@@ -1,0 +1,318 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Admin extends CI_Controller {
+	function __construct() {
+		parent::__construct();
+		$this->load->model('Adminmodel');
+	}
+
+	public function index()
+	{
+		if(!empty($this->session->userdata('session_id')))
+		{
+		redirect('Admin/dashboard');
+		}
+		$this->load->view('Admin/index');
+	}
+	public function admin_login()
+	{
+		$data= array(
+			'name' => $this->input->post('username'),
+			'pass' => md5($this->input->post('password'))
+		);
+		$table='admin';
+		$login=$this->Adminmodel->admin_log($data,$table);
+
+		if ($login)
+		{
+
+			$newdata = array('session_id'  => $login->id,
+				'session_name'  => $login->email
+			);
+			$this->session->set_userdata($newdata);
+			redirect('Admin/dashboard');
+		}
+		else
+		{
+			$this->session->set_flashdata('message_name1', 'Invalid UserID or Password');
+			redirect("Admin/index");
+
+		}
+	}
+	public function listamienities()
+	{
+		$amentities_id= $_POST['amentities_id'];
+		$data = $this->AdminModel->editamienities($amentities_id);
+		print_r($data);die();
+		echo json_encode($data);
+
+	}
+
+	public function dashboard()
+	{
+		$this->load->view('Admin/dashboard.php');
+	}
+	public function logout()
+	{
+		session_destroy();
+		redirect('Admin/index');
+	}
+	public function editamenities(){
+		$id=$this->uri->segment(3);
+		$where='amentities_id';
+		$table='amenities';
+		$data['amenities']=$this->Adminmodel->select_com_where($table,$where,$id);
+		$this->load->view('Admin/editamenties.php',$data);
+		//$this->load->view('Admin/editamenties.php');
+	}
+	public  function editprofession(){
+		$id=$this->uri->segment(3);
+		$where='profession_id';
+		$table='profession';
+		$data['profession']=$this->Adminmodel->select_com_where($table,$where,$id);
+		$this->load->view('Admin/editprofession.php',$data);
+	}
+	public function amenities()
+	{
+		is_protected();
+		$data['message']=$this->Adminmodel->amenities();
+		$this->load->view('Admin/amenities.php',$data);
+	}
+	public function profession()
+	{
+		is_protected();
+		$data['message']=$this->Adminmodel->profession();
+		$this->load->view('Admin/profession.php',$data);
+	}
+	public function insert_amenities()
+	{
+		$name1= $_POST['amentities_name'];
+		$table='amenities';
+		$data= array(
+			'amentities_name' => $name1
+		);
+		$login=$this->Adminmodel->insert_common($table,$data);
+		redirect('Admin/amenities');
+	}
+	public function insert_profession()
+	{
+		$name1= $_POST['profession_name'];
+		$table='profession';
+		$data= array(
+			'profession_name' => $name1
+		);
+		$login=$this->Adminmodel->insert_common($table,$data);
+		redirect('Admin/profession');
+	}
+	public function update_amenities()
+	{
+		if($_SERVER['REQUEST_METHOD']=='POST') {
+			$title = $this->input->post('amentities_name');
+			$amentities_id = $this->input->post('id');
+			$data = array(
+				'amentities_name' => $title
+			);
+			$this->db->where('amentities_id', $amentities_id);
+			$this->db->update('amenities', $data);
+			redirect("Admin/amenities");
+		}
+	}
+	public function update_profession()
+	{
+		if($_SERVER['REQUEST_METHOD']=='POST') {
+			$title = $this->input->post('profession_name');
+			$profession_id = $this->input->post('id');
+			$data = array(
+				'profession_name' => $title
+			);
+			$this->db->where('profession_id', $profession_id);
+			$this->db->update('profession', $data);
+			redirect("Admin/profession");
+		}
+	}
+	public function delete_amenities($id)
+	{
+		$this->db->where('amentities_id', $id);
+		$this->db->delete('amenities');
+		redirect('Admin/profession');
+	}
+	public function delete_profession($id)
+	{
+		$this->db->where('profession_id', $id);
+		$this->db->delete('profession');
+		redirect('Admin/profession');
+	}
+
+    public function ListGym()
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('user_type',2);
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $data = array(
+            'gymowner' => $result,
+        );
+        $this->load->view('Admin/listGym.php',$data);
+    }
+
+
+    public function viewPofile($id)
+    {
+        $this->db->select('*');
+        $this->db->from('profile_owner');
+        $this->db->where('user_id',$id);
+        $query = $this->db->get();
+        $result = $query->result();
+        $data = array(
+            'ownerProfile' => $result,
+        );
+        $this->load->view('Admin/ownerProfile.php',$data);
+    }
+
+    public function viewGym($id)
+    {
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->where('user_profile_id',$id);
+        $query = $this->db->get();
+        $result = $query->result();
+        $data = array(
+            'gym' => $result,
+        );
+        $this->load->view('Admin/viewGym.php',$data);
+    }
+
+
+    public function gymDetail()
+    {
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->join('user', 'user.id = gym.user_id');
+        $this->db->where('user.user_type',2);
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $data = array(
+            'gymorowner' => $result,
+        );
+        $this->load->view('Admin/gymDetail.php',$data);
+    }
+
+
+
+    public function blockGym($id)
+    {
+        $ownerData = $this->Adminmodel->profile_approve($id);
+        if($ownerData[0]['is_active']==0){
+            $result = array(
+                'is_active' => '1'
+            );
+            $this->db->where('gym_id', $id);
+            $this->db->update('gym', $result);
+            $this->session->set_flashdata('message_name', 'Profile has been Active successfully!');
+            redirect('Admin/gymDetail');
+        }
+        if($ownerData[0]['is_active']==1){
+            $result = array(
+                'is_active' => '0'
+            );
+            $this->db->where('gym_id', $id);
+            $this->db->update('gym', $result);
+            $this->session->set_flashdata('message_name', 'Profile has been Deactive successfully!');
+            redirect('Admin/gymDetail');
+
+        }
+
+    }
+
+    public function category()
+    {
+        is_protected();
+        $data['message']=$this->Adminmodel->category();
+        $this->load->view('Admin/category.php',$data);
+    }
+    public function saveCategory()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $categoryName = $this->input->post('categoryName');
+            $path1=  base_url().'images/';
+            if(!empty($_FILES["categoryImage"]))
+            {
+                $upload_image1=$_FILES["categoryImage"]["name"];
+                $upload1 = move_uploaded_file($_FILES["categoryImage"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+            $data = array(
+                'categoryName' => $categoryName,
+                'categoryImage' => $img_name1,
+
+            );
+            $this->db->insert('category', $data);
+            redirect('Admin/category');
+        }
+    }
+
+    public function deleteCategory($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('category');
+        redirect('Admin/category');
+    }
+
+    public  function editCategory($id){
+        $where='id';
+        $table='category';
+        $data['category']=$this->Adminmodel->select_com_where($table,$where,$id);
+        $this->load->view('Admin/editCategory.php',$data);
+    }
+    public  function updateCategory(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $categoryName = $this->input->post('categoryName');
+            $id = $this->input->post('id');
+            $upload_image1=$_FILES["categoryImage"]["name"];
+            if(empty($upload_image1)){
+                $data = array(
+                    'categoryName' => $categoryName,
+                );
+                $this->db->where('id', $id);
+                $this->db->update('category', $data);
+                redirect('Admin/category');
+            }else{
+                $path1=  base_url().'images/';
+                if(!empty($_FILES["categoryImage"]))
+                {
+                    $upload_image1=$_FILES["categoryImage"]["name"];
+                    $upload1 = move_uploaded_file($_FILES["categoryImage"]["tmp_name"], "./images/".$upload_image1);
+                    if($upload1){
+                        $img_name1 = $path1.$upload_image1;
+                    }else{
+                        $img_name1 = '';
+                    }
+                }else{
+                    $img_name1 = '';
+                }
+                $data = array(
+                    'categoryName' => $categoryName,
+                    'categoryImage' => $img_name1,
+
+                );
+                $this->db->where('id', $id);
+                $this->db->update('category', $data);
+                redirect('Admin/category');
+            }
+
+        }
+    }
+
+
+}
+
