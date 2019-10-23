@@ -325,6 +325,10 @@
 <script src="<?php echo base_url();?>web/assets/js/custom-maps.js"></script>
 <!-- Custom js -->
 <script src="<?php echo base_url();?>web/assets/js/custom.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+
+<script src="<?php echo base_url();?>web/assets/js/jquery.geocomplete.js"></script>
+
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
