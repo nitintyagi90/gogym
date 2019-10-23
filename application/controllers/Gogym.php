@@ -35,9 +35,21 @@ class Gogym extends CI_Controller {
 	{
 		$this->load->view('about');
 	}
+    public function contact()
+    {
+        $this->load->view('contact');
+    }
     public function list()
     {
        $this->load->view('list');
+    }
+    public function list_detail()
+    {
+        $this->load->view('list_detail');
+    }
+    public function payment()
+    {
+        $this->load->view('payment');
     }
 	public function dashboard()
 	{
