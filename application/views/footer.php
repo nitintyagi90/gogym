@@ -121,12 +121,12 @@
 
 							<div class="form-group">
 								<label>Mobile No</label>
-								<input type="text" class="form-control" placeholder="Mobile No" name="user_mobile">
+								<input type="tel" class="form-control" onkeypress="javascript:return isNumber(event)" maxlength="10" placeholder="Mobile No" name="user_mobile"  required>
 							</div>
 
 							<div class="form-group">
 								<label>Password</label>
-								<input type="password" class="form-control" placeholder="*********" name="user_password">
+								<input type="password" class="form-control" placeholder="*********" name="user_password" required>
 							</div>
 
 							<div class="form-group">
@@ -164,7 +164,7 @@
 								<div class="col-lg-12 col-md-12 col-sm-12">
 									<div class="form-group">
 										<label>Mobile</label>
-										<input type="text" id="mobileUser" name="userMobile" class="form-control" placeholder="Mobile">
+										<input type="text" id="mobileUser" onkeypress="javascript:return isNumber(event)" maxlength="10" name="userMobile" class="form-control" placeholder="Mobile" required>
 									</div>
 								</div>
 								<div class="col-lg-12 col-md-12 col-sm-12">
@@ -191,7 +191,7 @@
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
 										<label>Mobile</label>
-										<input type="text" class="form-control"  name="mobile" placeholder="Mobile" required="">
+										<input type="text" class="form-control" onkeypress="javascript:return isNumber(event)" maxlength="10"  name="mobile" placeholder="Mobile" required="">
 									</div>
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-12">
@@ -446,6 +446,16 @@
             return false;
         });
     });
+</script>
+<script>
+    // WRITE THE VALIDATION SCRIPT.
+    function isNumber(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+
+        return true;
+    }
 </script>
 </body>
 
