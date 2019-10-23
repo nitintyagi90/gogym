@@ -106,23 +106,19 @@ include 'header.php';
                         <?php foreach ($gym as $gymDetail){ ?>
                             <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
                                 <div class="event-grid-wrap">
-                                    <a href="list.html">
+                                    <a href="<?php echo base_url('Gogym/list'); ?>">
                                         <div class="event-grid-header">
                                             <img src="<?php echo $gymDetail->gymImage; ?>" class="img-fluid mx-auto" alt="">
-                                            <span class="event-grid-cat1"><?php echo $gymDetail->gym_address; ?></span>
+
+                                            <span class="event-grid-cat1">Noida</span>
                                             <span class="event-grid-cat2">
 										<h5 class="clrfff"><?php echo $gymDetail->gymName; ?></h5></span>
-                                            <span class="event-grid-cat3">
+
                                             <span class="event-grid-cat4"><p class="thmclr"><i class="fa fa-inr"></i> <?php echo $gymDetail->gymPrice; ?></p></span>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-
-
-
-
-
                         <?php } ?>
 
 					</div>

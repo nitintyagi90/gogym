@@ -56,7 +56,7 @@ include 'header.php';
 											</div>
 											<div class="form-group col-md-6 col-sm-12">
 												<label>Mobile No</label>
-												<input class="form-control" name="ownerMobile" type="text" value="<?php echo $user[0]->mobile ?>" >
+												<input class="form-control" name="ownerMobile" onkeypress="javascript:return isNumber(event)" maxlength="10" type="text" value="<?php echo $user[0]->mobile ?>" >
 											</div>
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Password</label>
@@ -119,11 +119,11 @@ include 'header.php';
 
 											<div class="form-group col-md-6 col-sm-12">
 												<label>Price</label>
-												<input class="form-control" value="<?php echo @$profile_user[0]->gymPrice ?>" name="gymPrice" name="price" type="text" value="">
+												<input class="form-control" onkeypress="javascript:return isNumber(event)" value="<?php echo @$profile_user[0]->gymPrice ?>" name="gymPrice" name="price" type="text" value="">
 											</div>
 											<div class="form-group col-md-6 col-sm-12">
 												<label>Total Availability</label>
-												<input type="text" name="totalavailability" value="<?php echo @$profile_user[0]->totalavailability ?>" name="availability" class="form-control">
+												<input type="text" onkeypress="javascript:return isNumber(event)" name="totalavailability" value="<?php echo @$profile_user[0]->totalavailability ?>" name="availability" class="form-control">
 											</div>
 
 
@@ -134,7 +134,7 @@ include 'header.php';
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Contact No </label>
-                                                    <input class="form-control" type="text" placeholder="" name="contact_no" value="<?php echo @$profile_user[0]->contact_no ?>" required>
+                                                    <input class="form-control" onkeypress="javascript:return isNumber(event)" maxlength="10" type="text" placeholder="" name="contact_no" value="<?php echo @$profile_user[0]->contact_no ?>" required>
                                                 </div>
 
 
@@ -146,7 +146,7 @@ include 'header.php';
 
                                                 <div class="form-group col-md-3 col-sm-12">
                                                     <label>PinCode</label>
-                                                    <input class="form-control" type="number" maxlength="6" placeholder="" value="<?php echo @$profile_user[0]->pinCode ?>" name="gym_pin" required>
+                                                    <input class="form-control" type="text" onkeypress="javascript:return isNumber(event)" maxlength="6" placeholder="" value="<?php echo @$profile_user[0]->pinCode ?>" name="gym_pin" required>
                                                 </div>
 
 
@@ -175,7 +175,7 @@ include 'header.php';
                                                         </div>
                                                         <div class="form-group col-md-6 col-sm-12">
                                                             <label>Account Number</label>
-                                                            <input class="form-control" type="number" name="account_no" value="<?php echo @$profile_user[0]->accountNumber ?>" required>
+                                                            <input class="form-control" type="text" onkeypress="javascript:return isNumber(event)" name="account_no" value="<?php echo @$profile_user[0]->accountNumber ?>" required>
                                                         </div>
                                                         <div class="form-group col-md-6 col-sm-12">
                                                             <label>IFSC Code</label>
@@ -220,7 +220,7 @@ include 'header.php';
                                                             <div class="col-lg-6 col-md-6 col-sm-12">
                                                                 <div class="form-group">
                                                                     <label class="social-nfo">PAN No</label>
-                                                                    <input class="form-control" type="text" name="gym_panno" value="<?php echo @$profile_user[0]->panCard ?>" required>
+                                                                    <input class="form-control" maxlength="10" type="text" name="gym_panno" value="<?php echo @$profile_user[0]->panCard ?>" required>
                                                                 </div>
                                                             </div>
                                                         </div>
