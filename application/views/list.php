@@ -145,7 +145,7 @@ include 'header.php';
                         <div class="verticleilist listing-shot">
                             <div class="listing-badge now-open">Now Open</div>
                             <div class="signle-vert-listing-item">
-                                <a class="listing-item" href="list-detail.html">
+                                <a class="listing-item" href="<?php echo base_url('Gogym/list_detail'); ?>">
                                     <div class="listing-items">
                                         <div class="listing-shot-img">
                                             <img src="assets/img/event-1.jpg" class="img-responsive" alt="" />
@@ -154,7 +154,7 @@ include 'header.php';
                                 </a>
                                 <div class="verticle-listing-caption">
                                     <div class="listing-shot-caption">
-                                        <a href="list-detail.html"><h4>Power World Gyms </h4></a>
+                                        <a href="<?php echo base_url('Gogym/list_detail'); ?>"><h4>Power World Gyms </h4></a>
                                         <span class="fnt12"><i class="ti-location-pin"></i> No 285.C, 3rd Floor, Sankranti Arcade, 9th Main Road</span>
                                         <span>Services : Certified Trainers | Circuit Training | <a href="#">5 more</a></span>
                                         <span>Pricing : ₹2800.00</span>
@@ -165,7 +165,7 @@ include 'header.php';
                         <div class="verticleilist listing-shot">
                             <div class="listing-badge now-open">Now Open</div>
                             <div class="signle-vert-listing-item">
-                                <a class="listing-item" href="list-detail.html">
+                                <a class="listing-item" href="<?php echo base_url('Gogym/list_detail'); ?>">
                                     <div class="listing-items">
                                         <div class="listing-shot-img">
                                             <img src="assets/img/event-1.jpg" class="img-responsive" alt="" />
@@ -175,7 +175,7 @@ include 'header.php';
 
                                 <div class="verticle-listing-caption">
                                     <div class="listing-shot-caption">
-                                        <a href="list-detail.html"><h4>Power World Gyms </h4></a>
+                                        <a href="<?php echo base_url('Gogym/list_detail'); ?>"><h4>Power World Gyms </h4></a>
                                         <span class="fnt12"><i class="ti-location-pin"></i> No 285.C, 3rd Floor, Sankranti Arcade, 9th Main Road</span>
                                         <span>Services : Certified Trainers | Circuit Training | <a href="#">5 more</a></span>
                                         <span>Pricing : ₹2800.00</span>

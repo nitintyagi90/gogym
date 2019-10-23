@@ -35,10 +35,10 @@
 							<div class="footer-widget">
 								<h4 class="widget-title">Useful links</h4>
 								<ul class="footer-menu">
-									<li><a href="#">About US</a></li>
+									<li><a href="<?php echo base_url('Gogym/about'); ?>">About US</a></li>
 									<li><a href="#">Fitness Blog</a></li>
 									<li><a href="#">Carrer</a></li>
-									<li><a href="#">Contact US</a></li>
+									<li><a href="<?php echo base_url('Gogym/contact'); ?>">Contact US</a></li>
 								</ul>
 							</div>
 						</div>
