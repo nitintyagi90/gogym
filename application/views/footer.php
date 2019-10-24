@@ -75,6 +75,18 @@
 				</div>
 
 			</div>
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12">
+                    <ul class="footer-bottom-social">
+                        <li><a href="<?php echo base_url('Gogym/rules_regulation'); ?>">Rule & Regulation</a></li>
+                        <li><a href="<?php echo base_url('Gogym/rules_regulation_policy'); ?>">Rule & Regulation & Policy</a></li>
+                        <li><a href="<?php echo base_url('Gogym/refund_cancellation_policy'); ?>">Refund & Cancellation</a></li>
+                        <li><a href="<?php echo base_url('Gogym/termination_policy'); ?>">Termination Policy</a></li>
+                    </ul>
+                </div>
+
+            </div>
 		</div>
 	</div>
 </footer>

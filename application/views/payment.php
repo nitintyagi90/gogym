@@ -75,6 +75,7 @@ include 'header.php';
                             </div>
                         </div>
                     </div>
+                    <a href="<?php echo base_url('Gogym/disclaimer'); ?>" style="color: #ff7600">Disclaimer</a>
                     <!-- Payment Methode -->
                     <div class="tr-single-box">
                         <div class="tr-single-header">

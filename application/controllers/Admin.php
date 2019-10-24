@@ -227,7 +227,46 @@ class Admin extends CI_Controller {
         }
 
     }
-
+    public function event()
+    {
+        $this->load->view('Admin/event.php');
+    }
+    public function edit_event()
+    {
+        $this->load->view('Admin/edit_event');
+    }
+    public function event_list()
+    {
+        $this->load->view('Admin/event_list');
+    }
+    public function team()
+    {
+        $this->load->view('Admin/team.php');
+    }
+    public function editteam()
+    {
+        $this->load->view('Admin/editteam.php');
+    }
+    public function gogyms_diet()
+    {
+        $this->load->view('Admin/gogyms_diet.php');
+    }
+    public function edit_gogyms_diet()
+    {
+        $this->load->view('Admin/edit_gogyms_diet.php');
+    }
+    public function launch_offer()
+    {
+        $this->load->view('Admin/launch_offer.php');
+    }
+    public function launch_offer_list()
+    {
+        $this->load->view('Admin/launch_offer_list.php');
+    }
+    public function edit_launch_offer()
+    {
+        $this->load->view('Admin/edit_launch_offer.php');
+    }
     public function category()
     {
         is_protected();
