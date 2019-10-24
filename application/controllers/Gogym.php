@@ -6,6 +6,8 @@ class Gogym extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('GogymModel');
+		$this->load->model('Gympagination');
+        $this->load->library('pagination');
 
 	}
 
@@ -41,7 +43,23 @@ class Gogym extends CI_Controller {
     }
     public function lists()
     {
-       $this->load->view('list');
+        $config = array();
+        $config["base_url"] = base_url() . "lists";
+        $config["total_rows"] = $this->Gympagination->get_count();
+        $config["per_page"] = 5;
+        $config["uri_segment"] = 2;
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $data["links"] = $this->pagination->create_links();
+        $data['gym'] = $this->Gympagination->get_authors($config["per_page"], $page);
+        $this->db->select('*');
+        $this->db->from('category');
+        $this->db->order_by("createdAt", "desc");
+        $this->db->limit(8);
+        $category = $this->db->get();
+        $categoryList = $category->result();
+        $data['category']=$categoryList;
+        $this->load->view('list',$data);
     }
 
     public function list_detail()
@@ -116,6 +134,28 @@ class Gogym extends CI_Controller {
             'profession'=>$result
         );
         $this->load->view('user_dashboard.php',$response);
+    }
+
+    public function filter(){
+        $id = $this->input->post('id');
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->join('gym_category', 'gym_category.gym_id = gym.gym_id');
+        $this->db->where('gym_category.categoryName',$id);
+        $category = $this->db->get();
+        $categoryList = $category->result();
+        $data['gym']=$categoryList;
+        $this->load->view('filter',$data);
+    }
+    public function locationFilter(){
+        $location = $this->input->post('location');
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->where('gymCity',$location);
+        $category = $this->db->get();
+        $categoryList = $category->result();
+        $data['gym']=$categoryList;
+        $this->load->view('filter',$data);
     }
 
 }
