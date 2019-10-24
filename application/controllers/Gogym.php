@@ -39,7 +39,7 @@ class Gogym extends CI_Controller {
     {
         $this->load->view('contact');
     }
-    public function list()
+    public function lists()
     {
        $this->load->view('list');
     }
@@ -50,6 +50,34 @@ class Gogym extends CI_Controller {
     public function payment()
     {
         $this->load->view('payment');
+    }
+    public function story()
+    {
+        $this->load->view('story');
+    }
+    public function team()
+    {
+        $this->load->view('team');
+    }
+    public function rules_regulation()
+    {
+        $this->load->view('rules_regulation');
+    }
+    public function rules_regulation_policy()
+    {
+        $this->load->view('rules_regulation_policy');
+    }
+    public function termination_policy()
+    {
+        $this->load->view('termination_policy');
+    }
+    public function refund_cancellation_policy()
+    {
+        $this->load->view('refund_cancellation_policy');
+    }
+    public function disclaimer()
+    {
+        $this->load->view('disclaimer');
     }
 	public function dashboard()
 	{

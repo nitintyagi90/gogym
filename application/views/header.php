@@ -31,18 +31,17 @@
 									<li class="nav-item"><a class="nav-link" href="<?php echo base_url('Gogym');?>">Home</a></li>
 									<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Why GoGyms <i class="fa fa-angle-down m-l-5"></i></a>
 										<ul class="b-none dropdown-menu font-14 animated fadeInUp">
-											<li><a class="dropdown-item" href="#">About US</a></li>
-											<li><a class="dropdown-item" href="#">Our Team</a></li>
-											<li><a class="dropdown-item" href="#">Our Story</a></li>
+											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/about'); ?>">About US</a></li>
+											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/team'); ?>">Our Team</a></li>
+											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/story'); ?>">Our Story</a></li>
 										</ul>
 									</li>
 									<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GoGyms Services <i class="fa fa-angle-down m-l-5"></i></a>
 										<ul class="b-none dropdown-menu font-14 animated fadeInUp">
-											<li><a class="dropdown-item" href="#">Health Checkups Plan</a></li>
+											<li><a class="dropdown-item" href="#">Health Checkups</a></li>
 											<li><a class="dropdown-item" href="#">GoGyms Diet</a></li>
 											<li><a class="dropdown-item" href="#">Launch Offers</a></li>
-											<li><a class="dropdown-item" href="#">Upcoming Offers</a></li>
-											<li><a class="dropdown-item" href="#">GoGyms Tips</a></li>
+										    <li><a class="dropdown-item" href="#">GoGyms Tips</a></li>
 											<li><a class="dropdown-item" href="#">Upcoming GoGyms Events</a></li>
 										</ul>
 									</li>

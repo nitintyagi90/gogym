@@ -32,7 +32,16 @@
 	<!-- Responsive datatable examples -->
 	<link href="<?php echo base_url();?>admin/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url();?>admin/assets/plugins/timepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>admin/assets/plugins/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>admin/assets/plugins/clockpicker/jquery-clockpicker.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>admin/assets/plugins/colorpicker/asColorPicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url();?>admin/assets/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
 
+    <link href="<?php echo base_url();?>admin/assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url();?>admin/assets/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url();?>admin/assets/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url();?>admin/assets/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
 
@@ -156,44 +165,24 @@
                         <a href="<?=base_url('Admin/category')?>"><i class="mdi mdi-animation"></i>Gym Category</a>
                     </li>
 
-
-					<!--<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/gym')*/?>"><i class="mdi mdi-animation"></i>Add Gym</a>
-					</li>
-
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/booking')*/?>"><i class="mdi mdi-layers"></i>Booking Details</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/amenities')*/?>"><i class="mdi mdi-cards"></i>Add Amenities</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/trending')*/?>"><i class="mdi mdi-cards"></i>Trending Deals</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/offerbanner')*/?>"><i class="mdi mdi-cards"></i>Offer Banner</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/coupon')*/?>"><i class="mdi mdi-cards"></i>Coupan</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/prmotions')*/?>"><i class="mdi mdi-cards"></i>Prmotions Query</a>
-					</li>
-
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/add_banner_list')*/?>"><i class="mdi mdi-cards"></i>Add Banner List</a>
-					</li>
-
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/user_list')*/?>"><i class="mdi mdi-cards"></i>User List</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/galleryList')*/?>"><i class="mdi mdi-cards"></i>Gallery List</a>
-					</li>
-					<li class="has-submenu ">
-						<a href="<?/*=base_url('Admin/queryList')*/?>"><i class="mdi mdi-cards"></i>Query List</a>
-					</li>-->
-
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/team')?>"><i class="mdi mdi-animation"></i>Team Details</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/gogyms_diet')?>"><i class="mdi mdi-animation"></i>Gogyms Diet</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/launch_offer')?>"><i class="mdi mdi-animation"></i>Launch Offer</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/launch_offer_list')?>"><i class="mdi mdi-animation"></i>Launch Offer List</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/event')?>"><i class="mdi mdi-animation"></i>Add Event</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/event_list')?>"><i class="mdi mdi-animation"></i>Event List</a>
+                    </li>
 				</ul><!-- End navigation menu -->
 			</div> <!-- end #navigation -->
 		</div> <!-- end container -->
