@@ -303,6 +303,7 @@ class Auth extends CI_Controller {
             $contact_name = $this->input->post('contact_name');
             $contact_no = $this->input->post('contact_no');
             $gym_pin = $this->input->post('gym_pin');
+            $gymCity = $this->input->post('gymCity');
             $gymdescription = $this->input->post('gymdescription');
             $account_name = $this->input->post('account_name');
             $account_type = $this->input->post('account_type');
@@ -335,6 +336,7 @@ class Auth extends CI_Controller {
                     'organization' => $org_name,
                     'gym_address' => $gymaddress,
                     'pinCode' => $gym_pin,
+                    'gymCity' => $gymCity,
                     'totalavailability' => $totalavailability,
                     'gymdescription' => $gymdescription,
                     'panCard' => $gym_panno,
@@ -405,6 +407,7 @@ class Auth extends CI_Controller {
                     'organization' => $org_name,
                     'gym_address' => $gymaddress,
                     'pinCode' => $gym_pin,
+                    'gymCity' => $gymCity,
                     'totalavailability' => $totalavailability,
                     'gymdescription' => $gymdescription,
                     'panCard' => $gym_panno,

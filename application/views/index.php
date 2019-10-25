@@ -106,7 +106,7 @@ include 'header.php';
                         <?php foreach ($gym as $gymDetail){ ?>
                             <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
                                 <div class="event-grid-wrap">
-                                    <a href="<?php echo base_url('Gogym/list'); ?>">
+                                    <a href="<?php echo base_url('Gogym/lists'); ?>">
                                         <div class="event-grid-header">
                                             <img src="<?php echo $gymDetail->gymImage; ?>" class="img-fluid mx-auto" alt="">
 

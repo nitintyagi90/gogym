@@ -30,58 +30,17 @@ include 'header.php';
 
                         <div class="widget-boxed-body p-t-10">
                             <ul class="no-ul-list">
+                                <?php
+                                $d = 1;
+                                foreach ($category as $cat){
+                                    $d++
+                                    ?>
                                 <li>
-                                    <input id="d-1" class="checkbox-custom" name="d-1" type="checkbox">
-                                    <label for="d-1" class="checkbox-custom-label">Aerobic  Exercise </label>
+                                    <input id="d-<?php echo $d; ?>" class="checkbox-custom searchType" value="<?php echo $cat->categoryName; ?>" name="d-1" type="checkbox">
+                                    <label for="d-<?php echo $d; ?>" class="checkbox-custom-label"><?php echo $cat->categoryName; ?> </label>
                                 </li>
-                                <li>
-                                    <input id="d-2" class="checkbox-custom" name="d-2" type="checkbox">
-                                    <label for="d-2" class="checkbox-custom-label">Cardio Workout</label>
-                                </li>
-                                <li>
-                                    <input id="d-3" class="checkbox-custom" name="d-3" type="checkbox">
-                                    <label for="d-3" class="checkbox-custom-label">Endurance activities </label>
-                                </li>
-                                <li>
-                                    <input id="d-4" class="checkbox-custom" name="d-4" type="checkbox">
-                                    <label for="d-4" class="checkbox-custom-label">Strength training </label>
-                                </li>
-                                <li>
-                                    <input id="d-5" class="checkbox-custom" name="d-5" type="checkbox">
-                                    <label for="d-5" class="checkbox-custom-label">Stretching</label>
-                                </li>
-                                <li>
-                                    <input id="d-3" class="checkbox-custom" name="d-3" type="checkbox">
-                                    <label for="d-3" class="checkbox-custom-label">Running Exercise</label>
-                                </li>
-                                <li>
-                                    <input id="d-6" class="checkbox-custom" name="d-6" type="checkbox">
-                                    <label for="d-6" class="checkbox-custom-label">.Endurance activities </label>
-                                </li>
-                                <li>
-                                    <input id="d-7" class="checkbox-custom" name="d-7" type="checkbox">
-                                    <label for="d-7" class="checkbox-custom-label">Jogging</label>
-                                </li>
-                                <li>
-                                    <input id="d-8" class="checkbox-custom" name="d-8" type="checkbox">
-                                    <label for="d-8" class="checkbox-custom-label">Climbing the stairs</label>
-                                </li>
-                                <li>
-                                    <input id="d-9" class="checkbox-custom" name="d-9" type="checkbox">
-                                    <label for="d-9" class="checkbox-custom-label">Playing tennis</label>
-                                </li>
-                                <li>
-                                    <input id="d-10" class="checkbox-custom" name="d-10" type="checkbox">
-                                    <label for="d-10" class="checkbox-custom-label">Dancing</label>
-                                </li>
-                                <li>
-                                    <input id="d-11" class="checkbox-custom" name="d-11" type="checkbox">
-                                    <label for="d-11" class="checkbox-custom-label">Digging</label>
-                                </li>
-                                <li>
-                                    <input id="d-12" class="checkbox-custom" name="d-12" type="checkbox">
-                                    <label for="d-12" class="checkbox-custom-label">Swimming laps </label>
-                                </li>
+                                <?php } ?>
+
                             </ul>
                         </div>
                     </div>
@@ -93,23 +52,23 @@ include 'header.php';
                         <div class="widget-boxed-body p-t-10">
                             <ul class="no-ul-list">
                                 <li>
-                                    <input id="l-1" class="checkbox-custom" name="l-1" type="checkbox">
+                                    <input id="l-1" class="checkbox-custom searchlocation" value="Delhi" name="l-1" type="checkbox">
                                     <label for="l-1" class="checkbox-custom-label">Delhi </label>
                                 </li>
                                 <li>
-                                    <input id="l-2" class="checkbox-custom" name="l-2" type="checkbox">
-                                    <label for="d-2" class="checkbox-custom-label">Gurugram</label>
+                                    <input id="l-2" class="checkbox-custom searchlocation" value="Gurugram" name="l-2" type="checkbox">
+                                    <label for="l-2" class="checkbox-custom-label">Gurugram</label>
                                 </li>
                                 <li>
-                                    <input id="l-3" class="checkbox-custom" name="l-3" type="checkbox">
+                                    <input id="l-3" class="checkbox-custom searchlocation" value="Noida"  name="l-3" type="checkbox">
                                     <label for="l-3" class="checkbox-custom-label">Noida</label>
                                 </li>
                                 <li>
-                                    <input id="l-4" class="checkbox-custom" name="l-4" type="checkbox">
+                                    <input id="l-4" class="checkbox-custom searchlocation" value="Ghaziabad" name="l-4" type="checkbox">
                                     <label for="l-4" class="checkbox-custom-label">Ghaziabad</label>
                                 </li>
                                 <li>
-                                    <input id="l-5" class="checkbox-custom" name="l-5" type="checkbox">
+                                    <input id="l-5" class="checkbox-custom searchlocation" value="Faridabad" name="l-5" type="checkbox">
                                     <label for="l-5" class="checkbox-custom-label">Faridabad</label>
                                 </li>
                             </ul>
@@ -129,9 +88,8 @@ include 'header.php';
                                     </a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Popularity</a>
-                                        <a class="dropdown-item" href="#">Price (High To Low)</a>
+                                        <a class="dropdown-item priceHigh" href="#">Price (High To Low)</a>
                                         <a class="dropdown-item" href="#">Price (Low To High)</a>
-                                        <a class="dropdown-item" href="#">Distance</a>
                                     </div>
                                 </div>
                             </div>
@@ -139,52 +97,37 @@ include 'header.php';
                     </div>
 
                     <!--  All Listing -->
+                    <div class="filter">
+
+                    </div>
                     <div class="row m-0 mb-3">
 
                         <!--  Single Listing -->
+                        <?php foreach ($gym as $gymDetails){ ?>
                         <div class="verticleilist listing-shot">
                             <div class="listing-badge now-open">Now Open</div>
                             <div class="signle-vert-listing-item">
                                 <a class="listing-item" href="<?php echo base_url('Gogym/list_detail'); ?>">
                                     <div class="listing-items">
                                         <div class="listing-shot-img">
-                                            <img src="assets/img/event-1.jpg" class="img-responsive" alt="" />
+                                            <img src="<?php echo $gymDetails->gymImage ?>" class="img-responsive" alt="" />
                                         </div>
                                     </div>
                                 </a>
                                 <div class="verticle-listing-caption">
                                     <div class="listing-shot-caption">
-                                        <a href="<?php echo base_url('Gogym/list_detail'); ?>"><h4>Power World Gyms </h4></a>
-                                        <span class="fnt12"><i class="ti-location-pin"></i> No 285.C, 3rd Floor, Sankranti Arcade, 9th Main Road</span>
+                                        <a href="<?php echo base_url('Gogym/list_detail'); ?>"><h4><?php echo $gymDetails->gymName ?> </h4></a>
+                                        <span class="fnt12"><i class="ti-location-pin"></i> <?php echo $gymDetails->gym_address ?></span>
                                         <span>Services : Certified Trainers | Circuit Training | <a href="#">5 more</a></span>
-                                        <span>Pricing : ₹2800.00</span>
+                                        <span>Pricing : ₹<?php echo $gymDetails->gymPrice; ?></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="verticleilist listing-shot">
-                            <div class="listing-badge now-open">Now Open</div>
-                            <div class="signle-vert-listing-item">
-                                <a class="listing-item" href="<?php echo base_url('Gogym/list_detail'); ?>">
-                                    <div class="listing-items">
-                                        <div class="listing-shot-img">
-                                            <img src="assets/img/event-1.jpg" class="img-responsive" alt="" />
-                                        </div>
-                                    </div>
-                                </a>
+                        <?php } ?>
 
-                                <div class="verticle-listing-caption">
-                                    <div class="listing-shot-caption">
-                                        <a href="<?php echo base_url('Gogym/list_detail'); ?>"><h4>Power World Gyms </h4></a>
-                                        <span class="fnt12"><i class="ti-location-pin"></i> No 285.C, 3rd Floor, Sankranti Arcade, 9th Main Road</span>
-                                        <span>Services : Certified Trainers | Circuit Training | <a href="#">5 more</a></span>
-                                        <span>Pricing : ₹2800.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
+                    <p><?php echo $links; ?></p>
                 </div>
 
 
@@ -194,3 +137,59 @@ include 'header.php';
     <!-- ============================= Verticle Listing ============================= -->
 <?php
 include 'footer.php';
+?>
+<script>
+    $('.priceHigh').click(function() {
+        alert('hii');
+            $.ajax({
+                type: "POST",
+                url: '<?php echo base_url('Gogym/filter')?>',
+                data:{id:checkedValue},
+                success: function (data) {
+                    $(".filter").prepend(data);
+
+                },
+            });
+        }
+
+    });
+
+
+
+
+
+    $('.searchlocation').click(function() {
+        var location = $(this).val();
+        if(this.checked) {
+            $.ajax({
+                type: "POST",
+                url: '<?php echo base_url('Gogym/locationFilter')?>',
+                data:{location:location},
+                success: function (data) {
+                    $(".filter").prepend(data);
+
+                },
+            });
+        }
+
+    });
+
+    $('.priceHigh').click(function() {
+        var location = $(this).val();
+        if(this.checked) {
+            $.ajax({
+                type: "POST",
+                url: '<?php echo base_url('Gogym/locationFilter')?>',
+                data:{location:location},
+                success: function (data) {
+                    $(".filter").prepend(data);
+
+                },
+            });
+        }
+
+    });
+
+
+
+</script>

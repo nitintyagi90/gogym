@@ -144,6 +144,11 @@ include 'header.php';
                                                     <textarea name="gymaddress" class="form-control" name="gymAddress"><?php echo @$profile_user[0]->gym_address ?></textarea>
                                                 </div>
 
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                    <label>City</label>
+                                                    <input class="form-control" type="text" placeholder="" name="gymCity" value="<?php echo @$profile_user[0]->gymCity ?>" required>
+                                                </div>
+
                                                 <div class="form-group col-md-3 col-sm-12">
                                                     <label>PinCode</label>
                                                     <input class="form-control" type="text" onkeypress="javascript:return isNumber(event)" maxlength="6" placeholder="" value="<?php echo @$profile_user[0]->pinCode ?>" name="gym_pin" required>
