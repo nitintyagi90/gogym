@@ -37,7 +37,7 @@
 								<ul class="footer-menu">
 									<li><a href="<?php echo base_url('Gogym/about'); ?>">About US</a></li>
 									<li><a href="#">Fitness Blog</a></li>
-									<li><a href="#">Carrer</a></li>
+									<li><a href="<?php echo base_url('Gogym/carrer'); ?>">Carrer</a></li>
 									<li><a href="<?php echo base_url('Gogym/contact'); ?>">Contact US</a></li>
 								</ul>
 							</div>

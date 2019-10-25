@@ -6,36 +6,48 @@ include 'header.php';
         <div class="finding-overlay op-70"></div>
         <div class="container">
             <div class="page-title-wrap">
-                <h1>Why GoGyms</h1>
-                <p><a href="#" class="theme-cl">Home</a> <span class="current-page active">Story</span></p>
+                <p><a href="#" class="theme-cl">Home</a> <span class="current-page active">Team</span></p>
             </div>
         </div>
     </div>
     <!-- ============================ Page Title End ================================== -->
 
-    <!-- ============================ Say Hello Start ================================== -->
+    <!-- =========================== Category Start ============================================ -->
     <section>
         <div class="container">
+
             <div class="row">
-
-                <div class="col-lg-12 col-md-8 col-sm-12">
-                    <article class="blog-news detail-wrapper">
-                        <div class="full-blog">
-                            <!-- Blog Content -->
-                            <div class="full blog-content">
-                                <a href="#"><h3>Team</h3></a>
-                                <div class="blog-text">
-
-                                </div>
-                            </div>
-                            <!-- Blog Content -->
-                        </div>
-                    </article>
-
+                <div class="col text-center">
+                    <div class="sec-heading mx-auto">
+                        <h2>Our Team</h2>
+                    </div>
                 </div>
             </div>
+
+            <div class="row">
+
+                <!-- Single Category -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="modern-category">
+                        <div class="modern-category-box-thumb">
+                            <a href="#"><img src="<?php echo base_url();?>web/assets/img/category/bear.jpg" class="img-fluid mx-auto" alt=""></a>
+                        </div>
+                        <div class="modern-category-footer">
+                            <div class="mc-footer-caption">
+                                <h4 class="category-title">Amit Sharma</h4>
+                                <span class="category-counting"><b>Director</b></span>
+                                <p style="line-height: 16px;">This is a dummy data.Its replaces original data very shorthly.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+             </div>
+
         </div>
     </section>
+    <!-- =========================== Category End ============================================ -->
     <div class="clearfix"></div>
     <!-- ============================ Say Hello End ================================== -->
 <?php

@@ -6,10 +6,8 @@ class Gogym extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('GogymModel');
-
-	}
-
-	public function index()
+    }
+    public function index()
 	{
         $this->db->select('*');
         $this->db->from('gym');
@@ -79,6 +77,22 @@ class Gogym extends CI_Controller {
     public function disclaimer()
     {
         $this->load->view('disclaimer');
+    }
+    public function upcoming_event()
+    {
+        $this->load->view('upcoming_event');
+    }
+    public function gogyms_diet()
+    {
+        $this->load->view('gogyms_diet');
+    }
+    public function launch_offer()
+    {
+        $this->load->view('launch_offer');
+    }
+    public function carrer()
+    {
+        $this->load->view('carrer');
     }
 	public function dashboard()
 	{
