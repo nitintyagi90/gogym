@@ -139,8 +139,9 @@ include 'header.php';
 include 'footer.php';
 ?>
 <script>
-    $('.priceHigh').click(function() {
-        alert('hii');
+    $('.searchType').click(function() {
+        var checkedValue = $(this).val();
+        if(this.checked) {
             $.ajax({
                 type: "POST",
                 url: '<?php echo base_url('Gogym/filter')?>',
@@ -148,13 +149,10 @@ include 'footer.php';
                 success: function (data) {
                     $(".filter").prepend(data);
 
-                },
+                }
             });
         }
-
     });
-
-
 
 
 
@@ -167,29 +165,11 @@ include 'footer.php';
                 data:{location:location},
                 success: function (data) {
                     $(".filter").prepend(data);
-
-                },
+                }
             });
         }
 
     });
-
-    $('.priceHigh').click(function() {
-        var location = $(this).val();
-        if(this.checked) {
-            $.ajax({
-                type: "POST",
-                url: '<?php echo base_url('Gogym/locationFilter')?>',
-                data:{location:location},
-                success: function (data) {
-                    $(".filter").prepend(data);
-
-                },
-            });
-        }
-
-    });
-
 
 
 </script>
