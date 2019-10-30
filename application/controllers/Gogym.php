@@ -3,14 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Gogym extends CI_Controller {
 	function __construct()
-	{
-		parent::__construct();
-		$this->load->model('GogymModel');
-		$this->load->model('Gympagination');
-        $this->load->library('pagination');
-
-	}
-
+    {
+        parent::__construct();
+        $this->load->model('GogymModel');
+    }
 	public function index()
 	{
         $this->db->select('*');
@@ -97,6 +93,22 @@ class Gogym extends CI_Controller {
     public function disclaimer()
     {
         $this->load->view('disclaimer');
+    }
+    public function upcoming_event()
+    {
+        $this->load->view('upcoming_event');
+    }
+    public function gogyms_diet()
+    {
+        $this->load->view('gogyms_diet');
+    }
+    public function launch_offer()
+    {
+        $this->load->view('launch_offer');
+    }
+    public function carrer()
+    {
+        $this->load->view('carrer');
     }
 	public function dashboard()
 	{
