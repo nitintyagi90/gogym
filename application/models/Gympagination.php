@@ -14,6 +14,13 @@ class Gympagination extends CI_Model {
 
     public function get_authors($limit, $start) {
         $this->db->limit($limit, $start);
+        $this->db->where('is_active', 1);
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+
+    public function searchLocation($location) {
+        $this->db->like('gymCity', $location);
         $query = $this->db->get($this->table);
         return $query->result();
     }

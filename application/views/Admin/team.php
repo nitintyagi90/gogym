@@ -48,17 +48,24 @@ include 'header.php';
                                 </thead>
 
                                 <tbody>
+                                <?php
+                                $count = 0;
+                                foreach ($team as $tm){
+                                    $count++;
+                                    ?>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><?php echo $count; ?></td>
+                                        <td><?php echo $tm->memberName; ?></td>
+                                        <td><?php echo $tm->designation; ?></td>
+                                        <td><?php echo $tm->description; ?></td>
+                                        <td><img src="<?php echo $tm->image ?>" class="img50"></td>
+
                                         <td>
-                                            <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
-                                            <a href="<?=base_url('Admin/editteam')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+                                            <a href="<?php echo site_url('Admin/deleteTeam/'.$tm->id);?>" class="btn btn-danger btn-sm delete" data-confirm="Are you sure to delete this member?" title="Delete"><i class="fa fa-trash-o "></i></a>
+                                            <a href="<?php echo site_url('Admin/editTeam/'.$tm->id);?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
                                         </td>
                                     </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -73,7 +80,7 @@ include 'header.php';
 
 <div class="modal fade bd-example-modal-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" action="<?php echo base_url('Admin/saveTeam');?>" method="post" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalform">Add Team Member</h5>
@@ -101,13 +108,13 @@ include 'header.php';
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label for="field-1" class="control-label">Description</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" name="description" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="field-1" class="control-label">Member Image</label>
-                                <input type="file" name="categoryImage" required class="form-control" id="field-1" placeholder="Enter Amenities Name">
+                                <input type="file" name="image" required class="form-control" id="field-1" placeholder="Enter Amenities Name">
                             </div>
                         </div>
                     </div>
@@ -124,4 +131,20 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+    var deleteLinks = document.querySelectorAll('.delete');
+    for (var i = 0; i < deleteLinks.length; i++) {
+        deleteLinks[i].addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var choice = confirm(this.getAttribute('data-confirm'));
+
+            if (choice) {
+                window.location.href = this.getAttribute('href');
+            }
+        });
+    }
+
+</script>
+
 

@@ -9,6 +9,9 @@
         <link href="<?php echo base_url();?>web/assets/plugins/css/plugins.css" rel="stylesheet">
 		<!-- Custom CSS -->
         <link href="<?php echo base_url();?>web/assets/css/styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.css">
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="shortcut icon" href="<?php echo base_url();?>web/assets/img/go-gyms-fab.png" type="image/x-icon" /> 
     </head>

@@ -107,7 +107,8 @@ include 'header.php';
                         <div class="verticleilist listing-shot">
                             <div class="listing-badge now-open">Now Open</div>
                             <div class="signle-vert-listing-item">
-                                <a class="listing-item" href="<?php echo base_url('Gogym/list_detail'); ?>">
+
+                                <a class="listing-item" href="<?php echo site_url('Gogym/list_detail/'.$gymDetails->gym_id);?>">
                                     <div class="listing-items">
                                         <div class="listing-shot-img">
                                             <img src="<?php echo $gymDetails->gymImage ?>" class="img-responsive" alt="" />

@@ -6,6 +6,9 @@ class Gogym extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('GogymModel');
+        $this->load->model('Gympagination');
+        $this->load->library('pagination');
+
     }
 	public function index()
 	{
@@ -58,13 +61,30 @@ class Gogym extends CI_Controller {
         $this->load->view('list',$data);
     }
 
-    public function list_detail()
+    public function list_detail($id)
     {
-        $this->load->view('list_detail');
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->where('is_active', 1);
+        $this->db->where('gym_id', $id);
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $this->db->select('*');
+        $this->db->from('gym_amenities');
+        $this->db->where('gym_id', $id);
+        $query = $this->db->get();
+        $aminities = $query->result();
+        $data['gym']=$result;
+        $data['aminities']=$aminities;
+        $this->load->view('list_detail',$data);
     }
     public function payment()
     {
-        $this->load->view('payment');
+        $query = $this->db->get('insurance');
+        $result = $query->result();
+        $data['insurance']=$result;
+        $this->load->view('payment',$data);
     }
     public function story()
     {
@@ -72,7 +92,10 @@ class Gogym extends CI_Controller {
     }
     public function team()
     {
-        $this->load->view('team');
+        $query = $this->db->get('team');
+        $result = $query->result();
+        $data['team']=$result;
+        $this->load->view('team',$data);
     }
     public function rules_regulation()
     {
@@ -100,7 +123,10 @@ class Gogym extends CI_Controller {
     }
     public function gogyms_diet()
     {
-        $this->load->view('gogyms_diet');
+        $query = $this->db->get('diet');
+        $result = $query->result();
+        $data['diet']=$result;
+        $this->load->view('gogyms_diet',$data);
     }
     public function launch_offer()
     {
@@ -182,6 +208,7 @@ class Gogym extends CI_Controller {
         $this->db->from('gym');
         $this->db->join('gym_category', 'gym_category.gym_id = gym.gym_id');
         $this->db->where('gym_category.categoryName',$id);
+        $this->db->where('gym.is_active',1);
         $category = $this->db->get();
         $categoryList = $category->result();
         $data['gym']=$categoryList;
@@ -192,10 +219,17 @@ class Gogym extends CI_Controller {
         $this->db->select('*');
         $this->db->from('gym');
         $this->db->where('gymCity',$location);
+        $this->db->where('gym.is_active',1);
         $category = $this->db->get();
         $categoryList = $category->result();
         $data['gym']=$categoryList;
         $this->load->view('filter',$data);
+    }
+
+    public function searchLocation(){
+        $location = $this->input->post('location');
+        $data = $this->Gympagination->searchLocation($location);
+        echo json_encode($data);
     }
 
 }

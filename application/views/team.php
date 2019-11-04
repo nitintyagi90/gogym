@@ -25,24 +25,28 @@ include 'header.php';
             </div>
 
             <div class="row">
+                <?php foreach ($team as $tm){ ?>
 
                 <!-- Single Category -->
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+
                     <div class="modern-category">
                         <div class="modern-category-box-thumb">
-                            <a href="#"><img src="<?php echo base_url();?>web/assets/img/category/bear.jpg" class="img-fluid mx-auto" alt=""></a>
+                            <a href="#"><img src="<?php echo $tm->image; ?>" class="img-fluid mx-auto" alt=""></a>
                         </div>
                         <div class="modern-category-footer">
                             <div class="mc-footer-caption">
-                                <h4 class="category-title">Amit Sharma</h4>
-                                <span class="category-counting"><b>Director</b></span>
-                                <p style="line-height: 16px;">This is a dummy data.Its replaces original data very shorthly.</p>
+                                <h4 class="category-title"><?php echo $tm->memberName ?></h4>
+                                <span class="category-counting"><b><?php echo $tm->designation ?></b></span>
+                                <p style="line-height: 16px;"><?php echo $tm->description ?></p>
                             </div>
 
                         </div>
                     </div>
-                </div>
 
+
+                </div>
+                <?php } ?>
              </div>
 
         </div>
@@ -52,3 +56,5 @@ include 'header.php';
     <!-- ============================ Say Hello End ================================== -->
 <?php
 include 'footer.php';
+?>
+

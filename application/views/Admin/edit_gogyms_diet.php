@@ -3,6 +3,13 @@ include 'header.php';
 ?>
 
 <!-- End Navigation Bar-->
+<style>
+    .img50{
+        height:50px !important;
+        width:50px !important;
+    }
+    </style>
+
 <div class="wrapper">
 
     <div class="container-fluid">
@@ -26,7 +33,7 @@ include 'header.php';
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="<?php echo base_url('Admin/updateDiet');?>" method="post" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header">
 
@@ -36,13 +43,14 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Title</label>
-                                                <input type="text" name="title" required class="form-control" id="field-1" placeholder="Enter Title">
+                                                <input type="text" name="title" value="<?php echo $diet[0]['title']; ?>" class="form-control" id="field-1" placeholder="Enter Title">
+                                                <input type="hidden" name="id" value="<?php echo $diet[0]['id']; ?>" class="form-control" id="field-1" placeholder="Enter Title">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Url</label>
-                                                <input type="text" name="url" required class="form-control" id="field-1" placeholder="Enter Url">
+                                                <input type="text" name="url" value="<?php echo $diet[0]['url']; ?>" class="form-control" id="field-1" placeholder="Enter Url">
                                             </div>
                                         </div>
                                     </div>
@@ -50,13 +58,15 @@ include 'header.php';
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Description</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea class="form-control" name="description" rows="3"><?php echo $diet[0]['description']; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Diet Image</label>
-                                                <input type="file" name="categoryImage" required class="form-control" id="field-1" >
+                                                <input type="file" name="categoryImage"  class="form-control" id="field-1" >
+                                                <img src="<?php echo $diet[0]['image'] ?>" class="img50">
+
                                             </div>
                                         </div>
                                     </div>

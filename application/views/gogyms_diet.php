@@ -16,22 +16,25 @@ include 'header.php';
             <div class="row">
 
                 <!-- Single Event -->
+
+                <?php foreach ($diet as $di){ ?>
                 <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
                     <div class="event-grid-wrap">
-                        <a href="#">
-                            <div class="event-grid-header">
-                                <img src="<?php echo base_url();?>web/assets/img/event-1.jpg" class="img-fluid mx-auto" alt="">
+                        <a href="<?php echo $di->url; ?>" target="_blank">
+                            <div class="event-grid-header" >
+                                <img src="<?php echo $di->image ?>" class="img-fluid mx-auto" alt="">
                             </div>
                         </a>
                         <div class="event-grid-caption">
                             <div class="event-grid-caption-header">
-                                <h4 class="event-name"><a href="#">Title</a></h4>
+                                <h4 class="event-name"><a href="#"><?php echo $di->title ?></a></h4>
                             </div>
                             <span class="event-time-limit"><i class="fa fa-phone"></i>&nbsp; +91-8377083777</span>
-                            <p style="    line-height: 18px;">This is a dummy data. Its replaces original data very shorthly.</p>
+                            <p style="    line-height: 18px;"><?php echo $di->description ?></p>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
 
 
 

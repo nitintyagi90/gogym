@@ -144,9 +144,16 @@
 			<div id="navigation">
 				<!-- Navigation Menu-->
 				<ul class="navigation-menu text-center">
+
+
 					<li class="has-submenu ">
 						<a href="<?=base_url('Admin/dashboard')?>"><i class="mdi mdi-view-dashboard"></i>Dashboard</a>
 					</li>
+
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/insurance')?>"><i class="mdi mdi-animation"></i>Insurance</a>
+                    </li>
+
 					<li class="has-submenu ">
 						<a href="<?=base_url('Admin/amenities')?>"><i class="mdi mdi-cards"></i>Add Amenities</a>
 					</li>
@@ -183,6 +190,9 @@
                     <li class="has-submenu ">
                         <a href="<?=base_url('Admin/event_list')?>"><i class="mdi mdi-animation"></i>Event List</a>
                     </li>
+
+
+
 				</ul><!-- End navigation menu -->
 			</div> <!-- end #navigation -->
 		</div> <!-- end container -->

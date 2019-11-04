@@ -190,11 +190,8 @@ class Admin extends CI_Controller {
     {
         $this->db->select('*');
         $this->db->from('gym');
-        $this->db->join('user', 'user.id = gym.user_id');
-        $this->db->where('user.user_type',2);
         $query = $this->db->get();
         $result = $query->result();
-
         $data = array(
             'gymorowner' => $result,
         );
@@ -241,18 +238,29 @@ class Admin extends CI_Controller {
     }
     public function team()
     {
-        $this->load->view('Admin/team.php');
+        $query = $this->db->get('team');
+        $result = $query->result();
+        $data['team']=$result;
+        $this->load->view('Admin/team.php',$data);
     }
-    public function editteam()
+    public function editteam($id)
     {
-        $this->load->view('Admin/editteam.php');
+        $query = $this->db->get('team');
+        $this->db->where('id', $id);
+        $result = $query->result();
+        $data['team']=$result;
+        $this->load->view('Admin/editteam.php',$data);
     }
     public function gogyms_diet()
     {
-        $this->load->view('Admin/gogyms_diet.php');
+        $query = $this->db->get('diet');
+        $result = $query->result();
+        $data['diet']=$result;
+        $this->load->view('Admin/gogyms_diet.php',$data);
     }
     public function edit_gogyms_diet()
     {
+
         $this->load->view('Admin/edit_gogyms_diet.php');
     }
     public function launch_offer()
@@ -351,7 +359,208 @@ class Admin extends CI_Controller {
 
         }
     }
+    public function saveTeam()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            $memberName = $this->input->post('memberName');
+            $designation = $this->input->post('designation');
+            $description = $this->input->post('description');
+            $path1=  base_url().'images/';
+            if(!empty($_FILES["image"]))
+            {
+                $upload_image1=$_FILES["image"]["name"];
+                $upload1 = move_uploaded_file($_FILES["image"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+            $data = array(
+                'memberName' => $memberName,
+                'designation' => $designation,
+                'description' => $description,
+                'image' => $img_name1,
+
+            );
+            $this->db->insert('team', $data);
+            redirect('Admin/team');
+        }
+    }
+
+    public function deleteTeam($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('team');
+        redirect('Admin/team');
+    }
+    public  function updateTeam(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $memberName = $this->input->post('memberName');
+            $designation = $this->input->post('designation');
+            $description = $this->input->post('description');
+            $id = $this->input->post('id');
+            $upload_image1=$_FILES["categoryImage"]["name"];
+            if(empty($upload_image1)){
+                $data = array(
+                    'memberName' => $memberName,
+                    'designation' => $designation,
+                    'description' => $description,
+                );
+                $this->db->where('id', $id);
+                $this->db->update('team', $data);
+                redirect('Admin/team');
+            }else{
+                $path1=  base_url().'images/';
+                if(!empty($_FILES["categoryImage"]))
+                {
+                    $upload_image1=$_FILES["categoryImage"]["name"];
+                    $upload1 = move_uploaded_file($_FILES["categoryImage"]["tmp_name"], "./images/".$upload_image1);
+                    if($upload1){
+                        $img_name1 = $path1.$upload_image1;
+                    }else{
+                        $img_name1 = '';
+                    }
+                }else{
+                    $img_name1 = '';
+                }
+                $data = array(
+                    'memberName' => $memberName,
+                    'designation' => $designation,
+                    'description' => $description,
+                    'image' => $img_name1,
+
+                );
+                $this->db->where('id', $id);
+                $this->db->update('team', $data);
+                redirect('Admin/team');
+            }
+
+        }
+    }
+    public  function updateDiet(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $title = $this->input->post('title');
+            $url = $this->input->post('url');
+            $description = $this->input->post('description');
+            $id = $this->input->post('id');
+            $upload_image1=$_FILES["categoryImage"]["name"];
+            if(empty($upload_image1)){
+                $data = array(
+                    'title' => $title,
+                    'url' => $url,
+                    'description' => $description,
+                );
+                $this->db->where('id', $id);
+                $this->db->update('diet', $data);
+                redirect('Admin/gogyms_diet');
+            }else{
+                $path1=  base_url().'images/';
+                if(!empty($_FILES["categoryImage"]))
+                {
+                    $upload_image1=$_FILES["categoryImage"]["name"];
+                    $upload1 = move_uploaded_file($_FILES["categoryImage"]["tmp_name"], "./images/".$upload_image1);
+                    if($upload1){
+                        $img_name1 = $path1.$upload_image1;
+                    }else{
+                        $img_name1 = '';
+                    }
+                }else{
+                    $img_name1 = '';
+                }
+                $data = array(
+                    'title' => $title,
+                    'url' => $url,
+                    'description' => $description,
+                    'image' => $img_name1,
+
+                );
+                $this->db->where('id', $id);
+                $this->db->update('diet', $data);
+                redirect('Admin/gogyms_diet');
+            }
+
+        }
+    }
+
+    public function saveDiet()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $title = $this->input->post('title');
+            $url = $this->input->post('url');
+            $description = $this->input->post('description');
+            $path1=  base_url().'images/';
+            if(!empty($_FILES["image"]))
+            {
+                $upload_image1=$_FILES["image"]["name"];
+                $upload1 = move_uploaded_file($_FILES["image"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+            $data = array(
+                'title' => $title,
+                'url' => $url,
+                'description' => $description,
+                'image' => $img_name1,
+
+            );
+            $this->db->insert('diet', $data);
+            redirect('Admin/gogyms_diet');
+        }
+    }
+
+    public function deletediet($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('diet');
+        redirect('Admin/gogyms_diet');
+    }
+
+    public  function editDiet($id){
+        $where='id';
+        $table='diet';
+        $data['diet']=$this->Adminmodel->select_com_where($table,$where,$id);
+        $this->load->view('Admin/edit_gogyms_diet.php',$data);
+    }
+
+
+    public function insurance()
+    {
+        $query = $this->db->get('insurance');
+        $result = $query->result();
+        $data['insurance']=$result;
+        $this->load->view('Admin/insurance.php',$data);
+    }
+
+    public function editInsurance($id)
+    {
+        $query = $this->db->get('insurance');
+        $this->db->where('id', $id);
+        $result = $query->result();
+        $data['insurance']=$result;
+        $this->load->view('Admin/editInsurance.php',$data);
+    }
+
+    public  function updateInsurance(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $insurance_value = $this->input->post('insurance_value');
+            $id = $this->input->post('id');
+            $data = array(
+                'insurance_value' => $insurance_value,
+            );
+            $this->db->where('id', $id);
+            $this->db->update(' insurance', $data);
+            redirect('Admin/insurance');
+        }
+    }
 
 }
 

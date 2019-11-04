@@ -34,7 +34,6 @@ include 'header.php';
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Owner Name</th>
                                     <th>Gym Name</th>
                                     <th>Mobile</th>
                                     <th>Gymplan</th>
@@ -53,13 +52,13 @@ include 'header.php';
                                     ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
-                                        <td><?=$value->owner_name;?></td>
-                                        <td><?=$value->gym_name;?></td>
-                                        <td><?=$value->mobile;?></td>
+
+                                        <td><?=$value->gymName;?></td>
+                                        <td><?=$value->contact_no;?></td>
                                         <td><?=$value->gymplanType;?></td>
                                         <td><?=$value->gymPrice;?></td>
                                         <td><?=$value->totalavailability;?></td>
-                                        <td><?=$value->location;?></td>
+                                        <td><?=$value->gymCity;?></td>
                                         <td>
                                             <?php
                                             if($value->is_active==0){?>

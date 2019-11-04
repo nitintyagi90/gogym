@@ -11,8 +11,8 @@ include 'header.php';
                             <img src="assets/img/go-gyms-60.png" class="img-responsive" alt="" />
                         </div>
                         <div class="tr-list-info">
-                            <h4>Power World Gyms</h4>
-                            <p>No 285.C, 3rd Floor, Sankranti Arcade, 9th Main Road</p>
+                            <h4><?php echo $gym[0]->gymName; ?></h4>
+                            <p><?php echo $gym[0]->gym_address ?></p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ include 'header.php';
                                         <h4><i class="ti-files"></i>Description</h4>
                                     </div>
                                     <div class="tr-single-body">
-                                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus..</p>
+                                        <p><?php echo $gym[0]->gymdescription; ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -72,24 +72,9 @@ include 'header.php';
                                     </div>
                                     <div class="tr-single-body">
                                         <ul class="amenities third">
-                                            <li>Satellite TV</li>
-                                            <li>Coffeemaker</li>
-                                            <li>Hair Dryer</li>
-                                            <li>Swimming Pool</li>
-                                            <li>Room Service</li>
-                                            <li>Luxury Bedding</li>
-                                            <li>Good Showers</li>
-                                            <li>Free Parking</li>
-                                            <li>Free Wifi</li>
-                                            <li>Bath towel</li>
-                                            <li>Free Coffee</li>
-                                            <li>Pets Allow</li>
-                                            <li>Hot Water</li>
-                                            <li>Attached garage </li>
-                                            <li>Elevator</li>
-                                            <li>Spa/Sauna</li>
-                                            <li>Indoor pool </li>
-                                            <li>Security cameras </li>
+                                            <?php foreach ($aminities as $am){ ?>
+                                            <li><?php echo $am->aminitiesName ?></li>
+                                           <?php }?>
                                         </ul>
                                     </div>
                                 </div>
@@ -248,12 +233,12 @@ include 'header.php';
                         </div>
 
                         <div class="tr-single-body">
-                            <form class="booking-form">
+                            <form action="<?php echo base_url('Gogym/payment'); ?>" method="post" class="booking-form">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Select Gender</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="gender">
                                                 <option>Male</option>
                                                 <option>Female</option>
                                             </select>
@@ -262,7 +247,7 @@ include 'header.php';
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>CheckIn</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="checkIn">
                                                 <option>06:00<span>AM</span></option>
                                                 <option>07:00<span>AM</span></option>
                                                 <option>08:00<span>AM</span></option>
@@ -282,31 +267,20 @@ include 'header.php';
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
+                                        <div class="form-group input-group bootstrap-timepicker timepicker">
                                             <label>Check Out</label>
-                                            <select class="form-control">
-                                                <option>10:00<span>AM</span></option>
-                                                <option>11:00<span>AM</span></option>
-                                                <option>12:00<span>PM</span></option>
-                                                <option>01:00<span>PM</span></option>
-                                                <option>02:00<span>PM</span></option>
-                                                <option>03:00<span>PM</span></option>
-                                                <option>04:00<span>PM</span></option>
-                                                <option>05:00<span>PM</span></option>
-                                                <option>06:00<span>PM</span></option>
-                                                <option>07:00<span>PM</span></option>
-                                                <option>08:00<span>PM</span></option>
-                                                <option>09:00<span>PM</span></option>
-                                                <option>10:00<span>PM</span></option>
-                                                <option>11:00<span>PM</span></option>
-                                                <option>12:00<span>AM</span></option>
-                                            </select>
+                                            <input type="text" name="checkOut" id="timepicker1" class="form-control floating-label" placeholder="Time">
+                                            <input type="hidden" name="gymId" value="<?php echo $gym[0]->gym_id; ?>">
+                                            <input type="hidden" name="gymPrice" value="<?php echo $gym[0]->gymPrice; ?>">
+                                            <input type="hidden" name="gymImage" value="<?php echo $gym[0]->gymImage; ?>">
+                                            <input type="hidden" name="gym_address" value="<?php echo $gym[0]->gym_address; ?>">
+                                            <input type="hidden" name="gymName" value="<?php echo $gym[0]->gymName; ?>">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>No. Of Person</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="personValue">
                                                 <option>1</option>
                                                 <option>2</option>
                                                 <option>3</option>
@@ -321,8 +295,7 @@ include 'header.php';
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <a href="<?php echo base_url('Gogym/payment'); ?>" class="btn btn-success full-width">
-                                            Continue To Book</a>
+                                        <input type="submit" class="btn btn-success full-width" value="Continue To Book">
                                     </div>
                                 </div>
                             </form>
@@ -389,3 +362,7 @@ include 'header.php';
     <!-- ============== Tour Detail ====================== -->
 <?php
 include 'footer.php';
+?>
+<script type="text/javascript">
+    $('#timepicker1').timepicker();
+</script>

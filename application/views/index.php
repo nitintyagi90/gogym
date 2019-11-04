@@ -22,7 +22,7 @@ include 'header.php';
 									<div class="col-lg-4 col-md-5">
 										<div class="form-group">
 											<i class="fa fa-map-marker"></i>
-											<input type="text" id="geocomplete" class="form-control b-r" placeholder="Location...">
+											<input type="text" id="search_text" class="form-control b-r" placeholder="Location...">
 
 										</div>
 									</div>
@@ -293,28 +293,20 @@ include 'footer.php';
 ?>
 
 <script>
-    $(function(){
+    $('#search_text').keyup(function(){
+        var search = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: '<?php echo base_url('Gogym/searchLocation')?>',
+            data:{location:search},
+            success: function (data) {
+                $.each(JSON.parse(data), function(k, v) {
+                    console.log('hkhhk',v.gymCity)
 
-        $("#geocomplete").geocomplete()
-            .bind("geocode:result", function(event, result){
-                $.log("Result: " + result.formatted_address);
-            })
-            .bind("geocode:error", function(event, status){
-                $.log("ERROR: " + status);
-            })
-            .bind("geocode:multiple", function(event, results){
-                $.log("Multiple: " + results.length + " results found");
-            });
+                });
 
-        $("#find").click(function(){
-            $("#geocomplete").trigger("geocode");
+            }
         });
-
-
-        $("#examples a").click(function(){
-            $("#geocomplete").val($(this).text()).trigger("geocode");
-            return false;
-        });
-
     });
 </script>
+

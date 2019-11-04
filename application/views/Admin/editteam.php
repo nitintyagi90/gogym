@@ -1,7 +1,12 @@
 <?php
 include 'header.php';
 ?>
-
+<style>
+    .img50{
+        height:50px !important;
+        width:50px !important;
+    }
+</style>
 <!-- End Navigation Bar-->
 <div class="wrapper">
 
@@ -26,7 +31,7 @@ include 'header.php';
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="<?php echo base_url('Admin/updateTeam');?>" method="post" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header">
 
@@ -36,13 +41,14 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Name</label>
-                                                <input type="text" name="memberName" required class="form-control" id="field-1" placeholder="Enter Member Name">
+                                                <input type="text" value="<?php echo $team[0]->memberName ?>" name="memberName" required class="form-control" id="field-1" placeholder="Enter Member Name">
+                                                <input type="hidden" value="<?php echo $team[0]->id ?>" name="id"  class="form-control" id="field-1" placeholder="Enter Member Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Designation</label>
-                                                <input type="text" name="designation" required class="form-control" id="field-1" placeholder="Enter Designation">
+                                                <input type="text" value="<?php echo $team[0]->designation ?>" name="designation" required class="form-control" id="field-1" placeholder="Enter Designation">
                                             </div>
                                         </div>
                                     </div>
@@ -50,13 +56,14 @@ include 'header.php';
                                         <div class="col-md-9">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Description</label>
-                                                <textarea class="form-control" rows="3"></textarea>
+                                                <textarea class="form-control" name="description" rows="3"><?php echo $team[0]->description ?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Member Image</label>
-                                                <input type="file" name="categoryImage" required class="form-control" id="field-1" placeholder="Enter Amenities Name">
+                                                <input type="file" name="categoryImage"  class="form-control" id="field-1" placeholder="Enter Amenities Name">
+                                                <img src="<?php echo $team[0]->image ?>" class="img50">
                                             </div>
                                         </div>
                                     </div>

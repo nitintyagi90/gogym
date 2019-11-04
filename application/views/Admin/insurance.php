@@ -1,8 +1,12 @@
 <?php
-
 include 'header.php';
 ?>
-
+<style>
+    .img50{
+        height:50px !important;
+        width:50px !important;
+    }
+</style>
 <div class="wrapper">
     <div class="container-fluid">
 
@@ -14,10 +18,10 @@ include 'header.php';
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">GoGyms</a></li>
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Profession</li>
+                            <li class="breadcrumb-item active">Team</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Profession</h4>
+                    <h4 class="page-title">Team</h4>
                 </div>
             </div>
         </div>
@@ -34,28 +38,25 @@ include 'header.php';
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Name</th>
-                                    <th>Mobile</th>
-                                    <th>Email</th>
-
+                                    <th>Insurance Value</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                <?php $i=1;
-                                foreach ($gymowner as  $value) {
-
-
+                                <?php
+                                $count = 0;
+                                foreach ($insurance as $tm){
+                                    $count++;
                                     ?>
                                     <tr>
-                                        <td><?= $i++; ?></td>
-                                        <td><?=$value->owner_name;?></td>
-                                        <td><?=$value->mobile;?></td>
-                                        <td><?=$value->email;?></td>
+                                        <td><?php echo $count; ?></td>
+                                        <td><?php echo $tm->insurance_value; ?></td>
 
-
+                                        <td>
+                                            <a href="<?php echo site_url('Admin/editInsurance/'.$tm->id);?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+                                        </td>
                                     </tr>
-                                <?php }?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -67,9 +68,24 @@ include 'header.php';
     </div> <!-- end container -->
 </div>
 <!-- end wrapper -->
-<?php
 
+<?php
 include 'footer.php';
 ?>
+<script>
+    var deleteLinks = document.querySelectorAll('.delete');
+    for (var i = 0; i < deleteLinks.length; i++) {
+        deleteLinks[i].addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var choice = confirm(this.getAttribute('data-confirm'));
+
+            if (choice) {
+                window.location.href = this.getAttribute('href');
+            }
+        });
+    }
+
+</script>
 
 

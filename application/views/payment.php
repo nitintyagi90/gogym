@@ -1,6 +1,7 @@
 <?php
 include 'header.php';
 ?>
+
     <!-- ============================ Page Title  Start================================== -->
     <div class="page-title image-title" style="background-image:url(assets/img/banner-2.jpg);">
         <div class="finding-overlay op-70"></div>
@@ -112,7 +113,7 @@ include 'header.php';
                 <div class="col-lg-4 col-md-4">
                     <div class="booking-item list-item">
                         <div class="bookin-item-header">
-                            <img src="assets/img/event-1.jpg" class="img-fluid mx-auto" alt="">
+                            <img src="<?php echo $_POST['gymImage']; ?>" class="img-fluid mx-auto" alt="">
                         </div>
                         <div class="booking-summary-head">
                             <div class="gl-rating gl-card">
@@ -124,20 +125,27 @@ include 'header.php';
                             </div>
                         </div>
                         <div class="booking-summary">
-                            <h4 class="booking-item-title">Group EX Fitness Revolution</h4>
-                            <p class="booking-item-location"> No 285.C, 3rd Floor, Sankranti Arcade</p>
+                            <h4 class="booking-item-title"><?php echo $_POST['gymName'] ?></h4>
+                            <p class="booking-item-location"><?php echo $_POST['gym_address'] ?></p>
                         </div>
                     </div>
                     <div class="summary-boxed-widget">
                         <h4><i class="ti-calendar"></i> Booking Summary</h4>
                         <ul>
-                            <li>Check In <span>06:00 AM</span></li>
-                            <li>Check Out <span>10:00 AM</span></li>
-                            <li>No. Of Person <span>2</span></li>
-                            <li>Booking Amount <span>49.00</span></li>
+                            <li>Check In <span><?php echo $_POST['checkIn'] ?></span></li>
+                            <li>Check Out <span><?php echo $_POST['checkOut'] ?></span></li>
+                            <li>No. Of Person <span><?php echo $_POST['personValue'] ?></span></li>
+                            <?php
+                            $gymAmount = $_POST['gymPrice'];
+                            $personValue = $_POST['personValue'];
+                            $totalPrice = $gymAmount*$personValue;
+                            $cal = $totalPrice*$insurance[0]->insurance_value;
+                            $newTotal = $cal / 100;
+                            ?>
+                            <li>Booking Amount <span><?php echo $totalPrice; ?></span></li>
                             <li>Coupon Discount (Go25) <span class="main-color">-<i class="fa fa-inr"></i>13.00</span></li>
-                            <li><input type="checkbox" name="Insurance" value="Insurance">&nbsp;Insurance(3%) <span class="main-color"><i class="fa fa-inr"></i>0.00</span></li>
-                            <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color" style="margin-top: -20%;"><i class="fa fa-inr"></i>36.00</span></li>
+                            <li><input type="checkbox" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance[0]->insurance_value; ?>%) <span class="main-color"><i class="fa fa-inr"></i>0.00</span></li>
+                            <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $newTotal; ?></span></li>
                         </ul>
                     </div>
                 </div>
