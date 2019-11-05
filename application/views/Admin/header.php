@@ -190,10 +190,10 @@
                     <li class="has-submenu ">
                         <a href="<?=base_url('Admin/event_list')?>"><i class="mdi mdi-animation"></i>Event List</a>
                     </li>
-
-
-
-				</ul><!-- End navigation menu -->
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/enquiry')?>"><i class="mdi mdi-animation"></i>Enquiry List</a>
+                    </li>
+                </ul><!-- End navigation menu -->
 			</div> <!-- end #navigation -->
 		</div> <!-- end container -->
 	</div> <!-- end navbar-custom -->

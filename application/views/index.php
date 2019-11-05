@@ -22,8 +22,19 @@ include 'header.php';
 									<div class="col-lg-4 col-md-5">
 										<div class="form-group">
 											<i class="fa fa-map-marker"></i>
-											<input type="text" id="search_text" class="form-control b-r" placeholder="Location...">
-
+											<!--<input type="text" id="search_text" class="form-control b-r" placeholder="Location...">-->
+                                           <!-- <select id="location" class="js-states form-control">
+                                                <option value="">Choose location</option>
+                                                <option value="Delhi">Delhi</option>
+                                            </select>-->
+                                            <select id="area" class="js-states form-control">
+                                                <option value="">Choose Location</option>
+                                                <option value="Delhi">Delhi</option>
+                                                <option value="Gurugram">Gurugram</option>
+                                                 <option value="Noida">Noida</option>
+                                                <option value="Ghaziabad">Ghaziabad</option>
+                                                <option value="Faridabad">Faridabad</option>
+                                            </select>
 										</div>
 									</div>
 
@@ -154,7 +165,7 @@ include 'header.php';
 
 							</div>
 							<h6>Get a best-in-class Personal Trainer from Gympik and kick-start your fitness journey at the comfort of your home! You would love the results you see!</h6><br>
-							<a class="btn theme-btn font-14" href="#"></i>ENQUIRE NOW</a>
+							<a class="btn theme-btn font-14" href="#myModal" data-toggle="modal"></i>ENQUIRE NOW</a>
 						</div>
 						</div>
 					</div>
@@ -291,7 +302,53 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">ENQUIRE NOW</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo base_url('Gogym/insert_enquiry');?>" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Email ID</label>
+                        <input type="email" class="form-control" name="email">
+                    </div>
+                </div>
+                    <div class="row" style="padding-top: 2%;">
+                        <div class="col-md-6">
+                            <label>Mobile No</label>
+                            <input type="text" class="form-control" name="mobile">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Subject</label>
+                            <input type="text" class="form-control" name="subject">
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 2%;">
+                        <div class="col-md-12">
+                            <label>Message</label>
+                            <textarea class="form-control" name="msg"></textarea>
+                        </div>
+                    </div>
+                    <span style="padding-top: 2%;">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
 <script>
     $('#search_text').keyup(function(){
         var search = $(this).val();

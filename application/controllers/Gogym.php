@@ -8,7 +8,7 @@ class Gogym extends CI_Controller {
         $this->load->model('GogymModel');
         $this->load->model('Gympagination');
         $this->load->library('pagination');
-
+        $this->load->model('Adminmodel');
     }
 	public function index()
 	{
@@ -230,6 +230,25 @@ class Gogym extends CI_Controller {
         $location = $this->input->post('location');
         $data = $this->Gympagination->searchLocation($location);
         echo json_encode($data);
+    }
+    public function insert_enquiry()
+    {
+        $name= $_POST['name'];
+        $email= $_POST['email'];
+        $mobile= $_POST['mobile'];
+        $subject= $_POST['subject'];
+        $msg= $_POST['msg'];
+
+        $table='enquiry';
+        $data= array(
+            'enq_name' => $name,
+            'enq_email' => $email,
+            'enq_mobile' => $mobile,
+            'enq_subject' => $subject,
+            'enq_message' => $msg
+        );
+        $login=$this->Adminmodel->insert_common($table,$data);
+        redirect('Gogym/index');
     }
 
 }

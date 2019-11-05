@@ -55,10 +55,10 @@ class Adminmodel extends CI_Model{
 		$result = $query->result_array();
 		return $result;
 	}
-	public function Enquiry(){
+	public function enquiry(){
 		$this->db->select('*');
 		$this->db->from('enquiry');
-		$this->db->order_by("id", "desc");
+		$this->db->order_by("enq_id", "desc");
 		$query = $this->db->get();
 		$result = $query->result_array();
 		return $result;
@@ -91,7 +91,14 @@ class Adminmodel extends CI_Model{
 		$query = $this->db->get();
 		$result = $query->result_array();
 		return $result;
-	}
+	}public function eventlist(){
+    $this->db->select('*');
+    $this->db->from('event');
+    $this->db->order_by("event_id", "desc");
+    $query = $this->db->get();
+    $result = $query->result_array();
+    return $result;
+}
 	public function profession(){
 		$this->db->select('*');
 		$this->db->from('profession');

@@ -335,12 +335,14 @@
 <script src="<?php echo base_url();?>web/assets/plugins/js/map_infobox.js"></script>
 <script src="<?php echo base_url();?>web/assets/plugins/js/markerclusterer.js"></script>
 <script src="<?php echo base_url();?>web/assets/js/custom-maps.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js"></script>
+
 <!-- Custom js -->
 <script src="<?php echo base_url();?>web/assets/js/custom.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 
 <script src="<?php echo base_url();?>web/assets/js/jquery.geocomplete.js"></script>
+<script src="<?php echo base_url();?>web/assets/bootstrap-clockpicker.min.js"></script>
+
 
 <!-- ============================================================== -->
 <!-- This page plugins -->

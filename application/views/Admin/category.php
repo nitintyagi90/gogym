@@ -91,7 +91,7 @@ include 'footer.php';
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="field-1" class="control-label">Category Name</label>
-                                <input type="text" name="categoryName" required class="form-control" id="field-1" placeholder="Enter Amenities Name">
+                                <input type="text" name="categoryName" required class="form-control" id="field-1" placeholder="Enter Category Name">
                             </div>
                         </div>
                     </div>

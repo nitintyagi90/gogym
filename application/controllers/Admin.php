@@ -44,8 +44,6 @@ class Admin extends CI_Controller {
 	{
 		$amentities_id= $_POST['amentities_id'];
 		$data = $this->AdminModel->editamienities($amentities_id);
-		print_r($data);die();
-		echo json_encode($data);
 
 	}
 
@@ -95,6 +93,40 @@ class Admin extends CI_Controller {
 		$login=$this->Adminmodel->insert_common($table,$data);
 		redirect('Admin/amenities');
 	}
+    public function insert_event()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $this->input->post('name');
+            $address = $this->input->post('address');
+            $date = $this->input->post('date');
+            $price = $this->input->post('price');
+            $description = $this->input->post('description');
+            $path1=  base_url().'images/';
+            if(!empty($_FILES["event_pic"]))
+            {
+                $upload_image1=$_FILES["event_pic"]["name"];
+                $upload1 = move_uploaded_file($_FILES["event_pic"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+            $data = array(
+                'event_name' => $name,
+                'event_address' => $address,
+                'event_date' => $date,
+                'event_price' => $price,
+                'event_description' => $description,
+                'event_pic' => $img_name1,
+
+            );
+            $this->db->insert('event', $data);
+            redirect('Admin/event_list');
+        }
+    }
 	public function insert_profession()
 	{
 		$name1= $_POST['profession_name'];
@@ -234,7 +266,14 @@ class Admin extends CI_Controller {
     }
     public function event_list()
     {
-        $this->load->view('Admin/event_list');
+        is_protected();
+        $data['message']=$this->Adminmodel->eventlist();
+        $this->load->view('Admin/event_list.php',$data);
+     }
+    public function enquiry()
+    {
+        $data['message']=$this->Adminmodel->enquiry();
+        $this->load->view('Admin/enquiry.php',$data);
     }
     public function team()
     {

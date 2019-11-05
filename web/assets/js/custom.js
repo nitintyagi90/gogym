@@ -104,7 +104,7 @@ $(function() {
 	});
 	
 	$('#area').select2({
-		placeholder: "Choose Area",
+		placeholder: "Choose location...",
 		allowClear: true
 	});
 	

@@ -2346,7 +2346,7 @@ color: #546e7a;
     padding: 0 15px;
 }
 .home-form-1 .select2-container--default .select2-selection--single {
-    border: none;
+    /*border: none;*/
 }
 .select2-container--default .select2-selection--single {
     background-color:#fff;
@@ -5872,7 +5872,7 @@ hr {
     margin-right: 10px;
 }
 .modal-header button.close {
-    font-size: 16px;
+    font-size: 30px;
     color: #5d6d7f;
     cursor: pointer;
 }

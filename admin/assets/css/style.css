@@ -3428,8 +3428,8 @@ body {
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
   line-height: 18px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #topnav .navigation-menu > li > a:hover {

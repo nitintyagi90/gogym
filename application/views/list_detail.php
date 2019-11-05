@@ -1,6 +1,13 @@
 <?php
 include 'header.php';
 ?>
+<style>
+    #hearts { color: #FF0000;}
+    #hearts-existing { color: #87bad7;}
+</style>
+
+
+
     <!-- ======================= Start Banner ===================== -->
     <section class="page-title-banner" style="background-image:url(assets/img/banner-2.jpg);">
         <div class="container">
@@ -83,7 +90,7 @@ include 'header.php';
 
 
                             <!-- Location -->
-                            <div class="row">
+                       <!--     <div class="row">
                                 <div class="tr-single-box">
                                     <div class="tr-single-header">
                                         <h4><i class="ti-map-alt"></i>Location</h4>
@@ -92,10 +99,10 @@ include 'header.php';
                                         <div class="height-350" id="singleMap" data-latitude="40.712776" data-longitude="-74.005974" data-mapTitle="Our Location"></div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <!-- Review button -->
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#add-review" class="btn add-review-btn">Add Your Review</a>
+                            <a href="#myModal" data-toggle="modal" class="btn add-review-btn">Add Your Review</a>
 
                             <!-- Review & Rating -->
                             <div class="row">
@@ -111,7 +118,8 @@ include 'header.php';
                                         </div>
                                         <div class="comment-module-rating">
                                             <div class="f-rate">
-                                                9.8<sup>10</sup><span class="rating-status good-rate">Very Good</span>
+                                                4.5<sup>5</sup>
+                                                <!--<span class="rating-status good-rate">Very Good</span>-->
                                             </div>
                                         </div>
                                     </div>
@@ -119,31 +127,22 @@ include 'header.php';
                                     <div class="comment-module-body">
                                         <h4 class="comment-module-title">Very Good & Success</h4>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-                                        <div class="comment-module-status">
-                                            <ul>
-                                                <li><span>206</span> Likes</li>
-                                                <li><span>206</span> Comment</li>
-                                                <li><span>206</span> Share</li>
-                                            </ul>
-                                        </div>
                                     </div>
                                     <div class="comment-module-footer">
                                         <div class="comment-info-module">
                                             <div class="comment-review_btn">
-                                                <a href="#" class="utility-meta_module"><i class="ti-thumb-up"></i>Like</a>
+                                                <a href="#" class="utility-meta_module"><i class="ti-thumb-up"></i><span style="color: #ff7600;">206</span>&nbsp;Like</a>
                                             </div>
                                             <div class="comment-review_btn">
-                                                <a href="#" class="utility-meta_module"><i class="ti-comment-alt"></i>Comment</a>
+                                                <a href="#anchor-01" class="utility-meta_module"><i class="ti-comment-alt"></i><span style="color: #ff7600;">206</span>&nbsp;Comment</a>
                                             </div>
-                                            <div class="comment-review_btn">
-                                                <a href="#" class="utility-meta_module"><i class="ti-share"></i>Share</a>
-                                            </div>
+
                                         </div>
                                         <div class="comment-reply-module">
                                             <ul>
                                                 <li>
                                                     <div class="reply-module-avater">
-                                                        <img src="assets/img/team-2.png" class="img-responsive img-circle" alt="">
+                                                        <img src="<?php echo base_url();?>web/assets/img/team-2.png" class="img-responsive img-circle" alt="">
                                                     </div>
                                                     <div class="reply-module-detail">
                                                         <h5 class="reply-module-title">Daisy Lilla</h5>
@@ -153,7 +152,7 @@ include 'header.php';
                                                 </li>
                                                 <li>
                                                     <div class="reply-module-avater">
-                                                        <img src="assets/img/team-3.png" class="img-responsive img-circle" alt="">
+                                                        <img src="<?php echo base_url();?>web/assets/img/team-3.png" class="img-responsive img-circle" alt="">
                                                     </div>
                                                     <div class="reply-module-detail">
                                                         <h5 class="reply-module-title">Zahir Khan</h5>
@@ -165,11 +164,11 @@ include 'header.php';
                                         </div>
                                         <div class="comment-form-module">
                                             <div class="comment-form-avater">
-                                                <img src="assets/img/team-4.png" class="img-responsive img-circle" alt="">
+                                                <img src="<?php echo base_url();?>web/assets/img/team-4.png" class="img-responsive img-circle" alt="">
                                             </div>
                                             <div class="comment-form-box">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Type Soething...">
+                                                    <input id="anchor-01" type="text" class="form-control" placeholder="Type Something...">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="ti-arrow-right"></i></span>
                                                     </div>
@@ -247,29 +246,15 @@ include 'header.php';
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>CheckIn</label>
-                                            <select class="form-control" name="checkIn">
-                                                <option>06:00<span>AM</span></option>
-                                                <option>07:00<span>AM</span></option>
-                                                <option>08:00<span>AM</span></option>
-                                                <option>09:00<span>AM</span></option>
-                                                <option>10:00<span>AM</span></option>
-                                                <option>11:00<span>AM</span></option>
-                                                <option>12:00<span>PM</span></option>
-                                                <option>01:00<span>PM</span></option>
-                                                <option>02:00<span>PM</span></option>
-                                                <option>03:00<span>PM</span></option>
-                                                <option>04:00<span>PM</span></option>
-                                                <option>05:00<span>PM</span></option>
-                                                <option>06:00<span>PM</span></option>
-                                                <option>07:00<span>PM</span></option>
-                                                <option>08:00<span>PM</span></option>
-                                            </select>
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                                <input type="text" class="form-control" value="09:30">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group input-group bootstrap-timepicker timepicker">
-                                            <label>Check Out</label>
-                                            <input type="text" name="checkOut" id="timepicker1" class="form-control floating-label" placeholder="Time">
+                                        <label>Check Out</label>
+                                        <div class="input-group clockpicker" data-autoclose="true">
+                                            <input type="text" class="form-control" value="09:30">
                                             <input type="hidden" name="gymId" value="<?php echo $gym[0]->gym_id; ?>">
                                             <input type="hidden" name="gymPrice" value="<?php echo $gym[0]->gymPrice; ?>">
                                             <input type="hidden" name="gymImage" value="<?php echo $gym[0]->gymImage; ?>">
@@ -360,9 +345,135 @@ include 'header.php';
         </div>
     </section>
     <!-- ============== Tour Detail ====================== -->
+
 <?php
 include 'footer.php';
 ?>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Give your Feedback</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="rating-ability-wrapper">
+                    <label class="control-label" for="rating" style="margin-bottom: 0px;">
+                        <span class="field-label-info"></span>
+                        <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">
+                    </label>
+                    <h2 class="bold rating-header" style="">
+                        <span class="selected-rating">0</span><small> / 5</small>
+                    </h2>
+                    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+
+        </div>
+
+    </div>
+</div>
+   <script>
+       jQuery(document).ready(function($){
+
+           $(".btnrating").on('click',(function(e) {
+
+               var previous_value = $("#selected_rating").val();
+
+               var selected_value = $(this).attr("data-attr");
+               $("#selected_rating").val(selected_value);
+
+               $(".selected-rating").empty();
+               $(".selected-rating").html(selected_value);
+
+               for (i = 1; i <= selected_value; ++i) {
+                   $("#rating-star-"+i).toggleClass('btn-warning');
+                   $("#rating-star-"+i).toggleClass('btn-default');
+               }
+
+               for (ix = 1; ix <= previous_value; ++ix) {
+                   $("#rating-star-"+ix).toggleClass('btn-warning');
+                   $("#rating-star-"+ix).toggleClass('btn-default');
+               }
+
+           }));
+
+
+       });
+
+   </script>
 <script type="text/javascript">
-    $('#timepicker1').timepicker();
+    $('.clockpicker').clockpicker()
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+    var input = $('#single-input').clockpicker({
+        placement: 'bottom',
+        align: 'left',
+        autoclose: true,
+        'default': 'now'
+    });
+
+    $('.clockpicker-with-callbacks').clockpicker({
+        donetext: 'Done',
+        init: function() {
+            console.log("colorpicker initiated");
+        },
+        beforeShow: function() {
+            console.log("before show");
+        },
+        afterShow: function() {
+            console.log("after show");
+        },
+        beforeHide: function() {
+            console.log("before hide");
+        },
+        afterHide: function() {
+            console.log("after hide");
+        },
+        beforeHourSelect: function() {
+            console.log("before hour selected");
+        },
+        afterHourSelect: function() {
+            console.log("after hour selected");
+        },
+        beforeDone: function() {
+            console.log("before done");
+        },
+        afterDone: function() {
+            console.log("after done");
+        }
+    })
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+
+    // Manually toggle to the minutes view
+    $('#check-minutes').click(function(e){
+        // Have to stop propagation here
+        e.stopPropagation();
+        input.clockpicker('show')
+            .clockpicker('toggleView', 'minutes');
+    });
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
 </script>
