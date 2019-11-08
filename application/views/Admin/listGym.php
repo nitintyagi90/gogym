@@ -37,7 +37,7 @@ include 'header.php';
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Email</th>
-
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 
@@ -52,7 +52,7 @@ include 'header.php';
                                         <td><?=$value->owner_name;?></td>
                                         <td><?=$value->mobile;?></td>
                                         <td><?=$value->email;?></td>
-
+                                        <td><a href="<?php echo base_url('Admin/ListGym_details'); ?>" class="btn btn-primary">View More</a></td>
 
                                     </tr>
                                 <?php }?>

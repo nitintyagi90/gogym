@@ -46,7 +46,10 @@ class Admin extends CI_Controller {
 		$data = $this->AdminModel->editamienities($amentities_id);
 
 	}
-
+    public function ListGym_details()
+    {
+        $this->load->view('Admin/ListGym_details.php');
+    }
 	public function dashboard()
 	{
 		$this->load->view('Admin/dashboard.php');
@@ -541,8 +544,7 @@ class Admin extends CI_Controller {
             $designation = $this->input->post('designation');
             $description = $this->input->post('description');
             $path1=  base_url().'images/';
-
-            if(!empty($_FILES["file"]["image"]))
+            if(!empty($_FILES["image"]))
             {
                 $upload_image1=$_FILES["image"]["name"];
                 $upload1 = move_uploaded_file($_FILES["image"]["tmp_name"], "./images/".$upload_image1);
