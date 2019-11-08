@@ -316,7 +316,9 @@ include 'header.php';
 
 									</div>
 									<div class="row">
-										<div class="col-md-10"></div>
+										<div class="col-md-10">
+                                            <a class="btn btn-primary full-width mb-4" ></a>
+                                        </div>
 										<div class="col-md-2">
                                             <input type="submit" value="Submit" class="btn btn-primary full-width mb-4">
 								</div>
@@ -389,6 +391,57 @@ include 'header.php';
                                     </div>
 
                                 </form>
+                            </div>
+                            <!-- Billing Content -->
+                            <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="v-pills-billing-tab">
+                                <!-- Notification Info -->
+                                <div class="tr-single-box">
+
+                                    <div class="tr-single-header">
+                                        <h4><i class="ti-bell"></i> Booking Details</h4>
+                                    </div>
+
+                                    <div class="tr-single-body">
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-2 table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Booking ID</th>
+                                                        <th>User Name</th>
+                                                        <th>User Email ID</th>
+                                                        <th>User Mobile No</th>
+                                                        <th>Plan Type</th>
+                                                        <th>Amount</th>
+                                                        <th>Payment Mode</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>1001</td>
+                                                        <td>Sanjeev</td>
+                                                        <td>skgupta5050@gmail.com</td>
+                                                        <td>9716683297</td>
+                                                        <td>Daily</td>
+                                                        <td>49</td>
+                                                        <td>Online</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1002</td>
+                                                        <td>Sanjeev</td>
+                                                        <td>skgupta5050@gmail.com</td>
+                                                        <td>9716683297</td>
+                                                        <td>Weekly</td>
+                                                        <td>299</td>
+                                                        <td>Online</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
 						</div>
 					</div>

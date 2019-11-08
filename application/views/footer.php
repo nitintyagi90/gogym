@@ -8,7 +8,7 @@
 					<div class="footer-widget">
 						<aside id="media_image-2" class="widget widget_media_image">
 							<a href="index.html">
-								<img src="<?php echo base_url();?>web/assets/img/go-gyms-60.png" class="img-fluid mx-auto" alt="">
+								<img src="<?php echo base_url();?>web/assets/img/go-gyms-new .png" class="img-fluid mx-auto" alt="">
 							</a>
 						</aside>
 						<p>Go gyms a connecting bridge between you and your health Goals. Go Gyms is a flexible key platform which provides a flexible regular hazard free fitness environment to help people to live fit Everyday. </p>
