@@ -7,6 +7,54 @@ include 'header.php';
         height: 110px !important;
     }
 </style>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+    button {
+        background-color: #4CAF50;
+        color: #ffffff;
+        border: none;
+        padding: 8px 20px;
+        font-size: 17px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    #prevBtn {
+        background-color: #bbbbbb;
+    }
+
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+    .step.active {
+        opacity: 1;
+    }
+
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: #4CAF50;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 	<!-- =========================== Features Start ============================================ -->
 	<section class="gray p-0">
 		<div class="container-fluid" >
@@ -33,8 +81,8 @@ include 'header.php';
 					</div>
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="ti-user"></i>Profile</a>
-						<!--  <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Order Details</a>
-						 <a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Add Gallery</a> -->
+						  <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Daily Tracking Report</a>
+						 <a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Daily Tracking List</a>
 						<a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 					</div>
 				</div>
@@ -199,117 +247,209 @@ include 'header.php';
 							<!-- Basic Info -->
 							<div class="tr-single-box">
 								<div class="tr-single-header">
-									<h4><i class="ti-share"></i> Gym Information</h4>
+									<h4><i class="ti-share"></i> Daily Tracking Report</h4>
 								</div>
 
 								<div class="tr-single-body">
-									<div class="row">
-										<div class="form-group col-md-12 col-sm-12">
-											<label>Gym Name</label>
-											<input class="form-control" type="text" value="">
-										</div>
-										<div class="form-group col-md-6 col-sm-12">
-											<label>Plan Type</label>
-											<select class="form-control">
-												<option>---Select Plan Type---</option>
-												<option>Daily</option>
-												<option>Monthly</option>
-												<option>Weekly</option>
-												<option>Yearly</option>
-											</select>
-										</div>
-										<div class="form-group col-md-6 col-sm-12">
-											<label>Price</label>
-											<input class="form-control" name="price" type="text" value="">
-										</div>
-										<div class="form-group col-md-6 col-sm-12">
-											<label>Total Availability</label>
-											<input type="text" name="availability" class="form-control">
-										</div>
-										<div class="form-group col-md-6 col-sm-12">
-											<label>Choose Allow</label><br>
-											<input type="checkbox" name="vehicle1" value="Bike" checked=""> Male
-											<input type="checkbox" name="vehicle2" value="Car"> Female
-										</div>
-										<div class="form-group col-md-12 col-sm-12">
-											<label>Amenities</label><br>
-											<div class="row">
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car" checked=""> Locker Rooms
-												</div>
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car"> Indoor/Outdoor Swimming Pools
-												</div>
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car"> Volleyball
-												</div>
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car"> Basketball courts
-												</div>
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car"> Women's Only Workout Area
-												</div>
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car"> Cardio Cinema
-												</div>
-												<div class="form-group col-md-3">
-													<input type="checkbox" name="vehicle2" value="Car"> Outdoor Functional Training Area
-												</div>
-											</div>
-										</div>
+                                    <form id="regForm" action="#">
+                                        <div class="tab">Date:
+                                            <input  type="date"  placeholder="Select Date..." oninput="this.className = ''" name="fname">
+                                            <!--<input type="text" id="myTextarea">-->
 
-										<div class="form-group col-md-12 col-sm-12">
-											<label>Gym Description</label>
-											<textarea class="form-control" name="description"></textarea>
-										</div>
-										<div class="form-group col-md-12 col-sm-12">
-											<label>Gym Image</label>
-											<div class="custom-file">
-												<input type="file" class="custom-file-input" >
-												<label class="custom-file-label" for="cover-image">Gym Image</label>
-											</div>
-										</div>
+                                        </div>
+                                        <div class="tab">In-Time:
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                            <input type="text"  oninput="this.className = ''" value="09:30" name="intime">
+                                            </div>
+                                        </div>
+                                        <div class="tab">Weight:
+                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Weight" oninput="this.className = ''" name="weight">
+                                        </div>
+                                        <div class="tab">Blood pressure:
+                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure High..." oninput="this.className = ''" name="pressurehigh">
+                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure Low..." oninput="this.className = ''" name="pressurelow">
 
-									</div>
+                                        </div>
+                                        <div class="tab">Heart Rate:
+                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Heart Rate..." oninput="this.className = ''" name="heartrate">
+                                        </div>
+                                        <div class="tab">Select Activity 1:
+                                            <select oninput="this.className = ''" name="activity1">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 2:
+                                            <select oninput="this.className = ''" name="activity2">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 3:
+                                            <select oninput="this.className = ''" name="activity3">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 4:
+                                            <select oninput="this.className = ''" name="activity4">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 5:
+                                            <select oninput="this.className = ''" name="activity5">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 6:
+                                            <select oninput="this.className = ''" name="activity6">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 7:
+                                            <select oninput="this.className = ''" name="activity7">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 8:
+                                            <select oninput="this.className = ''" name="activity8">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 9:
+                                            <select oninput="this.className = ''" name="activity9">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Select Activity 10:
+                                            <select oninput="this.className = ''" name="activity10">
+                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
+                                                <option value="Cardio Workout">Cardio Workout</option>
+                                            </select>
+                                        </div>
+                                        <div class="tab">Out-Time:
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                                <input type="text"  oninput="this.className = ''" value="09:30" name="outtime">
+                                            </div>
+                                        </div>
+                                        <div class="tab">
+                                            <textarea oninput="this.className = ''" rows="2" placeholder="Enter Note / Remark...." style="width: 50%;"></textarea>
+                                        </div>
+                                        <div style="overflow:auto;">
+                                            <div style="float:right;">
+                                                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                                                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                                                <input type="submit" class="btn btn-primary" value="Submit" style="margin-top: -5px;">
+                                            </div>
+                                        </div>
+                                        <!-- Circles which indicates the steps of the form: -->
+                                        <div style="text-align:center;margin-top:40px;">
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                            <span class="step"></span>
+                                        </div>
+                                    </form>
 								</div>
+                                <div class="output"></div>
 
 							</div>
-							<div class="row">
-								<div class="col-md-10"></div>
-								<div class="col-md-2">
-									<button type="submit" class="btn btn-primary full-width mb-4">Submit</button>
-								</div>
-							</div>
+
 						</form>
 					</div>
-					<div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="v-pills-events-tab">
-						<!-- All Listing -->
-						<form class="dash-profile-form">
-							<!-- Basic Info -->
-							<div class="tr-single-box">
-								<div class="tr-single-header">
-									<h4><i class="ti-share"></i> Gallery Image</h4>
-								</div>
 
-								<div class="tr-single-body">
-									<div class="row">
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="cover-image">
-											<label class="custom-file-label" for="cover-image">Gallery Image</label>
-										</div>
-									</div>
-								</div>
-							</div>
+                    <!-- Events Content -->
+                    <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="v-pills-events-tab">
+                        <!-- All Event -->
+                        <div class="tr-single-box">
 
-							<div class="row">
-								<div class="col-md-10"></div>
-								<div class="col-md-2">
-									<button type="submit" class="btn btn-primary full-width mb-4">Submit</button>
-								</div>
-							</div>
-						</form>
-					</div>
+                            <div class="tr-single-header">
+                                <h4><i class="ti-share"></i> Daily Tracking List</h4>
+                                <div class="btn-group fl-right">
+                                    <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ti-more"></i>
+                                    </button>
 
+                                </div>
+                            </div>
+
+                            <div class="tr-single-body">
+                                <div class="card">
+                                    <div class="table-responsive" style="overflow-x: auto;">
+                                        <table class="table table-striped table-2 table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>In-Time</th>
+                                                <th>Weight</th>
+                                                <th>Blood Pressure</th>
+                                                <th>Heart Rate</th>
+                                                <th>Activity 1</th>
+                                                <th>Activity 2</th>
+                                                <th>Activity 3</th>
+                                                <th>Activity 4</th>
+                                                <th>Activity 5</th>
+                                                <th>Activity 6</th>
+                                                <th>Activity 7</th>
+                                                <th>Activity 8</th>
+                                                <th>Activity 9</th>
+                                                <th>Activity 10</th>
+                                                <th>Out-Time</th>
+                                                <th>Note / Remark</th>
+
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <tr>
+                                                <td>06/11/2019</td>
+                                                <td>07:00</td>
+                                                <td>100</td>
+                                                <td>120/80</td>
+                                                <td>90</td>
+                                                <td>Activity 1</td>
+                                                <td>Activity 2</td>
+                                                <td>Activity 3</td>
+                                                <td>Activity 4</td>
+                                                <td>Activity 5</td>
+                                                <td>Activity 6</td>
+                                                <td>Activity 7</td>
+                                                <td>Activity 8</td>
+                                                <td>Activity 9</td>
+                                                <td>Activity 10</td>
+                                                <td>11:00</td>
+                                                <td>Test</td>
+                                            </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
 				</div>
 			</div>
 
@@ -323,11 +463,7 @@ include 'footer.php';
 <script>
     $('#checkin').dateDropper();
 </script>
-<script>
-    $( function() {
-        $( "#datepicker" ).datepicker();
-    } );
-</script>
+
 <script>
     $("#selectNEWBox").change(function (){
 		var value = this.value;
@@ -355,6 +491,147 @@ include 'footer.php';
         var fit = document.getElementById('fit');
         cm.value = fit.value*30.48;
     }
+</script>
+<script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+</script>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker()
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+    var input = $('#single-input').clockpicker({
+        placement: 'bottom',
+        align: 'left',
+        autoclose: true,
+        'default': 'now'
+    });
+
+    $('.clockpicker-with-callbacks').clockpicker({
+        donetext: 'Done',
+        init: function() {
+            console.log("colorpicker initiated");
+        },
+        beforeShow: function() {
+            console.log("before show");
+        },
+        afterShow: function() {
+            console.log("after show");
+        },
+        beforeHide: function() {
+            console.log("before hide");
+        },
+        afterHide: function() {
+            console.log("after hide");
+        },
+        beforeHourSelect: function() {
+            console.log("before hour selected");
+        },
+        afterHourSelect: function() {
+            console.log("after hour selected");
+        },
+        beforeDone: function() {
+            console.log("before done");
+        },
+        afterDone: function() {
+            console.log("after done");
+        }
+    })
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+
+    // Manually toggle to the minutes view
+    $('#check-minutes').click(function(e){
+        // Have to stop propagation here
+        e.stopPropagation();
+        input.clockpicker('show')
+            .clockpicker('toggleView', 'minutes');
+    });
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        $("#myTextarea").keyup(function(){
+            // Getting the current value of textarea
+            var currentText = $(this).val();
+            // Setting the Div content
+            $(".output").text(currentText);
+        });
+    });
 </script>
 
 

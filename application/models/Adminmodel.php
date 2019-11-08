@@ -63,6 +63,30 @@ class Adminmodel extends CI_Model{
 		$result = $query->result_array();
 		return $result;
 	}
+    public function contact(){
+        $this->db->select('*');
+        $this->db->from('contact');
+        $this->db->order_by("c_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+    public function carrer(){
+        $this->db->select('*');
+        $this->db->from('carrer');
+        $this->db->order_by("ca_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
+    public function testimonial(){
+        $this->db->select('*');
+        $this->db->from('testimonial');
+        $this->db->order_by("tes_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
 	public function select_com_where($table,$where,$id){
 		$this->db->select('*');
 		$this->db->from($table);
@@ -80,6 +104,15 @@ class Adminmodel extends CI_Model{
 		$result = $query->result_array();
 		return $result;
 	}
+    public function editactivity($activity_id){
+        $this->db->select('*');
+        $this->db->from('activity');
+        $this->db->where('activity_id', $activity_id);
+        $this->db->order_by("activity_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
 	public function insert_common($table,$data){
 		$this->db->insert($table,$data);
 		return $this->db->insert_id();
@@ -91,7 +124,24 @@ class Adminmodel extends CI_Model{
 		$query = $this->db->get();
 		$result = $query->result_array();
 		return $result;
-	}public function eventlist(){
+	}
+    public function activity(){
+        $this->db->select('*');
+        $this->db->from('activity');
+        $this->db->order_by("activity_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+    public function healthcheckup(){
+        $this->db->select('*');
+        $this->db->from('health');
+        $this->db->order_by("health_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+	public function eventlist(){
     $this->db->select('*');
     $this->db->from('event');
     $this->db->order_by("event_id", "desc");

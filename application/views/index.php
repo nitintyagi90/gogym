@@ -30,10 +30,10 @@ include 'header.php';
                                             <select id="area" class="js-states form-control">
                                                 <option value="">Choose Location</option>
                                                 <option value="Delhi">Delhi</option>
+                                                <option value="Faridabad">Faridabad</option>
+                                                <option value="Ghaziabad">Ghaziabad</option>
                                                 <option value="Gurugram">Gurugram</option>
                                                  <option value="Noida">Noida</option>
-                                                <option value="Ghaziabad">Ghaziabad</option>
-                                                <option value="Faridabad">Faridabad</option>
                                             </select>
 										</div>
 									</div>
@@ -316,17 +316,17 @@ include 'footer.php';
                 <div class="row">
                     <div class="col-md-6">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" required>
                     </div>
                     <div class="col-md-6">
                         <label>Email ID</label>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                 </div>
                     <div class="row" style="padding-top: 2%;">
                         <div class="col-md-6">
                             <label>Mobile No</label>
-                            <input type="text" class="form-control" name="mobile">
+                            <input type="text" class="form-control" name="mobile" required>
                         </div>
                         <div class="col-md-6">
                             <label>Subject</label>

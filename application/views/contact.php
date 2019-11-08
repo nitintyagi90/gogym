@@ -17,36 +17,6 @@ include 'header.php';
     <section>
         <div class="container">
 
-            <!-- <div class="row mb-4">
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="contact-box">
-                        <img src="assets/img/us-marker.png" class="mx-auto" alt=""/>
-                        <h4>Global Headquarters</h4>
-                        810 Clis Road,<br>
-                        Indraprash NW11 0PU, India
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="contact-box">
-                        <img src="assets/img/india-marker.png" class="mx-auto" alt=""/>
-                        <h4>Evolphin India</h4>
-                        virasat@gmail.com<br>
-                        my.virasat@gmail.com
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                    <div class="contact-box">
-                        <img src="assets/img/uk-marker.png" class="mx-auto" alt=""/>
-                        <h4>Evolphin Europe</h4>
-                        91+ 123 456 9857<br>
-                        91+ 258 548 5426
-                    </div>
-                </div>
-
-            </div> -->
 
             <div class="row mt-5 align-items-center">
 
@@ -54,8 +24,9 @@ include 'header.php';
                     <div class="contact-box">
                         <i class="fa fa-map-marker"></i>
                         <h4>Address</h4>
-                        C-82/8, Gali No-7, Mohanpuri
-                        Maujpur Delhi-110053
+                        <h5>Gogyms Fitness Solutions</h5>
+                        101, Pratap Nagar, Mayur Vihar Phase-1,
+                        New Delhi-110091
                     </div>
                     <div class="contact-box">
                         <i class="ti-email"></i>
@@ -65,36 +36,36 @@ include 'header.php';
                     <div class="contact-box">
                         <i class="ti-headphone"></i>
                         <h4>Call Us</h4>
-                        +91-8377083777
+                        08377-083777
                     </div>
                 </div>
 
                 <div class="col-lg-7 col-md-7">
                     <div class="contact-form">
-                        <form>
+                        <form action="<?php echo base_url('Gogym/insert_contact');?>" method="post" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>First Name</label>
-                                    <input type="text" class="form-control" placeholder="First Name">
+                                    <input type="text" class="form-control" name="fname" placeholder="First Name" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Last Name">
+                                    <input type="text" class="form-control" name="lname" placeholder="Last Name">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Email ID</label>
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" name="cemail" placeholder="Email" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Mobile No</label>
-                                    <input type="text" onkeypress="javascript:return isNumber(event)" maxlength="10" class="form-control" placeholder="Mobile No">
+                                    <input type="text" name="cmobile" onkeypress="javascript:return isNumber(event)" maxlength="10" class="form-control" placeholder="Mobile No" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Message</label>
-                                <textarea class="form-control" placeholder="Type Here..."></textarea>
+                                <textarea class="form-control" name="cmsg" placeholder="Type Here..."></textarea>
                             </div>
                             <input type="submit" class="btn btn-primary" value="Submit">
                         </form>

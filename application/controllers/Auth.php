@@ -22,7 +22,7 @@ class Auth extends CI_Controller {
 		{
 			$newdata = array(
 				'session_id'  => $login->id,
-				'session_name'  => $login->mobile,
+				'session_name'  => $login->owner_name,
 				 'user_type'  => $login->user_type,
 				'response' => 'true',
 			);

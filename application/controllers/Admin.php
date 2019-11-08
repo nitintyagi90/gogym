@@ -51,6 +51,28 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('Admin/dashboard.php');
 	}
+    public function cupcon()
+    {
+        $this->load->view('Admin/cupcon.php');
+    }
+    public function cupconlist()
+    {
+        $this->load->view('Admin/cupconlist.php');
+    }
+	public function carrer()
+    {
+        $data['message'] = $this->Adminmodel->carrer();
+        $this->load->view('Admin/carrer.php', $data);
+    }
+    public function testimonial()
+    {
+        $data['message'] = $this->Adminmodel->testimonial();
+        $this->load->view('Admin/testimonial.php', $data);
+    }
+    public function edit_testimonial()
+    {
+        $this->load->view('Admin/edit_testimonial');
+    }
 	public function logout()
 	{
 		session_destroy();
@@ -62,8 +84,15 @@ class Admin extends CI_Controller {
 		$table='amenities';
 		$data['amenities']=$this->Adminmodel->select_com_where($table,$where,$id);
 		$this->load->view('Admin/editamenties.php',$data);
-		//$this->load->view('Admin/editamenties.php');
 	}
+    public function editactivity(){
+        $id=$this->uri->segment(3);
+        $where='activity_id';
+        $table='activity';
+        $data['activity']=$this->Adminmodel->select_com_where($table,$where,$id);
+        $this->load->view('Admin/editactivity.php',$data);
+    //$this->load->view('Admin/editamenties.php');
+    }
 	public  function editprofession(){
 		$id=$this->uri->segment(3);
 		$where='profession_id';
@@ -93,6 +122,32 @@ class Admin extends CI_Controller {
 		$login=$this->Adminmodel->insert_common($table,$data);
 		redirect('Admin/amenities');
 	}
+    public function insert_health()
+    {
+        $day= $_POST['day'];
+        $breakfast= $_POST['breakfast'];
+        $lunch= $_POST['lunch'];
+        $dinner= $_POST['dinner'];
+        $table='health';
+        $data= array(
+            'health_day' => $day,
+            'health_breakfast' => $breakfast,
+            'health_lunch' => $lunch,
+            'health_dinner' => $dinner,
+        );
+        $login=$this->Adminmodel->insert_common($table,$data);
+        redirect('Admin/healthcheckup');
+    }
+    public function insert_activity()
+    {
+        $name1= $_POST['activity_name'];
+        $table='activity';
+        $data= array(
+            'activity_name' => $name1
+        );
+        $login=$this->Adminmodel->insert_common($table,$data);
+        redirect('Admin/activity');
+    }
     public function insert_event()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -101,6 +156,7 @@ class Admin extends CI_Controller {
             $date = $this->input->post('date');
             $price = $this->input->post('price');
             $description = $this->input->post('description');
+
             $path1=  base_url().'images/';
             if(!empty($_FILES["event_pic"]))
             {
@@ -150,6 +206,19 @@ class Admin extends CI_Controller {
 			redirect("Admin/amenities");
 		}
 	}
+    public function update_activity()
+    {
+        if($_SERVER['REQUEST_METHOD']=='POST') {
+            $title = $this->input->post('activity_name');
+            $activity_id = $this->input->post('id');
+            $data = array(
+                'activity_name' => $title
+            );
+            $this->db->where('activity_id', $activity_id);
+            $this->db->update('activity', $data);
+            redirect("Admin/activity");
+        }
+    }
 	public function update_profession()
 	{
 		if($_SERVER['REQUEST_METHOD']=='POST') {
@@ -167,8 +236,26 @@ class Admin extends CI_Controller {
 	{
 		$this->db->where('amentities_id', $id);
 		$this->db->delete('amenities');
-		redirect('Admin/profession');
+		redirect('Admin/amenities');
 	}
+    public function delete_testimonial($id)
+    {
+        $this->db->where('tes_id', $id);
+        $this->db->delete('testimonial');
+        redirect('Admin/testimonial');
+    }
+    public function delete_healthcheckup($id)
+    {
+        $this->db->where('health_id', $id);
+        $this->db->delete('health');
+        redirect('Admin/healthcheckup');
+    }
+    public function delete_activity($id)
+    {
+        $this->db->where('activity_id', $id);
+        $this->db->delete('activity');
+        redirect('Admin/activity');
+    }
 	public function delete_profession($id)
 	{
 		$this->db->where('profession_id', $id);
@@ -189,8 +276,6 @@ class Admin extends CI_Controller {
         );
         $this->load->view('Admin/listGym.php',$data);
     }
-
-
     public function viewPofile($id)
     {
         $this->db->select('*');
@@ -203,7 +288,6 @@ class Admin extends CI_Controller {
         );
         $this->load->view('Admin/ownerProfile.php',$data);
     }
-
     public function viewGym($id)
     {
         $this->db->select('*');
@@ -216,8 +300,6 @@ class Admin extends CI_Controller {
         );
         $this->load->view('Admin/viewGym.php',$data);
     }
-
-
     public function gymDetail()
     {
         $this->db->select('*');
@@ -229,9 +311,6 @@ class Admin extends CI_Controller {
         );
         $this->load->view('Admin/gymDetail.php',$data);
     }
-
-
-
     public function blockGym($id)
     {
         $ownerData = $this->Adminmodel->profile_approve($id);
@@ -256,6 +335,15 @@ class Admin extends CI_Controller {
         }
 
     }
+    public function healthcheckup()
+    {
+        $data['message']=$this->Adminmodel->healthcheckup();
+        $this->load->view('Admin/healthcheckup.php',$data);
+    }
+    public function edit_healthcheckup()
+    {
+        $this->load->view('Admin/edit_healthcheckup');
+    }
     public function event()
     {
         $this->load->view('Admin/event.php');
@@ -264,6 +352,11 @@ class Admin extends CI_Controller {
     {
         $this->load->view('Admin/edit_event');
     }
+    public function activity()
+    {
+        $data['message']=$this->Adminmodel->activity();
+        $this->load->view('Admin/activity.php',$data);
+     }
     public function event_list()
     {
         is_protected();
@@ -274,6 +367,11 @@ class Admin extends CI_Controller {
     {
         $data['message']=$this->Adminmodel->enquiry();
         $this->load->view('Admin/enquiry.php',$data);
+    }
+    public function contact()
+    {
+        $data['message']=$this->Adminmodel->contact();
+        $this->load->view('Admin/contact.php',$data);
     }
     public function team()
     {
@@ -353,6 +451,12 @@ class Admin extends CI_Controller {
         $this->db->delete('category');
         redirect('Admin/category');
     }
+    public function delete_event($id)
+    {
+        $this->db->where('event_id', $id);
+        $this->db->delete('event');
+        redirect('Admin/event_list');
+    }
 
     public  function editCategory($id){
         $where='id';
@@ -429,7 +533,38 @@ class Admin extends CI_Controller {
             redirect('Admin/team');
         }
     }
+    public function saveTestimonial()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            $memberName = $this->input->post('memberName');
+            $designation = $this->input->post('designation');
+            $description = $this->input->post('description');
+            $path1=  base_url().'images/';
+
+            if(!empty($_FILES["file"]["image"]))
+            {
+                $upload_image1=$_FILES["image"]["name"];
+                $upload1 = move_uploaded_file($_FILES["image"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+
+            $data = array(
+                'tes_name' => $memberName,
+                'tes_designation' => $designation,
+                'tes_description' => $description,
+                'tes_image' => $img_name1,
+            );
+            $this->db->insert('testimonial', $data);
+            redirect('Admin/testimonial');
+        }
+    }
     public function deleteTeam($id)
     {
         $this->db->where('id', $id);

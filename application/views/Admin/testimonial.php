@@ -18,10 +18,10 @@ include 'header.php';
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">GoGyms</a></li>
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Team</li>
+                            <li class="breadcrumb-item active">Testimonial</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Team</h4>
+                    <h4 class="page-title">Testimonial</h4>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@ include 'header.php';
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title"><a data-toggle="modal" data-target=".bd-example-modal-form" class="btn btn-primary">Add Team Member</a></h4>
+                        <h4 class="mt-0 header-title"><a data-toggle="modal" data-target=".bd-example-modal-form" class="btn btn-primary">Add Testimonial</a></h4>
 
                         <div class="table-responsive">
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -46,25 +46,21 @@ include 'header.php';
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
-                                <?php
-                                $count = 0;
-                                foreach ($team as $tm){
-                                    $count++;
-                                    ?>
+                                <?php $i=1; foreach ($message as  $value) {
+                                ?>
                                     <tr>
-                                        <td><?php echo $count; ?></td>
-                                        <td><?php echo $tm->memberName; ?></td>
-                                        <td><?php echo $tm->designation; ?></td>
-                                        <td><?php echo $tm->description; ?></td>
-                                        <td><img src="<?php echo $tm->image ?>" class="img50"></td>
+                                        <td><?= $i++; ?></td>
+                                        <td><?=$value['tes_name']?></td>
+                                        <td><?=$value['tes_designation']?></td>
+                                        <td><?=$value['tes_description']?></td>
+                                        <td><img src="<?=$value['tes_image']?>" class="img50"></td>
                                         <td>
-                                            <a href="<?php echo site_url('Admin/deleteTeam/'.$tm->id);?>" class="btn btn-danger btn-sm delete" data-confirm="Are you sure to delete this member?" title="Delete"><i class="fa fa-trash-o "></i></a>
-                                            <a href="<?php echo site_url('Admin/editTeam/'.$tm->id);?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+                                            <a href="<?php echo site_url('Admin/delete_testimonial/'.$value['tes_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
+                                            <a href="<?=base_url('Admin/edit_testimonial')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php }?>
                                 </tbody>
                             </table>
                         </div>
@@ -79,10 +75,10 @@ include 'header.php';
 
 <div class="modal fade bd-example-modal-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form class="form-horizontal" action="<?php echo base_url('Admin/saveTeam');?>" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" action="<?php echo base_url('Admin/saveTestimonial');?>" method="post" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalform">Add Team Member</h5>
+                    <h5 class="modal-title" id="exampleModalform">Add Testimonial</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -93,7 +89,7 @@ include 'header.php';
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="field-1" class="control-label">Name</label>
-                                <input type="text" name="memberName" required class="form-control" id="field-1" placeholder="Enter Member Name">
+                                <input type="text" name="memberName" required class="form-control" id="field-1" placeholder="Enter Name">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -112,8 +108,8 @@ include 'header.php';
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="field-1" class="control-label">Member Image</label>
-                                <input type="file" name="image" required class="form-control" id="field-1" placeholder="Enter Amenities Name">
+                                <label for="field-1" class="control-label">Image</label>
+                                <input type="file" name="image" required class="form-control" id="field-1">
                             </div>
                         </div>
                     </div>

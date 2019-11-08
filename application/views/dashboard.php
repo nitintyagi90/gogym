@@ -25,7 +25,9 @@ include 'header.php';
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 								  <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="ti-user"></i>Profile</a>
 								  <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Add Gym Details</a>
+                                <a class="nav-link" id="v-pills-property-tab" data-toggle="pill" href="#property" role="tab" aria-controls="property" aria-selected="false"><i class="ti-home"></i>Add Plan</a>
 								  <a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Add Gallery</a>
+                                <a class="nav-link" id="v-pills-billing-tab" data-toggle="pill" href="#billing" role="tab" aria-controls="billing" aria-selected="false"><i class="ti-credit-card"></i>Booking Details</a>
 								  <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 							</div>
 						</div>
@@ -44,7 +46,7 @@ include 'header.php';
 										<div class="tr-single-body">
 											<div class="row">
 											<div class="form-group col-md-6 col-sm-12">
-												<label>Gym Owner Name</label>
+												<label>Partner Name</label>
 												<input class="form-control" name="ownerName" type="text" value="<?php echo $user[0]->owner_name ?>" >
                                                 <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
 
@@ -94,18 +96,18 @@ include 'header.php';
 										<div class="tr-single-header">
 											<h4><i class="ti-share"></i> Gym Information</h4>
 										</div>
-                                        <div class="form-group col-md-6 col-sm-12">
+                                      <!--  <div class="form-group col-md-6 col-sm-12">
                                             <label>Plan Type</label>
                                             <select class="form-control" name="gymplanType">
                                                 <option>---Select Plan Type---</option>
 
-                                                <option value="Daily" <?php if(@$profile_user[0]->gymplanType=="Daily") echo 'selected="selected"'; ?> >Daily</option>
-                                                <option value="Monthly" <?php if(@$profile_user[0]->gymplanType=="Monthly") echo 'selected="selected"'; ?> >Monthly</option>
-                                                <option value="Weekly" <?php if(@$profile_user[0]->gymplanType=="Weekly") echo 'selected="selected"'; ?> >Weekly</option>
-                                                <option value="Yearly" <?php if(@$profile_user[0]->gymplanType=="Yearly") echo 'selected="selected"'; ?> >Yearly</option>
+                                                <option value="Daily" <?php /*if(@$profile_user[0]->gymplanType=="Daily") echo 'selected="selected"'; */?> >Daily</option>
+                                                <option value="Monthly" <?php /*if(@$profile_user[0]->gymplanType=="Monthly") echo 'selected="selected"'; */?> >Monthly</option>
+                                                <option value="Weekly" <?php /*if(@$profile_user[0]->gymplanType=="Weekly") echo 'selected="selected"'; */?> >Weekly</option>
+                                                <option value="Yearly" <?php /*if(@$profile_user[0]->gymplanType=="Yearly") echo 'selected="selected"'; */?> >Yearly</option>
 
                                             </select>
-                                        </div>
+                                        </div>-->
 										<div class="tr-single-body">
 											<div class="row">
 											<div class="form-group col-md-12 col-sm-12">
@@ -136,10 +138,43 @@ include 'header.php';
                                                     <label>Contact No </label>
                                                     <input class="form-control" onkeypress="javascript:return isNumber(event)" maxlength="10" type="text" placeholder="" name="contact_no" value="<?php echo @$profile_user[0]->contact_no ?>" required>
                                                 </div>
-
-
-
-                                                <div class="form-group col-md-9 col-sm-9">
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Open Morning Time</label>
+                                                    <div class="clockpicker" data-autoclose="true">
+                                                        <input type="text" name="omorning" class="form-control" value="06:00">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Close Morning Time</label>
+                                                    <div class="clockpicker" data-autoclose="true">
+                                                        <input type="text" name="cmorning" class="form-control" value="11:00">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Open Afternoon Time</label>
+                                                    <div class="clockpicker" data-autoclose="true">
+                                                        <input type="text" name="oafternoon" class="form-control" value="01:00">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Close Afternoon Time</label>
+                                                    <div class="clockpicker" data-autoclose="true">
+                                                        <input type="text" name="cafternoon" class="form-control" value="04:00">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Open Evening Time</label>
+                                                    <div class="clockpicker" data-autoclose="true">
+                                                        <input type="text" name="oevening" class="form-control" value="05:00">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Close Evening Time</label>
+                                                    <div class="clockpicker" data-autoclose="true">
+                                                        <input type="text" name="cevening" class="form-control" value="11:00">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-12 col-sm-12">
                                                     <label>Gym Address</label>
                                                     <textarea name="gymaddress" class="form-control" name="gymAddress"><?php echo @$profile_user[0]->gym_address ?></textarea>
                                                 </div>
@@ -149,7 +184,7 @@ include 'header.php';
                                                     <input class="form-control" type="text" placeholder="" name="gymCity" value="<?php echo @$profile_user[0]->gymCity ?>" required>
                                                 </div>
 
-                                                <div class="form-group col-md-3 col-sm-12">
+                                                <div class="form-group col-md-6 col-sm-12">
                                                     <label>PinCode</label>
                                                     <input class="form-control" type="text" onkeypress="javascript:return isNumber(event)" maxlength="6" placeholder="" value="<?php echo @$profile_user[0]->pinCode ?>" name="gym_pin" required>
                                                 </div>
@@ -314,11 +349,109 @@ include 'header.php';
 							</div>
 								</form>
 							</div>
-							
+                            <!-- Property Content -->
+                            <div class="tab-pane fade" id="property" role="tabpanel" aria-labelledby="v-pills-property-tab">
+                                <!-- All Property Info -->
+                                <form class="dash-profile-form" action="#" method="post" enctype="multipart/form-data">
+
+                                    <!-- Basic Info -->
+                                    <div class="tr-single-box">
+                                        <div class="tr-single-header">
+                                            <h4><i class="ti-share"></i> Add Plan</h4>
+                                        </div>
+                                        <div class="tr-single-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                    <label>Daily Price (Included GST)</label>
+                                                    <input type="text" class="form-control" name="dailyprice" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                    <label>Weekly Price (Included GST)</label>
+                                                    <input type="text" class="form-control" name="weeklyprice" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                    <label>Monthly Price (Included GST)</label>
+                                                    <input type="text" class="form-control" name="monthlyprice" required>
+                                                </div>
+                                                <div class="form-group col-md-6 col-sm-12">
+                                                    <label>Yearly Price (Included GST)</label>
+                                                    <input type="text" class="form-control" name="yearlyprice" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-9"></div>
+                                        <div class="col-md-3">
+                                            <input type="Submit" name="" class="btn btn-primary full-width mb-4" value="Save Changes">
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
 						</div>
 					</div>
 					
 				</div>
 			</section>
 <?php
-include 'footer.php';	
+include 'footer.php';
+?>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker()
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+    var input = $('#single-input').clockpicker({
+        placement: 'bottom',
+        align: 'left',
+        autoclose: true,
+        'default': 'now'
+    });
+
+    $('.clockpicker-with-callbacks').clockpicker({
+        donetext: 'Done',
+        init: function() {
+            console.log("colorpicker initiated");
+        },
+        beforeShow: function() {
+            console.log("before show");
+        },
+        afterShow: function() {
+            console.log("after show");
+        },
+        beforeHide: function() {
+            console.log("before hide");
+        },
+        afterHide: function() {
+            console.log("after hide");
+        },
+        beforeHourSelect: function() {
+            console.log("before hour selected");
+        },
+        afterHourSelect: function() {
+            console.log("after hour selected");
+        },
+        beforeDone: function() {
+            console.log("before done");
+        },
+        afterDone: function() {
+            console.log("after done");
+        }
+    })
+        .find('input').change(function(){
+        console.log(this.value);
+    });
+
+    // Manually toggle to the minutes view
+    $('#check-minutes').click(function(e){
+        // Have to stop propagation here
+        e.stopPropagation();
+        input.clockpicker('show')
+            .clockpicker('toggleView', 'minutes');
+    });
+    if (/mobile/i.test(navigator.userAgent)) {
+        $('input').prop('readOnly', true);
+    }
+</script>

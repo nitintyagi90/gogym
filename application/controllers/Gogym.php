@@ -90,6 +90,12 @@ class Gogym extends CI_Controller {
     {
         $this->load->view('story');
     }
+    public function healthcheckup()
+    {
+        $data['message']=$this->GogymModel->healthcheckup();
+
+        $this->load->view('healthcheckup.php',$data);
+    }
     public function team()
     {
         $query = $this->db->get('team');
@@ -119,7 +125,8 @@ class Gogym extends CI_Controller {
     }
     public function upcoming_event()
     {
-        $this->load->view('upcoming_event');
+        $data['message']=$this->Adminmodel->eventlist();
+        $this->load->view('upcoming_event.php',$data);
     }
     public function gogyms_diet()
     {
@@ -249,6 +256,61 @@ class Gogym extends CI_Controller {
         );
         $login=$this->Adminmodel->insert_common($table,$data);
         redirect('Gogym/index');
+    }
+    public function insert_carrer()
+    {
+        $fname= $_POST['fname'];
+        $lname= $_POST['lname'];
+        $email= $_POST['email'];
+        $mobile= $_POST['mobile'];
+        $dob= $_POST['dob'];
+        $gender= $_POST['gender'];
+        $msg= $_POST['msg'];
+        $path1=  base_url().'images/';
+        if(!empty($_FILES["event_pic"]))
+        {
+            $upload_image1=$_FILES["event_pic"]["name"];
+            $upload1 = move_uploaded_file($_FILES["event_pic"]["tmp_name"], "./images/".$upload_image1);
+            if($upload1){
+                $img_name1 = $path1.$upload_image1;
+            }else{
+                $img_name1 = '';
+            }
+        }else{
+            $img_name1 = '';
+        }
+        $table='carrer';
+        $data= array(
+            'ca_fname' => $fname,
+            'ca_lname' => $lname,
+            'ca_email' => $email,
+            'ca_mobile' => $mobile,
+            'ca_dob' => $dob,
+            'ca_gender' => $gender,
+            'ca_msg' => $msg,
+            'ca_resume' => $img_name1
+        );
+        $login=$this->Adminmodel->insert_common($table,$data);
+        redirect('Gogym/carrer');
+    }
+    public function insert_contact()
+    {
+        $fname= $_POST['fname'];
+        $email= $_POST['cemail'];
+        $mobile= $_POST['cmobile'];
+        $lname= $_POST['lname'];
+        $msg= $_POST['cmsg'];
+
+        $table='contact';
+        $data= array(
+            'c_fname' => $fname,
+            'c_email' => $email,
+            'c_mobile' => $mobile,
+            'c_lname' => $lname,
+            'c_msg' => $msg
+        );
+        $login=$this->Adminmodel->insert_common($table,$data);
+        redirect('Gogym/contact');
     }
 
 }

@@ -193,6 +193,27 @@
                     <li class="has-submenu ">
                         <a href="<?=base_url('Admin/enquiry')?>"><i class="mdi mdi-animation"></i>Enquiry List</a>
                     </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/contact')?>"><i class="mdi mdi-animation"></i>Contact List</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/healthcheckup')?>"><i class="mdi mdi-animation"></i>Add Health-checkup</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/activity')?>"><i class="mdi mdi-animation"></i>Add Activity</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/testimonial')?>"><i class="mdi mdi-animation"></i>Add Testimonial</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/carrer')?>"><i class="mdi mdi-animation"></i>Carrer List</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/cupcon')?>"><i class="mdi mdi-animation"></i>Add Coupon</a>
+                    </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/cupconlist')?>"><i class="mdi mdi-animation"></i>Coupon List</a>
+                    </li>
                 </ul><!-- End navigation menu -->
 			</div> <!-- end #navigation -->
 		</div> <!-- end container -->

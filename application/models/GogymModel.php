@@ -35,6 +35,14 @@ class GogymModel extends CI_Model
 		$result = $query->result();
 		return $result;
 	}
+    public function healthcheckup(){
+        $this->db->select('*');
+        $this->db->from('health');
+        $this->db->order_by("health_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
 	public function admin_log($data,$table)
 	{
 		$ads = array();

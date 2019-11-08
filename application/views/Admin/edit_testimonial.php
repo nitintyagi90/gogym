@@ -15,10 +15,10 @@ include 'header.php';
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Gym</a></li>
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Edit Event</li>
+                            <li class="breadcrumb-item active">Edit Testimonial</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Edit Event</h4>
+                    <h4 class="page-title">Edit Testimonial</h4>
                 </div>
             </div>
         </div>
@@ -35,49 +35,34 @@ include 'header.php';
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Name</label>
-                                                <input type="text" name="name" required maxlength="16" class="form-control" id="field-1" placeholder="Enter Event Name">
+                                                <label for="field-1" class="control-label">Name</label>
+                                                <input type="text" name="name" required  class="form-control" id="field-1" placeholder="Enter Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Address</label>
-                                                <input type="text" name="address" class="form-control" id="field-1" placeholder="Enter Event Address">
+                                                <label for="field-1" class="control-label">Designation</label>
+                                                <input type="text" name="address" class="form-control" id="field-1" placeholder="Enter Designation">
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Date</label>
-                                                <input type="date" required name="percent" class="form-control" id="field-1" placeholder="Enter Event Date">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Price</label>
-                                                <input type="text" required name="percent" class="form-control" id="field-1" placeholder="Enter Price">
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Description</label>
+                                                <label for="field-1" class="control-label">Description</label>
                                                 <textarea class="form-control" rows="3"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <label for="field-3" class="control-label">Offer Pic</label>
-                                                <input type="file" required name="file1" onchange="readURL(this);">
+                                                <label for="field-3" class="control-label">Image</label>
+                                                <input type="file" required name="file1">
                                             </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <img id="blah" src="http://placehold.it/80" alt="your image">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-
                                     <input type="submit" class="btn btn-raised btn-primary ml-2" value="Submit">
                                 </div>
                             </div>

@@ -21,7 +21,7 @@ include 'header.php';
             <div class="row mt-5 align-items-center">
                 <div class="col-lg-12 col-md-12">
                     <div class="contact-form">
-                        <form>
+                        <form action="<?php echo base_url('Gogym/insert_carrer');?>" method="post" enctype="multipart/form-data">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>First Name</label>
@@ -57,12 +57,12 @@ include 'header.php';
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Upload Resume</label>
-                                    <input type="file" class="form-control" name="file">
+                                    <input type="file" class="form-control" name="file" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" >
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Message</label>
-                                <textarea class="form-control" placeholder="Type Here..."></textarea>
+                                <textarea class="form-control" name="msg" placeholder="Type Here..."></textarea>
                             </div>
                             <input type="submit" class="btn btn-primary" value="Submit">
                         </form>

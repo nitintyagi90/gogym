@@ -17,8 +17,7 @@
 
 				<div class="col-lg-8 col-md-8">
 					<div class="row">
-
-						<div class="col-lg-4 col-md-4">
+                        <div class="col-lg-4 col-md-4">
 							<div class="footer-widget">
 								<h4 class="widget-title">Location</h4>
 								<ul class="footer-menu">
@@ -42,16 +41,16 @@
 								</ul>
 							</div>
 						</div>
-
-						<div class="col-lg-4 col-md-4">
-							<div class="footer-widget">
-								<h4 class="widget-title">Contact Us</h4>
-								<p><i class="fa fa-map-marker"></i> C-82/8, Gali No-7, Mohanpuri<br>
-									Maujpur Delhi-110053</p>
-								<p><i class="fa fa-envelope"></i> info@gogyms.in</p>
-								<p><i class="fa fa-phone"></i> +91-8377083777</p>
-							</div>
-						</div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="footer-widget">
+                                <h4 class="widget-title">Contact Us</h4>
+                                <p><b>GoGyms Fitness Solutions</b><br>
+                                    <i class="fa fa-map-marker"></i> 101, Pratap Nagar, <br>Mayur Vihar Phase-1,<br>
+                                    New Delhi-110091</p>
+                                <p><i class="fa fa-envelope"></i> info@gogyms.in</p>
+                                <p><i class="fa fa-phone"></i> 08377-083777</p>
+                            </div>
+                        </div>
 					</div>
 				</div>
 
@@ -167,7 +166,7 @@
 										<select class="form-control" name="purpose" id='purpose'>
 											<option value="0">---Select Type---</option>
 											<option value="1">AS User</option>
-											<option value="2">AS Gym Owner</option>
+											<option value="2">AS Partner</option>
 										</select>
 									</div>
 								</div>
@@ -189,7 +188,7 @@
 							<div class="row" style="display: none;" id="owner">
 								<div class="col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group">
-										<label>Gym Owner Name</label>
+										<label>Partner Name</label>
 										<input type="text" class="form-control"  name="owner_name" placeholder="Gym Owner Name" required="">
 									</div>
 								</div>

@@ -14,7 +14,7 @@ include 'header.php';
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Gym</a></li>
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Add Trending Deals</li>
+                            <li class="breadcrumb-item active">Add Launch Offer</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Add Launch Offer</h4>
@@ -37,7 +37,7 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">offer Name</label>
-                                                <input type="text" name="name" required maxlength="16" class="form-control" id="field-1" placeholder="Enter Deals Name">
+                                                <input type="text" name="name" required class="form-control" id="field-1" placeholder="Enter Deals Name">
                                             </div>
                                         </div>
 

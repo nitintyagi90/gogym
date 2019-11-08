@@ -1,7 +1,6 @@
 <?php
 include 'header.php';
 ?>
-
 <!-- End Navigation Bar-->
 <div class="wrapper">
 
@@ -15,10 +14,10 @@ include 'header.php';
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">Gym</a></li>
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Edit Event</li>
+                            <li class="breadcrumb-item active">Edit Health Checkup</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Edit Event</h4>
+                    <h4 class="page-title">Edit Health Checkup</h4>
                 </div>
             </div>
         </div>
@@ -29,52 +28,46 @@ include 'header.php';
                         <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalform">Edit Health Checkup</h5>
 
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Name</label>
-                                                <input type="text" name="name" required maxlength="16" class="form-control" id="field-1" placeholder="Enter Event Name">
+                                                <label for="field-1" class="control-label">Select Day</label>
+                                                <select class="form-control" name="day">
+                                                    <option>---Select Day---</option>
+                                                    <option value="Sunday">Sunday</option>
+                                                    <option value="Monday">Monday</option>
+                                                    <option value="Tuesday">Tuesday</option>
+                                                    <option value="Wednesday">Wednesday</option>
+                                                    <option value="Thursday">Thursday</option>
+                                                    <option value="Friday">Friday</option>
+                                                    <option value="Saturday">Saturday</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Address</label>
-                                                <input type="text" name="address" class="form-control" id="field-1" placeholder="Enter Event Address">
+                                                <label for="field-1" class="control-label">Breakfast</label>
+                                                <input type="text" class="form-control" placeholder="Enter Breakfast" name="breakfast">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Date</label>
-                                                <input type="date" required name="percent" class="form-control" id="field-1" placeholder="Enter Event Date">
+                                                <label for="field-1" class="control-label">Lunch</label>
+                                                <input type="text" class="form-control" placeholder="Enter Lunch" name="lunch">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Price</label>
-                                                <input type="text" required name="percent" class="form-control" id="field-1" placeholder="Enter Price">
+                                                <label for="field-1" class="control-label">Dinner</label>
+                                                <input type="text" class="form-control" placeholder="Enter Dinner" name="dinner">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label for="field-1" class="control-label">Event Description</label>
-                                                <textarea class="form-control" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="field-3" class="control-label">Offer Pic</label>
-                                                <input type="file" required name="file1" onchange="readURL(this);">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <img id="blah" src="http://placehold.it/80" alt="your image">
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="modal-footer">
 
@@ -86,7 +79,6 @@ include 'header.php';
                 </div>
             </div>
         </div>
-
         <?php
         include 'footer.php';
         ?>

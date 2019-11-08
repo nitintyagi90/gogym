@@ -41,7 +41,7 @@
 									</li>
 									<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GoGyms Services <i class="fa fa-angle-down m-l-5"></i></a>
 										<ul class="b-none dropdown-menu font-14 animated fadeInUp">
-											<li><a class="dropdown-item" href="#">Health Checkups</a></li>
+											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/healthcheckup'); ?>">Health Checkups</a></li>
 											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/gogyms_diet'); ?>">GoGyms Diet</a></li>
 											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/launch_offer'); ?>">Launch Offers</a></li>
 										    <!--<li><a class="dropdown-item" href="#">GoGyms Tips</a></li>-->
@@ -59,7 +59,7 @@
 									<?php } else{ ?>
 									<ul style="list-style-type: none">
 										<li>
-											<a href="javascript:void(0)" class="login btn theme-btn font-14 "  style="color: #fff;"><?php echo $_SESSION['session_name']; ?></a>
+											<a href="javascript:void(0)" class="login btn theme-btn font-14 "  style="color: #fff;">welcome <?php echo $_SESSION['session_name']; ?></a>
 										</li>
 										<li style="padding-left: 10%;"><a href="<?php echo base_url('Auth/logout'); ?>" class="prof">Logout</a></li>
 									</ul>
