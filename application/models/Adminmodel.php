@@ -175,5 +175,20 @@ class Adminmodel extends CI_Model{
         $result = $query->result_array();
         return $result;
     }
-
+    public function allgym(){
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->order_by("gym_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
+    public function lauch_offerlist(){
+        $this->db->select('*');
+        $this->db->from('launch_offer');
+        $this->db->order_by("deal_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
 }

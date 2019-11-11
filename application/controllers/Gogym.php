@@ -25,10 +25,17 @@ class Gogym extends CI_Controller {
         $this->db->limit(8);
         $category = $this->db->get();
         $categoryList = $category->result();
+        $this->db->select('*');
+        $this->db->from('testimonial');
+        $this->db->order_by("tes_id", "desc");
+        $testimonial = $this->db->get();
+        //echo $this->db->last_query();die();
+        $testimonial = $testimonial->result();
 
         $response= array(
             'gym'=>$result,
             'category'=>$categoryList,
+            '$testimonial'=>$testimonial
         );
         $this->load->view('index',$response);
 	}
@@ -137,7 +144,8 @@ class Gogym extends CI_Controller {
     }
     public function launch_offer()
     {
-        $this->load->view('launch_offer');
+        $data['message']=$this->GogymModel->launchoffer();
+        $this->load->view('launch_offer.php',$data);
     }
     public function carrer()
     {
@@ -243,15 +251,19 @@ class Gogym extends CI_Controller {
         $name= $_POST['name'];
         $email= $_POST['email'];
         $mobile= $_POST['mobile'];
-        $subject= $_POST['subject'];
+        $subject1= $_POST['subject'];
         $msg= $_POST['msg'];
-
+        $to = $_POST['email'];
+        $subject = "Enquiry Details";
+        $txt = "Name-".$_POST['name']."\n Mobile-".$_POST['mobile']."\n Email -".$_POST['email']."\n Subject -".$_POST['subject']."\n Message -".$_POST['msg'];
+        $headers = "From: info@gogyms.in";
+        mail($to,$subject,$txt,$headers);
         $table='enquiry';
         $data= array(
             'enq_name' => $name,
             'enq_email' => $email,
             'enq_mobile' => $mobile,
-            'enq_subject' => $subject,
+            'enq_subject' => $subject1,
             'enq_message' => $msg
         );
         $login=$this->Adminmodel->insert_common($table,$data);
@@ -279,6 +291,11 @@ class Gogym extends CI_Controller {
         }else{
             $img_name1 = '';
         }
+        $to = $_POST['email'];
+        $subject = "Carrer Details";
+        $txt = "First Name-".$_POST['fname']."\n Last Name-".$_POST['lname']."\n Email -".$_POST['email']."\n Mobile -".$_POST['mobile']."\n DOB -".$_POST['dob']."\n Gender -".$_POST['gender']."\n Message -".$_POST['msg'];
+        $headers = "From: info@gogyms.in";
+        mail($to,$subject,$txt,$headers);
         $table='carrer';
         $data= array(
             'ca_fname' => $fname,
@@ -296,14 +313,19 @@ class Gogym extends CI_Controller {
     public function insert_contact()
     {
         $fname= $_POST['fname'];
+        $lname= $_POST['lname'];
         $email= $_POST['cemail'];
         $mobile= $_POST['cmobile'];
-        $lname= $_POST['lname'];
         $msg= $_POST['cmsg'];
-
+        $to = $_POST['cemail'];
+        $subject = "Contact Details";
+        $txt = "First Name-".$_POST['fname']."\n Last Name-".$_POST['lname']."\n Email -".$_POST['cemail']."\n Mobile -".$_POST['cmobile']."\n Message -".$_POST['cmsg'];
+        $headers = "From: info@gogyms.in";
+        mail($to,$subject,$txt,$headers);
         $table='contact';
         $data= array(
             'c_fname' => $fname,
+            'c_lname' => $lname,
             'c_email' => $email,
             'c_mobile' => $mobile,
             'c_lname' => $lname,
