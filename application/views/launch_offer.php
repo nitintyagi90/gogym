@@ -14,26 +14,25 @@ include 'header.php';
             </div>
 
             <div class="row">
-
+                <?php $i=1; foreach ($message as  $value) {
+                    ?>
                 <!-- Single Event -->
                 <div class="col-lg-4 col-md-4 col-sm-6 mb-4">
                     <div class="event-grid-wrap">
                         <a href="#">
                             <div class="event-grid-header">
-                                <img src="<?php echo base_url();?>web/assets/img/event-1.jpg" class="img-fluid mx-auto" alt="">
-                                <span class="event-grid-cat" style="    font-size: 18px;">25%</span>
+                                <img src="<?=$value['deal_image']?>" class="img-fluid mx-auto" alt="">
+                                <span class="event-grid-cat" style="    font-size: 18px;"><?=$value['deal_percent']?>%</span>
                             </div>
                         </a>
                         <div class="event-grid-caption">
                             <div class="event-grid-caption-header">
-                                <h4 class="event-name"><a href="#">Deal Name</a></h4>
+                                <h4 class="event-name"><a href="#"><?=$value['deal_name']?></a></h4>
                             </div>
                        </div>
                     </div>
                 </div>
-
-
-
+                <?php }?>
             </div>
         </div>
     </section>
