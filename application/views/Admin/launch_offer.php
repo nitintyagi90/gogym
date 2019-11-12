@@ -43,7 +43,7 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Gym Name</label><br>
-                                                <select class="select2 mb-3 select2-multiple" name="gymName" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                                <select class="select2 mb-3 select2-multiple" name="gymName[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
                                                     <option>---Select Gym Name---</option>
                                                     <?php foreach ($message as  $value) {
                                                     ?>

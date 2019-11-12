@@ -1,6 +1,12 @@
 <?php
 include 'header.php';
 ?>
+<style>
+    .img50{
+        height: 50px;
+        width: 50px;
+    }
+</style>
 <div class="wrapper">
     <div class="container-fluid">
 
@@ -49,10 +55,12 @@ include 'header.php';
                                     <td><?=$value['deal_gym']?></td>
                                     <td><?=$value['deal_percent']?></td>
                                     <td><?=$value['deal_discount']?></td>
-                                    <td><?=$value['deal_image']?></td>
+
+                                    <td><img src="<?=$value['deal_image']?>" class="img50"></td>
                                     <td>
                                         <a href="<?php echo site_url('Admin/delete_launch_offer/'.$value['deal_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
-                                        <a href="<?=base_url('Admin/edit_launch_offer')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+<!--                                        <a href="<?php /*echo site_url('Admin/edit_launch_offer/'.$value['deal_id']);*/?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+-->
                                     </td>
                                 </tr>
                                 <?php }?>

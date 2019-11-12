@@ -1,6 +1,12 @@
 <?php
 include 'header.php';
 ?>
+<style>
+    .img50{
+        height: 50px;
+        width: 50px;
+    }
+</style>
 <!-- End Navigation Bar-->
 <div class="wrapper">
 
@@ -25,7 +31,7 @@ include 'header.php';
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="<?php echo base_url('Admin/updateLaunch_offer');?>" method="post" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalform">Edit Launch Offer</h5>
@@ -37,7 +43,8 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">offer Name</label>
-                                                <input type="text" name="name" required maxlength="16" class="form-control" id="field-1" placeholder="Enter Deals Name">
+                                                <input type="text"  name="name" value="<?php echo $offer[0]['deal_name'] ?>" maxlength="16" class="form-control" id="field-1" placeholder="Enter Deals Name">
+                                                <input type="hidden"  name="id" value="<?php echo $offer[0]['deal_id'] ?>" maxlength="16" class="form-control" id="field-1" placeholder="Enter Deals Name">
                                             </div>
                                         </div>
 
@@ -45,25 +52,19 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Gym Name</label><br>
-                                                <!--<input type="text" name="gym_mobile" class="form-control" id="mobile" placeholder="Enter Gym mobile Number">-->
-                                                <select class="select2 mb-3 select2-multiple" name="gym_mobile[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
-
-                                                    <option value="Gold">Gold</option>
-
-                                                    <option value="New">New</option>
-
-                                                    <option value="old">old</option>
-
+                                                <select class="select2 mb-3 select2-multiple" name="gymName[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                                    <option>---Select Gym Name---</option>
+                                                    <?php foreach ($message as  $value) {
+                                                        ?>
+                                                        <option value="<?=$value['gym_id']?>"><?=$value['gymName']?></option>
+                                                    <?php }?>
                                                 </select>
-
                                             </div>
                                         </div>
-
-
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Percent</label>
-                                                <input type="text" required name="percent" class="form-control" id="field-1" placeholder="Enter Percent">
+                                                <input type="text" value="<?php echo $offer[0]['deal_percent'] ?>" name="percent" class="form-control" id="field-1" placeholder="Enter Percent">
                                             </div>
                                         </div>
                                     </div>
@@ -71,17 +72,18 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Max. Discount</label>
-                                                <input type="text" required name="discount" class="form-control" id="field-1" placeholder="Enter Max. Discount">
+                                                <input type="text" value="<?php echo $offer[0]['deal_discount'] ?>" name="discount" class="form-control" id="field-1" placeholder="Enter Max. Discount">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="field-3" class="control-label">Offer Pic</label>
-                                                <input type="file" required name="file1" onchange="readURL(this);">
+                                                <input type="file" name="image" onchange="readURL(this);">
+
                                             </div>
-                                        </div>
+                                        </div
                                         <div class="col-md-3">
-                                            <img id="blah" src="http://placehold.it/80" alt="your image">
+                                            <img src="<?php echo $offer[0]['deal_image'] ?>" class="img50">
                                         </div>
                                     </div>
 

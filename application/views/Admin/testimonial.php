@@ -57,7 +57,7 @@ include 'header.php';
                                         <td><img src="<?=$value['tes_image']?>" class="img50"></td>
                                         <td>
                                             <a href="<?php echo site_url('Admin/delete_testimonial/'.$value['tes_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
-                                            <a href="<?=base_url('Admin/edit_testimonial')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+                                            <a href="<?=base_url('Admin/edit_testimonial/'.$value['tes_id'])?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
                                         </td>
                                     </tr>
                                 <?php }?>

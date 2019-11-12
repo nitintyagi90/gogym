@@ -37,7 +37,7 @@ include 'header.php';
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <tr>
                                     <th>Gym Name :</th>
-                                    <td>Gold</td>
+                                    <td><?php echo $gym[0]->gymName; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Daily Plan Price :</th>
@@ -55,17 +55,14 @@ include 'header.php';
                                     <th>Yearly Plan Price :</th>
                                     <td>Gold</td>
                                 </tr>
-                                <tr>
-                                    <th>Availability :</th>
-                                    <td>20</td>
-                                </tr>
+
                                 <tr>
                                     <th>Contact Person :</th>
-                                    <td>Amit</td>
+                                    <td><?php echo $gym[0]->contact_name ?></td>
                                 </tr>
                                 <tr>
                                     <th>Contact No :</th>
-                                    <td>0123456789</td>
+                                    <td><?php echo $gym[0]->contact_no ?></td>
                                 </tr>
                                 <tr>
                                     <th>Open Morning Time :</th>
@@ -104,31 +101,31 @@ include 'header.php';
 
                                 <tr>
                                     <th>Account Holder Name</th>
-                                    <td>Amit Kumar</td>
+                                    <td><?php echo $gym[0]->accountHolderName ?></td>
                                 </tr>
                                 <tr>
                                     <th>Account Type</th>
-                                    <td>Saving</td>
+                                    <td><?php echo $gym[0]->accountType ?></td>
                                 </tr>
                                 <tr>
                                     <th>Account No</th>
-                                    <td>10254875412</td>
+                                    <td><?php echo $gym[0]->accountNumber ?></td>
                                 </tr>
                                 <tr>
                                     <th>IFSC Code</th>
-                                    <td>SBIN0012121</td>
+                                    <td><?php echo $gym[0]->ifsc ?></td>
                                 </tr>
                                 <tr>
                                     <th>Name Of Organization</th>
-                                    <td>GoGyms</td>
+                                    <td><?php echo $gym[0]->organization ?></td>
                                 </tr>
                                 <tr>
                                     <th>GST No</th>
-                                    <td>07jhbjhhbj</td>
+                                    <td><?php echo $gym[0]->gstNumber ?></td>
                                 </tr>
                                 <tr>
                                     <th>PAN No</th>
-                                    <td>JHBJD8525H</td>
+                                    <td><?php echo $gym[0]->panCard ?></td>
                                 </tr>
                                 <tr>
                                     <th>Gym Category</th>
@@ -136,23 +133,20 @@ include 'header.php';
                                 </tr>
                                 <tr>
                                     <th>Gym Addrerss</th>
-                                    <td>G-18, Sector-63, Noida-201301</td>
+                                    <td><?php echo $gym[0]->gym_address ?></td>
                                 </tr>
-                                <tr>
-                                    <th>City</th>
-                                    <td>Noida</td>
-                                </tr>
+
                                 <tr>
                                     <th>PinCode</th>
-                                    <td>201301</td>
+                                    <td><?php echo $gym[0]->pinCode ?></td>
                                 </tr>
                                 <tr>
                                     <th>Gym Description</th>
-                                    <td>Testing.....</td>
+                                    <td><?php echo $gym[0]->gymdescription ?></td>
                                 </tr>
                                 <tr>
                                     <th>Gym Image</th>
-                                    <td><img src="" class="img50"></td>
+                                    <td><img src="<?php echo $gym[0]->gymImage ?>" class="img50"></td>
                                 </tr>
                             </table>
                         </div>
@@ -170,11 +164,11 @@ include 'header.php';
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <tr>
                                     <th>Partner Name :</th>
-                                    <td>Amit</td>
+                                    <td><?php echo $gym[0]->owner_name ?></td>
                                 </tr>
                                 <tr>
                                     <th>Partner Email ID :</th>
-                                    <td>abc@gmail.com</td>
+                                    <td><?php echo $gym[0]->email ?></td>
                                 </tr>
 
                             </table>
@@ -189,11 +183,17 @@ include 'header.php';
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <tr>
                                     <th>Partner Mobile No</th>
-                                    <td>0123456789</td>
+                                    <td><?php echo $gym[0]->mobile; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Partner Profile Image</th>
-                                    <td><img src="" class="img50"></td>
+                                    <?php if(empty($gym[0]->profileImage)){ ?>
+                                        <td><img src="" class="img50"></td>
+
+                                    <?php }else{?>
+                                        <td><img src="<?php echo $gym[0]->profileImage ?>" class="img50"></td>
+
+                                    <?php } ?>
                                 </tr>
                             </table>
                         </div>

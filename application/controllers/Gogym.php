@@ -25,17 +25,17 @@ class Gogym extends CI_Controller {
         $this->db->limit(8);
         $category = $this->db->get();
         $categoryList = $category->result();
+
         $this->db->select('*');
         $this->db->from('testimonial');
         $this->db->order_by("tes_id", "desc");
         $testimonial = $this->db->get();
-        //echo $this->db->last_query();die();
         $testimonial = $testimonial->result();
 
         $response= array(
             'gym'=>$result,
             'category'=>$categoryList,
-            '$testimonial'=>$testimonial
+            'testimonial'=>$testimonial
         );
         $this->load->view('index',$response);
 	}
@@ -201,9 +201,11 @@ class Gogym extends CI_Controller {
         $response= array(
 			'user'=>$data,
 			'profile_user'=>$data1,
-            'profession'=>$result
+            'profession'=>$result,
+            'loginPop'=>true
 		);
-		$this->load->view('user_dashboard.php',$response);
+        $this->session->set_flashdata('message_name', 'Profile has been Deactive successfully!');
+        $this->load->view('user_dashboard.php',$response);
 	}
 
     public function gym($id)
@@ -287,10 +289,10 @@ class Gogym extends CI_Controller {
         $gender= $_POST['gender'];
         $msg= $_POST['msg'];
         $path1=  base_url().'images/';
-        if(!empty($_FILES["event_pic"]))
+        if(!empty($_FILES["file"]))
         {
-            $upload_image1=$_FILES["event_pic"]["name"];
-            $upload1 = move_uploaded_file($_FILES["event_pic"]["tmp_name"], "./images/".$upload_image1);
+            $upload_image1=$_FILES["file"]["name"];
+            $upload1 = move_uploaded_file($_FILES["file"]["tmp_name"], "./images/".$upload_image1);
             if($upload1){
                 $img_name1 = $path1.$upload_image1;
             }else{
@@ -316,6 +318,7 @@ class Gogym extends CI_Controller {
             'ca_resume' => $img_name1
         );
         $login=$this->Adminmodel->insert_common($table,$data);
+        $this->session->set_flashdata('Successfully','We Will be approve shorthly');
         redirect('Gogym/carrer');
     }
     public function insert_contact()

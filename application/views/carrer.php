@@ -16,7 +16,19 @@ include 'header.php';
     <!-- ============================ Page Title End ================================== -->
 
     <!-- ============================ Say Hello Start ================================== -->
+
+
+<?php if($responce = $this->session->flashdata('Successfully')): ?>
+    <div class="box-header">
+        <div class="col-lg-12">
+            <div class="alert alert-success text-center"><?php echo $responce;?></div>
+        </div>
+    </div>
+<?php endif;?>
+
+
     <section>
+
         <div class="container">
             <div class="row mt-5 align-items-center">
                 <div class="col-lg-12 col-md-12">
