@@ -15,14 +15,15 @@ include 'header.php';
                     <div class="tab-content">
                         <!-- SignIn-->
                         <div class="tab-pane fade in show active" id="employer" role="tabpanel">
-                            <form>
+                            <form method="post" action="<?php echo base_url('Auth/otpverify'); ?>">
                                 <div class="form-group">
                                     <label>OTP</label>
-                                    <input type="text" class="form-control" placeholder="Enter OTP">
+                                    <input type="text" class="form-control" name="otp" placeholder="Enter OTP">
+                                    <input type="hidden" name="id" value="<?php echo $user_id ?>" class="form-control" placeholder="Enter OTP">
                                 </div>
                                 <div class="form-group text-center">
-                                    <!-- <input type="submit" class="btn theme-btn full-width btn-m" value="OTP" > -->
-                                    <a href="<?php echo base_url('Gogym/password'); ?>" class="btn theme-btn full-width btn-m">OTP</a>
+                                    <input type="submit" class="btn theme-btn full-width btn-m" value="OTP" >
+
                                 </div>
                             </form>
                         </div>
