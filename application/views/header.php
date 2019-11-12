@@ -55,7 +55,8 @@
 								</div>-->
 								<div class="act-buttons">
 									<?php if(empty($_SESSION['session_id'])){ ?>
-									<a href="javascript:void(0)" class="login btn theme-btn font-14 " data-toggle="modal" data-target="#signin" style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>
+									<!--<a href="javascript:void(0)" class="login btn theme-btn font-14 " data-toggle="modal" data-target="#signin" style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>-->
+                                        <a href="<?php echo base_url('Gogym/login'); ?>" class="login btn theme-btn font-14 "  style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>
 									<?php } else{ ?>
 									<ul style="list-style-type: none">
 										<li>

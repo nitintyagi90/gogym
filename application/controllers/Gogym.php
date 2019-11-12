@@ -97,6 +97,10 @@ class Gogym extends CI_Controller {
     {
         $this->load->view('story');
     }
+    public function login()
+    {
+        $this->load->view('login');
+    }
     public function healthcheckup()
     {
         $data['message']=$this->GogymModel->healthcheckup();
