@@ -19,7 +19,7 @@ include 'header.php';
                         <i class="ti-user"></i> Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#candidate" role="tab">
+                    <a class="nav-link" href="<?php echo base_url('Gogym/register'); ?>" role="tab">
                         <i class="ti-user"></i> Sign Up</a>
                 </li>
             </ul>
