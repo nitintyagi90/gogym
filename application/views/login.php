@@ -53,7 +53,7 @@ include 'header.php';
 											<input id="rmp-3" class="checkbox-custom" name="rmp-3" type="checkbox">
 											<label for="rmp-3" class="checkbox-custom-label">Remember Me</label>
 										</span>
-                            <a href="#forget" data-toggle="modal" title="Forget" onclick="forgot();" class="float-right">Forgot Password?</a>
+                            <a href="<?php echo base_url('Gogym/forgot'); ?>"  title="Forget" onclick="forgot();" class="float-right">Forgot Password?</a>
                         </div>
                         <div class="form-group text-center">
                             <input type="submit" class="btn theme-btn full-width btn-m" value="LogIn" >

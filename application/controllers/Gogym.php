@@ -105,6 +105,22 @@ class Gogym extends CI_Controller {
     {
         $this->load->view('register');
     }
+    public function forgot()
+    {
+        $this->load->view('forgot');
+    }
+    public function forgototp()
+    {
+        $this->load->view('forgototp');
+    }
+    public function password()
+    {
+        $this->load->view('password');
+    }
+    public function otpverify()
+    {
+	    $this->load->view('otpverify');
+    }
     public function healthcheckup()
     {
         $data['message']=$this->GogymModel->healthcheckup();
