@@ -233,66 +233,24 @@ include 'header.php';
 					<div class="row justify-content-center">
 						<div class="col-lg-10 col-md-10">
 							<div id="testimonial-3" class="slick-carousel-3">
-								<div class="testimonial-detail">
+                                <?php
+                                foreach ($testimonial as $tes){ ?>
+                                <div class="testimonial-detail">
 									<div class="client-detail-box">
 										<div class="pic">
 											<img src="<?php echo base_url();?>web/assets/img/team-1.png" alt="">
 										</div>
 										<div class="client-detail">
-											<h3 class="testimonial-title">Adam Alloriam</h3>
-											<span class="post">Web Developer</span>
+											<h3 class="testimonial-title"><?php echo $tes->tes_name; ?></h3>
+											<span class="post"><?php echo $tes->tes_designation; ?></span>
 										</div>
 									</div>
 									<p class="description">
-										" Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi facilis itaque minus non odio, quaerat ullam eligendi facilis itaque minus non odio, quaerat ullam unde  unde voluptatum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi. "
+										" <?php echo $tes->tes_description; ?> "
 									</p>
 								</div>
-
-								<div class="testimonial-detail">
-									<div class="client-detail-box">
-										<div class="pic">
-											<img src="<?php echo base_url();?>web/assets/img/team-2.png" alt="">
-										</div>
-										<div class="client-detail">
-											<h3 class="testimonial-title">Illa Millia</h3>
-											<span class="post">Project Manager</span>
-										</div>
-									</div>
-									<p class="description">
-										" Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi facilis itaque minus non odio, quaerat ullam eligendi facilis itaque minus non odio, quaerat ullam unde  unde voluptatum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi. "
-									</p>
-								</div>
-
-								<div class="testimonial-detail">
-									<div class="client-detail-box">
-										<div class="pic">
-											<img src="<?php echo base_url();?>web/assets/img/team-3.png" alt="">
-										</div>
-										<div class="client-detail">
-											<h3 class="testimonial-title">Rout Millance</h3>
-											<span class="post">Web Designer</span>
-										</div>
-									</div>
-									<p class="description">
-										" Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi facilis itaque minus non odio, quaerat ullam eligendi facilis itaque minus non odio, quaerat ullam unde  unde voluptatum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi. "
-									</p>
-								</div>
-
-								<div class="testimonial-detail">
-									<div class="client-detail-box">
-										<div class="pic">
-											<img src="<?php echo base_url();?>web/assets/img/team-4.png" alt="">
-										</div>
-										<div class="client-detail">
-											<h3 class="testimonial-title">williamson</h3>
-											<span class="post">Web Developer</span>
-										</div>
-									</div>
-									<p class="description">
-										" Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi facilis itaque minus non odio, quaerat ullam eligendi facilis itaque minus non odio, quaerat ullam unde  unde voluptatum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi eligendi. "
-									</p>
-								</div>
-							</div>
+                                <?php } ?>
+                            </div>
 						</div>
 					</div>
 

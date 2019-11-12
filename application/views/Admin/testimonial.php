@@ -11,7 +11,7 @@ include 'header.php';
     <div class="container-fluid">
 
         <!-- Page-Title -->
-        <div class="row">
+        <div class="row paddtp5">
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group m-0 pull-right">
@@ -109,7 +109,7 @@ include 'header.php';
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="field-1" class="control-label">Image</label>
-                                <input type="file" name="image" required class="form-control" id="field-1">
+                                <input type="file" name="image" required class="form-control" id="field-1" >
                             </div>
                         </div>
                     </div>

@@ -27,8 +27,9 @@ include 'header.php';
 								  <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Add Gym Details</a>
                                 <a class="nav-link" id="v-pills-property-tab" data-toggle="pill" href="#property" role="tab" aria-controls="property" aria-selected="false"><i class="ti-home"></i>Add Plan</a>
 								  <a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Add Gallery</a>
+                                <a class="nav-link" id="v-pills-bookmark-tab" data-toggle="pill" href="#bookmark" role="tab" aria-controls="bookmark" aria-selected="false"><i class="ti-bookmark-alt"></i>List Gallery</a>
                                 <a class="nav-link" id="v-pills-billing-tab" data-toggle="pill" href="#billing" role="tab" aria-controls="billing" aria-selected="false"><i class="ti-credit-card"></i>Booking Details</a>
-								  <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
+                                  <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 							</div>
 						</div>
 						<div class="tab-content dashboard-wrap" id="v-pills-tabContent">
@@ -316,7 +317,9 @@ include 'header.php';
 
 									</div>
 									<div class="row">
-										<div class="col-md-10"></div>
+										<div class="col-md-10">
+                                            <a class="btn btn-primary full-width mb-4" ></a>
+                                        </div>
 										<div class="col-md-2">
                                             <input type="submit" value="Submit" class="btn btn-primary full-width mb-4">
 								</div>
@@ -389,6 +392,123 @@ include 'header.php';
                                     </div>
 
                                 </form>
+                            </div>
+                            <!-- Billing Content -->
+                            <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="v-pills-billing-tab">
+                                <!-- Notification Info -->
+                                <div class="tr-single-box">
+
+                                    <div class="tr-single-header">
+                                        <h4><i class="ti-bell"></i> Booking Details</h4>
+                                    </div>
+
+                                    <div class="tr-single-body">
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-2 table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Booking ID</th>
+                                                        <th>User Name</th>
+                                                        <th>User Email ID</th>
+                                                        <th>User Mobile No</th>
+                                                        <th>Plan Type</th>
+                                                        <th>Amount</th>
+                                                        <th>Payment Mode</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>1001</td>
+                                                        <td>Sanjeev</td>
+                                                        <td>skgupta5050@gmail.com</td>
+                                                        <td>9716683297</td>
+                                                        <td>Daily</td>
+                                                        <td>49</td>
+                                                        <td>Online</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1002</td>
+                                                        <td>Sanjeev</td>
+                                                        <td>skgupta5050@gmail.com</td>
+                                                        <td>9716683297</td>
+                                                        <td>Weekly</td>
+                                                        <td>299</td>
+                                                        <td>Online</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Bookmark Content -->
+                            <div class="tab-pane fade" id="bookmark" role="tabpanel" aria-labelledby="v-pills-bookmark-tab">
+                                <!-- All Bookmark -->
+                               <div class="tr-single-body">
+                                        <div class="card">
+                                            <div class="tr-single-box">
+                                                <div class="tr-single-header">
+                                                    <h4><i class="ti-gallery"></i>All Gallery</h4>
+                                                </div>
+                                                <div class="tr-single-body">
+                                                    <ul class="gallery-list">
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/1.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/1.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/2.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/2.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/3.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/3.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/4.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/4.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/5.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/5.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/6.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/6.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/7.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/7.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/8.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/8.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/9.jpg">
+                                                                <img src="<?php echo base_url();?>web/assets/img/9.jpg" class="img-responsive" alt="">
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+
+                                </div>
                             </div>
 						</div>
 					</div>

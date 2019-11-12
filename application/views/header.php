@@ -9,7 +9,7 @@
         <link href="<?php echo base_url();?>web/assets/plugins/css/plugins.css" rel="stylesheet">
 		<!-- Custom CSS -->
         <link href="<?php echo base_url();?>web/assets/css/styles.css" rel="stylesheet">
-    <link href="<?php echo base_url();?>web/assets/bootstrap-clockpicker.min.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>web/assets/bootstrap-clockpicker.min.css" rel="stylesheet">
 
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,7 +27,7 @@
                 <div class="header light">
                     <div class="container po-relative">
                         <nav class="navbar navbar-expand-lg header-nav-bar">
-                            <a href="<?php echo base_url('Gogym');?>" class="navbar-brand"><img src="<?php echo base_url();?>web/assets/img/go-gyms-60.png" alt="GoGyms"></a>
+                            <a href="<?php echo base_url('Gogym');?>" class="navbar-brand"><img src="<?php echo base_url();?>web/assets/img/go-gyms-new .png" alt="GoGyms"></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="ti-align-right"></span></button>
                             <div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="navigation">
                                 <ul class="navbar-nav ml-auto">

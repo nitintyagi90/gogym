@@ -7,17 +7,17 @@ include 'header.php';
     <div class="container-fluid">
 
         <!-- Page-Title -->
-        <div class="row">
+        <div class="row paddtp5">
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group m-0 pull-right">
                         <ol class="breadcrumb hide-phone p-0 m-0">
                             <li class="breadcrumb-item"><a href="#">GoGyms</a></li>
                             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Profession</li>
+                            <li class="breadcrumb-item active">Gym Owner</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Profession</h4>
+                    <h4 class="page-title">Gym Owner</h4>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ include 'header.php';
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Email</th>
-
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 
@@ -52,7 +52,7 @@ include 'header.php';
                                         <td><?=$value->owner_name;?></td>
                                         <td><?=$value->mobile;?></td>
                                         <td><?=$value->email;?></td>
-
+                                        <td><a href="<?php echo base_url('Admin/ListGym_details'); ?>" class="btn btn-primary">View More</a></td>
 
                                     </tr>
                                 <?php }?>

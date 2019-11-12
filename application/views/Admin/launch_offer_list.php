@@ -5,7 +5,7 @@ include 'header.php';
     <div class="container-fluid">
 
         <!-- Page-Title -->
-        <div class="row">
+        <div class="row paddtp5">
             <div class="col-sm-12">
                 <div class="page-title-box">
                     <div class="btn-group m-0 pull-right">
@@ -41,18 +41,21 @@ include 'header.php';
                                 </thead>
 
                                 <tbody>
+                                <?php $i=1; foreach ($message as  $value) {
+                                    ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $i++; ?></td>
+                                    <td><?=$value['deal_name']?></td>
+                                    <td><?=$value['deal_gym']?></td>
+                                    <td><?=$value['deal_percent']?></td>
+                                    <td><?=$value['deal_discount']?></td>
+                                    <td><?=$value['deal_image']?></td>
                                     <td>
-                                        <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
+                                        <a href="<?php echo site_url('Admin/delete_launch_offer/'.$value['deal_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
                                         <a href="<?=base_url('Admin/edit_launch_offer')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
                                     </td>
                                 </tr>
+                                <?php }?>
                                 </tbody>
                             </table>
                         </div>

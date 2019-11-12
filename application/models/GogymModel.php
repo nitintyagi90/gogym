@@ -43,6 +43,14 @@ class GogymModel extends CI_Model
         $result = $query->result();
         return $result;
     }
+    public function launchoffer(){
+        $this->db->select('*');
+        $this->db->from('launch_offer');
+        $this->db->order_by("deal_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
 	public function admin_log($data,$table)
 	{
 		$ads = array();

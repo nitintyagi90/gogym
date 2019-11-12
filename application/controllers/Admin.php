@@ -46,7 +46,10 @@ class Admin extends CI_Controller {
 		$data = $this->AdminModel->editamienities($amentities_id);
 
 	}
-
+    public function ListGym_details()
+    {
+        $this->load->view('Admin/ListGym_details.php');
+    }
 	public function dashboard()
 	{
 		$this->load->view('Admin/dashboard.php');
@@ -405,11 +408,13 @@ class Admin extends CI_Controller {
     }
     public function launch_offer()
     {
-        $this->load->view('Admin/launch_offer.php');
+        $data['message']=$this->Adminmodel->allgym();
+        $this->load->view('Admin/launch_offer.php',$data);
     }
     public function launch_offer_list()
     {
-        $this->load->view('Admin/launch_offer_list.php');
+        $data['message']=$this->Adminmodel->lauch_offerlist();
+        $this->load->view('Admin/launch_offer_list.php',$data);
     }
     public function edit_launch_offer()
     {
@@ -460,7 +465,12 @@ class Admin extends CI_Controller {
         $this->db->delete('event');
         redirect('Admin/event_list');
     }
-
+    public function delete_launch_offer($id)
+    {
+        $this->db->where('deal_id', $id);
+        $this->db->delete('launch_offer');
+        redirect('Admin/launch_offer_list');
+    }
     public  function editCategory($id){
         $where='id';
         $table='category';
@@ -544,8 +554,7 @@ class Admin extends CI_Controller {
             $designation = $this->input->post('designation');
             $description = $this->input->post('description');
             $path1=  base_url().'images/';
-
-            if(!empty($_FILES["file"]["image"]))
+            if(!empty($_FILES["image"]))
             {
                 $upload_image1=$_FILES["image"]["name"];
                 $upload1 = move_uploaded_file($_FILES["image"]["tmp_name"], "./images/".$upload_image1);
@@ -609,7 +618,6 @@ class Admin extends CI_Controller {
                     'designation' => $designation,
                     'description' => $description,
                     'image' => $img_name1,
-
                 );
                 $this->db->where('id', $id);
                 $this->db->update('team', $data);
@@ -737,6 +745,38 @@ class Admin extends CI_Controller {
             $this->db->where('id', $id);
             $this->db->update(' insurance', $data);
             redirect('Admin/insurance');
+        }
+    }
+    public function saveLaunch_offer()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $name = $this->input->post('name');
+            $gymName = $this->input->post('gymName');
+            $percent = $this->input->post('percent');
+            $discount = $this->input->post('discount');
+            $path1=  base_url().'images/';
+            if(!empty($_FILES["image"]))
+            {
+                $upload_image1=$_FILES["image"]["name"];
+                $upload1 = move_uploaded_file($_FILES["image"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+            $data = array(
+                'deal_name' => $name,
+                'deal_gym' => $gymName,
+                'deal_percent' => $percent,
+                'deal_discount' => $discount,
+                'deal_image' => $img_name1,
+
+            );
+            $this->db->insert('launch_offer', $data);
+            redirect('Admin/launch_offer_list');
         }
     }
 

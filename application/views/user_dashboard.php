@@ -8,6 +8,21 @@ include 'header.php';
     }
 </style>
 <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+    }
+    th {
+        text-align: left;
+    }
+    .clr{
+        color: #333;
+    }
+</style>
+<style>
     * {
         box-sizing: border-box;
     }
@@ -263,72 +278,73 @@ include 'header.php';
                                             </div>
                                         </div>
                                         <div class="tab">Weight:
-                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Weight" oninput="this.className = ''" name="weight">
+                                            <input id="weight" maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Weight" oninput="this.className = ''" name="weight">
                                         </div>
                                         <div class="tab">Blood pressure:
-                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure High..." oninput="this.className = ''" name="pressurehigh">
-                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure Low..." oninput="this.className = ''" name="pressurelow">
+                                            <input id="bphigh" maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure High..." oninput="this.className = ''" name="pressurehigh">
+                                            <input id="bplow" maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure Low..." oninput="this.className = ''" name="pressurelow">
 
                                         </div>
                                         <div class="tab">Heart Rate:
-                                            <input maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Heart Rate..." oninput="this.className = ''" name="heartrate">
+                                            <input id="heartrate" maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Heart Rate..." oninput="this.className = ''" name="heartrate">
                                         </div>
                                         <div class="tab">Select Activity 1:
-                                            <select oninput="this.className = ''" name="activity1">
+                                            <select id="activity1" oninput="this.className = ''" name="activity1">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 2:
-                                            <select oninput="this.className = ''" name="activity2">
+                                            <select id="activity2" oninput="this.className = ''" name="activity2">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="Test">Test</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 3:
-                                            <select oninput="this.className = ''" name="activity3">
+                                            <select id="activity3" oninput="this.className = ''" name="activity3">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 4:
-                                            <select oninput="this.className = ''" name="activity4">
+                                            <select id="activity4" oninput="this.className = ''" name="activity4">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 5:
-                                            <select oninput="this.className = ''" name="activity5">
+                                            <select id="activity5" oninput="this.className = ''" name="activity5">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 6:
-                                            <select oninput="this.className = ''" name="activity6">
+                                            <select id="activity6" oninput="this.className = ''" name="activity6">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 7:
-                                            <select oninput="this.className = ''" name="activity7">
+                                            <select id="activity7" oninput="this.className = ''" name="activity7">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 8:
-                                            <select oninput="this.className = ''" name="activity8">
+                                            <select id="activity8" oninput="this.className = ''" name="activity8">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 9:
-                                            <select oninput="this.className = ''" name="activity9">
+                                            <select id="activity9" oninput="this.className = ''" name="activity9">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 10:
-                                            <select oninput="this.className = ''" name="activity10">
+                                            <select id="activity10" oninput="this.className = ''" name="activity10">
                                                 <option value="Aerobic Exercise">Aerobic Exercise</option>
                                                 <option value="Cardio Workout">Cardio Workout</option>
                                             </select>
@@ -339,7 +355,7 @@ include 'header.php';
                                             </div>
                                         </div>
                                         <div class="tab">
-                                            <textarea oninput="this.className = ''" rows="2" placeholder="Enter Note / Remark...." style="width: 50%;"></textarea>
+                                            <textarea id="note" oninput="this.className = ''" rows="2" placeholder="Enter Note / Remark...." style="width: 50%;"></textarea>
                                         </div>
                                         <div style="overflow:auto;">
                                             <div style="float:right;">
@@ -370,7 +386,47 @@ include 'header.php';
                                         </div>
                                     </form>
 								</div>
-                                <div class="output"></div>
+                                <div class="table-responsive" style="overflow-x: auto;">
+                                    <table class="table table-striped table-2 table-hover">
+                                        <thead>
+                                    <tr>
+                                        <th class="clr">Weight</th>
+                                        <th class="clr">BP High</th>
+                                        <th class="clr">BP Low</th>
+                                        <th class="clr">Heart Rate</th>
+                                        <th class="clr">Activity1</th>
+                                        <th class="clr">Activity2</th>
+                                        <th class="clr">Activity3</th>
+                                        <th class="clr">Activity4</th>
+                                        <th class="clr">Activity5</th>
+                                        <th class="clr">Activity6</th>
+                                        <th class="clr">Activity7</th>
+                                        <th class="clr">Activity8</th>
+                                        <th class="clr">Activity9</th>
+                                        <th class="clr">Activity10</th>
+                                        <th class="clr">Note / Remark</th>
+                                    </tr>
+                                        </thead>
+                                        <tbody
+                                    <tr>
+                                        <td class="weight"></td>
+                                        <td class="bphigh"></td>
+                                        <td class="bplow"></td>
+                                        <td class="heartrate"></td>
+                                        <td class="activity1"></td>
+                                        <td class="activity2"></td>
+                                        <td class="activity3"></td>
+                                        <td class="activity4"></td>
+                                        <td class="activity5"></td>
+                                        <td class="activity6"></td>
+                                        <td class="activity7"></td>
+                                        <td class="activity8"></td>
+                                        <td class="activity9"></td>
+                                        <td class="activity10"></td>
+                                        <td class="note"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
 
 							</div>
 
@@ -625,11 +681,123 @@ include 'footer.php';
 </script>
 <script>
     $(document).ready(function(){
-        $("#myTextarea").keyup(function(){
+        $("#weight").keyup(function(){
             // Getting the current value of textarea
             var currentText = $(this).val();
             // Setting the Div content
-            $(".output").text(currentText);
+            $(".weight").text(currentText);
+        });
+    });
+    $(document).ready(function(){
+        $("#bphigh").keyup(function(){
+            // Getting the current value of textarea
+            var currentText = $(this).val();
+            // Setting the Div content
+            $(".bphigh").text(currentText);
+        });
+    });
+    $(document).ready(function(){
+        $("#bplow").keyup(function(){
+            // Getting the current value of textarea
+            var currentText = $(this).val();
+            // Setting the Div content
+            $(".bplow").text(currentText);
+        });
+    });
+    $(document).ready(function(){
+        $("#heartrate").keyup(function(){
+            // Getting the current value of textarea
+            var currentText = $(this).val();
+            // Setting the Div content
+            $(".heartrate").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity1").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity1").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity2").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity2").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity3").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity3").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity4").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity4").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity5").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity5").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity6").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity6").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity7").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity7").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity8").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity8").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity9").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity9").text(currentText);
+        });
+    });
+    $(function() {
+        $("#activity10").change(function() {
+            //alert ( $('option:selected', this).text() );
+            var currentText = $('option:selected', this).text();
+            // Setting the Div content
+            $(".activity10").text(currentText);
+        });
+    });
+    $(document).ready(function(){
+        $("#note").keyup(function(){
+            // Getting the current value of textarea
+            var currentText = $(this).val();
+            // Setting the Div content
+            $(".note").text(currentText);
         });
     });
 </script>
