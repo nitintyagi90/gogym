@@ -34,9 +34,11 @@ include 'header.php';
                         </strong>
                     </div>
                 <?php } ?>
+
+
                 <!-- SignIn-->
                 <div class="tab-pane fade in show active" id="employer" role="tabpanel">
-                    <form id="login">
+                    <form method="post" action="<?php echo base_url('Auth/login'); ?>">
 
                         <div class="form-group">
                             <label>Mobile No</label>

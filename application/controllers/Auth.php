@@ -17,7 +17,6 @@ class Auth extends CI_Controller {
 		);
 		$table='user';
 		$login=$this->GogymModel->admin_log($data,$table);
-
 		if ($login)
 		{
 			$newdata = array(
@@ -26,9 +25,25 @@ class Auth extends CI_Controller {
 				 'user_type'  => $login->user_type,
 				'response' => 'true',
 			);
+            $table='user';
+            $where='id';
+            $data=$this->GogymModel->userdetails($login->id);
+            $table='profile_user';
+            $where='id';
+            $data1=$this->GogymModel->profiledetails($login->id);
+            $query = $this->db->get('profession');
+            $result = $query->result();
+            $response= array(
+                'user'=>$data,
+                'profile_user'=>$data1,
+                'profession'=>$result,
+            );
 			$this->session->set_userdata($newdata);
-			echo json_encode($newdata);
-		}
+            $this->session->set_flashdata('Successfully','Login Successfully');
+
+            $this->load->view('user_dashboard.php',$response);
+
+        }
 		else
 		{
 			echo 'false';
@@ -53,8 +68,9 @@ class Auth extends CI_Controller {
 			$result = $query->result_array();
 			$existsmobile = $result[0]['mobile'];
 			if($userMobile==$existsmobile){
-				echo "false";
-			}else{
+                $this->session->set_flashdata('fail','Mobile Number already exists!');
+                redirect('gogym/register');
+            }else{
 				$otp=rand(1000,9999);
 				sms91($userMobile,$otp);
 				$data = array(
@@ -65,10 +81,10 @@ class Auth extends CI_Controller {
 				);
 				$result = $this->db->insert('user', $data);
 				$insert_id = $this->db->insert_id();
-				$arr = array('user_id' => $insert_id, 'response' => 'true');
-				header('Content-Type: application/json');
-				echo json_encode( $arr );
-			}
+                $this->session->set_flashdata('Successfully','Login Successfully');
+                $this->load->view('otp.php');
+
+            }
 		}elseif ($purpose==2){
 			$mobile = $_POST['mobile'];
 			$owner_name = $_POST['owner_name'];
