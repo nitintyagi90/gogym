@@ -159,7 +159,6 @@ class Admin extends CI_Controller {
             $date = $this->input->post('date');
             $price = $this->input->post('price');
             $description = $this->input->post('description');
-
             $path1=  base_url().'images/';
             if(!empty($_FILES["event_pic"]))
             {
@@ -173,6 +172,9 @@ class Admin extends CI_Controller {
             }else{
                 $img_name1 = '';
             }
+
+
+
             $data = array(
                 'event_name' => $name,
                 'event_address' => $address,
@@ -183,6 +185,7 @@ class Admin extends CI_Controller {
 
             );
             $this->db->insert('event', $data);
+
             redirect('Admin/event_list');
         }
     }
@@ -695,6 +698,7 @@ class Admin extends CI_Controller {
 
             );
             $this->db->insert('diet', $data);
+
             redirect('Admin/gogyms_diet');
         }
     }

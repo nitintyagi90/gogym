@@ -52,7 +52,7 @@ include 'header.php';
                                     <td><?=$value['event_date']?></td>
                                     <td><?=$value['event_price']?></td>
                                     <td><?=$value['event_description']?></td>
-                                    <td><img src="" style="height: 50px;width: 50px;"></td>
+                                    <td><img src="<?=$value['event_pic']?>" style="height: 50px;width: 50px;"></td>
                                     <td>
                                         <a href="<?php echo site_url('Admin/delete_event/'.$value['event_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
                                         <a href="<?=base_url('Admin/edit_event')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
