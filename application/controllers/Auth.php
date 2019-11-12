@@ -76,13 +76,11 @@ class Auth extends CI_Controller {
 			$password = $_POST['password'];
 			$this->db->select('*');
 			$this->db->from('user');
-			$this->db->where('email', $email);
 			$this->db->where('mobile', $mobile);
 			$query = $this->db->get();
 			$result = $query->result_array();
-			@$existemail = $result[0]['email'];
 			@$existsmobile = $result[0]['mobile'];
-			if($existemail==$_POST['email'] && $existsmobile==$_POST['mobile']) {
+			if($existsmobile==$_POST['mobile']) {
 				echo "false";
 				exit();
 			}else{

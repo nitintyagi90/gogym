@@ -341,6 +341,7 @@
 
 <script src="<?php echo base_url();?>web/assets/js/jquery.geocomplete.js"></script>
 <script src="<?php echo base_url();?>web/assets/bootstrap-clockpicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 
 <!-- ============================================================== -->
@@ -385,8 +386,12 @@
             dataType: 'json',
             success: function(result){
                 var userId = result.user_id;
-                if(result=='false'){
-                    alert('Email and Mobile already exists')
+                if(result==false){
+                    swal({
+                        title: "Sorry!",
+                        text: "Required Detail already exists!"
+
+                    });
                 }
                 if(result.response=='true'){
                     $('#signin').modal('hide');
@@ -430,11 +435,13 @@
         $("#otp2").click(function(){
             var otp = $("#otp").val();
             var id = $("#id").val();
-
             var dataString = 'otp='+ otp ;
             if(otp=='')
             {
-                alert("Please Enter OTP");
+                swal({
+                    title: "Required",
+                    text: "OTP is required for complete register"
+                });
             }
             else
             {
@@ -446,11 +453,15 @@
                         otp:otp
                     },
                     success: function(result){
-                        console.log(result.response);
                         if(result=="false"){
-                            alert('Please Enter valid OTP');
+                            swal({
+                                title: "Invalid OTP!",
+                                text: "Please Enter valid OTP"
+
+                            });
                         }
                         if(result.userType=='1'){
+
                             window.location = "Gogym/user_dashboard?user_id="+id;
 
                         }
@@ -458,6 +469,7 @@
                             window.location.href="Gogym/dashboard?user_id="+id;
 
                         }
+
                     }
                 });
             }

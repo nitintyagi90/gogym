@@ -516,7 +516,15 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+
+
+
+
 <script>
+
+
+
+
     $('#checkin').dateDropper();
 </script>
 
@@ -800,6 +808,9 @@ include 'footer.php';
             $(".note").text(currentText);
         });
     });
+
+
+
 </script>
 
 
