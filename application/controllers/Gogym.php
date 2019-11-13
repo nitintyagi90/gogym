@@ -177,22 +177,30 @@ class Gogym extends CI_Controller {
     }
 	public function dashboard()
 	{
-		$user_id=$_GET['user_id'];
+		$user_id=$_SESSION['session_id'];
 		$table='user';
 		$where='id';
 		$data=$this->GogymModel->userdetails($user_id);
 		$table='gym';
 		$where='user_id';
 		$data1=$this->GogymModel->profileownerdetails($user_id);
+
         $query = $this->db->get('amenities');
         $result = $query->result();
+
         $this->db->select('*');
         $this->db->from('gym');
         $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
         $query2 = $this->db->get();
         $result2 = $query2->result();
-        $categoryList = $this->db->get('category');  // Produces: SELECT * FROM mytable
+
+        $categoryList = $this->db->get('category');
         $category = $categoryList->result();
+
+        $gymPrice = $this->db->get_where('gymPrice', array('user_id' => $user_id));
+        $gym_gallery = $this->db->get_where('gym_gallery', array('user_id' => $user_id));
+        $listgymPrice = $gymPrice->result();
+        $listGallery = $gym_gallery->result();
 
         $response= array(
 			'user'=>$data,
@@ -200,12 +208,14 @@ class Gogym extends CI_Controller {
 			'amenities'=>$result,
 			'gym'=>$result2,
 			'category'=>$category,
+			'gymPrice'=>$listgymPrice,
+			'galleryList'=>$listGallery,
 		);
 		$this->load->view('dashboard.php',$response);
 	}
 	public function user_dashboard()
 	{
-		$user_id=$_GET['user_id'];
+		$user_id=$_SESSION['session_id'];
 		$table='user';
 		$where='id';
 		$data=$this->GogymModel->userdetails($user_id);
@@ -355,11 +365,86 @@ class Gogym extends CI_Controller {
             'c_lname' => $lname,
             'c_email' => $email,
             'c_mobile' => $mobile,
-            'c_lname' => $lname,
             'c_msg' => $msg
         );
         $login=$this->Adminmodel->insert_common($table,$data);
         redirect('Gogym/contact');
+    }
+
+    public function saveGymplan (){
+        $dailyprice = $this->input->post('dailyprice');
+        $weeklyprice = $this->input->post('weeklyprice');
+        $monthlyprice = $this->input->post('monthlyprice');
+        $yearlyprice = $this->input->post('yearlyprice');
+        $gym_id = $this->input->post('user_profile_id');
+        $user_id = $this->input->post('id');
+        if(empty($dailyprice)&& empty($weeklyprice)&& empty($monthlyprice) && empty($yearlyprice)){
+            $this->session->set_flashdata('Successfully','All fields are required!');
+            redirect('Gogym/dashboard');
+        }else{
+            $data = array(
+                'dailyPrice'=>$dailyprice,
+                'weeklyPrice'=>$weeklyprice,
+                'monthlyPrice'=>$monthlyprice,
+                'yearlyPrice'=>$yearlyprice,
+                'gym_id'=>$gym_id,
+                'user_id'=>$user_id,
+            );
+            $this->db->select('*');
+            $this->db->where('gym_id', $gym_id);
+            $query = $this->db->get('gymPrice');
+            $cnt= $query->num_rows();
+            if($cnt===0){
+                $table='gymPrice';
+                $login=$this->Adminmodel->insert_common($table,$data);
+                $this->session->set_flashdata('Successfully','Price save successfully');
+                redirect('Gogym/dashboard');
+            }else{
+                $this->db->where('gym_id', $gym_id);
+                $this->db->update('gymPrice', $data);
+                $this->session->set_flashdata('Successfully','Price update successfully');
+                redirect('Gogym/dashboard');
+            }
+
+
+        }
+
+    }
+    public function saveGallery (){
+        $gym_id = $this->input->post('user_profile_id');
+        $user_id = $this->input->post('id');
+        $path1=  base_url().'images/';
+        $upload_image1=$_FILES["gallery"]["name"];
+        if(!empty($upload_image1)){
+            if(!empty($_FILES["gallery"]))
+            {
+                $upload_image1=$_FILES["gallery"]["name"];
+                $upload1 = move_uploaded_file($_FILES["gallery"]["tmp_name"], "./images/".$upload_image1);
+                if($upload1){
+                    $img_name1 = $path1.$upload_image1;
+                }else{
+                    $img_name1 = '';
+                }
+            }else{
+                $img_name1 = '';
+            }
+            $data = array(
+                'user_id'=>$user_id,
+                'gym_id'=>$gym_id,
+                'gym_gallery'=>$img_name1,
+            );
+
+            $table='gym_gallery';
+            $login=$this->Adminmodel->insert_common($table,$data);
+            $this->session->set_flashdata('Successfully','Gallery Save successfully');
+
+            redirect('Gogym/dashboard');
+        }else{
+            $this->session->set_flashdata('Successfully','Please fill all required fields');
+            redirect('Gogym/dashboard');
+        }
+
+
     }
 
 }

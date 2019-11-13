@@ -7,7 +7,8 @@ include 'header.php';
             height: 110px !important;
         }
     </style>
-<section class="gray p-0">
+
+           <section class="gray p-0">
 				<div class="container-fluid" >
 					<div class="row">
 						<div class="dashboard-sidebar">
@@ -55,6 +56,7 @@ include 'header.php';
 											<div class="row">
 											<div class="form-group col-md-6 col-sm-12">
 												<label>Partner Name</label>
+
 												<input class="form-control" name="ownerName" type="text" value="<?php echo $user[0]->owner_name ?>" >
                                                 <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
 
@@ -104,18 +106,7 @@ include 'header.php';
 										<div class="tr-single-header">
 											<h4><i class="ti-share"></i> Gym Information</h4>
 										</div>
-                                      <!--  <div class="form-group col-md-6 col-sm-12">
-                                            <label>Plan Type</label>
-                                            <select class="form-control" name="gymplanType">
-                                                <option>---Select Plan Type---</option>
 
-                                                <option value="Daily" <?php /*if(@$profile_user[0]->gymplanType=="Daily") echo 'selected="selected"'; */?> >Daily</option>
-                                                <option value="Monthly" <?php /*if(@$profile_user[0]->gymplanType=="Monthly") echo 'selected="selected"'; */?> >Monthly</option>
-                                                <option value="Weekly" <?php /*if(@$profile_user[0]->gymplanType=="Weekly") echo 'selected="selected"'; */?> >Weekly</option>
-                                                <option value="Yearly" <?php /*if(@$profile_user[0]->gymplanType=="Yearly") echo 'selected="selected"'; */?> >Yearly</option>
-
-                                            </select>
-                                        </div>-->
 										<div class="tr-single-body">
 											<div class="row">
 											<div class="form-group col-md-12 col-sm-12">
@@ -136,8 +127,6 @@ include 'header.php';
 												<input type="text" onkeypress="javascript:return isNumber(event)" name="totalavailability" value="<?php echo @$profile_user[0]->totalavailability ?>" name="availability" class="form-control">
 											</div>
 
-
-
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Contact Person</label>
                                                     <input class="form-control" type="text" placeholder="" name="contact_name" value="<?php echo @$profile_user[0]->contact_name ?>" required>
@@ -149,25 +138,25 @@ include 'header.php';
                                                 <div class="form-group col-md-4 col-sm-12">
                                                     <label>Open Morning Time</label>
                                                     <div class="clockpicker" data-autoclose="true">
-                                                        <input type="text" name="omorning" class="form-control" value="06:00">
+                                                        <input type="text" value="<?php echo @$profile_user[0]->open_mg_time ?>"  name="omorning" class="form-control" value="06:00">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4 col-sm-12">
                                                     <label>Close Morning Time</label>
                                                     <div class="clockpicker" data-autoclose="true">
-                                                        <input type="text" name="cmorning" class="form-control" value="11:00">
+                                                        <input type="text" value="<?php echo @$profile_user[0]->close_mg_time ?>" name="cmorning" class="form-control" value="11:00">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4 col-sm-12">
                                                     <label>Open Afternoon Time</label>
                                                     <div class="clockpicker" data-autoclose="true">
-                                                        <input type="text" name="oafternoon" class="form-control" value="01:00">
+                                                        <input type="text" value="<?php echo @$profile_user[0]->after_open_time ?>" name="oafternoon" class="form-control" value="01:00">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4 col-sm-12">
                                                     <label>Close Afternoon Time</label>
                                                     <div class="clockpicker" data-autoclose="true">
-                                                        <input type="text" name="cafternoon" class="form-control" value="04:00">
+                                                        <input type="text" value="<?php echo @$profile_user[0]->after_close_time ?>" name="cafternoon" class="form-control" value="04:00">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4 col-sm-12">
@@ -189,7 +178,7 @@ include 'header.php';
 
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>City</label>
-                                                    <input class="form-control" type="text" placeholder="" name="gymCity" value="<?php echo @$profile_user[0]->gymCity ?>" required>
+                                                    <input class="form-control" type="text" placeholder="" name="gymCity" value="<?php echo @$profile_user[0]->gymCity ?>">
                                                 </div>
 
                                                 <div class="form-group col-md-6 col-sm-12">
@@ -333,9 +322,11 @@ include 'header.php';
 							</div>
 								</form>
 							</div>
+
+
 							<div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="v-pills-events-tab">
 								<!-- All Listing -->
-								<form class="dash-profile-form">
+								<form action="<?php echo base_url('Gogym/saveGallery');?>" method="post" class="dash-profile-form" enctype="multipart/form-data">
 									<!-- Basic Info -->
 									<div class="tr-single-box">
 										<div class="tr-single-header">
@@ -345,9 +336,12 @@ include 'header.php';
 										<div class="tr-single-body">
 											<div class="row">
 											<div class="custom-file">
-													<input type="file" class="custom-file-input" id="cover-image">
+													<input type="file" name="gallery" class="custom-file-input" id="cover-image">
 													<label class="custom-file-label" for="cover-image">Gallery Image</label>
-												</div>
+                                                <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
+                                                <input class="form-control" type="hidden" name="user_profile_id" value="<?php echo @$profile_user[0]->gym_id ?>">
+
+                                            </div>
 											</div>
 										</div>
 									</div>
@@ -361,8 +355,9 @@ include 'header.php';
 							</div>
                             <!-- Property Content -->
                             <div class="tab-pane fade" id="property" role="tabpanel" aria-labelledby="v-pills-property-tab">
+
                                 <!-- All Property Info -->
-                                <form class="dash-profile-form" action="#" method="post" enctype="multipart/form-data">
+                                <form class="dash-profile-form" action="<?php echo base_url('Gogym/saveGymplan');?>" method="post" enctype="multipart/form-data">
 
                                     <!-- Basic Info -->
                                     <div class="tr-single-box">
@@ -373,19 +368,22 @@ include 'header.php';
                                             <div class="row">
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Daily Price (Included GST)</label>
-                                                    <input type="text" class="form-control" name="dailyprice" required>
+                                                    <input type="text" value="<?php echo $gymPrice[0]->dailyPrice ?>" class="form-control" name="dailyprice">
+                                                    <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
+                                                    <input class="form-control" type="hidden" name="user_profile_id" value="<?php echo @$profile_user[0]->gym_id ?>">
+
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Weekly Price (Included GST)</label>
-                                                    <input type="text" class="form-control" name="weeklyprice" required>
+                                                    <input type="text"  value="<?php echo $gymPrice[0]->weeklyPrice ?>" class="form-control" name="weeklyprice">
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Monthly Price (Included GST)</label>
-                                                    <input type="text" class="form-control" name="monthlyprice" required>
+                                                    <input type="text"  value="<?php echo $gymPrice[0]->monthlyPrice ?>" class="form-control" name="monthlyprice">
                                                 </div>
                                                 <div class="form-group col-md-6 col-sm-12">
                                                     <label>Yearly Price (Included GST)</label>
-                                                    <input type="text" class="form-control" name="yearlyprice" required>
+                                                    <input type="text"  value="<?php echo $gymPrice[0]->yearlyPrice ?>" class="form-control" name="yearlyprice">
                                                 </div>
                                             </div>
                                         </div>
@@ -462,51 +460,14 @@ include 'header.php';
                                                 </div>
                                                 <div class="tr-single-body">
                                                     <ul class="gallery-list">
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/1.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/1.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/2.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/2.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/3.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/3.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/4.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/4.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/5.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/5.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/6.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/6.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/7.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/7.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/8.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/8.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a data-fancybox="gallery" href="<?php echo base_url();?>web/assets/img/9.jpg">
-                                                                <img src="<?php echo base_url();?>web/assets/img/9.jpg" class="img-responsive" alt="">
-                                                            </a>
-                                                        </li>
+                                                        <?php foreach ($galleryList as $gallery){ ?>
+                                                            <li>
+                                                                <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery ?>">
+                                                                    <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive" alt="">
+                                                                </a>
+                                                            </li>
+                                                        <?php } ?>
+
                                                     </ul>
                                                 </div>
                                             </div>

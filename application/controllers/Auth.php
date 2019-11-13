@@ -17,6 +17,7 @@ class Auth extends CI_Controller {
 		);
 		$table='user';
 		$login=$this->GogymModel->admin_log($data,$table);
+
         if($login){
             if($login->user_type==1){
                 $newdata = array(
@@ -30,17 +31,11 @@ class Auth extends CI_Controller {
                 $data=$this->GogymModel->userdetails($login->id);
                 $table='profile_user';
                 $where='id';
-                $data1=$this->GogymModel->profiledetails($login->id);
-                $query = $this->db->get('profession');
-                $result = $query->result();
                 $response= array(
                     'user'=>$data,
-                    'profile_user'=>$data1,
-                    'profession'=>$result,
                 );
                 $this->session->set_userdata($newdata);
                 $this->session->set_flashdata('Successfully','Login Successfully');
-
                 $this->load->view('user_dashboard.php',$response);
             }elseif ($login->user_type==2){
                 $newdata = array(
@@ -52,6 +47,7 @@ class Auth extends CI_Controller {
                 $table='user';
                 $where='id';
                 $data=$this->GogymModel->userdetails($login->id);
+
                 $table='gym';
                 $where='user_id';
                 $data1=$this->GogymModel->profileownerdetails($login->id);
@@ -148,9 +144,11 @@ class Auth extends CI_Controller {
 				);
 				$result = $this->db->insert('user', $data);
 				$insert_id = $this->db->insert_id();
-				$arr = array('user_id' => $insert_id, 'response' => 'true');
-				header('Content-Type: application/json');
-				echo json_encode( $arr );
+                $response = array(
+                    'user_id'=>$insert_id,
+                );
+                $this->session->set_flashdata('Successfully','Register Successfully');
+                $this->load->view('otpverify',$response);
 			}
 		}
 	}
@@ -196,7 +194,7 @@ class Auth extends CI_Controller {
                 );
                 $this->db->where('id', $user_id);
                 $this->db->update('user', $data);
-                redirect("Gogym/dashboard?user_id=$user_id");
+                redirect("Gogym/dashboard");
 
             }else{
                 $path1=  base_url().'images/';
@@ -221,7 +219,12 @@ class Auth extends CI_Controller {
                 );
                 $this->db->where('id', $user_id);
                 $this->db->update('user', $data);
-                redirect("Gogym/dashboard?user_id=$user_id");
+                $userData=$this->GogymModel->userdetails($user_id);
+
+                $response= array(
+                    'user'=>$data,
+                );
+                redirect("Gogym/dashboard",$response);
 
             }
 		}
@@ -248,7 +251,9 @@ class Auth extends CI_Controller {
 			$user_disease= $this->input->post('user_disease');
 			$disease_details=$this->input->post('disease_details');
 			$user_address= $this->input->post('user_address');
-			$user_id= $this->input->post('id');
+			$user_mobile= $this->input->post('user_mobile');
+			$user_password= $this->input->post('user_password');
+			$user_id= $_SESSION['session_id'];
 			$path1=  base_url().'images/';
             $upload_image1=$_FILES["user_images"]["name"];
 			if(empty($upload_image1)){
@@ -273,6 +278,12 @@ class Auth extends CI_Controller {
                     'user_address' => $user_address,
                     'user_id'=>$user_id
                 );
+
+                 $userdata = array(
+                    'mobile' => $user_mobile,
+                    'password' => $user_password,
+
+                );
                 $this->db->select('user_id');
                 $this->db->where('user_id', $user_id);
                 $query = $this->db->get('profile_user');
@@ -280,11 +291,13 @@ class Auth extends CI_Controller {
                 $existuser = $cnt['user_id'];
                 if($existuser!=$user_id){
                     $this->db->insert('profile_user', $data);
-                    redirect("Gogym/user_dashboard?user_id=$user_id",'refresh');
+                    redirect("Gogym/user_dashboard");
                 }else{
                     $this->db->where('user_id', $user_id);
                     $this->db->update('profile_user', $data);
-                    redirect("Gogym/user_dashboard?user_id=$user_id",'refresh');
+                    $this->db->where('id', $user_id);
+                    $this->db->update('user', $userdata);
+                    redirect("Gogym/user_dashboard");
                 }
             }else{
                 if(!empty($_FILES["user_images"]))
@@ -323,6 +336,13 @@ class Auth extends CI_Controller {
                     'user_images' => $img_name1,
                     'user_id'=>$user_id
                 );
+
+                $userdata = array(
+                    'mobile' => $user_mobile,
+                    'password' => $user_password,
+
+                );
+
                 $this->db->select('user_id');
                 $this->db->where('user_id', $user_id);
                 $query = $this->db->get('profile_user');
@@ -330,11 +350,13 @@ class Auth extends CI_Controller {
                 $existuser = $cnt['user_id'];
                 if($existuser!=$user_id){
                     $this->db->insert('profile_user', $data);
-                    redirect("Gogym/user_dashboard?user_id=$user_id",'refresh');
+                    redirect("Gogym/user_dashboard");
                 }else{
                     $this->db->where('user_id', $user_id);
                     $this->db->update('profile_user', $data);
-                    redirect("Gogym/user_dashboard?user_id=$user_id",'refresh');
+                    $this->db->where('id', $user_id);
+                    $this->db->update('user', $userdata);
+                    redirect("Gogym/user_dashboard");
                 }
             }
 
@@ -343,7 +365,6 @@ class Auth extends CI_Controller {
 
     public function saveGym(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
-            $gymplanType = $this->input->post('gymplanType');
             $gymName = $this->input->post('gymName');
             $gymPrice = $this->input->post('gymPrice');
             $totalavailability = $this->input->post('totalavailability');
@@ -364,12 +385,17 @@ class Auth extends CI_Controller {
             $categoryName = $this->input->post('categoryName');
             $gymaddress = $this->input->post('gymaddress');
             $user_id = $this->input->post('id');
+            $omorning = $this->input->post('omorning');
+            $cmorning = $this->input->post('cmorning');
+            $oafternoon = $this->input->post('oafternoon');
+            $cafternoon = $this->input->post('cafternoon');
+            $oevening = $this->input->post('oevening');
+            $cevening = $this->input->post('cevening');
             $path1=  base_url().'images/';
             $upload_image1=$_FILES["gymImage"]["name"];
 
             if(empty($upload_image1)){
                 $data = array(
-                    'gymplanType' => $gymplanType,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -388,6 +414,12 @@ class Auth extends CI_Controller {
                     'gymdescription' => $gymdescription,
                     'panCard' => $gym_panno,
                     'user_id'=>$user_id,
+                    'open_mg_time'=>$omorning,
+                    'close_mg_time'=>$cmorning,
+                    'after_open_time'=>$oafternoon,
+                    'after_close_time'=>$cafternoon,
+                    'open_evng_time'=>$oevening,
+                    'close_evng_time'=>$cevening,
 
                 );
                 $this->db->select('*');
@@ -406,7 +438,6 @@ class Auth extends CI_Controller {
                         );
                         $this->db->insert('gym_amenities', $dataresult);
                     }
-
                     foreach ($categoryName as $cat){
                         $categoryarray = array(
                             'gym_id' => $insert_id,
@@ -416,16 +447,15 @@ class Auth extends CI_Controller {
                         );
                         $this->db->insert('gym_category', $categoryarray);
                     }
-                    redirect("Gogym/dashboard?user_id=$user_id",'refresh');
+                    redirect("Gogym/dashboard");
 
                 }
                 else{
                     $this->db->where('user_id', $user_id);
                     $this->db->update('gym', $data);
-                    redirect("Gogym/dashboard?user_id=$user_id",'refresh');
 
+                    redirect("Gogym/dashboard");
                 }
-
             }else{
                 if(!empty($_FILES["gymImage"]))
                 {
@@ -440,7 +470,6 @@ class Auth extends CI_Controller {
                     $img_name1 = '';
                 }
                 $data = array(
-                    'gymplanType' => $gymplanType,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -459,6 +488,12 @@ class Auth extends CI_Controller {
                     'gymdescription' => $gymdescription,
                     'panCard' => $gym_panno,
                     'user_id'=>$user_id,
+                    'open_mg_time'=>$omorning,
+                    'close_mg_time'=>$cmorning,
+                    'after_open_time'=>$oafternoon,
+                    'after_close_time'=>$cafternoon,
+                    'open_evng_time'=>$oevening,
+                    'close_evng_time'=>$cevening,
                     'gymImage'=>$img_name1,
                 );
                 $this->db->select('*');
@@ -487,12 +522,12 @@ class Auth extends CI_Controller {
                         );
                         $this->db->insert('gym_category', $categoryarray);
                     }
-                    redirect("Gogym/dashboard?user_id=$user_id",'refresh');
+                    redirect("Gogym/dashboard");
 
                 }else{
                     $this->db->where('user_id', $user_id);
                     $this->db->update('gym', $data);
-                    redirect("Gogym/dashboard?user_id=$user_id",'refresh');
+                    redirect("Gogym/dashboard");
 
                 }
             }

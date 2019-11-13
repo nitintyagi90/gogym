@@ -118,6 +118,7 @@ include 'header.php';
 						<form class="dash-profile-form" action="<?php echo base_url('Auth/profileuser');?>" method="post" enctype="multipart/form-data" novalidate>
 
 							<!-- Basic Info -->
+
 							<div class="tr-single-box">
 								<div class="tr-single-header">
 									<h4><i class="ti-share"></i> Basic Information</h4>
@@ -145,8 +146,14 @@ include 'header.php';
 
 										<div class="form-group col-md-6 col-sm-12">
 											<label>Mobile No</label>
-											<input class="form-control" type="text" value="<?php echo $user[0]->mobile ?>" readonly="true">
+											<input class="form-control" name="user_mobile" type="text" value="<?php echo $user[0]->mobile ?>">
 										</div>
+
+                                        <div class="form-group col-md-6 col-sm-12">
+                                            <label>Password</label>
+                                            <input class="form-control" name="user_password" type="password" value="<?php echo $user[0]->password ?>">
+                                        </div>
+
 										<div class="form-group col-md-6 col-sm-12">
 											<label>Date Of Birth (DD/MM/YYYY)</label><br>
 											<input type="date" name="user_dob" class="form-control" value="<?php echo $profile_user[0]->user_dob ?>">
