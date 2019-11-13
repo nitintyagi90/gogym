@@ -25,7 +25,7 @@ include 'header.php';
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="<?php echo base_url('Admin/save_coupon');?>" method="post" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalform">Add Coupon</h5>
@@ -38,17 +38,19 @@ include 'header.php';
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">Gym Name</label><br>
                                                 <!--<input type="text" name="gym_mobile" class="form-control" id="mobile" placeholder="Enter Gym mobile Number">-->
-                                                <select class="select2 mb-3 select2-multiple " name="gym_mobile[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
-                                                    <option value="Gold">Gold</option>
-                                                    <option value="New">New</option>
-                                                    <option value="old">old</option>
+                                                <select class="select2 mb-3 select2-multiple" name="gymName[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+                                                    <option>---Select Gym Name---</option>
+                                                    <?php foreach ($message as  $value) {
+                                                        ?>
+                                                        <option value="<?=$value['gym_id']?>"><?=$value['gymName']?></option>
+                                                    <?php }?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group"><br>
                                                 <label for="field-1" class="control-label">Coupon Code</label>
-                                                <input type="text" required name="cupcon" class="form-control" id="field-1" placeholder="Enter Cupcon Code">
+                                                <input type="text" required name="coupcon" class="form-control" id="field-1" placeholder="Enter Cupcon Code">
                                             </div>
                                         </div>
                                     </div>
@@ -73,9 +75,7 @@ include 'header.php';
                                         </div>
 
                                     </div>
-
-
-                                </div>
+                                    </div>
                                 <div class="modal-footer">
 
                                     <input type="submit" class="btn btn-raised btn-primary ml-2" value="Submit">

@@ -110,7 +110,7 @@ include 'header.php';
 
                             <div class="row mrg-bot-20">
                                 <div class="col-md-6">
-                                    <a href="#" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
+                                    <a href="<?php echo base_url('Auth/FacebookLogin'); ?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
                                 </div>
                                 <div class="col-md-6">
                                     <a href="#" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>

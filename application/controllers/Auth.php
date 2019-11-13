@@ -103,6 +103,7 @@ class Auth extends CI_Controller {
             }else{
 				$otp=rand(1000,9999);
 				sms91($userMobile,$otp);
+
 				$data = array(
 					'mobile' => $userMobile,
 					'password'=>md5($userPassword),
@@ -362,7 +363,44 @@ class Auth extends CI_Controller {
 
 		}
 	}
+    public function FacebookLogin(){
 
+        $this->load->library('facebook'); // Automatically picks appId and secret from config
+        // OR
+        // You can pass different one like this
+        //$this->load->library('facebook', array(
+        //    'appId' => 'APP_ID',
+        //    'secret' => 'SECRET',
+        //    ));
+
+        $user = $this->facebook->getUser();
+
+        if ($user) {
+            try {
+                $data['user_profile'] = $this->facebook->api('/me');
+            } catch (FacebookApiException $e) {
+                $user = null;
+            }
+        }else {
+            $this->facebook->destroySession();
+        }
+
+        if ($user) {
+
+            $data['logout_url'] = site_url('Auth/logout'); // Logs off application
+            // OR
+            // Logs off FB!
+            // $data['logout_url'] = $this->facebook->getLogoutUrl();
+
+        } else {
+            $data['login_url'] = $this->facebook->getLoginUrl(array(
+                'redirect_uri' => site_url('Auth/FacebookLogin'),
+                'scope' => array("email") // permissions here
+            ));
+        }
+        $this->load->view('index',$data);
+
+    }
     public function saveGym(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $gymName = $this->input->post('gymName');

@@ -7,7 +7,7 @@ include 'header.php';
         <br>
     <div class="modal-content" id="myModalLabel1">
         <div class="modal-header">
-            <h5 class="modal-title"><i class="ti-unlock"></i>Create a Account</h5>
+            <h5 class="modal-title"><i class="ti-unlock"></i>Login Your Account</h5>
 
         </div>
         <div class="modal-body">

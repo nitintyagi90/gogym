@@ -41,18 +41,21 @@ include 'header.php';
                                 </thead>
 
                                 <tbody>
+                                <?php $i=1; foreach ($message as  $value) {
+                                ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?= $i++; ?></td>
+                                    <td><?=$value['coupon_gym']?></td>
+                                    <td><?=$value['coupon_code']?></td>
+                                    <td><?=$value['coupon_percent']?></td>
+                                    <td><?=$value['coupon_max_discount']?></td>
+                                    <td><?=$value['coupon_min_value']?></td>
                                     <td>
-                                        <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
-                                        <a href="<?=base_url('Admin/edit_cupconlist')?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+                                        <a href="<?php echo site_url('Admin/delete_cupconlist/'.$value['coupon_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
+                                        <a href="<?php echo site_url('Admin/edit_cupconlist/'.$value['coupon_id']);?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
                                     </td>
                                 </tr>
+                                <?php }?>
                                 </tbody>
                             </table>
                         </div>

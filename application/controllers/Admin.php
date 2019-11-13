@@ -66,12 +66,14 @@ class Admin extends CI_Controller
 
     public function cupcon()
     {
-        $this->load->view('Admin/cupcon.php');
+        $data['message'] = $this->Adminmodel->allgym();
+        $this->load->view('Admin/cupcon.php', $data);
     }
 
     public function cupconlist()
     {
-        $this->load->view('Admin/cupconlist.php');
+        $data['message'] = $this->Adminmodel->cupconlist();
+        $this->load->view('Admin/cupconlist.php', $data);
     }
 
     public function carrer()
@@ -458,8 +460,15 @@ class Admin extends CI_Controller
 
     public function edit_gogyms_diet()
     {
-
         $this->load->view('Admin/edit_gogyms_diet.php');
+    }
+    public function edit_cupconlist($id)
+    {
+        $where = 'coupon_id';
+        $table = 'coupon';
+        $data['coupon'] = $this->Adminmodel->select_com_where($table, $where, $id);
+        $data['message'] = $this->Adminmodel->allgym();
+        $this->load->view('Admin/edit_cupconlist.php',$data);
     }
 
     public function launch_offer()
@@ -479,10 +488,7 @@ class Admin extends CI_Controller
         $where = 'deal_id';
         $table = 'launch_offer';
         $data['offer'] = $this->Adminmodel->select_com_where($table, $where, $id);
-
         $data['message'] = $this->Adminmodel->allgym();
-
-
         $this->load->view('Admin/edit_launch_offer.php', $data);
     }
 
@@ -539,7 +545,12 @@ class Admin extends CI_Controller
         $this->db->delete('launch_offer');
         redirect('Admin/launch_offer_list');
     }
-
+    public function delete_cupconlist($id)
+    {
+        $this->db->where('coupon_id', $id);
+        $this->db->delete('coupon');
+        redirect('Admin/cupconlist');
+    }
     public function editCategory($id)
     {
         $where = 'id';
@@ -577,8 +588,7 @@ class Admin extends CI_Controller
                 $data = array(
                     'categoryName' => $categoryName,
                     'categoryImage' => $img_name1,
-
-                );
+                 );
                 $this->db->where('id', $id);
                 $this->db->update('category', $data);
                 redirect('Admin/category');
@@ -823,6 +833,27 @@ class Admin extends CI_Controller
         }
     }
 
+    public function save_coupon()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gymName = $this->input->post('gymName');
+            $coupconcode = $this->input->post('coupcon');
+            $coupconpercent = $this->input->post('percent');
+            $coupcondiscount = $this->input->post('maxdiscount');
+            $coupconvalue = $this->input->post('minvalue');
+            foreach ($gymName as $gym) {
+            $data = array(
+                    'coupon_gym' => $gym,
+                    'coupon_code' => $coupconcode,
+                    'coupon_percent' => $coupconpercent,
+                    'coupon_max_discount' => $coupcondiscount,
+                    'coupon_min_value' => $coupconvalue,
+                );
+                $this->db->insert('coupon', $data);
+                redirect('Admin/cupconlist');
+            }
+        }
+    }
     public function saveLaunch_offer()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -859,7 +890,30 @@ class Admin extends CI_Controller
 
         }
     }
+    public function updateCoupon()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $gymName = $this->input->post('gymName');
+            $coupcon = $this->input->post('coupcon');
+            $percent = $this->input->post('percent');
+            $maxdiscount = $this->input->post('maxdiscount');
+            $minvalue = $this->input->post('minvalue');
+            $id = $this->input->post('id');
+            foreach ($gymName as $gym) {
+                $data = array(
+                    'coupon_gym' => $gym,
+                    'coupon_code' => $coupcon,
+                    'coupon_percent' => $percent,
+                    'coupon_max_discount' => $maxdiscount,
+                    'coupon_min_value' => $minvalue,
+                );
+                $this->db->where('coupon_id', $id);
+                $this->db->update('coupon', $data);
+                redirect('Admin/cupconlist');
+            }
 
+        }
+    }
     public function updateLaunch_offer()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
