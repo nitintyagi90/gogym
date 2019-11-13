@@ -191,4 +191,12 @@ class Adminmodel extends CI_Model{
         $result = $query->result_array();
         return $result;
     }
+    public function cupconlist(){
+        $this->db->select('*');
+        $this->db->from('coupon');
+        $this->db->order_by("coupon_id", "desc");
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
 }

@@ -43,8 +43,8 @@ include 'header.php';
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="field-1" class="control-label">offer Name</label>
-                                                <input type="text"  name="name" value="<?php echo $offer[0]['deal_name'] ?>" maxlength="16" class="form-control" id="field-1" placeholder="Enter Deals Name">
-                                                <input type="hidden"  name="id" value="<?php echo $offer[0]['deal_id'] ?>" maxlength="16" class="form-control" id="field-1" placeholder="Enter Deals Name">
+                                                <input type="text"  name="name" value="<?php echo $offer[0]['deal_name'] ?>"  class="form-control" id="field-1" placeholder="Enter Deals Name">
+                                                <input type="hidden"  name="id" value="<?php echo $offer[0]['deal_id'] ?>"  class="form-control" id="field-1" placeholder="Enter Deals Name">
                                             </div>
                                         </div>
 

@@ -59,7 +59,7 @@ include 'header.php';
                                     <td><img src="<?=$value['deal_image']?>" class="img50"></td>
                                     <td>
                                         <a href="<?php echo site_url('Admin/delete_launch_offer/'.$value['deal_id']);?>" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o "></i></a>
-<!--                                        <a href="<?php /*echo site_url('Admin/edit_launch_offer/'.$value['deal_id']);*/?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
+<!--                                        <a href="<?php echo site_url('Admin/edit_launch_offer/'.$value['deal_id']);?>" class="btn btn-danger btn-sm" title="Edit"><i class="fa fa-pencil "></i></a>
 -->
                                     </td>
                                 </tr>
