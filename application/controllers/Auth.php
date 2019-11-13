@@ -17,23 +17,72 @@ class Auth extends CI_Controller {
 		);
 		$table='user';
 		$login=$this->GogymModel->admin_log($data,$table);
+        if($login){
+            if($login->user_type==1){
+                $newdata = array(
+                    'session_id'  => $login->id,
+                    'session_name'  => $login->owner_name,
+                    'user_type'  => $login->user_type,
+                    'response' => 'true',
+                );
+                $table='user';
+                $where='id';
+                $data=$this->GogymModel->userdetails($login->id);
+                $table='profile_user';
+                $where='id';
+                $data1=$this->GogymModel->profiledetails($login->id);
+                $query = $this->db->get('profession');
+                $result = $query->result();
+                $response= array(
+                    'user'=>$data,
+                    'profile_user'=>$data1,
+                    'profession'=>$result,
+                );
+                $this->session->set_userdata($newdata);
+                $this->session->set_flashdata('Successfully','Login Successfully');
 
-		if ($login)
-		{
-			$newdata = array(
-				'session_id'  => $login->id,
-				'session_name'  => $login->owner_name,
-				 'user_type'  => $login->user_type,
-				'response' => 'true',
-			);
-			$this->session->set_userdata($newdata);
-			echo json_encode($newdata);
-		}
-		else
-		{
-			echo 'false';
-		}
-	}
+                $this->load->view('user_dashboard.php',$response);
+            }elseif ($login->user_type==2){
+                $newdata = array(
+                    'session_id'  => $login->id,
+                    'session_name'  => $login->owner_name,
+                    'user_type'  => $login->user_type,
+                    'response' => 'true',
+                );
+                $table='user';
+                $where='id';
+                $data=$this->GogymModel->userdetails($login->id);
+                $table='gym';
+                $where='user_id';
+                $data1=$this->GogymModel->profileownerdetails($login->id);
+                $query = $this->db->get('amenities');
+                $result = $query->result();
+                $this->db->select('*');
+                $this->db->from('gym');
+                $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
+                $query2 = $this->db->get();
+                $result2 = $query2->result();
+                $categoryList = $this->db->get('category');
+                $category = $categoryList->result();
+                $response= array(
+                    'user'=>$data,
+                    'profile_user'=>$data1,
+                    'amenities'=>$result,
+                    'gym'=>$result2,
+                    'category'=>$category,
+                );
+                $this->session->set_userdata($newdata);
+                $this->session->set_flashdata('Successfully','Login Successfully');
+                $this->load->view('dashboard.php',$response);
+
+            }
+        }else{
+            $this->session->set_flashdata('fail','Invalid login detail');
+            redirect('gogym/login');
+        }
+        }
+
+
 	public function logout()
 	{
 		session_destroy();
@@ -53,8 +102,9 @@ class Auth extends CI_Controller {
 			$result = $query->result_array();
 			$existsmobile = $result[0]['mobile'];
 			if($userMobile==$existsmobile){
-				echo "false";
-			}else{
+                $this->session->set_flashdata('fail','Mobile Number already exists!');
+                redirect('gogym/register');
+            }else{
 				$otp=rand(1000,9999);
 				sms91($userMobile,$otp);
 
@@ -66,10 +116,12 @@ class Auth extends CI_Controller {
 				);
 				$result = $this->db->insert('user', $data);
 				$insert_id = $this->db->insert_id();
-				$arr = array('user_id' => $insert_id, 'response' => 'true');
-				header('Content-Type: application/json');
-				echo json_encode( $arr );
-			}
+				$response = array(
+				    'user_id'=>$insert_id,
+                );
+                $this->session->set_flashdata('Successfully','Register Successfully');
+                $this->load->view('otpverify',$response);
+            }
 		}elseif ($purpose==2){
 			$mobile = $_POST['mobile'];
 			$owner_name = $_POST['owner_name'];
@@ -101,13 +153,11 @@ class Auth extends CI_Controller {
 				header('Content-Type: application/json');
 				echo json_encode( $arr );
 			}
-
 		}
-
-
 	}
 	public function otpverify(){
 		$otp = $_POST['otp'];
+		$id = $_POST['id'];
 		$this->db->select('*');
 		$this->db->from('user');
 		$this->db->where('otp', $otp);
@@ -119,11 +169,10 @@ class Auth extends CI_Controller {
 			$data = array(
 				'is_verify' => '1',
 			);
-			$this->db->where('otp', $otp);
+			$this->db->where('id', $id);
 			$this->db->update('user', $data);
-			$arr = array('userType' => $userType, 'response' => 'true');
-			header('Content-Type: application/json');
-			echo json_encode( $arr );
+            $this->session->set_flashdata('fail','Verification Done please login');
+            redirect('gogym/login');
 		}
 		else{
 

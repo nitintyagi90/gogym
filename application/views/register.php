@@ -1,6 +1,13 @@
 <?php
 include 'header.php';
 ?>
+<?php if($responce = $this->session->flashdata('fail')): ?>
+    <div class="box-header">
+        <div class="col-lg-12">
+            <div class="alert alert-success text-center"><?php echo $responce;?></div>
+        </div>
+    </div>
+<?php endif;?>
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
@@ -39,7 +46,7 @@ include 'header.php';
 
                         <!-- SignUp Panel -->
                         <div class="tab-pane fade in show active" id="candidate" role="tabpanel">
-                            <form id="userRegister" method="post" enctype="multipart/form-data" novalidate>
+                            <form  action="<?php echo base_url('Auth/register'); ?>" method="post" enctype="multipart/form-data" novalidate>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">

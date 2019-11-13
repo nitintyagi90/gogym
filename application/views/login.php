@@ -26,17 +26,18 @@ include 'header.php';
             <!-- Nav tabs -->
 
             <!-- Tab panels -->
-            <div class="tab-content">
-                <?php if($this->session->flashdata('active')){?>
-                    <div class="alert alert-primary text-center">
-                        <strong>
-                            <?php echo $this->session->flashdata('active'); ?>
-                        </strong>
+            <?php if($responce = $this->session->flashdata('fail')): ?>
+                <div class="box-header">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success text-center"><?php echo $responce;?></div>
                     </div>
-                <?php } ?>
+                </div>
+            <?php endif;?>
+
+
                 <!-- SignIn-->
                 <div class="tab-pane fade in show active" id="employer" role="tabpanel">
-                    <form id="login">
+                    <form method="post" action="<?php echo base_url('Auth/login'); ?>">
 
                         <div class="form-group">
                             <label>Mobile No</label>

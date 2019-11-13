@@ -36,6 +36,13 @@ include 'header.php';
 							
 							<!-- Profile Content -->
 							<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                <?php if($responce = $this->session->flashdata('Successfully')): ?>
+                                    <div class="box-header">
+                                        <div class="col-lg-12">
+                                            <div class="alert alert-success text-center"><?php echo $responce;?></div>
+                                        </div>
+                                    </div>
+                                <?php endif;?>
 								<form class="dash-profile-form" action="<?php echo base_url('Auth/profileowner');?>" method="post" enctype="multipart/form-data">
 
 									<!-- Basic Info -->
