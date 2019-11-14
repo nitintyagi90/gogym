@@ -417,30 +417,25 @@ include 'header.php';
                                                         <th>User Name</th>
                                                         <th>User Email ID</th>
                                                         <th>User Mobile No</th>
-                                                        <th>Plan Type</th>
-                                                        <th>Amount</th>
-                                                        <th>Payment Mode</th>
+
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
-                                                        <td>1001</td>
-                                                        <td>Sanjeev</td>
-                                                        <td>skgupta5050@gmail.com</td>
-                                                        <td>9716683297</td>
-                                                        <td>Daily</td>
-                                                        <td>49</td>
-                                                        <td>Online</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1002</td>
-                                                        <td>Sanjeev</td>
-                                                        <td>skgupta5050@gmail.com</td>
-                                                        <td>9716683297</td>
-                                                        <td>Weekly</td>
-                                                        <td>299</td>
-                                                        <td>Online</td>
-                                                    </tr>
+                                                    <?php
+                                                    $i =0;
+                                                    foreach ($booking as $book){
+                                                        $i++;
+                                                        ?>
+                                                        <tr>
+                                                            <td>100<?php echo $i; ?></td>
+                                                            <td><?php echo $book->name; ?></td>
+                                                            <td><?php echo $book->email; ?></td>
+                                                            <td><?php echo $book->mobile; ?></td>
+
+                                                        </tr>
+                                                    <?php } ?>
+
+
                                                     </tbody>
                                                 </table>
                                             </div>

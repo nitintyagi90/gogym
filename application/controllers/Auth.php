@@ -17,6 +17,8 @@ class Auth extends CI_Controller {
 		);
 		$table='user';
 		$login=$this->GogymModel->admin_log($data,$table);
+        $query = $this->db->get('profession');
+        $profession = $query->result();
 
         if($login){
             if($login->user_type==1){
@@ -33,6 +35,7 @@ class Auth extends CI_Controller {
                 $where='id';
                 $response= array(
                     'user'=>$data,
+                    'profession'=>$profession,
                 );
                 $this->session->set_userdata($newdata);
                 $this->session->set_flashdata('Successfully','Login Successfully');
@@ -53,19 +56,26 @@ class Auth extends CI_Controller {
                 $data1=$this->GogymModel->profileownerdetails($login->id);
                 $query = $this->db->get('amenities');
                 $result = $query->result();
+
                 $this->db->select('*');
                 $this->db->from('gym');
                 $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
                 $query2 = $this->db->get();
                 $result2 = $query2->result();
+
                 $categoryList = $this->db->get('category');
                 $category = $categoryList->result();
+
+                $bookingQuery = $this->db->get_where('booking', array('gymUserID' => $login->id));
+                $booking = $bookingQuery->result();
+
                 $response= array(
                     'user'=>$data,
                     'profile_user'=>$data1,
                     'amenities'=>$result,
                     'gym'=>$result2,
                     'category'=>$category,
+                    'booking'=>$booking,
                 );
                 $this->session->set_userdata($newdata);
                 $this->session->set_flashdata('Successfully','Login Successfully');

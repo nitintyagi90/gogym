@@ -260,6 +260,7 @@ include 'header.php';
                                             <input type="hidden" name="gymImage" value="<?php echo $gym[0]->gymImage; ?>">
                                             <input type="hidden" name="gym_address" value="<?php echo $gym[0]->gym_address; ?>">
                                             <input type="hidden" name="gymName" value="<?php echo $gym[0]->gymName; ?>">
+                                            <input type="hidden" name="gymUserID" value="<?php echo $gym[0]->user_id; ?>">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -302,7 +303,7 @@ include 'header.php';
                                                 <i class="lni-map-marker"></i>
                                             </div>
                                             <div class="icon-box-text">
-                                                524 New Ave, CA 548, USA
+                                               <?php echo $gym[0]->gym_address ?>
                                             </div>
                                         </a>
                                     </div>
@@ -312,27 +313,16 @@ include 'header.php';
                                     <div class="icon-box-icon-block">
                                         <a href="#">
                                             <div class="icon-box-round">
-                                                <i class="lni-envelope"></i>
+                                                <i class="fa fa-phone"></i>
                                             </div>
                                             <div class="icon-box-text">
-                                                helpsupport.com@abc.com
+                                                <?php echo $gym[0]->contact_no ?>
                                             </div>
                                         </a>
                                     </div>
                                 </li>
 
-                                <li>
-                                    <div class="icon-box-icon-block">
-                                        <a href="#">
-                                            <div class="icon-box-round">
-                                                <i class="lni-world"></i>
-                                            </div>
-                                            <div class="icon-box-text">
-                                                www.abc.com
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
+
 
                             </ul>
                         </div>

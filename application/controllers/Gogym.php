@@ -98,6 +98,7 @@ class Gogym extends CI_Controller {
             $gymImage = $_POST['gymImage'];
             $gym_address = $_POST['gym_address'];
             $gymName = $_POST['gymName'];
+            $gymUserID = $_POST['gymUserID'];
             $personValue = $_POST['personValue'];
             $query = $this->db->get('insurance');
             $result = $query->result();
@@ -116,6 +117,7 @@ class Gogym extends CI_Controller {
                 'image'=>$gymImage,
                 'address'=>$gym_address,
                 'gymName'=>$gymName,
+                'gymUserID'=>$gymUserID,
                 'person'=>$personValue,
                 'checkIn'=>$checkIn,
                 'checkOut'=>$checkOut,
@@ -244,6 +246,9 @@ class Gogym extends CI_Controller {
         $listgymPrice = $gymPrice->result();
         $listGallery = $gym_gallery->result();
 
+        $bookingQuery = $this->db->get_where('booking', array('gymUserID' => $user_id));
+        $booking = $bookingQuery->result();
+
         $response= array(
 			'user'=>$data,
 			'profile_user'=>$data1,
@@ -252,6 +257,7 @@ class Gogym extends CI_Controller {
 			'category'=>$category,
 			'gymPrice'=>$listgymPrice,
 			'galleryList'=>$listGallery,
+            'booking'=>$booking,
 		);
 		$this->load->view('dashboard.php',$response);
 	}
@@ -266,6 +272,9 @@ class Gogym extends CI_Controller {
 		$data1=$this->GogymModel->profiledetails($user_id);
         $query = $this->db->get('profession');
         $result = $query->result();
+
+
+
         $response= array(
 			'user'=>$data,
 			'profile_user'=>$data1,
@@ -568,15 +577,27 @@ class Gogym extends CI_Controller {
         $gymId = $_POST['gymId'];
         $email = $_POST['email'];
         $mobile = $_POST['mobile'];
+        $gymUserID = $_POST['gymUserID'];
         $user_id = $_SESSION['session_id'];
         $bookingDate = $date = date('d-m-Y');
+
         $order_id = 'ORD'.$otp=rand(1000,9999);
-        $query = $this->db->get_where('user', array('id' => $user_id,'user_type'=>2));
+
+        $query = $this->db->get_where('gym', array('gym_id' => $gymId));
+
         $result = $query->result();
-        $gymMobile = $result[0]->mobile;
-        $otp=rand(1000,9999);
-        sms91($gymMobile,$otp);
-        sms91($mobile,$otp);
+
+        $gymuser = $this->db->get_where('user', array('id' => $result[0]->user_id));
+
+        $result2 = $gymuser->result();
+
+        $gymMobile = $result2[0]->mobile;
+
+        $verification=rand(1000,9999);
+
+        sms91($gymMobile,$verification);
+
+        sms91($mobile,$verification);
         $data = array(
             'name'=>$name,
             'email'=>$email,
@@ -584,6 +605,7 @@ class Gogym extends CI_Controller {
             'mobile'=>$mobile,
             'checkin'=>$checkIn,
             'checkout'=>$checkout,
+            'gymUserID'=>$gymUserID,
             'no_person'=>$person,
             'order_id'=>$order_id,
             'cur_date'=>$bookingDate,
@@ -592,9 +614,11 @@ class Gogym extends CI_Controller {
         );
         $this->db->insert('booking', $data);
         $response = array(
-          'userName'=>$name
+          'userName'=>$name,
+          'bookingId'=>$order_id,
+          'Verification'=>$verification,
         );
-        $this->load->view('forgototp',$response);
+        $this->load->view('thankyou',$response);
     }
 
 }

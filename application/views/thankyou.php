@@ -17,7 +17,7 @@ include 'header.php';
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-10">
                     <div class="cta-sec text-center">
-                        <h2>Thank You for registering with "GoGyms". Your booking ID: ABC123 and your OTP no. is 1111</h2>
+                        <h2>Thank You for registering with "GoGyms". Your booking ID: <?php echo $bookingId; ?> and your OTP no. is <?php echo $Verification; ?></h2>
                         <br>
                     </div>
                 </div>

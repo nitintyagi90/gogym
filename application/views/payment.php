@@ -41,6 +41,7 @@ include 'header.php';
                                         <input value="<?php echo $checkOut; ?>" name="checkout" class="form-control" type="hidden">
                                         <input value="<?php echo $person; ?>" name="person" class="form-control" type="hidden">
                                         <input value="<?php echo $gymId; ?>" name="gymId" class="form-control" type="hidden">
+                                        <input value="<?php echo $gymUserID; ?>" name="gymUserID" class="form-control" type="hidden">
                                     </div>
                                 </div>
 
