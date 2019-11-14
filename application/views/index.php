@@ -62,7 +62,7 @@ include 'header.php';
 							<div class="col-lg-10 col-md-12">
 								<ul class="banner-cat-list">
                                     <?php foreach ($category as $cat){ ?>
-									<li><a href="<?php echo site_url('Admin/viewPofile/'.$cat->id);?>"><img src="<?php echo base_url();?>web/assets/img/01.png"><span><?php echo $cat->categoryName ?></span></a></li>
+									<li><a href="<?php echo site_url('Admin/viewPofile/'.$cat->id);?>"><img src="<?php echo $cat->categoryImage ?>"><span><?php echo substr($cat->categoryName,0,12) ?></span></a></li>
                                    <?php } ?>
                                 </ul>
 							</div>
@@ -89,9 +89,9 @@ include 'header.php';
                         <?php foreach ($category as $cat){ ?>
                             <li>
                                 <a href="#">
-                                    <img src="<?php echo base_url();?>web/assets/img/02.png">
+                                    <img src="<?php echo $cat->categoryImage ?>">
                                     <!-- <span class="fitness-options gyms"></span> -->
-                                    <p class="text-uppercase"><?php echo $cat->categoryName ?></p>
+                                    <p class="" style="line-height: 16px;"><?php echo substr($cat->categoryName,0,12 )?></p>
                                 </a>
                             </li>
                         <?php } ?>
