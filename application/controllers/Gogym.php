@@ -88,10 +88,48 @@ class Gogym extends CI_Controller {
     }
     public function payment()
     {
-        $query = $this->db->get('insurance');
-        $result = $query->result();
-        $data['insurance']=$result;
-        $this->load->view('payment',$data);
+        if ($_SESSION['session_id'])
+        {
+            $gender = $_POST['gender'];
+            $checkIn = $_POST['checkIn'];
+            $checkOut = $_POST['checkOut'];
+            $gymId = $_POST['gymId'];
+            $gymPrice = $_POST['gymPrice'];
+            $gymImage = $_POST['gymImage'];
+            $gym_address = $_POST['gym_address'];
+            $gymName = $_POST['gymName'];
+            $personValue = $_POST['personValue'];
+            $query = $this->db->get('insurance');
+            $result = $query->result();
+
+            $userProfile = $this->db->get_where('profile_user', array('user_id' => $_SESSION['session_id']));
+            $userPhone = $this->db->get_where('user', array('id' => $_SESSION['session_id']));
+
+            $userData = $userProfile->result();
+            $userMobile = $userPhone->result();
+
+
+            $data=array(
+                'gender'=>$gender,
+                'gymId'=>$gymId,
+                'price'=>$gymPrice,
+                'image'=>$gymImage,
+                'address'=>$gym_address,
+                'gymName'=>$gymName,
+                'person'=>$personValue,
+                'checkIn'=>$checkIn,
+                'checkOut'=>$checkOut,
+                'user'=>$userData,
+                'insurance'=>$result[0]->insurance_value,
+                'userMobile'=>$userMobile[0]->mobile,
+            );
+            $this->load->view('payment',$data);
+        }
+        else
+        {
+            redirect('Auth/login');
+        }
+
     }
     public function story()
     {
@@ -444,7 +482,115 @@ class Gogym extends CI_Controller {
             redirect('Gogym/dashboard');
         }
 
+    }
+    public function forgotPassword(){
+        $mobileNo = $this->input->post('mobileNo');
 
+        if(empty($mobileNo)){
+            $this->session->set_flashdata('Successfully','Soory! Mobile number is required!');
+            redirect('Gogym/forgot');
+        }else{
+            $checkMobile = $this->db->get_where('user', array('mobile' =>$mobileNo));
+            $result = $checkMobile->result();
+            if(empty($result)){
+                $this->session->set_flashdata('Successfully','Soory! This mobile number is not register!');
+                redirect('Gogym/forgot');
+            }else{
+                $otp=rand(1000,9999);
+                sms91($result[0]->mobile,$otp);
+                $response = array(
+                    'mobile'=>$mobileNo,
+                );
+                $data = array(
+                    'otp'=>$otp,
+                );
+                $this->db->where('mobile', $mobileNo);
+                $this->db->update('user', $data);
+                $this->load->view('forgototp',$response);
+            }
+        }
+
+    }
+
+    public function forgotVerify(){
+        $otp = $_POST['otp'];
+        $mobile = $_POST['mobile'];
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('mobile', $mobile);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        $existsotp = $result[0]['otp'];
+        if($existsotp==$otp) {
+            $data = array(
+                'is_forgot' => '1',
+            );
+            $this->db->where('mobile', $mobile);
+            $this->db->update('user', $data);
+            $this->session->set_flashdata('Successfully','Otp verify please enter password and confirm password');
+            $respone = array(
+                'mobile' => $mobile,
+            );
+            $this->load->view('password',$respone);
+        }else{
+            $this->session->set_flashdata('Successfully','Soory! Otp is wrong!');
+            redirect('Gogym/forgototp');
+
+        }
+    }
+    public function changePassword(){
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirmPassword'];
+        $mobile = $_POST['mobile'];
+        if($password!=$confirm_password){
+            $this->session->set_flashdata('Successfully','Soory! password and confirm password not matched!');
+            redirect('Gogym/password');
+        }else{
+            $data = array(
+                'password'=>md5($password),
+            );
+            $this->db->where('mobile', $mobile);
+            $this->db->update('user', $data);
+            $this->session->set_flashdata('Successfully','Thanks! password reset successfully');
+            redirect('Auth/login');
+        }
+    }
+
+    public function booking(){
+        $name = $_POST['name'];
+        $checkIn = $_POST['checkIn'];
+        $checkout = $_POST['checkout'];
+        $person = $_POST['person'];
+        $gymId = $_POST['gymId'];
+        $email = $_POST['email'];
+        $mobile = $_POST['mobile'];
+        $user_id = $_SESSION['session_id'];
+        $bookingDate = $date = date('d-m-Y');
+        $order_id = 'ORD'.$otp=rand(1000,9999);
+        $query = $this->db->get_where('user', array('id' => $user_id,'user_type'=>2));
+        $result = $query->result();
+        $gymMobile = $result[0]->mobile;
+        $otp=rand(1000,9999);
+        sms91($gymMobile,$otp);
+        sms91($mobile,$otp);
+        $data = array(
+            'name'=>$name,
+            'email'=>$email,
+            'user_id'=>$user_id,
+            'mobile'=>$mobile,
+            'checkin'=>$checkIn,
+            'checkout'=>$checkout,
+            'no_person'=>$person,
+            'order_id'=>$order_id,
+            'cur_date'=>$bookingDate,
+            'gym_id'=>$gymId,
+            'verificationCode'=>$otp,
+        );
+        $this->db->insert('booking', $data);
+        $response = array(
+          'userName'=>$name
+        );
+        $this->load->view('forgototp',$response);
     }
 
 }

@@ -17,6 +17,7 @@ include 'header.php';
     <!-- =========================== Category Start ============================================ -->
     <section>
         <div class="container">
+        <form action="<?php echo base_url('Gogym/booking'); ?>" method="post" enctype="multipart/form-data">
             <div class="row">
 
                 <!-- Payment Form -->
@@ -31,30 +32,29 @@ include 'header.php';
                         <div class="tr-single-body">
                             <div class="row">
 
+
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
-                                        <label>First Name</label>
-                                        <input class="form-control" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input class="form-control" type="text">
+                                        <label>Name</label>
+                                        <input value="<?php echo $user[0]->user_name; ?>" name="name" class="form-control" type="text">
+                                        <input value="<?php echo $checkIn; ?>" name="checkIn" class="form-control" type="hidden">
+                                        <input value="<?php echo $checkOut; ?>" name="checkout" class="form-control" type="hidden">
+                                        <input value="<?php echo $person; ?>" name="person" class="form-control" type="hidden">
+                                        <input value="<?php echo $gymId; ?>" name="gymId" class="form-control" type="hidden">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input class="form-control" type="email">
+                                        <input class="form-control" value="<?php echo $user[0]->user_email ?>" name="email" type="email">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Mobile</label>
-                                        <input class="form-control" type="text">
+                                        <input value="<?php echo $userMobile ?>" name="mobile" class="form-control" type="text">
                                     </div>
                                 </div>
 
@@ -62,10 +62,10 @@ include 'header.php';
                         </div>
                     </div>
                     <div class="tr-single-box">
-                        <div class="tr-single-header">
+                        <!--<div class="tr-single-header">
                             <h4><i class="ti-headphone"></i> Coupon </h4>
-                        </div>
-                        <div class="tr-single-body">
+                        </div>-->
+                        <!--<div class="tr-single-body">
                             <h5>Have discount coupon?</h5>
                             <div class="row">
                                 <div class="col-md-4"><p>Enter discount code</p></div>
@@ -74,7 +74,7 @@ include 'header.php';
                                     <input type="submit" name="apply" value="APPLY" class="btn btn-success">
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <a href="<?php echo base_url('Gogym/disclaimer'); ?>" style="color: #ff7600">Disclaimer</a>
                     <!-- Payment Methode -->
@@ -94,9 +94,9 @@ include 'header.php';
                                         </li>
 
                                         <li class="nav-item" style="width: 50%;">
-                                            <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">
-                                                <button class="btn btn-success" type="submit" style="width: 100%;">Pay At Gym</button>
-                                            </a>
+                                           <!-- <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">-->
+                                                <input type="submit" class="btn btn-success" value="Pay At Gym">
+                                           <!-- </a>-->
                                         </li>
                                     </ul>
                                 </div>
@@ -113,7 +113,7 @@ include 'header.php';
                 <div class="col-lg-4 col-md-4">
                     <div class="booking-item list-item">
                         <div class="bookin-item-header">
-                            <img src="<?php echo $_POST['gymImage']; ?>" class="img-fluid mx-auto" alt="">
+                            <img src="<?php echo $image; ?>" class="img-fluid mx-auto" alt="">
                         </div>
                         <div class="booking-summary-head">
                             <div class="gl-rating gl-card">
@@ -125,34 +125,58 @@ include 'header.php';
                             </div>
                         </div>
                         <div class="booking-summary">
-                            <h4 class="booking-item-title"><?php echo $_POST['gymName'] ?></h4>
-                            <p class="booking-item-location"><?php echo $_POST['gym_address'] ?></p>
+                            <h4 class="booking-item-title" name="gymname"><?php echo $gymName ?></h4>
+                            <p class="booking-item-location" name="address"><?php echo $address ?></p>
                         </div>
                     </div>
                     <div class="summary-boxed-widget">
                         <h4><i class="ti-calendar"></i> Booking Summary</h4>
                         <ul>
-                            <li>Check In <span><?php echo $_POST['checkIn'] ?></span></li>
-                            <li>Check Out <span><?php echo $_POST['checkOut'] ?></span></li>
-                            <li>No. Of Person <span><?php echo $_POST['personValue'] ?></span></li>
+                            <li >Check In <span name="checkIn"><?php echo $checkIn ?></span></li>
+                            <li>Check Out <span><?php echo $checkOut ?></span></li>
+                            <li>No. Of Person <span><?php echo $person ?></span></li>
                             <?php
-                            $gymAmount = $_POST['gymPrice'];
-                            $personValue = $_POST['personValue'];
-                            $totalPrice = $gymAmount*$personValue;
-                            $cal = $totalPrice*$insurance[0]->insurance_value;
+                            $totalPrice = $price*$person;
+                            $cal = $totalPrice*$insurance;
                             $newTotal = $cal / 100;
                             ?>
                             <li>Booking Amount <span><?php echo $totalPrice; ?></span></li>
-                            <li>Coupon Discount (Go25) <span class="main-color">-<i class="fa fa-inr"></i>13.00</span></li>
-                            <li><input type="checkbox" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance[0]->insurance_value; ?>%) <span class="main-color"><i class="fa fa-inr"></i>0.00</span></li>
-                            <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $newTotal; ?></span></li>
+<!--                            <li>Coupon Discount (Go25) <span class="main-color">-<i class="fa fa-inr"></i>13.00</span></li>
+-->                            <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
+                            <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?></span></li>
                         </ul>
                     </div>
                 </div>
 
             </div>
+        </form>
         </div>
     </section>
     <!-- =========================== Category End ============================================ -->
 <?php
 include 'footer.php';
+?>
+<?php
+$totalPrice = $price*$person;
+$cal = $totalPrice*$insurance;
+$newTotal = $cal / 100;
+$totalAmountis = $totalPrice - $newTotal;
+    echo "
+            <script type=\"text/javascript\">
+           $ ('.insurance').click(function(){
+             if ($(this).prop('checked')){
+              $(\".appendvalue\").text('₹' + $newTotal);
+              $(\".appendvalue\").val('₹' + $newTotal);
+              $(\".calTotal\").text('');
+              $(\".calTotal\").text('₹' + $totalAmountis);
+             }
+            else{
+             $(\".appendvalue\").text('₹0.00');
+             $(\".appendvalue\").val('0.00');
+             $(\".calTotal\").text('₹' + $totalPrice);
+              }
+             }); 
+            </script>
+        ";
+
+?>
