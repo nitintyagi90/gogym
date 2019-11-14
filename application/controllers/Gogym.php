@@ -127,6 +127,10 @@ class Gogym extends CI_Controller {
 
         $this->load->view('healthcheckup.php',$data);
     }
+    public function thankyou()
+    {
+        $this->load->view('thankyou');
+    }
     public function team()
     {
         $query = $this->db->get('team');
