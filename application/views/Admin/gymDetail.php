@@ -40,7 +40,7 @@ include 'header.php';
                                     <th>GymPrice</th>
                                     <th>Totalavailability</th>
                                     <th>Location</th>
-                                    <th>Action</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
 
@@ -63,7 +63,7 @@ include 'header.php';
                                             <?php
                                             if($value->is_active==1){?>
 
-                                                <a href="<?php echo site_url('Admin/blockGym/'.$value->gym_id);?>" class="btn btn-danger btn-sm" title="Delete">Active</a>
+                                                <a href="<?php echo site_url('Admin/blockGym/'.$value->gym_id);?>" class="btn btn-danger btn-sm" >Deactive</a>
 
 
                                             <?php } ?>
@@ -71,7 +71,7 @@ include 'header.php';
                                             <?php
                                             if($value->is_active==0){?>
 
-                                                <a href="<?php echo site_url('Admin/blockGym/'.$value->gym_id);?>" class="btn btn-primary btn-sm" title="Delete">Deactive</a>
+                                                <a href="<?php echo site_url('Admin/blockGym/'.$value->gym_id);?>" class="btn btn-primary btn-sm" >Active</a>
 
 
                                             <?php } ?>

@@ -112,7 +112,9 @@ include 'header.php';
 
                 <!-- Billing Detail -->
                 <div class="col-lg-4 col-md-4">
+
                     <div class="booking-item list-item">
+
                         <div class="bookin-item-header">
                             <img src="<?php echo $image; ?>" class="img-fluid mx-auto" alt="">
                         </div>
@@ -125,6 +127,11 @@ include 'header.php';
                                 <i class="fa fa-star-half-o"></i>
                             </div>
                         </div>
+                        <p>Please select your gender:</p>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Daily" checked> Daily<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Weekly"> Weekly<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Monthly"> Monthly<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Yearly"> Yearly<br>
                         <div class="booking-summary">
                             <h4 class="booking-item-title" name="gymname"><?php echo $gymName ?></h4>
                             <p class="booking-item-location" name="address"><?php echo $address ?></p>

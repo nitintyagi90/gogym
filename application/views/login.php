@@ -66,7 +66,7 @@ include 'header.php';
                 <!--/.Panel 1-->
 
                 <!-- SignUp Panel -->
-                <div class="tab-pane fade" id="candidate" role="tabpanel">
+                <!--<div class="tab-pane fade" id="candidate" role="tabpanel">
                     <form id="userRegister" method="post" enctype="multipart/form-data" novalidate>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -138,7 +138,7 @@ include 'header.php';
                         </div>
                     </div>
 
-                </div>
+                </div>-->
                 <!--/.Panel 2-->
 
             </div>

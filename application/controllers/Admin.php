@@ -46,7 +46,6 @@ class Admin extends CI_Controller
         $data = $this->AdminModel->editamienities($amentities_id);
 
     }
-
     public function ListGym_details($id)
     {
         $this->db->select('*');
@@ -57,6 +56,17 @@ class Admin extends CI_Controller
         $result = $query->result();
         $data['gym']=$result;
         $this->load->view('Admin/ListGym_details.php',$data);
+    }
+    public function Userlist_details($id)
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->join('profile_user', 'profile_user.user_id = user.id');
+        $this->db->where('user.id', $id);
+        $query = $this->db->get();
+        $result = $query->result();
+        $data['user']=$result;
+        $this->load->view('Admin/Userlist_details.php');
     }
 
     public function dashboard()
@@ -320,7 +330,18 @@ class Admin extends CI_Controller
         );
         $this->load->view('Admin/listGym.php', $data);
     }
-
+    public function userlist()
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('user_type', 1);
+        $query = $this->db->get();
+        $result = $query->result();
+        $data = array(
+            'userlist' => $result,
+        );
+        $this->load->view('Admin/userlist.php', $data);
+    }
     public function viewPofile($id)
     {
         $this->db->select('*');

@@ -6,6 +6,17 @@ include 'header.php';
             width: 110px !important;
             height: 110px !important;
         }
+        .dlt{
+            font-size: 18px !important;
+            color: #4558be !important;
+            float: right !important;
+            border: 1px solid !important;
+            border-radius: 50px !important;
+            width: 30px !important;
+            height: 30px !important;
+            padding-left: 8px !important;
+            padding-bottom: 1px !important;
+        }
     </style>
 
            <section class="gray p-0">
@@ -25,12 +36,13 @@ include 'header.php';
 							</div>
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 								  <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="ti-user"></i>Profile</a>
+                                <a class="nav-link" id="v-pills-wwallete-tab" data-toggle="pill" href="#wwallete" role="tab" aria-controls="wwallete" aria-selected="false" aria-expanded="false"><i class="ti-wallet"></i>Profile Details</a>
 								  <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Add Gym Details</a>
                                 <a class="nav-link" id="v-pills-property-tab" data-toggle="pill" href="#property" role="tab" aria-controls="property" aria-selected="false"><i class="ti-home"></i>Add Plan</a>
 								  <a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Add Gallery</a>
                                 <a class="nav-link" id="v-pills-bookmark-tab" data-toggle="pill" href="#bookmark" role="tab" aria-controls="bookmark" aria-selected="false"><i class="ti-bookmark-alt"></i>List Gallery</a>
                                 <a class="nav-link" id="v-pills-billing-tab" data-toggle="pill" href="#billing" role="tab" aria-controls="billing" aria-selected="false"><i class="ti-credit-card"></i>Booking Details</a>
-                                  <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
+                                <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 							</div>
 						</div>
 						<div class="tab-content dashboard-wrap" id="v-pills-tabContent">
@@ -77,8 +89,8 @@ include 'header.php';
                                                 <div class="form-group col-md-12 col-sm-12">
                                                     <label>Profile Image</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="cover-image" name="profileImage">
-                                                        <label class="custom-file-label" for="cover-image">Profile Image</label>
+                                                        <input type="file" class="form-control" accept="image/x-png,image/gif,image/jpeg" / name="profileImage">
+
                                                     </div>
                                                 </div>
 										</div>
@@ -109,7 +121,7 @@ include 'header.php';
 
 										<div class="tr-single-body">
 											<div class="row">
-											<div class="form-group col-md-12 col-sm-12">
+											<div class="form-group col-md-6 col-sm-12">
 												<label>Gym Name</label>
 												<input class="form-control" value="<?php echo @$profile_user[0]->gymName ?>" name="gymName" type="text" value="">
                                                 <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
@@ -118,10 +130,10 @@ include 'header.php';
 
                                             </div>
 
-											<div class="form-group col-md-6 col-sm-12">
+										<!--	<div class="form-group col-md-6 col-sm-12">
 												<label>Price</label>
-												<input class="form-control" onkeypress="javascript:return isNumber(event)" value="<?php echo @$profile_user[0]->gymPrice ?>" name="gymPrice" name="price" type="text" value="">
-											</div>
+												<input class="form-control" onkeypress="javascript:return isNumber(event)" value="<?php /*echo @$profile_user[0]->gymPrice */?>" name="gymPrice" name="price" type="text" value="">
+											</div>-->
 											<div class="form-group col-md-6 col-sm-12">
 												<label>Total Availability</label>
 												<input type="text" onkeypress="javascript:return isNumber(event)" name="totalavailability" value="<?php echo @$profile_user[0]->totalavailability ?>" name="availability" class="form-control">
@@ -304,8 +316,8 @@ include 'header.php';
 											<div class="form-group col-md-12 col-sm-12">
 												<label>Gym Image</label>
 												<div class="custom-file">
-													<input type="file" name="gymImage"  class="custom-file-input" id="cover-image">
-													<label class="custom-file-label" for="cover-image">Gym Image</label>
+													<input type="file" name="gymImage"  class="form-control" accept="image/x-png,image/gif,image/jpeg" />
+
 												</div>
 											</div>
 											</div>
@@ -336,8 +348,8 @@ include 'header.php';
 										<div class="tr-single-body">
 											<div class="row">
 											<div class="custom-file">
-													<input type="file" name="gallery" class="custom-file-input" id="cover-image">
-													<label class="custom-file-label" for="cover-image">Gallery Image</label>
+													<input type="file" name="gallery" class="form-control" accept="image/x-png,image/gif,image/jpeg" />
+
                                                 <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
                                                 <input class="form-control" type="hidden" name="user_profile_id" value="<?php echo @$profile_user[0]->gym_id ?>">
 
@@ -415,8 +427,8 @@ include 'header.php';
                                                     <tr>
                                                         <th>Booking ID</th>
                                                         <th>User Name</th>
-                                                        <th>User Email ID</th>
-                                                        <th>User Mobile No</th>
+                                                        <!--<th>User Email ID</th>
+                                                        <th>User Mobile No</th>-->
 
                                                     </tr>
                                                     </thead>
@@ -429,8 +441,8 @@ include 'header.php';
                                                         <tr>
                                                             <td>100<?php echo $i; ?></td>
                                                             <td><?php echo $book->name; ?></td>
-                                                            <td><?php echo $book->email; ?></td>
-                                                            <td><?php echo $book->mobile; ?></td>
+                                                            <!--<td><?php /*echo $book->email; */?></td>
+                                                            <td><?php /*echo $book->mobile; */?></td>-->
 
                                                         </tr>
                                                     <?php } ?>
@@ -457,6 +469,8 @@ include 'header.php';
                                                     <ul class="gallery-list">
                                                         <?php foreach ($galleryList as $gallery){ ?>
                                                             <li>
+                                                                <a href="#">
+                                                                    <span aria-hidden="true" class="dlt">×</span></a>
                                                                 <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery ?>">
                                                                     <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive" alt="">
                                                                 </a>
@@ -471,7 +485,50 @@ include 'header.php';
 
                                     </div>
 
+
+                        <div class="tab-pane fade" id="wwallete" role="tabpanel" aria-labelledby="v-pills-wwallete-tab">
+                            <!-- All Bookmark -->
+                            <div class="tr-single-body">
+                                <div class="card">
+                                    <div class="tr-single-box">
+                                        <div class="tr-single-header">
+                                            <h4><i class="ti-gallery"></i>Profile Details</h4>
+                                        </div>
+                                        <div class="tr-single-body">
+                                            <div class="card">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped table-2 table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Partner Name</th>
+                                                            <th>Email ID</th>
+                                                            <th>Mobile No</th>
+                                                            <th>Profile Image</th>
+                                                            <th>Action</th>
+                                                         </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td>Sanjeev</td>
+                                                                <td>skgupta5050@gmail.com</td>
+                                                                <td>9716683297</td>
+                                                                <td><img src="" class="img50"></td>
+                                                                <td><a href="#" TITLE="Edit"><i class="fa fa-pencil"></i></a></td>
+                                                            </tr>
+                                                       </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            </div>
+
+                        </div>
+                        </div>
+
+                    </div>
                             </div>
 						</div>
 					</div>

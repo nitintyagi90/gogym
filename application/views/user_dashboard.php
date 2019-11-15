@@ -96,8 +96,9 @@ include 'header.php';
 					</div>
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="ti-user"></i>Profile</a>
-						  <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Daily Tracking Report</a>
-						 <a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Daily Tracking List</a>
+                        <a class="nav-link" id="v-pills-property-tab" data-toggle="pill" href="#property" role="tab" aria-controls="property" aria-selected="false"><i class="ti-home"></i>Profile Details</a>
+                        <a class="nav-link" id="v-pills-listings-tab" data-toggle="pill" href="#listings" role="tab" aria-controls="listings" aria-selected="false"><i class="ti-layers-alt"></i>Daily Tracking Report</a>
+						<a class="nav-link" id="v-pills-events-tab" data-toggle="pill" href="#events" role="tab" aria-controls="events" aria-selected="false"><i class="ti-medall-alt"></i>Daily Tracking List</a>
 						<a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 					</div>
 				</div>
@@ -200,21 +201,21 @@ include 'header.php';
 										</div>
 										<div class="form-group col-md-6 col-sm-12">
 											<label>Weight</label>
-											<input type="text" name="user_weight" value="<?php echo $profile_user[0]->user_weight ?>" class="form-control" placeholder="Enter Height(In Kg)" required>
+											<input type="text" maxlength="3" onkeypress="javascript:return isNumber(event)" name="user_weight" value="<?php echo $profile_user[0]->user_weight ?>" class="form-control" placeholder="Enter Height(In Kg)" required>
 										</div>
 										<div class="form-group col-md-6 col-sm-12">
 											<label>Heart Rate</label>
-											<input type="text" name="user_heart_rate" value="<?php echo $profile_user[0]->user_heart_rate ?>" class="form-control" placeholder="Enter Pulse" required>
+											<input type="text" maxlength="3" onkeypress="javascript:return isNumber(event)" name="user_heart_rate" value="<?php echo $profile_user[0]->user_heart_rate ?>" class="form-control" placeholder="Enter Pulse" required>
 										</div>
 										<div class="form-group col-md-6 col-sm-12">
 											<label>Blood Pressure(Low)</label>
-											<input type="text" name="user_bp_low" value="<?php echo $profile_user[0]->user_bp_low ?>" class="form-control" placeholder="Enter Blood Pressure(Low)" required>
+											<input type="text" maxlength="3" onkeypress="javascript:return isNumber(event)" name="user_bp_low" value="<?php echo $profile_user[0]->user_bp_low ?>" class="form-control" placeholder="Enter Blood Pressure(Low)" required>
 										</div>
 										<div class="form-group col-md-6 col-sm-12">
 											<label>Blood Pressure(High)</label>
-											<input type="text" name="user_bp_high" value="<?php echo $profile_user[0]->user_bp_high ?>" class="form-control" placeholder="Enter Blood Pressure(High)" required>
+											<input type="text" maxlength="3" onkeypress="javascript:return isNumber(event)" name="user_bp_high" value="<?php echo $profile_user[0]->user_bp_high ?>" class="form-control" placeholder="Enter Blood Pressure(High)" required>
 										</div>
-										<div class="form-group col-md-4 col-sm-12">
+										<div class="form-group col-md-6 col-sm-12">
 											<label>Smoking</label>
 											<select class="form-control" name="user_smoking" required>
 												<option>---Select Smoking---</option>
@@ -224,7 +225,7 @@ include 'header.php';
 
 											</select>
 										</div>
-										<div class="form-group col-md-4 col-sm-12">
+										<div class="form-group col-md-6 col-sm-12">
 											<label>Drinking</label>
 											<select class="form-control" name="user_drinking" required>
 												<option>---Select Drinking---</option>
@@ -234,7 +235,7 @@ include 'header.php';
 
 											</select>
 										</div>
-										<div class="form-group col-md-4 col-sm-12">
+										<div class="form-group col-md-6 col-sm-12">
 											<label>Disease ( If Any )</label>
 											<select class="form-control" name="user_disease" id="selectNEWBox" required>
 												<option>---Select Disease---</option>
@@ -254,8 +255,8 @@ include 'header.php';
 										<div class="form-group col-md-12 col-sm-12">
 											<label>Profile Image</label>
 											<div class="custom-file">
-												<input type="file" class="custom-file-input" name="user_images">
-												<label class="custom-file-label" for="cover-image">Profile Image</label>
+												<input type="file" class="form-control" name="user_images" accept="image/x-png,image/gif,image/jpeg" />
+												<!--<label class="custom-file-label" for="cover-image">Profile Image</label>-->
 											</div>
 										</div>
 									</div>
@@ -271,6 +272,47 @@ include 'header.php';
 
 						</form>
 					</div>
+                    <div class="tab-pane fade" id="property" role="tabpanel" aria-labelledby="v-pills-property-tab">
+                        <!-- All Property Info -->
+                        <div class="tr-single-body">
+                            <div class="card">
+                                <div class="tr-single-box">
+                                    <div class="tr-single-header">
+                                        <h4><i class="ti-gallery"></i>Profile Details</h4>
+                                    </div>
+                                    <div class="tr-single-body">
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-2 table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>User Name</th>
+                                                        <th>Email ID</th>
+                                                        <th>Mobile No</th>
+                                                        <th>Gender</th>
+                                                        <th>DOB</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    <tr>
+                                                        <td>Sanjeev</td>
+                                                        <td>skgupta5050@gmail.com</td>
+                                                        <td>9716683297</td>
+                                                        <td>Male</td>
+                                                        <td>16/10/1990</td>
+                                                        <td><a href="#" TITLE="Edit"><i class="fa fa-pencil"></i></a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 					<!-- Listings Content -->
 					<div class="tab-pane fade" id="listings" role="tabpanel" aria-labelledby="v-pills-listings-tab">
@@ -523,6 +565,12 @@ include 'header.php';
 
                         </div>
                     </div>
+                    <!-- Property Content -->
+
+
+                </div>
+
+
 				</div>
 			</div>
 
@@ -588,7 +636,7 @@ include 'footer.php';
             document.getElementById("prevBtn").style.display = "inline";
         }
         if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
+            //document.getElementById("nextBtn").innerHTML = "Submit";
         } else {
             document.getElementById("nextBtn").innerHTML = "Next";
         }

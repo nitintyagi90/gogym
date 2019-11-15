@@ -214,6 +214,9 @@
                     <li class="has-submenu ">
                         <a href="<?=base_url('Admin/cupconlist')?>"><i class="mdi mdi-animation"></i>Coupon List</a>
                     </li>
+                    <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/userlist')?>"><i class="mdi mdi-animation"></i>User List</a>
+                    </li>
                 </ul><!-- End navigation menu -->
 			</div> <!-- end #navigation -->
 		</div> <!-- end container -->

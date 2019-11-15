@@ -58,12 +58,21 @@
 									<!--<a href="javascript:void(0)" class="login btn theme-btn font-14 " data-toggle="modal" data-target="#signin" style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>-->
                                         <a href="<?php echo base_url('Gogym/login'); ?>" class="login btn theme-btn font-14 "  style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>
 									<?php } else{ ?>
-									<ul style="list-style-type: none">
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle login btn theme-btn font-14" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">welcome <?php echo $_SESSION['session_name']; ?><i class="fa fa-angle-down m-l-5"></i></a>
+                                            <ul class="b-none dropdown-menu font-14 animated fadeInUp">
+                                                <li><a class="dropdown-item" href="<?php echo base_url('Auth/'); ?>">My Profile</a></li>
+                                                <li><a class="dropdown-item" href="<?php echo base_url('Auth/logout'); ?>">Logout</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+									<!--<ul style="list-style-type: none">
 										<li>
-											<a href="javascript:void(0)" class="login btn theme-btn font-14 "  style="color: #fff;">welcome <?php echo $_SESSION['session_name']; ?></a>
+											<a href="javascript:void(0)" class="login btn theme-btn font-14 "  style="color: #fff;"></a>
 										</li>
-										<li style="padding-left: 10%;"><a href="<?php echo base_url('Auth/logout'); ?>" class="prof">Logout</a></li>
-									</ul>
+										<li style="padding-left: 10%;"><a href="<?php /*echo base_url('Auth/logout'); */?>" class="prof">Logout</a></li>
+									</ul>-->
 										<?php } ?>
 								</div>
 								
