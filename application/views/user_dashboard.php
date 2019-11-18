@@ -611,6 +611,7 @@ include 'footer.php';
         var cm = document.getElementById('cm');
         var fit = document.getElementById('fit');
         fit.value = cm.value/30.48;
+
     }
 </script>
 <script>

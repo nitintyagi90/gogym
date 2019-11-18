@@ -469,7 +469,7 @@ include 'header.php';
                                                     <ul class="gallery-list">
                                                         <?php foreach ($galleryList as $gallery){ ?>
                                                             <li>
-                                                                <a href="#">
+                                                                <a href="<?php echo site_url('Gogym/delete_gallerys/'.$value['id']);?>">
                                                                     <span aria-hidden="true" class="dlt">×</span></a>
                                                                 <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery ?>">
                                                                     <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive" alt="">

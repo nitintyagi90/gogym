@@ -327,7 +327,12 @@ class Gogym extends CI_Controller {
         $data['gym']=$categoryList;
         $this->load->view('filter',$data);
     }
-
+    public function delete_gallerys($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('gym_gallery');
+        redirect('');
+    }
     public function searchLocation(){
         $location = $this->input->post('location');
         $data = $this->Gympagination->searchLocation($location);
