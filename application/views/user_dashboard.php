@@ -297,11 +297,11 @@ include 'header.php';
                                                     <tbody>
 
                                                     <tr>
-                                                        <td>Sanjeev</td>
-                                                        <td>skgupta5050@gmail.com</td>
-                                                        <td>9716683297</td>
-                                                        <td>Male</td>
-                                                        <td>16/10/1990</td>
+                                                        <td><?php echo $profile_user[0]->user_name ?></td>
+                                                        <td><?php echo $profile_user[0]->user_email ?></td>
+                                                        <td><?php echo $user[0]->mobile ?></td>
+                                                        <td><?php echo $profile_user[0]->user_gender ?></td>
+                                                        <td><?php echo $profile_user[0]->user_dob ?></td>
                                                         <td><a href="#" TITLE="Edit"><i class="fa fa-pencil"></i></a></td>
                                                     </tr>
                                                     </tbody>

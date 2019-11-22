@@ -31,11 +31,14 @@ class Auth extends CI_Controller {
                 $table='user';
                 $where='id';
                 $data=$this->GogymModel->userdetails($login->id);
+                $profileData=$this->GogymModel->profiledetails($login->id);
+
                 $table='profile_user';
                 $where='id';
                 $response= array(
                     'user'=>$data,
                     'profession'=>$profession,
+                    'profile_user'=>$profileData,
                 );
                 $this->session->set_userdata($newdata);
                 $this->session->set_flashdata('Successfully','Login Successfully');

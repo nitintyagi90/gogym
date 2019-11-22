@@ -62,7 +62,7 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle login btn theme-btn font-14" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">welcome <?php echo $_SESSION['session_name']; ?><i class="fa fa-angle-down m-l-5"></i></a>
                                             <ul class="b-none dropdown-menu font-14 animated fadeInUp">
-                                                <li><a class="dropdown-item" href="<?php echo base_url('Auth/'); ?>">My Profile</a></li>
+                                                <li><a class="dropdown-item" href="<?php echo base_url('Gogym/user_dashboard"'); ?>">My Profile</a></li>
                                                 <li><a class="dropdown-item" href="<?php echo base_url('Auth/logout'); ?>">Logout</a></li>
                                             </ul>
                                         </li>
