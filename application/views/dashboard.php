@@ -19,7 +19,7 @@ include 'header.php';
         }
     </style>
 
-           <section class="gray p-0">
+           <section class="gray p-0" >
 				<div class="container-fluid" >
 					<div class="row">
 						<div class="dashboard-sidebar">
@@ -45,10 +45,10 @@ include 'header.php';
                                 <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 							</div>
 						</div>
-						<div class="tab-content dashboard-wrap" id="v-pills-tabContent">
+						<div class="tab-content dashboard-wrap" id="v-pills-tabContent" >
 							
 							<!-- Profile Content -->
-							<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+							<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" >
                                 <?php if($responce = $this->session->flashdata('Successfully')): ?>
                                     <div class="box-header">
                                         <div class="col-lg-12">
@@ -56,14 +56,14 @@ include 'header.php';
                                         </div>
                                     </div>
                                 <?php endif;?>
-								<form class="dash-profile-form" action="<?php echo base_url('Auth/profileowner');?>" method="post" enctype="multipart/form-data">
+								<form class="dash-profile-form" action="<?php echo base_url('Auth/profileowner');?>" method="post" enctype="multipart/form-data" style="background-image: url('<?php echo base_url();?>web/assets/img/gobg.png');">
 
 									<!-- Basic Info -->
 									<div class="tr-single-box">
 										<div class="tr-single-header">
 											<h4><i class="ti-share"></i> Basic Information</h4>
 										</div>
-										
+										round
 										<div class="tr-single-body">
 											<div class="row">
 											<div class="form-group col-md-6 col-sm-12">
@@ -101,7 +101,7 @@ include 'header.php';
 									<div class="row">
 										<div class="col-md-9"></div>
 										<div class="col-md-3">
-									<!-- <button type="submit" class="btn btn-primary full-width mb-4">Save Changes</button> -->
+
 									<input type="Submit" name="" class="btn btn-primary full-width mb-4" value="Save Changes">
 								</div>
 									</div>
@@ -326,7 +326,7 @@ include 'header.php';
 									</div>
 									<div class="row">
 										<div class="col-md-10">
-                                            <a class="btn btn-primary full-width mb-4" ></a>
+
                                         </div>
 										<div class="col-md-2">
                                             <input type="submit" value="Submit" class="btn btn-primary full-width mb-4">
@@ -402,8 +402,8 @@ include 'header.php';
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-9"></div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-10"></div>
+                                        <div class="col-md-2">
                                             <input type="Submit" name="" class="btn btn-primary full-width mb-4" value="Save Changes">
                                         </div>
                                     </div>
