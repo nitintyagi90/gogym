@@ -417,7 +417,6 @@ class Auth extends CI_Controller {
     public function saveGym(){
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $gymName = $this->input->post('gymName');
-            $gymPrice = $this->input->post('gymPrice');
             $totalavailability = $this->input->post('totalavailability');
             $contact_name = $this->input->post('contact_name');
             $contact_no = $this->input->post('contact_no');
@@ -452,7 +451,6 @@ class Auth extends CI_Controller {
                     'gstNumber' => $gym_gstno,
                     'gymName' => $gymName,
                     'allowGym' => $allowGym,
-                    'gymPrice' => $gymPrice,
                     'accountHolderName' => $account_name,
                     'accountType' => $account_type,
                     'accountNumber' => $account_no,
@@ -526,7 +524,6 @@ class Auth extends CI_Controller {
                     'gstNumber' => $gym_gstno,
                     'gymName' => $gymName,
                     'allowGym' => $allowGym,
-                    'gymPrice' => $gymPrice,
                     'accountHolderName' => $account_name,
                     'accountType' => $account_type,
                     'accountNumber' => $account_no,
@@ -553,6 +550,7 @@ class Auth extends CI_Controller {
                 $cnt= $query->num_rows();
                 if($cnt==0) {
                     $this->db->insert('gym', $data);
+
                     $insert_id = $this->db->insert_id();
                     foreach ($amenities as $am){
                         $dataresult = array(
