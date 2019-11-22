@@ -347,13 +347,8 @@ include 'header.php';
 										
 										<div class="tr-single-body">
 											<div class="row">
-											<div class="custom-file">
-													<input type="file" name="gallery" class="form-control" accept="image/x-png,image/gif,image/jpeg" />
-
                                                 <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
-                                                <input class="form-control" type="hidden" name="user_profile_id" value="<?php echo @$profile_user[0]->gym_id ?>">
-
-                                            </div>
+                                                <input type="file" name="gallery" class="form-control"/>
 											</div>
 										</div>
 									</div>
@@ -469,7 +464,7 @@ include 'header.php';
                                                     <ul class="gallery-list">
                                                         <?php foreach ($galleryList as $gallery){ ?>
                                                             <li>
-                                                                <a href="<?php echo site_url('Gogym/delete_gallerys/'.$value['id']);?>">
+                                                                <a href="<?php echo site_url('Gogym/delete_gallerys/'.$gallery->id);?>">
                                                                     <span aria-hidden="true" class="dlt">×</span></a>
                                                                 <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery ?>">
                                                                     <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive" alt="">
@@ -503,17 +498,15 @@ include 'header.php';
                                                             <th>Partner Name</th>
                                                             <th>Email ID</th>
                                                             <th>Mobile No</th>
-                                                            <th>Profile Image</th>
                                                             <th>Action</th>
                                                          </tr>
                                                         </thead>
                                                         <tbody>
 
                                                             <tr>
-                                                                <td>Sanjeev</td>
-                                                                <td>skgupta5050@gmail.com</td>
-                                                                <td>9716683297</td>
-                                                                <td><img src="" class="img50"></td>
+                                                                <td><?php echo $user[0]->owner_name ?></td>
+                                                                <td><?php echo $user[0]->email ?></td>
+                                                                <td><?php echo $user[0]->mobile ?></td>
                                                                 <td><a href="#" TITLE="Edit"><i class="fa fa-pencil"></i></a></td>
                                                             </tr>
                                                        </tbody>

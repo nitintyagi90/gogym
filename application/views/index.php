@@ -125,7 +125,7 @@ include 'header.php';
                                             <span class="event-grid-cat2">
 										<h5 class="clrfff"><?php echo $gymDetail->gymName; ?></h5></span>
 
-                                            <span class="event-grid-cat4"><p class="thmclr"><i class="fa fa-inr"></i> <?php echo $gymDetail->gymPrice; ?></p></span>
+                                            <span class="event-grid-cat4"><p class="thmclr"><i class="fa fa-inr"></i> <?php echo $gymDetail->dailyPrice; ?></p></span>
                                         </div>
                                     </a>
                                 </div>
