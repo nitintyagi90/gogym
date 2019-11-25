@@ -207,6 +207,14 @@ function get_userdata()
 		}
 		return $data;
 }
+/*function sms91($mob,$otp){
+    $message_content = $otp." is your OTP to verify to your Number. Please do not share this with anyone";
+    $url = "http://mysms.itpromos.com/sendurlcomma.asp?user=amit123&pwd=123456&&mobileno=".$mob."&msgtext=".urlencode($message_content)."";
+    $res = curl_init();
+    curl_setopt( $res, CURLOPT_URL, $url );
+    curl_setopt( $res, CURLOPT_RETURNTRANSFER, true );
+    $result = curl_exec( $res );
+}*/
 function sms91($mob,$otp){
 $message_content = $otp." is your OTP to verify to your Number. Please do not share this with anyone";
 $url="http://mysmsshop.in/http-api.php?username=sanj18304&password=Singh$999&senderid=BMITRA&route=1&number=".$mob."&authkey=G8ydXcyFnFZQSlyU&message=".urlencode($message_content)."";
@@ -215,5 +223,4 @@ $res = curl_init();
 	curl_setopt( $res, CURLOPT_RETURNTRANSFER, true ); 
 	$result = curl_exec( $res );
 }
-
 

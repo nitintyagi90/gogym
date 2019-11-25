@@ -40,7 +40,7 @@ include 'header.php';
                                     <th>GymPrice</th>
                                     <th>Totalavailability</th>
                                     <th>Location</th>
-                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
 

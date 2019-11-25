@@ -56,7 +56,7 @@ include 'header.php';
                                         </div>
                                     </div>
                                 <?php endif;?>
-								<form class="dash-profile-form" action="<?php echo base_url('Auth/profileowner');?>" method="post" enctype="multipart/form-data" style="background-image: url('<?php echo base_url();?>web/assets/img/gobg.png');">
+								<form class="dash-profile-form" action="<?php echo base_url('Auth/profileowner');?>" method="post" enctype="multipart/form-data" >
 
 									<!-- Basic Info -->
 									<div class="tr-single-box">
@@ -520,12 +520,12 @@ include 'header.php';
 
                         </div>
                         </div>
-
+                        <img src="<?php echo base_url();?>web/assets/img/gobg.png" style="width: 100%;">
                     </div>
                             </div>
 						</div>
 					</div>
-					
+
 				</div>
 			</section>
 <?php
