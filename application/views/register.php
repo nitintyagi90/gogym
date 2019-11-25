@@ -113,7 +113,7 @@ include 'header.php';
                                     <a href="<?php echo base_url('Auth/FacebookLogin'); ?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>
+                                    <a href="<?php echo base_url('Google/oauth2callback'); ?>" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>
                                 </div>
                             </div>
 
