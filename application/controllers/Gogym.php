@@ -283,13 +283,14 @@ class Gogym extends CI_Controller {
 		$data1=$this->GogymModel->profiledetails($user_id);
         $query = $this->db->get('profession');
         $result = $query->result();
-
+        $data2=$this->GogymModel->activitydetails();
 
 
         $response= array(
 			'user'=>$data,
 			'profile_user'=>$data1,
             'profession'=>$result,
+            'activity'=>$data2,
             'loginPop'=>true
 		);
         $this->session->set_flashdata('message_name', 'Profile has been Deactive successfully!');

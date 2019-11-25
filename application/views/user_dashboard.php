@@ -295,7 +295,6 @@ include 'header.php';
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-
                                                     <tr>
                                                         <td><?php echo $profile_user[0]->user_name ?></td>
                                                         <td><?php echo $profile_user[0]->user_email ?></td>
@@ -349,63 +348,82 @@ include 'header.php';
                                         </div>
                                         <div class="tab">Select Activity 1:
                                             <select id="activity1" oninput="this.className = ''" name="activity1">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 1---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 2:
                                             <select id="activity2" oninput="this.className = ''" name="activity2">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
-                                                <option value="Test">Test</option>
+                                                <option value="">---Select Activity 2---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 3:
                                             <select id="activity3" oninput="this.className = ''" name="activity3">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 3---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 4:
                                             <select id="activity4" oninput="this.className = ''" name="activity4">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 4---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 5:
                                             <select id="activity5" oninput="this.className = ''" name="activity5">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 5---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 6:
                                             <select id="activity6" oninput="this.className = ''" name="activity6">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 6---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 7:
                                             <select id="activity7" oninput="this.className = ''" name="activity7">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 7---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 8:
                                             <select id="activity8" oninput="this.className = ''" name="activity8">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 8---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 9:
                                             <select id="activity9" oninput="this.className = ''" name="activity9">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 9---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Select Activity 10:
                                             <select id="activity10" oninput="this.className = ''" name="activity10">
-                                                <option value="Aerobic Exercise">Aerobic Exercise</option>
-                                                <option value="Cardio Workout">Cardio Workout</option>
+                                                <option value="">---Select Activity 10---</option>
+                                                <?php foreach ($activity as $act){ ?>
+                                                    <option value="<?php echo $act->activity_name?>"><?php echo $act->activity_name; ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="tab">Out-Time:
@@ -611,7 +629,6 @@ include 'footer.php';
         var cm = document.getElementById('cm');
         var fit = document.getElementById('fit');
         fit.value = cm.value/30.48;
-
     }
 </script>
 <script>
@@ -874,8 +891,6 @@ include 'footer.php';
             $(".note").text(currentText);
         });
     });
-
-
 
 </script>
 

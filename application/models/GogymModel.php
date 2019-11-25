@@ -27,6 +27,13 @@ class GogymModel extends CI_Model
 		$result = $query->result();
 		return $result;
 	}
+    public function activitydetails(){
+        $this->db->select('*');
+        $this->db->from('activity');
+        $query = $this->db->get();
+        $result = $query->result();
+        return $result;
+    }
 	public function profileownerdetails($user_id){
 		$this->db->select('*');
 		$this->db->from('gym');

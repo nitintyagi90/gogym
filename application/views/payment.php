@@ -127,7 +127,7 @@ include 'header.php';
                                 <i class="fa fa-star-half-o"></i>
                             </div>
                         </div>
-                        <p>Please select your gender:</p>
+                        <p>Please select your Plan:</p>
                         <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Daily" checked> Daily<br>
                         <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Weekly"> Weekly<br>
                         <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Monthly"> Monthly<br>
@@ -168,7 +168,7 @@ include 'footer.php';
 $totalPrice = $price*$person;
 $cal = $totalPrice*$insurance;
 $newTotal = $cal / 100;
-$totalAmountis = $totalPrice - $newTotal;
+$totalAmountis = $totalPrice + $newTotal;
     echo "
             <script type=\"text/javascript\">
            $ ('.insurance').click(function(){
