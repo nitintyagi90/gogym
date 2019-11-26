@@ -642,6 +642,47 @@ class Gogym extends CI_Controller {
         $this->load->view('thankyou',$response);
     }
 
+    public function user_profile(){
+        $this->load->view('user_profile.php');
+    }
+    public function dailytrackreport(){
+	    $this->load->view('dailytrackreport.php');
+    }
+    public function dailytrackreportlist(){
+	    $this->load->view('dailytrackreportlist.php');
+    }
+    public function partner_profile(){
+	    $this->load->view('partner_profile.php');
+    }
+    public function addgallery(){
+        $this->load->view('addgallery.php');
+    }
+    public function listgallery(){
+        $this->load->view('listgallery.php');
+    }
+    public function bookingdetails(){
+        $this->load->view('bookingdetails.php');
+    }
+    public function gym_details(){
+        $this->load->view('gym_details.php');
+    }
+    public function plan(){
+        $this->load->view('plan.php');
+    }
+    public function plan_edit(){
+	    $this->load->view('plan_edit.php');
+    }
+    public function gym_edit(){
+        $this->load->view('gym_edit.php');
+    }
+    public function gym_add(){
+        $this->load->view('gym_add.php');
+    }
+    public function gym_view(){
+        $this->load->view('gym_view.php');
+    }
+
+
     public function search(){
         $address = $_POST['address'];
         $gymCategory = $_POST['gymCategory'];
