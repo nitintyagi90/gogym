@@ -141,6 +141,7 @@ class Gogym extends CI_Controller {
                 'user'=>$userData,
                 'insurance'=>$result[0]->insurance_value,
                 'userMobile'=>$userMobile[0]->mobile,
+                'userName'=>$userMobile[0]->owner_name,
             );
             $this->load->view('payment',$data);
         }
@@ -291,13 +292,20 @@ class Gogym extends CI_Controller {
         $result = $query->result();
         $data2=$this->GogymModel->activitydetails();
 
+        $this->db->where('user_id', $user_id); // OTHER CONDITIONS IF ANY
+        $this->db->from('booking'); //TABLE NAME
+        $bookingCount = $this->db->count_all_results();
 
+        $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
+        $result_booking = $query->result();
         $response= array(
 			'user'=>$data,
 			'profile_user'=>$data1,
             'profession'=>$result,
             'activity'=>$data2,
-            'loginPop'=>true
+            'loginPop'=>true,
+            'booking'=>$result_booking,
+            'bookingCount'=>$bookingCount
 		);
         $this->session->set_flashdata('message_name', 'Profile has been Deactive successfully!');
         $this->load->view('user_dashboard.php',$response);
@@ -642,14 +650,36 @@ class Gogym extends CI_Controller {
         $this->load->view('thankyou',$response);
     }
 
-    public function user_profile(){
-        $this->load->view('user_profile.php');
+    public function user_profile($id){
+        $table='user';
+        $where='id';
+        $data=$this->GogymModel->userdetails($id);
+        $table='profile_user';
+        $where='id';
+        $data1=$this->GogymModel->profiledetails($id);
+        $res = array(
+            'user'=>$data,
+            'profile_user'=>$data1,
+        );
+        $this->load->view('user_profile.php',$res);
     }
     public function dailytrackreport(){
-	    $this->load->view('dailytrackreport.php');
+        $data2=$this->GogymModel->activitydetails();
+        $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $data =array(
+            'booking'=>$result,
+            'activity'=>$data2
+        );
+        $this->load->view('dailytrackreport.php',$data);
     }
     public function dailytrackreportlist(){
-	    $this->load->view('dailytrackreportlist.php');
+        $query = $this->db->get_where('trackReport',array('user_id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $data =array(
+            'report'=>$result
+        );
+	    $this->load->view('dailytrackreportlist.php',$data);
     }
     public function partner_profile(){
 	    $this->load->view('partner_profile.php');
@@ -686,6 +716,33 @@ class Gogym extends CI_Controller {
     public function search(){
         $address = $_POST['address'];
         $gymCategory = $_POST['gymCategory'];
+    }
+    public function trackReport(){
+        $data = array(
+            'weight'=>$_POST['weight'],
+            'user_id'=>$_SESSION['session_id'],
+            'checkinDate'=>$_POST['checkinDate'],
+            'checkIntime'=>$_POST['checkIntime'],
+            'pressurehigh'=>$_POST['pressurehigh'],
+            'pressurelow'=>$_POST['pressurelow'],
+            'heartrate'=>$_POST['heartrate'],
+            'activity1'=>$_POST['activity1'],
+            'activity2'=>$_POST['activity2'],
+            'activity3'=>$_POST['activity3'],
+            'activity4'=>$_POST['activity4'],
+            'activity5'=>$_POST['activity5'],
+            'activity6'=>$_POST['activity6'],
+            'activity7'=>$_POST['activity7'],
+            'activity8'=>$_POST['activity8'],
+            'activity9'=>$_POST['activity9'],
+            'activity10'=>$_POST['activity10'],
+            'remark'=>$_POST['remark'],
+            'outtime'=>$_POST['outtime'],
+
+    );
+        $this->db->insert('trackReport', $data);
+        $this->session->set_flashdata('Successfully','Report save successfully');
+        redirect('Gogym/user_dashboard');
     }
 
 }

@@ -36,7 +36,7 @@ include 'header.php';
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input value="<?php echo $user[0]->user_name; ?>" name="name" class="form-control" type="text">
+                                        <input value="<?php echo $userName; ?>" name="name" class="form-control" type="text">
                                         <input value="<?php echo $checkIn; ?>" name="checkIn" class="form-control" type="hidden">
                                         <input value="<?php echo $checkOut; ?>" name="checkout" class="form-control" type="hidden">
                                         <input value="<?php echo $person; ?>" name="person" class="form-control" type="hidden">

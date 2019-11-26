@@ -148,25 +148,28 @@ include 'header.php';
                                             </thead>
 
                                             <tbody>
-                                            <tr>
-                                                <td>06/11/2019</td>
-                                                <td>07:00</td>
-                                                <td>100</td>
-                                                <td>120/80</td>
-                                                <td>90</td>
-                                                <td>Activity 1</td>
-                                                <td>Activity 2</td>
-                                                <td>Activity 3</td>
-                                                <td>Activity 4</td>
-                                                <td>Activity 5</td>
-                                                <td>Activity 6</td>
-                                                <td>Activity 7</td>
-                                                <td>Activity 8</td>
-                                                <td>Activity 9</td>
-                                                <td>Activity 10</td>
-                                                <td>11:00</td>
-                                                <td>Test</td>
-                                            </tr>
+                                            <?php foreach ($report as $res){ ?>
+                                                <tr>
+                                                    <td><?php echo $res->checkinDate ?></td>
+                                                    <td><?php echo $res->checkIntime ?></td>
+                                                    <td><?php echo $res->weight ?></td>
+                                                    <td><?php echo $res->pressurehigh ?></td>
+                                                    <td><?php echo $res->heartrate ?></td>
+                                                    <td><?php echo $res->activity1 ?></td>
+                                                    <td><?php echo $res->activity2 ?></td>
+                                                    <td><?php echo $res->activity3 ?></td>
+                                                    <td><?php echo $res->activity4 ?></td>
+                                                    <td><?php echo $res->activity5 ?></td>
+                                                    <td><?php echo $res->activity6 ?></td>
+                                                    <td><?php echo $res->activity7 ?></td>
+                                                    <td><?php echo $res->activity8 ?></td>
+                                                    <td><?php echo $res->activity9 ?></td>
+                                                    <td><?php echo $res->activity10 ?></td>
+                                                    <td><?php echo $res->outtime ?></td>
+                                                    <td><?php echo $res->remark ?></td>
+
+                                                </tr>
+                                            <?php  }?>
 
 
 
