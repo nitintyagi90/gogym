@@ -70,7 +70,7 @@ include 'header.php';
                                             <tr>
                                                 <td>Golden Gym</td>
                                                 <td>
-                                                    <a href="<?php echo base_url('Gogym/gym_add'); ?>" TITLE="Add"><i class="fa fa-add"></i></a>
+                                                    <a href="<?php echo base_url('Gogym/gym_add'); ?>" TITLE="Add"><i class="fa fa-plus"></i></a>
                                                     <a href="<?php echo base_url('Gogym/gym_edit'); ?>" TITLE="Edit"><i class="fa fa-pencil"></i></a>
                                                     <a href="<?php echo base_url('Gogym/gym_view'); ?>" TITLE="View"><i class="fa fa-eye"></i></a>
                                                 </td>
