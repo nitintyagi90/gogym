@@ -244,19 +244,20 @@ include 'header.php';
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             <label>CheckIn</label>
-                                            <div class="input-group clockpicker"  data-autoclose="true">
-                                                <input type="text" name="checkIn" class="form-control" value="09:30">
+                                            <div class="input-group clockpicker startTime"  data-autoclose="true">
+                                                <input type="text" name="checkIn" class="form-control checkIn" value="09:30">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <label>Check Out</label>
-                                        <div class="input-group clockpicker" data-autoclose="true">
-                                            <input type="text" class="form-control" name="checkOut" value="09:30">
+
+                                        <div class="input-group">
+                                            <input type="text" readonly class="form-control" name="checkOut" value="09:30">
                                             <input type="hidden" name="gymId" value="<?php echo $gym[0]->gym_id; ?>">
-                                            <input type="hidden" name="gymPrice" value="<?php echo $gym[0]->gymPrice; ?>">
+                                            <input type="hidden" name="gymPrice" value="<?php echo $gymprice[0]->dailyPrice; ?>">
                                             <input type="hidden" name="gymImage" value="<?php echo $gym[0]->gymImage; ?>">
                                             <input type="hidden" name="gym_address" value="<?php echo $gym[0]->gym_address; ?>">
                                             <input type="hidden" name="gymName" value="<?php echo $gym[0]->gymName; ?>">
@@ -466,4 +467,16 @@ include 'footer.php';
     if (/mobile/i.test(navigator.userAgent)) {
         $('input').prop('readOnly', true);
     }
+
+
+    $('.startTime').clockpicker().find('input').change(function(){
+        var time = this.value;
+        var checkOut = time+4;
+        alert(checkOut);
+    });
+
+
+
+
+
 </script>

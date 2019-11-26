@@ -66,6 +66,15 @@ include 'header.php';
                                             <input type="text" id="mobileUser" onkeypress="javascript:return isNumber(event)" maxlength="10" name="userMobile" class="form-control" placeholder="Mobile" required>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" id="mobileUser"  maxlength="10" name="userName" class="form-control" placeholder="Name" required>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Password</label>
@@ -113,7 +122,7 @@ include 'header.php';
                                     <a href="<?php echo base_url('Auth/FacebookLogin'); ?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="#" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>
+                                    <a href="<?php echo base_url('Google/oauth2callback'); ?>" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>
                                 </div>
                             </div>
 
