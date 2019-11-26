@@ -483,7 +483,7 @@ class Gogym extends CI_Controller {
                 $this->db->where('user_id', $user_id);
                 $this->db->update('gymPrice', $data);
                 $this->session->set_flashdata('Successfully','Price update successfully');
-                redirect('Gogym/dashboard');
+                redirect('Gogym/plan_add');
             }
 
 
@@ -776,7 +776,25 @@ class Gogym extends CI_Controller {
         $this->load->view('gym_edit.php',$data);
     }
     public function gym_add(){
-        $this->load->view('gym_add.php');
+
+        $query = $this->db->get('amenities');
+        $result = $query->result();
+
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
+        $query2 = $this->db->get();
+        $result2 = $query2->result();
+
+        $categoryList = $this->db->get('category');
+        $category = $categoryList->result();
+        $data = array(
+            'amenities'=>$result,
+            'gym'=>$result2,
+            'category'=>$category,
+        );
+
+        $this->load->view('gym_add.php',$data);
     }
     public function gym_view($id){
         $query = $this->db->get_where('gym',array('gym_id' => $id));
