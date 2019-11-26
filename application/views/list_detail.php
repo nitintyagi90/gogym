@@ -255,7 +255,7 @@ include 'header.php';
                                         <label>Check Out</label>
 
                                         <div class="input-group">
-                                            <input type="text" readonly class="form-control" name="checkOut" value="09:30">
+                                            <input type="text" readonly class="form-control checkouttime" name="checkOut" value="13:30">
                                             <input type="hidden" name="gymId" value="<?php echo $gym[0]->gym_id; ?>">
                                             <input type="hidden" name="gymPrice" value="<?php echo $gymprice[0]->dailyPrice; ?>">
                                             <input type="hidden" name="gymImage" value="<?php echo $gym[0]->gymImage; ?>">
@@ -414,7 +414,6 @@ include 'footer.php';
 <script type="text/javascript">
     $('.clockpicker').clockpicker()
         .find('input').change(function(){
-        console.log(this.value);
     });
     var input = $('#single-input').clockpicker({
         placement: 'bottom',
@@ -471,8 +470,12 @@ include 'footer.php';
 
     $('.startTime').clockpicker().find('input').change(function(){
         var time = this.value;
-        var checkOut = time+4;
-        alert(checkOut);
+        var date = time.split(':')[0];
+        var minute = time.split(':')[1];
+        var value = 4;
+        var add=value += +date;
+        var newData = add + ':' + minute;
+        $('.checkouttime').val(newData);
     });
 
 
