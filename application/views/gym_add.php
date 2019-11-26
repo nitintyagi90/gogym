@@ -38,7 +38,7 @@ include 'header.php';
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Gym Name</label>
                                         <input class="form-control" value="<?php echo @$profile_user[0]->gymName ?>" name="gymName" type="text" value="">
-                                        <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
+
                                         <input class="form-control" type="hidden" name="user_profile_id" value="<?php echo @$profile_user[0]->profile_id ?>">
 
 

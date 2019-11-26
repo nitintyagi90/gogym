@@ -87,9 +87,9 @@ include 'header.php';
 						</div>
 						<div class="ds-avatar-caption">
 
-                            <?php if(empty($profile_user[0]->user_name)){ ?>
+                            <?php if(empty($user[0]->owner_name)){ ?>
                             <?php }else{ ?>
-                                <h4 class="ds-author-name"><?php echo $profile_user[0]->user_name; ?></h4>
+                                <h4 class="ds-author-name"><?php echo $user[0]->owner_name; ?></h4>
                             <?php } ?>
 
 						</div>
@@ -97,8 +97,13 @@ include 'header.php';
 					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 						<!--<a class="nav-link " id="v-pills-profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><i class="ti-user"></i>Profile</a>-->
                         <a class="nav-link "  href="<?php echo base_url('Gogym/user_dashboard'); ?>" ><i class="ti-home"></i>Profile Details</a>
+
+                        <?php if($bookingCount==1){ ?>
                         <a class="nav-link"  href="<?php echo base_url('Gogym/dailytrackreport'); ?>" ><i class="ti-layers-alt"></i>Daily Tracking Report</a>
 						<a class="nav-link"  href="<?php echo base_url('Gogym/dailytrackreportlist'); ?>"><i class="ti-medall-alt"></i>Daily Tracking List</a>
+                        <?php } ?>
+
+
 						<a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 					</div>
 				</div>
@@ -132,12 +137,12 @@ include 'header.php';
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        <td><?php echo $profile_user[0]->user_name ?></td>
+                                                        <td><?php echo $user[0]->owner_name ?></td>
                                                         <td><?php echo $profile_user[0]->user_email ?></td>
                                                         <td><?php echo $user[0]->mobile ?></td>
                                                         <td><?php echo $profile_user[0]->user_gender ?></td>
                                                         <td><?php echo $profile_user[0]->user_dob ?></td>
-                                                        <td><a href="<?php echo base_url('Gogym/user_profile'); ?>" TITLE="Edit"><i class="fa fa-pencil"></i></a></td>
+                                                        <td><a href="<?php echo base_url('Gogym/user_profile/'.$user[0]->id); ?>" TITLE="Edit"><i class="fa fa-pencil"></i></a></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>

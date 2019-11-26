@@ -36,7 +36,7 @@ include 'header.php';
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input value="<?php echo $user[0]->user_name; ?>" name="name" class="form-control" type="text">
+                                        <input value="<?php echo $userName; ?>" name="name" class="form-control" type="text">
                                         <input value="<?php echo $checkIn; ?>" name="checkIn" class="form-control" type="hidden">
                                         <input value="<?php echo $checkOut; ?>" name="checkout" class="form-control" type="hidden">
                                         <input value="<?php echo $person; ?>" name="person" class="form-control" type="hidden">
@@ -116,14 +116,16 @@ include 'header.php';
                             </div>
                         </div>
 
+
                         <div class="booking-summary">
                            <!-- <h4 class="booking-item-title" name="gymname"><?php /*echo $gymName */?></h4>
                             <p class="booking-item-location" name="address"><?php /*echo $address */?></p>-->
                             <p>Please select your Plan:</p>
-                            <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->dailyPrice ?>" checked> Daily<br>
-                            <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->weeklyPrice ?>"> Weekly<br>
-                            <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->monthlyPrice ?>"> Monthly<br>
-                            <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->yearlyPrice ?>"> Yearly<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->dailyPrice ?>" name="plantype" value="Daily" checked> Daily<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->weeklyPrice ?>" name="plantype" value="Weekly"> Weekly<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->monthlyPrice ?>" name="plantype" value="Monthly"> Monthly<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->yearlyPrice ?>"  name="plantype" value="Yearly"> Yearly<br>
+
                         </div>
                     </div>
                     <div class="summary-boxed-widget">
@@ -165,7 +167,7 @@ include 'footer.php';
     var final = totalprice + newTotal;
     $(function(){
         $('input[type="radio"]').click(function(){
-            value = $(this).val();
+            value = $(this).attr("id");
             if ($(this).is(':checked'))
             {
                 $(".calTotal").text('₹' + value * person);

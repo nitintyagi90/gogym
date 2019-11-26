@@ -35,10 +35,18 @@ class Auth extends CI_Controller {
 
                 $table='profile_user';
                 $where='id';
+
+                $this->db->where('user_id', $login->id); // OTHER CONDITIONS IF ANY
+                $this->db->from('booking'); //TABLE NAME
+                $bookingCount = $this->db->count_all_results();
+                $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
+                $result_booking = $query->result();
                 $response= array(
                     'user'=>$data,
                     'profession'=>$profession,
                     'profile_user'=>$profileData,
+                    'bookingCount'=>$bookingCount,
+                    'booking'=>$result_booking,
                 );
                 $this->session->set_userdata($newdata);
                 $this->session->set_flashdata('Successfully','Login Successfully');
@@ -269,13 +277,13 @@ class Auth extends CI_Controller {
 			$disease_details=$this->input->post('disease_details');
 			$user_address= $this->input->post('user_address');
 			$user_mobile= $this->input->post('user_mobile');
-			$user_password= $this->input->post('user_password');
+			$password= $this->input->post('user_password');
+            $user_password=md5($password);
 			$user_id= $_SESSION['session_id'];
 			$path1=  base_url().'images/';
             $upload_image1=$_FILES["user_images"]["name"];
 			if(empty($upload_image1)){
                 $data = array(
-                    'user_name' => $user_name,
                     'user_gender' => $user_gender,
                     'user_email' => $user_email,
                     'user_dob' => $user_dob,
@@ -299,6 +307,7 @@ class Auth extends CI_Controller {
                  $userdata = array(
                     'mobile' => $user_mobile,
                     'password' => $user_password,
+                     'owner_name' => $user_name,
 
                 );
                 $this->db->select('user_id');
@@ -332,7 +341,6 @@ class Auth extends CI_Controller {
                 }
 
                 $data = array(
-                    'user_name' => $user_name,
                     'user_gender' => $user_gender,
                     'user_email' => $user_email,
                     'user_dob' => $user_dob,
@@ -357,6 +365,7 @@ class Auth extends CI_Controller {
                 $userdata = array(
                     'mobile' => $user_mobile,
                     'password' => $user_password,
+                    'owner_name' => $user_name,
 
                 );
 
@@ -382,12 +391,7 @@ class Auth extends CI_Controller {
     public function FacebookLogin(){
 
         $this->load->library('facebook'); // Automatically picks appId and secret from config
-        // OR
-        // You can pass different one like this
-        //$this->load->library('facebook', array(
-        //    'appId' => 'APP_ID',
-        //    'secret' => 'SECRET',
-        //    ));
+
 
         $user = $this->facebook->getUser();
 
@@ -437,7 +441,7 @@ class Auth extends CI_Controller {
             $allowGym = $this->input->post('allowGym');
             $categoryName = $this->input->post('categoryName');
             $gymaddress = $this->input->post('gymaddress');
-            $user_id = $this->input->post('id');
+            $user_id = $_SESSION['session_id'];
             $omorning = $this->input->post('omorning');
             $cmorning = $this->input->post('cmorning');
             $oafternoon = $this->input->post('oafternoon');

@@ -9,13 +9,13 @@ include 'header.php';
 
             <div class="col-md-12">
                 <div >
-                    <?php if($responce = $this->session->flashdata('Successfully')): ?>
+                  <!--  <?php /*if($responce = $this->session->flashdata('Successfully')): */?>
                         <div class="box-header">
                             <div class="col-lg-12">
-                                <div class="alert alert-success text-center"><?php echo $responce;?></div>
+                                <div class="alert alert-success text-center"><?php /*echo $responce;*/?></div>
                             </div>
                         </div>
-                    <?php endif;?>
+                    --><?php /*endif;*/?>
                     <form class="dash-profile-form" action="<?php echo base_url('Auth/profileuser');?>" method="post" enctype="multipart/form-data" novalidate>
 
                         <!-- Basic Info -->
@@ -29,7 +29,7 @@ include 'header.php';
                                 <div class="row">
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>User Name</label>
-                                        <input class="form-control" type="text" name="user_name" value="<?php echo $profile_user[0]->user_name ?>">
+                                        <input class="form-control" type="text" name="user_name" value="<?php echo $user[0]->owner_name ?>">
                                         <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">
@@ -155,7 +155,7 @@ include 'header.php';
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label>Profile Image</label>
                                         <div class="custom-file">
-                                            <input type="file" class="form-control" name="user_images" accept="image/x-png,image/gif,image/jpeg" />
+                                            <input type="file" class="form-control" name="user_images"/>
                                             <!--<label class="custom-file-label" for="cover-image">Profile Image</label>-->
                                         </div>
                                     </div>

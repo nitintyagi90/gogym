@@ -64,6 +64,7 @@ include 'header.php';
                                         <tr>
                                             <th>Booking ID</th>
                                             <th>User Name</th>
+                                            <th>Plan Type</th>
                                             <!--<th>User Email ID</th>
                                             <th>User Mobile No</th>-->
 
@@ -72,14 +73,15 @@ include 'header.php';
                                         <tbody>
                                         <?php
                                         $i =0;
-                                        foreach ($booking as $book){
+                                        foreach ($bookingDetail as $book){
                                             $i++;
                                             ?>
                                             <tr>
-                                                <td>100<?php echo $i; ?></td>
+
+                                                <td><?php echo $book->order_id; ?></td>
                                                 <td><?php echo $book->name; ?></td>
-                                                <!--<td><?php /*echo $book->email; */?></td>
-                                                            <td><?php /*echo $book->mobile; */?></td>-->
+                                                <td><?php echo $book->plan_type; ?></td>
+
 
                                             </tr>
                                         <?php } ?>

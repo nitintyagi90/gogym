@@ -68,6 +68,7 @@ include 'header.php';
         background-color: #4CAF50;
     }
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <section class="gray p-0">
     <div class="container-fluid" >
 
@@ -106,27 +107,28 @@ include 'header.php';
                 <!-- Listings Content -->
                 <div >
                     <!-- All Listing -->
-                    <form class="dash-profile-form">
+                    <form class="dash-profile-form" method="POST" action="<?php echo base_url('Gogym/trackReport');?>">
                         <!-- Basic Info -->
                         <div class="tr-single-box">
                             <div class="tr-single-header">
                                 <h4><i class="ti-share"></i> Daily Tracking Report</h4>
                             </div>
 
+
                             <div class="tr-single-body">
-                                <form id="regForm" action="#">
+                                <form id="regForm">
                                     <div class="tab">Date:
-                                        <input  type="date"  placeholder="Select Date..." oninput="this.className = ''" name="fname">
+                                        <input  type="text" readonly value="<?php echo $booking[0]->cur_date; ?>" placeholder="Select Date..." name="checkinDate">
                                         <!--<input type="text" id="myTextarea">-->
 
                                     </div>
                                     <div class="tab">In-Time:
                                         <div class="input-group clockpicker" data-autoclose="true">
-                                            <input type="text"  oninput="this.className = ''" value="09:30" name="intime">
+                                            <input type="text" readonly value="<?php echo $booking[0]->checkin; ?>" name="checkIntime">
                                         </div>
                                     </div>
                                     <div class="tab">Weight:
-                                        <input id="weight" maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Weight" oninput="this.className = ''" name="weight">
+                                        <input id="weight" maxlength="3"  onkeypress="javascript:return isNumber(event)" placeholder="Enter Weight" oninput="this.className = ''" name="weight">
                                     </div>
                                     <div class="tab">Blood pressure:
                                         <input id="bphigh" maxlength="3" onkeypress="javascript:return isNumber(event)" placeholder="Enter Blood Presure High..." oninput="this.className = ''" name="pressurehigh">
@@ -218,11 +220,11 @@ include 'header.php';
                                     </div>
                                     <div class="tab">Out-Time:
                                         <div class="input-group clockpicker" data-autoclose="true">
-                                            <input type="text"  oninput="this.className = ''" value="09:30" name="outtime">
+                                            <input type="text" readonly value="<?php echo $booking[0]->checkout; ?>"  name="outtime">
                                         </div>
                                     </div>
                                     <div class="tab">
-                                        <textarea id="note" oninput="this.className = ''" rows="2" placeholder="Enter Note / Remark...." style="width: 50%;"></textarea>
+                                        <textarea id="note" name="remark" oninput="this.className = ''" rows="2" placeholder="Enter Note / Remark...." style="width: 50%;"></textarea>
                                     </div>
                                     <div style="overflow:auto;">
                                         <div style="float:right;">

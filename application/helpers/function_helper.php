@@ -224,3 +224,12 @@ $res = curl_init();
 	$result = curl_exec( $res );
 }
 
+function ownerSms($mob,$otp,$ownername,$order_id){
+    $message_content = $otp." is your OTP to verify to your Number. Please do not share this with anyone" ."username:.$ownername"."orderId:.$order_id";
+    $url="http://mysmsshop.in/http-api.php?username=sanj18304&password=Singh$999&senderid=BMITRA&route=1&number=".$mob."&authkey=G8ydXcyFnFZQSlyU&message=".urlencode($message_content)."";
+    $res = curl_init();
+    curl_setopt( $res, CURLOPT_URL, $url );
+    curl_setopt( $res, CURLOPT_RETURNTRANSFER, true );
+    $result = curl_exec( $res );
+}
+

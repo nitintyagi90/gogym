@@ -141,6 +141,7 @@ class Gogym extends CI_Controller {
                 'user'=>$userData,
                 'insurance'=>$result[0]->insurance_value,
                 'userMobile'=>$userMobile[0]->mobile,
+                'userName'=>$userMobile[0]->owner_name,
             );
             $this->load->view('payment',$data);
         }
@@ -291,13 +292,20 @@ class Gogym extends CI_Controller {
         $result = $query->result();
         $data2=$this->GogymModel->activitydetails();
 
+        $this->db->where('user_id', $user_id); // OTHER CONDITIONS IF ANY
+        $this->db->from('booking'); //TABLE NAME
+        $bookingCount = $this->db->count_all_results();
 
+        $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
+        $result_booking = $query->result();
         $response= array(
 			'user'=>$data,
 			'profile_user'=>$data1,
             'profession'=>$result,
             'activity'=>$data2,
-            'loginPop'=>true
+            'loginPop'=>true,
+            'booking'=>$result_booking,
+            'bookingCount'=>$bookingCount
 		);
         $this->session->set_flashdata('message_name', 'Profile has been Deactive successfully!');
         $this->load->view('user_dashboard.php',$response);
@@ -450,8 +458,7 @@ class Gogym extends CI_Controller {
         $weeklyprice = $this->input->post('weeklyprice');
         $monthlyprice = $this->input->post('monthlyprice');
         $yearlyprice = $this->input->post('yearlyprice');
-        $gym_id = $this->input->post('user_profile_id');
-        $user_id = $this->input->post('id');
+        $user_id = $_SESSION['session_id'];
         if(empty($dailyprice)&& empty($weeklyprice)&& empty($monthlyprice) && empty($yearlyprice)){
             $this->session->set_flashdata('Successfully','All fields are required!');
             redirect('Gogym/dashboard');
@@ -461,11 +468,10 @@ class Gogym extends CI_Controller {
                 'weeklyPrice'=>$weeklyprice,
                 'monthlyPrice'=>$monthlyprice,
                 'yearlyPrice'=>$yearlyprice,
-                'gym_id'=>$gym_id,
                 'user_id'=>$user_id,
             );
             $this->db->select('*');
-            $this->db->where('gym_id', $gym_id);
+            $this->db->where('user_id', $user_id);
             $query = $this->db->get('gymPrice');
             $cnt= $query->num_rows();
             if($cnt===0){
@@ -474,10 +480,10 @@ class Gogym extends CI_Controller {
                 $this->session->set_flashdata('Successfully','Price save successfully');
                 redirect('Gogym/dashboard');
             }else{
-                $this->db->where('gym_id', $gym_id);
+                $this->db->where('user_id', $user_id);
                 $this->db->update('gymPrice', $data);
                 $this->session->set_flashdata('Successfully','Price update successfully');
-                redirect('Gogym/dashboard');
+                redirect('Gogym/plan_add');
             }
 
 
@@ -600,7 +606,11 @@ class Gogym extends CI_Controller {
         $mobile = $_POST['mobile'];
         $gymUserID = $_POST['gymUserID'];
         $user_id = $_SESSION['session_id'];
+        $plan_type = $_POST['plantype'];
         $bookingDate = $date = date('d-m-Y');
+
+
+
 
         $order_id = 'ORD'.$otp=rand(1000,9999);
 
@@ -615,8 +625,13 @@ class Gogym extends CI_Controller {
         $gymMobile = $result2[0]->mobile;
 
         $verification=rand(1000,9999);
+        $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
 
-        sms91($gymMobile,$verification);
+        $result = $query->result();
+
+        $ownername = $result[0]->owner_name;
+
+        ownerSms($gymMobile,$verification,$ownername,$order_id);
 
         sms91($mobile,$verification);
         $data = array(
@@ -632,6 +647,7 @@ class Gogym extends CI_Controller {
             'cur_date'=>$bookingDate,
             'gym_id'=>$gymId,
             'verificationCode'=>$otp,
+            'plan_type'=>$plan_type,
         );
         $this->db->insert('booking', $data);
         $response = array(
@@ -642,50 +658,184 @@ class Gogym extends CI_Controller {
         $this->load->view('thankyou',$response);
     }
 
-    public function user_profile(){
-        $this->load->view('user_profile.php');
+    public function user_profile($id){
+        $table='user';
+        $where='id';
+        $data=$this->GogymModel->userdetails($id);
+        $table='profile_user';
+        $where='id';
+        $data1=$this->GogymModel->profiledetails($id);
+        $res = array(
+            'user'=>$data,
+            'profile_user'=>$data1,
+        );
+        $this->load->view('user_profile.php',$res);
     }
     public function dailytrackreport(){
-	    $this->load->view('dailytrackreport.php');
+        $data2=$this->GogymModel->activitydetails();
+        $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $data =array(
+            'booking'=>$result,
+            'activity'=>$data2
+        );
+        $this->load->view('dailytrackreport.php',$data);
     }
     public function dailytrackreportlist(){
-	    $this->load->view('dailytrackreportlist.php');
+        $query = $this->db->get_where('trackReport',array('user_id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $data =array(
+            'report'=>$result
+        );
+	    $this->load->view('dailytrackreportlist.php',$data);
     }
     public function partner_profile(){
-	    $this->load->view('partner_profile.php');
+        $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $data =array(
+            'user'=>$result
+        );
+        $this->load->view('partner_profile.php',$data);
     }
     public function addgallery(){
-        $this->load->view('addgallery.php');
+        $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $data =array(
+            'user'=>$result
+        );
+        $this->load->view('addgallery.php',$data);
     }
     public function listgallery(){
-        $this->load->view('listgallery.php');
+        $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $query1 = $this->db->get_where('gym_gallery',array('user_id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $result1 = $query1->result();
+        $data =array(
+            'user'=>$result,
+            'galleryList'=>$result1,
+        );
+        $this->load->view('listgallery.php',$data);
     }
     public function bookingdetails(){
-        $this->load->view('bookingdetails.php');
+        $query = $this->db->get_where('booking',array('gymUserID' => $_SESSION['session_id']));
+        $result = $query->result();
+
+
+        $query1 = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $result1 = $query1->result();
+
+
+
+        $data =array(
+            'bookingDetail'=>$result,
+            'user'=>$result1
+        );
+        $this->load->view('bookingdetails.php',$data);
     }
     public function gym_details(){
-        $this->load->view('gym_details.php');
+        $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $query1 = $this->db->get_where('gym',array('user_id' => $_SESSION['session_id']));
+
+        $result = $query->result();
+        $result1 = $query1->result();
+        $data =array(
+            'user'=>$result,
+            'gym'=>$result1,
+        );
+        $this->load->view('gym_details.php',$data);
     }
     public function plan(){
-        $this->load->view('plan.php');
+        $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $query1 = $this->db->get_where('gymPrice',array('user_id' => $_SESSION['session_id']));
+        $result = $query->result();
+        $result1 = $query1->result();
+        $data =array(
+            'user'=>$result,
+            'plan'=>$result1,
+        );
+        $this->load->view('plan.php',$data);
+    }
+    public function plan_add(){
+        $this->load->view('plan_add.php');
     }
     public function plan_edit(){
-	    $this->load->view('plan_edit.php');
+        $query1 = $this->db->get_where('gymPrice',array('user_id' => $_SESSION['session_id']));
+        $result1 = $query1->result();
+        $data =array(
+            'gymPrice'=>$result1,
+        );
+	    $this->load->view('plan_edit.php',$data);
     }
-    public function gym_edit(){
-        $this->load->view('gym_edit.php');
+    public function gym_edit($id){
+
+        $query = $this->db->get_where('gym',array('gym_id' => $id));
+        $result = $query->result();
+        $data =array(
+            'profile_user'=>$result
+        );
+        $this->load->view('gym_edit.php',$data);
     }
     public function gym_add(){
-        $this->load->view('gym_add.php');
+
+        $query = $this->db->get('amenities');
+        $result = $query->result();
+
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
+        $query2 = $this->db->get();
+        $result2 = $query2->result();
+
+        $categoryList = $this->db->get('category');
+        $category = $categoryList->result();
+        $data = array(
+            'amenities'=>$result,
+            'gym'=>$result2,
+            'category'=>$category,
+        );
+
+        $this->load->view('gym_add.php',$data);
     }
-    public function gym_view(){
-        $this->load->view('gym_view.php');
+    public function gym_view($id){
+        $query = $this->db->get_where('gym',array('gym_id' => $id));
+        $result = $query->result();
+        $data =array(
+            'profile_user'=>$result
+        );
+        $this->load->view('gym_view.php',$data);
     }
 
 
     public function search(){
         $address = $_POST['address'];
         $gymCategory = $_POST['gymCategory'];
+    }
+    public function trackReport(){
+        $data = array(
+            'weight'=>$_POST['weight'],
+            'user_id'=>$_SESSION['session_id'],
+            'checkinDate'=>$_POST['checkinDate'],
+            'checkIntime'=>$_POST['checkIntime'],
+            'pressurehigh'=>$_POST['pressurehigh'],
+            'pressurelow'=>$_POST['pressurelow'],
+            'heartrate'=>$_POST['heartrate'],
+            'activity1'=>$_POST['activity1'],
+            'activity2'=>$_POST['activity2'],
+            'activity3'=>$_POST['activity3'],
+            'activity4'=>$_POST['activity4'],
+            'activity5'=>$_POST['activity5'],
+            'activity6'=>$_POST['activity6'],
+            'activity7'=>$_POST['activity7'],
+            'activity8'=>$_POST['activity8'],
+            'activity9'=>$_POST['activity9'],
+            'activity10'=>$_POST['activity10'],
+            'remark'=>$_POST['remark'],
+            'outtime'=>$_POST['outtime'],
+
+    );
+        $this->db->insert('trackReport', $data);
+        $this->session->set_flashdata('Successfully','Report save successfully');
+        redirect('Gogym/user_dashboard');
     }
 
 }
