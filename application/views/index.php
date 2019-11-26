@@ -15,32 +15,22 @@ include 'header.php';
 							</div>
 						</div>
 
-						<form>
+						<form action="<?php echo base_url('Gogym/search'); ?>" method="post" enctype="multipart/form-data">
 							<fieldset class="home-form-1">
 								<div class="row no-gutters justify-content-center seo-contact">
 
 									<div class="col-lg-4 col-md-5">
 										<div class="form-group">
 											<i class="fa fa-map-marker"></i>
-											<!--<input type="text" id="search_text" class="form-control b-r" placeholder="Location...">-->
-                                           <!-- <select id="location" class="js-states form-control">
-                                                <option value="">Choose location</option>
-                                                <option value="Delhi">Delhi</option>
-                                            </select>-->
-                                            <select id="area" class="js-states form-control">
-                                                <option value="">Choose Location</option>
-                                                <option value="Delhi">Delhi</option>
-                                                <option value="Faridabad">Faridabad</option>
-                                                <option value="Ghaziabad">Ghaziabad</option>
-                                                <option value="Gurugram">Gurugram</option>
-                                                 <option value="Noida">Noida</option>
-                                            </select>
+                                            <input required name="address" class="form-control" id="searchTextField"
+                                                   placeholder="Enter your address"
+                                                   type="text" autocomplete="on" />
 										</div>
 									</div>
 
 									<div class="col-lg-3 col-md-4">
 										<div class="form-group">
-											<select id="category" class="js-states form-control">
+											<select id="category" class="js-states form-control" name="gymCategory">
 												<option value="">Choose Fitness Option</option>
                                                 <?php foreach ($category as $cat){ ?>
 												<option value="<?php echo $cat->id ?>"><?php echo $cat->categoryName ?></option>
@@ -324,4 +314,15 @@ include 'footer.php';
         });
     });
 </script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBojTY9hrQYJlneXd7hCv0heMey8Uu1W6A&libraries=places&callback=initAutocomplete"
+        async defer></script>
+<script type="text/javascript">
+    function initialize() {
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+            var place = autocomplete.getPlace();
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>

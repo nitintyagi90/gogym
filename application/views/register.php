@@ -66,6 +66,15 @@ include 'header.php';
                                             <input type="text" id="mobileUser" onkeypress="javascript:return isNumber(event)" maxlength="10" name="userMobile" class="form-control" placeholder="Mobile" required>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" id="mobileUser"  maxlength="10" name="userName" class="form-control" placeholder="Name" required>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Password</label>

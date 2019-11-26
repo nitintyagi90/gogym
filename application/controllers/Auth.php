@@ -103,6 +103,8 @@ class Auth extends CI_Controller {
 		$otp=rand(1000,9999);
 		if($purpose==1){
 			$userMobile = $_POST['userMobile'];
+			$userMobile = $_POST['userMobile'];
+			$userName = $_POST['userName'];
 			$userPassword=$_POST['userPassword'];
 			$this->db->select('*');
 			$this->db->from('user');
@@ -119,6 +121,7 @@ class Auth extends CI_Controller {
 
 				$data = array(
 					'mobile' => $userMobile,
+                    'owner_name' => $userName,
 					'password'=>md5($userPassword),
 					'otp' =>$otp,
 					'user_type' => $purpose,

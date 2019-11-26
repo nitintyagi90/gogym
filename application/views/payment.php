@@ -63,19 +63,7 @@ include 'header.php';
                         </div>
                     </div>
                     <div class="tr-single-box">
-                        <!--<div class="tr-single-header">
-                            <h4><i class="ti-headphone"></i> Coupon </h4>
-                        </div>-->
-                        <!--<div class="tr-single-body">
-                            <h5>Have discount coupon?</h5>
-                            <div class="row">
-                                <div class="col-md-4"><p>Enter discount code</p></div>
-                                <div class="col-md-4"><input type="text" name="coupon" placeholder="Enter Any Coupon" value="" class="form-control"></div>
-                                <div class="col-md-4">
-                                    <input type="submit" name="apply" value="APPLY" class="btn btn-success">
-                                </div>
-                            </div>
-                        </div>-->
+
                     </div>
                     <a href="<?php echo base_url('Gogym/disclaimer'); ?>" style="color: #ff7600">Disclaimer</a>
                     <!-- Payment Methode -->
@@ -128,10 +116,10 @@ include 'header.php';
                             </div>
                         </div>
                         <p>Please select your Plan:</p>
-                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Daily" checked> Daily<br>
-                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Weekly"> Weekly<br>
-                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Monthly"> Monthly<br>
-                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="Yearly"> Yearly<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->dailyPrice ?>" checked> Daily<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->weeklyPrice ?>"> Weekly<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->monthlyPrice ?>"> Monthly<br>
+                        <input style="position: relative;left: 0px;" type="radio" name="plantype" value="<?php echo $allprice[0]->yearlyPrice ?>"> Yearly<br>
                         <div class="booking-summary">
                             <h4 class="booking-item-title" name="gymname"><?php echo $gymName ?></h4>
                             <p class="booking-item-location" name="address"><?php echo $address ?></p>
@@ -148,7 +136,7 @@ include 'header.php';
                             $cal = $totalPrice*$insurance;
                             $newTotal = $cal / 100;
                             ?>
-                            <li>Booking Amount <span><?php echo $totalPrice; ?></span></li>
+                            <li>Booking Amount <span class="calTotal"><?php echo $totalPrice; ?></span></li>
 <!--                            <li>Coupon Discount (Go25) <span class="main-color">-<i class="fa fa-inr"></i>13.00</span></li>
 -->                            <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
                             <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?></span></li>
@@ -164,13 +152,60 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+
+    var value;
+    var price = '<?php echo $price; ?>';
+    var person = '<?php echo $person; ?>';
+    var insurance = '<?php echo $insurance; ?>';
+    var totalprice = price * person;
+    var cal = totalprice * insurance;
+    var newTotal = cal / 100;
+    var final = totalprice + newTotal;
+    $(function(){
+        $('input[type="radio"]').click(function(){
+            value = $(this).val();
+            if ($(this).is(':checked'))
+            {
+                $(".calTotal").text('₹' + value * person);
+            }
+        });
+    });
+
+    $ ('.insurance').click(function(){
+        if ($(this).prop('checked')) {
+            if(value==undefined){
+                $(".calTotal").text('₹' + final);
+                $(".appendvalue").text('₹' + newTotal);
+
+            }else{
+                var totalprice2 = value * person;
+                var cal2 = totalprice2 * insurance;
+                var newTotal2 = cal2 / 100;
+                var final2 = totalprice2 + newTotal2;
+                $(".calTotal").text('₹' + final2);
+                $(".appendvalue").text('₹' + newTotal2);
+
+            }
+        }else{
+            $(".appendvalue").text('₹0.00');
+            $(".calTotal").text('₹' + final);
+            $(".calTotal").text('₹' + totalprice);
+
+        }
+
+    });
+
+
+</script>
+
 <?php
-$totalPrice = $price*$person;
+/*$totalPrice = $price*$person;
 $cal = $totalPrice*$insurance;
 $newTotal = $cal / 100;
 $totalAmountis = $totalPrice + $newTotal;
     echo "
-            <script type=\"text/javascript\">
+         <script type=\"text/javascript\">    
            $ ('.insurance').click(function(){
              if ($(this).prop('checked')){
               $(\".appendvalue\").text('₹' + $newTotal);
@@ -187,4 +222,4 @@ $totalAmountis = $totalPrice + $newTotal;
             </script>
         ";
 
-?>
+*/?>

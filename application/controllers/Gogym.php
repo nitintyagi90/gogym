@@ -120,11 +120,17 @@ class Gogym extends CI_Controller {
             $userData = $userProfile->result();
             $userMobile = $userPhone->result();
 
+            $this->db->select('*');
+            $this->db->from('gymPrice');
+            $this->db->where('gym_id', $gymId);
+            $query = $this->db->get();
+            $allprice = $query->result();
 
             $data=array(
                 'gender'=>$gender,
                 'gymId'=>$gymId,
                 'price'=>$gymPrice,
+                'allprice'=>$allprice,
                 'image'=>$gymImage,
                 'address'=>$gym_address,
                 'gymName'=>$gymName,
@@ -634,6 +640,11 @@ class Gogym extends CI_Controller {
           'Verification'=>$verification,
         );
         $this->load->view('thankyou',$response);
+    }
+
+    public function search(){
+        $address = $_POST['address'];
+        $gymCategory = $_POST['gymCategory'];
     }
 
 }
