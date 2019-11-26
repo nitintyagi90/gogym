@@ -441,7 +441,7 @@ class Auth extends CI_Controller {
             $allowGym = $this->input->post('allowGym');
             $categoryName = $this->input->post('categoryName');
             $gymaddress = $this->input->post('gymaddress');
-            $user_id = $this->input->post('id');
+            $user_id = $_SESSION['session_id'];
             $omorning = $this->input->post('omorning');
             $cmorning = $this->input->post('cmorning');
             $oafternoon = $this->input->post('oafternoon');

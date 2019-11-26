@@ -60,7 +60,7 @@ include 'header.php';
                                     <ul class="gallery-list">
                                         <?php foreach ($galleryList as $gallery){ ?>
                                             <li>
-                                                <a href="<?php echo site_url('Gogym/delete_gallerys/'.$gallery->id);?>">
+                                                <a class="delete" data-confirm="Are you sure to delete this image?" href="<?php echo site_url('Gogym/delete_gallerys/'.$gallery->id);?>">
                                                     <span aria-hidden="true" class="dlt">×</span></a>
                                                 <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery ?>">
                                                     <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive" alt="">
@@ -82,5 +82,19 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+<script>
+    var deleteLinks = document.querySelectorAll('.delete');
 
+    for (var i = 0; i < deleteLinks.length; i++) {
+        deleteLinks[i].addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var choice = confirm(this.getAttribute('data-confirm'));
+
+            if (choice) {
+                window.location.href = this.getAttribute('href');
+            }
+        });
+    }
+</script>
 

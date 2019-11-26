@@ -55,7 +55,15 @@ include 'header.php';
                         <div class="tr-single-header">
                             <h4><i class="ti-bell"></i> Plan Details</h4>
                         </div>
+                        <?php if(empty($plan)){ ?>
+                        <div class="tr-single-body">
+                            <div class="card"><br>
 
+                                <h3 class="text-center">Welcome To GoGyms</h3>
+                                <a href="<?php echo base_url('Gogym/plan_add'); ?>" class="btn btn-primary">Please Click to Add Plan</a>
+                            </div>
+                        </div>
+                        <?php }else{ ?>
                         <div class="tr-single-body">
                             <div class="card">
                                 <div class="table-responsive">
@@ -70,24 +78,26 @@ include 'header.php';
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <?php foreach ($plan as $pl) {?>
                                         <tr>
-                                            <td>49</td>
-                                            <td>300</td>
-                                            <td>1200</td>
-                                            <td>12500</td>
+                                            <td><?php echo $pl->dailyPrice; ?></td>
+                                            <td><?php echo $pl->weeklyPrice; ?></td>
+                                            <td><?php echo $pl->monthlyPrice; ?></td>
+                                            <td><?php echo $pl->yearlyPrice; ?></td>
                                             <td>
-
                                                 <a href="<?php echo base_url('Gogym/plan_edit'); ?>" TITLE="Edit"><i class="fa fa-pencil"></i></a>
 
                                             </td>
 
                                         </tr>
+                                        <?php } ?>
 
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
 
                     </div>
                 </div>

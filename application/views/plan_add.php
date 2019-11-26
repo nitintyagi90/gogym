@@ -39,21 +39,20 @@ include 'header.php';
                                 <div class="row">
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Daily Price (Included GST)</label>
-                                        <input type="text" value="<?php echo $gymPrice[0]->dailyPrice ?>" class="form-control" name="dailyprice">
-                                        <input class="form-control" type="hidden" name="id" value="<?php echo $gymPrice[0]->user_id ?>">
+                                        <input type="text"  class="form-control" name="dailyprice">
 
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Weekly Price (Included GST)</label>
-                                        <input type="text"  value="<?php echo $gymPrice[0]->weeklyPrice ?>" class="form-control" name="weeklyprice">
+                                        <input type="text" class="form-control" name="weeklyprice">
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Monthly Price (Included GST)</label>
-                                        <input type="text"  value="<?php echo $gymPrice[0]->monthlyPrice ?>" class="form-control" name="monthlyprice">
+                                        <input type="text"  class="form-control" name="monthlyprice">
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Yearly Price (Included GST)</label>
-                                        <input type="text"  value="<?php echo $gymPrice[0]->yearlyPrice ?>" class="form-control" name="yearlyprice">
+                                        <input type="text"  class="form-control" name="yearlyprice">
                                     </div>
                                 </div>
                             </div>
