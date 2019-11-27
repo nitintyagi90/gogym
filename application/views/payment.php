@@ -115,14 +115,17 @@ include 'header.php';
                                 <i class="fa fa-star-half-o"></i>
                             </div>
                         </div>
-                        <p>Please select your Plan:</p>
-                        <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->dailyPrice ?>" name="plantype" value="Daily" checked> Daily<br>
-                        <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->weeklyPrice ?>" name="plantype" value="Weekly"> Weekly<br>
-                        <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->monthlyPrice ?>" name="plantype" value="Monthly"> Monthly<br>
-                        <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->yearlyPrice ?>"  name="plantype" value="Yearly"> Yearly<br>
+
+
                         <div class="booking-summary">
-                            <h4 class="booking-item-title" name="gymname"><?php echo $gymName ?></h4>
-                            <p class="booking-item-location" name="address"><?php echo $address ?></p>
+                           <!-- <h4 class="booking-item-title" name="gymname"><?php /*echo $gymName */?></h4>
+                            <p class="booking-item-location" name="address"><?php /*echo $address */?></p>-->
+                            <p>Please select your Plan:</p>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->dailyPrice ?>" name="plantype" value="Daily" checked> Daily<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->weeklyPrice ?>" name="plantype" value="Weekly"> Weekly<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->monthlyPrice ?>" name="plantype" value="Monthly"> Monthly<br>
+                            <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->yearlyPrice ?>"  name="plantype" value="Yearly"> Yearly<br>
+
                         </div>
                     </div>
                     <div class="summary-boxed-widget">
