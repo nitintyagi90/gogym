@@ -314,6 +314,7 @@ include 'footer.php';
         });
     });
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBojTY9hrQYJlneXd7hCv0heMey8Uu1W6A&libraries=places&callback=initAutocomplete"
         async defer></script>
 <script type="text/javascript">
