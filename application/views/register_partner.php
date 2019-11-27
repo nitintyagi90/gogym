@@ -26,7 +26,7 @@ include 'header.php';
                                 <i class="ti-user"></i>Sign Up</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"  href="<?php echo base_url('Gogym/login'); ?>" role="tab">
+                            <a class="nav-link"  href="<?php echo base_url('Gogym/login_partner'); ?>" role="tab">
                                 <i class="ti-user"></i> Sign In</a>
                         </li>
                     </ul>
@@ -47,42 +47,9 @@ include 'header.php';
                         <!-- SignUp Panel -->
                         <div class="tab-pane fade in show active" id="candidate" role="tabpanel">
                             <form  action="<?php echo base_url('Auth/register'); ?>" method="post" enctype="multipart/form-data" novalidate>
+
+
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Select Type</label>
-                                            <select class="form-control" name="purpose" id='purpose'>
-                                                <option value="0">---Select Type---</option>
-                                                <option value="1">AS User</option>
-                                                <option value="2">AS Partner</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="display: none;" id="user">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Mobile</label>
-                                            <input type="text" id="mobileUser" onkeypress="javascript:return isNumber(event)" maxlength="10" name="userMobile" class="form-control" placeholder="Mobile" required>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Name</label>
-                                            <input type="text" id="mobileUser"  maxlength="10" name="userName" class="form-control" placeholder="Name" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input type="password" id="passwordUser" name="userPassword" class="form-control" placeholder="Password">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="display: none;" id="owner">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label>Partner Name</label>

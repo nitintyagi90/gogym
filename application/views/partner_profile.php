@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'header2.php';
 ?>
 <style>
     .img50{
@@ -88,7 +88,7 @@ include 'header.php';
     </div>
 </section>
 <?php
-include 'footer.php';
+include 'footer2.php';
 ?>
 <script type="text/javascript">
     $('.clockpicker').clockpicker()

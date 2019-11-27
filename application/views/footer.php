@@ -82,6 +82,7 @@
                         <li><a href="<?php echo base_url('Gogym/rules_regulation_policy'); ?>">Rule & Regulation & Policy</a></li>
                         <li><a href="<?php echo base_url('Gogym/refund_cancellation_policy'); ?>">Refund & Cancellation</a></li>
                         <li><a href="<?php echo base_url('Gogym/termination_policy'); ?>">Termination Policy</a></li>
+                        <a href="<?php echo base_url('Gogym/login_partner'); ?>" class="login btn theme-btn font-14 "  style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Join As Partner</a>
                     </ul>
                 </div>
 

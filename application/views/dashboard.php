@@ -1,5 +1,5 @@
 <?php
-include 'header.php';
+include 'header2.php';
 ?>
     <style>
         .img50{
@@ -36,7 +36,7 @@ include 'header.php';
 							</div>
 							<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-                                <a class="nav-link "  href="<?php echo base_url('Gogym/dashboard'); ?>" ><i class="ti-home"></i>Profile Details</a>
+                                <a class="nav-link active"  href="<?php echo base_url('Gogym/dashboard'); ?>" ><i class="ti-home"></i>Profile Details</a>
 								  <a class="nav-link"  href="<?php echo base_url('Gogym/gym_details'); ?>" ><i class="ti-layers-alt"></i>Gym Details</a>
                                 <a class="nav-link"  href="<?php echo base_url('Gogym/plan'); ?>" ><i class="ti-home"></i>Add Plan</a>
 								  <a class="nav-link" href="<?php echo base_url('Gogym/addgallery'); ?>"><i class="ti-medall-alt"></i>Add Gallery</a>
@@ -50,6 +50,7 @@ include 'header.php';
 
 
                         <div >
+                            <img src="<?php echo base_url();?>web/assets/img/gobg.png" style="width: 100%;">
                             <!-- All Bookmark -->
                             <div class="tr-single-body">
                                 <div class="card">
@@ -88,7 +89,7 @@ include 'header.php';
 
                         </div>
                         </div>
-                        <img src="<?php echo base_url();?>web/assets/img/gobg.png" style="width: 100%;">
+
                     </div>
                             </div>
 						</div>
@@ -97,7 +98,7 @@ include 'header.php';
 				</div>
 			</section>
 <?php
-include 'footer.php';
+include 'footer2.php';
 ?>
 <script type="text/javascript">
     $('.clockpicker').clockpicker()

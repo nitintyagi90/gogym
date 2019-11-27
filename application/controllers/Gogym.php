@@ -837,5 +837,11 @@ class Gogym extends CI_Controller {
         $this->session->set_flashdata('Successfully','Report save successfully');
         redirect('Gogym/user_dashboard');
     }
+    public function login_partner(){
+	    $this->load->view('login_partner.php');
+    }
+    public function register_partner(){
+	    $this->load->view('register_partner.php');
+    }
 
 }
