@@ -47,19 +47,8 @@ include 'header.php';
                         <!-- SignUp Panel -->
                         <div class="tab-pane fade in show active" id="candidate" role="tabpanel">
                             <form  action="<?php echo base_url('Auth/register'); ?>" method="post" enctype="multipart/form-data" novalidate>
+
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="form-group">
-                                            <label>Select Type</label>
-                                            <select class="form-control" name="purpose" id='purpose'>
-                                                <option value="0">---Select Type---</option>
-                                                <option value="1">AS User</option>
-                                                <option value="2">AS Partner</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row" style="display: none;" id="user">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Mobile</label>

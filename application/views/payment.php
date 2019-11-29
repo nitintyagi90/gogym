@@ -78,7 +78,8 @@ include 'header.php';
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" style="width: 50%;">
                                             <a class="nav-link active" id="credit-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="credit" aria-selected="true">
-                                                <button class="btn btn-payment" type="submit">Pay Now</button>
+                                               <!-- <button class="btn btn-payment" type="submit">Pay Now</button>-->
+                                                <a href="<?php echo base_url('Gogym/tokenmoney'); ?>" class="btn btn-payment">Pay Now</a>
                                             </a>
                                         </li>
 

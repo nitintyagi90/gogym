@@ -37,7 +37,7 @@ include 'header.php';
 
                     <!-- SignIn-->
                     <div class="tab-pane fade in show active" id="employer" role="tabpanel">
-                        <form method="post" action="<?php echo base_url('Auth/login'); ?>">
+                        <form method="post" action="<?php echo base_url('Auth/partnerLogin'); ?>">
 
                             <div class="form-group">
                                 <label>Mobile No</label>

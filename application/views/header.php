@@ -49,6 +49,7 @@
 										</ul>
 									</li>
 									<li class="nav-item"><a class="nav-link" href="#">Fitness Blog</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?php echo base_url('Gogym/bmi'); ?>">BMI Calculator</a></li>
 								</ul>
 								<!--<div class="act-buttons">
 									<a href="javascript:void(0)" class="login btn theme-btn font-14 " data-toggle="modal" data-target="#signin" style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>

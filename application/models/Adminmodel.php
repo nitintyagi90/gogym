@@ -19,6 +19,7 @@ class Adminmodel extends CI_Model{
 		return $ads;
 	}
 
+
 	public function listcust(){
 
 		$this->db->select('*');

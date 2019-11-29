@@ -13,15 +13,60 @@ class Auth extends CI_Controller {
 		$user_password= $_POST['user_password'];
 		$data= array(
 			'mobile' => $user_mobile,
-			'password' => $user_password
+			'password' => $user_password,
 		);
 		$table='user';
 		$login=$this->GogymModel->admin_log($data,$table);
-        $query = $this->db->get('profession');
-        $profession = $query->result();
-
         if($login){
-            if($login->user_type==1){
+            $query = $this->db->get('profession');
+            $profession = $query->result();
+            $newdata = array(
+                'session_id'  => $login->id,
+                'session_name'  => $login->owner_name,
+                'user_type'  => $login->user_type,
+                'response' => 'true',
+            );
+            $table='user';
+            $where='id';
+            $data=$this->GogymModel->userdetails($login->id);
+            $profileData=$this->GogymModel->profiledetails($login->id);
+
+            $table='profile_user';
+            $where='id';
+
+            $this->db->where('user_id', $login->id); // OTHER CONDITIONS IF ANY
+            $this->db->from('booking'); //TABLE NAME
+            $bookingCount = $this->db->count_all_results();
+            $query = $this->db->get_where('booking', array('user_id' => @$_SESSION['session_id']));
+            $result_booking = $query->result();
+            $response= array(
+                'user'=>$data,
+                'profession'=>$profession,
+                'profile_user'=>$profileData,
+                'bookingCount'=>$bookingCount,
+                'booking'=>$result_booking,
+            );
+            $this->session->set_userdata($newdata);
+            $this->session->set_flashdata('Successfully','Login Successfully');
+            $this->load->view('user_dashboard.php',$response);
+        }else{
+            $this->session->set_flashdata('fail','Invalid login detail');
+            redirect('gogym/login');
+        }
+        }
+
+        public function partnerLogin(){
+            $user_mobile = $_POST['user_mobile'];
+            $user_password= $_POST['user_password'];
+            $data= array(
+                'mobile' => $user_mobile,
+                'password' => $user_password,
+                'user_type' => 2,
+            );
+            $table='user';
+            $login=$this->GogymModel->partnerLogin($data,$table);
+
+            if($login){
                 $newdata = array(
                     'session_id'  => $login->id,
                     'session_name'  => $login->owner_name,
@@ -31,43 +76,11 @@ class Auth extends CI_Controller {
                 $table='user';
                 $where='id';
                 $data=$this->GogymModel->userdetails($login->id);
-                $profileData=$this->GogymModel->profiledetails($login->id);
-
-                $table='profile_user';
-                $where='id';
-
-                $this->db->where('user_id', $login->id); // OTHER CONDITIONS IF ANY
-                $this->db->from('booking'); //TABLE NAME
-                $bookingCount = $this->db->count_all_results();
-                $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
-                $result_booking = $query->result();
-                $response= array(
-                    'user'=>$data,
-                    'profession'=>$profession,
-                    'profile_user'=>$profileData,
-                    'bookingCount'=>$bookingCount,
-                    'booking'=>$result_booking,
-                );
-                $this->session->set_userdata($newdata);
-                $this->session->set_flashdata('Successfully','Login Successfully');
-                $this->load->view('user_dashboard.php',$response);
-            }elseif ($login->user_type==2){
-                $newdata = array(
-                    'session_id'  => $login->id,
-                    'session_name'  => $login->owner_name,
-                    'user_type'  => $login->user_type,
-                    'response' => 'true',
-                );
-                $table='user';
-                $where='id';
-                $data=$this->GogymModel->userdetails($login->id);
-
                 $table='gym';
                 $where='user_id';
                 $data1=$this->GogymModel->profileownerdetails($login->id);
                 $query = $this->db->get('amenities');
                 $result = $query->result();
-
                 $this->db->select('*');
                 $this->db->from('gym');
                 $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
@@ -91,92 +104,92 @@ class Auth extends CI_Controller {
                 $this->session->set_userdata($newdata);
                 $this->session->set_flashdata('Successfully','Login Successfully');
                 $this->load->view('dashboard.php',$response);
-
+            }else{
+                $this->session->set_flashdata('fail','Invalid login detail');
+                redirect('gogym/login_partner');
             }
-        }else{
-            $this->session->set_flashdata('fail','Invalid login detail');
-            redirect('gogym/login');
-        }
-        }
 
+        }
 
 	public function logout()
 	{
 		session_destroy();
 		redirect();
 	}
+
+	public function partnerRegister()
+    {
+        $mobile = $_POST['mobile'];
+        $owner_name = $_POST['owner_name'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('mobile', $mobile);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        @$existsmobile = $result[0]['mobile'];
+        if ($existsmobile == $_POST['mobile']) {
+            echo "false";
+            exit();
+        } else {
+            $otp = rand(1000, 9999);
+            sms91($mobile, $otp);
+            $data = array(
+                'user_type' => 2,
+                'owner_name' => $owner_name,
+                'email' => $email,
+                'mobile' => $mobile,
+                'password' => md5($password),
+                'otp' => $otp
+            );
+            $result = $this->db->insert('user', $data);
+            $insert_id = $this->db->insert_id();
+            $response = array(
+                'user_id' => $insert_id,
+            );
+            $this->session->set_flashdata('Successfully', 'Register Successfully');
+            $this->load->view('otpverify', $response);
+        }
+    }
+
 	public function register()
 	{
-		$purpose = $_POST['purpose'];
-		$otp=rand(1000,9999);
-		if($purpose==1){
-			$userMobile = $_POST['userMobile'];
-			$userMobile = $_POST['userMobile'];
-			$userName = $_POST['userName'];
-			$userPassword=$_POST['userPassword'];
-			$this->db->select('*');
-			$this->db->from('user');
-			$this->db->where('mobile', $userMobile);
-			$query = $this->db->get();
-			$result = $query->result_array();
-			$existsmobile = $result[0]['mobile'];
-			if($userMobile==$existsmobile){
-                $this->session->set_flashdata('fail','Mobile Number already exists!');
-                redirect('gogym/register');
-            }else{
-				$otp=rand(1000,9999);
-				sms91($userMobile,$otp);
 
-				$data = array(
-					'mobile' => $userMobile,
-                    'owner_name' => $userName,
-					'password'=>md5($userPassword),
-					'otp' =>$otp,
-					'user_type' => $purpose,
-				);
-				$result = $this->db->insert('user', $data);
-				$insert_id = $this->db->insert_id();
-				$response = array(
-				    'user_id'=>$insert_id,
-                );
-                $this->session->set_flashdata('Successfully','Register Successfully');
-                $this->load->view('otpverify',$response);
-            }
-		}elseif ($purpose==2){
-			$mobile = $_POST['mobile'];
-			$owner_name = $_POST['owner_name'];
-			$email = $_POST['email'];
-			$password = $_POST['password'];
-			$this->db->select('*');
-			$this->db->from('user');
-			$this->db->where('mobile', $mobile);
-			$query = $this->db->get();
-			$result = $query->result_array();
-			@$existsmobile = $result[0]['mobile'];
-			if($existsmobile==$_POST['mobile']) {
-				echo "false";
-				exit();
-			}else{
-				$otp=rand(1000,9999);
-				sms91($mobile,$otp);
-				$data = array(
-					'user_type' => $purpose,
-					'owner_name' => $owner_name,
-					'email' => $email,
-					'mobile' => $mobile,
-					'password'=>md5($password),
-					'otp' =>$otp
-				);
-				$result = $this->db->insert('user', $data);
-				$insert_id = $this->db->insert_id();
-                $response = array(
-                    'user_id'=>$insert_id,
-                );
-                $this->session->set_flashdata('Successfully','Register Successfully');
-                $this->load->view('otpverify',$response);
-			}
-		}
+        $userMobile = $_POST['userMobile'];
+        $userName = $_POST['userName'];
+        $userPassword=$_POST['userPassword'];
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('mobile', $userMobile);
+        $query = $this->db->get();
+        $result = $query->result_array();
+        $existsmobile = $result[0]['mobile'];
+        if($userMobile==$existsmobile){
+            $this->session->set_flashdata('fail','Mobile Number already exists!');
+            redirect('gogym/register');
+        }else {
+            $otp = rand(1000, 9999);
+            sms91($userMobile, $otp);
+            $data = array(
+                'mobile' => $userMobile,
+                'owner_name' => $userName,
+                'password' => md5($userPassword),
+                'otp' => $otp,
+                'user_type' => 1,
+            );
+            $result = $this->db->insert('user', $data);
+            $insert_id = $this->db->insert_id();
+            $response = array(
+                'user_id' => $insert_id,
+            );
+            $this->session->set_flashdata('Successfully', 'Register Successfully');
+            $this->load->view('otpverify', $response);
+
+        }
+
 	}
+
 	public function otpverify(){
 		$otp = $_POST['otp'];
 		$id = $_POST['id'];

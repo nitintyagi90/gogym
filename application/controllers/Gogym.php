@@ -151,6 +151,9 @@ class Gogym extends CI_Controller {
         }
 
     }
+    public function bmi(){
+        $this->load->view('bmi.php');
+    }
     public function story()
     {
         $this->load->view('story');
@@ -843,5 +846,16 @@ class Gogym extends CI_Controller {
     public function register_partner(){
 	    $this->load->view('register_partner.php');
     }
-
+    public function tokenmoney(){
+        $this->load->view('tokenmoney/TxnTest');
+    }
+    public function placeorderonline(){
+        $this->load->view('TxnTest.php');
+    }
+    public function pgRedirect(){
+        $this->load->view('pgRedirect.php');
+    }
+    public function pgresoponse(){
+         $this->load->view('pgResponse.php');
+    }
 }

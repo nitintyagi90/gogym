@@ -63,6 +63,7 @@ class GogymModel extends CI_Model
 		$ads = array();
 		$this->db->select('*');
 		$this->db->where('mobile',$data['mobile']);
+		$this->db->where('user_type',1);
 		$this->db->where('password',md5($data['password']));
 		$fetch_query= $this->db->get($table);
 		$query=$fetch_query->result();
@@ -72,5 +73,21 @@ class GogymModel extends CI_Model
 		}
 		return $ads;
 	}
+    public function partnerLogin($data,$table)
+    {
+        $ads = array();
+        $this->db->select('*');
+        $this->db->where('mobile',$data['mobile']);
+        $this->db->where('user_type',2);
+        $this->db->where('password',md5($data['password']));
+        $fetch_query= $this->db->get($table);
+        $query=$fetch_query->result();
+        foreach ($query as $row)
+        {
+            $ads = $row;
+        }
+        return $ads;
+    }
+
 }
 
