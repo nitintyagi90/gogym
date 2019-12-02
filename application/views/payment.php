@@ -1,7 +1,12 @@
 <?php
 include 'header.php';
 ?>
-
+<style>
+    .img250 {
+        width: 100%;
+        height: 250px;
+    }
+</style>
     <!-- ============================ Page Title  Start================================== -->
     <div class="page-title image-title" style="background-image:url(assets/img/banner-2.jpg);">
         <div class="finding-overlay op-70"></div>
@@ -105,7 +110,8 @@ include 'header.php';
                     <div class="booking-item list-item">
 
                         <div class="bookin-item-header">
-                            <img src="<?php echo $image; ?>" class="img-fluid mx-auto" alt="">
+                            <img src="<?php echo $image; ?>" class="img-fluid mx-auto img250" alt="">
+
                         </div>
                         <div class="booking-summary-head">
                             <div class="gl-rating gl-card">
@@ -118,7 +124,9 @@ include 'header.php';
                         </div>
 
 
-                        <div class="booking-summary">
+                        <div class="booking-summary" style="    bottom: 20px;
+    left: 25px;
+    top: 20px;position: relative;">
                            <!-- <h4 class="booking-item-title" name="gymname"><?php /*echo $gymName */?></h4>
                             <p class="booking-item-location" name="address"><?php /*echo $address */?></p>-->
                             <p>Please select your Plan:</p>
@@ -126,7 +134,7 @@ include 'header.php';
                             <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->weeklyPrice ?>" name="plantype" value="Weekly"> Weekly<br>
                             <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->monthlyPrice ?>" name="plantype" value="Monthly"> Monthly<br>
                             <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->yearlyPrice ?>"  name="plantype" value="Yearly"> Yearly<br>
-
+                            <br>
                         </div>
                     </div>
                     <div class="summary-boxed-widget">

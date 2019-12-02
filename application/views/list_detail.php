@@ -317,7 +317,8 @@ include 'header.php';
                                                 <i class="fa fa-phone"></i>
                                             </div>
                                             <div class="icon-box-text">
-                                                <?php echo $gym[0]->contact_no ?>
+                                                8376-06-8376
+                                                <?php /*echo $gym[0]->contact_no */?>
                                             </div>
                                         </a>
                                     </div>

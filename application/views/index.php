@@ -111,7 +111,7 @@ include 'header.php';
                                         <div class="event-grid-header">
                                             <img src="<?php echo $gymDetail->gymImage; ?>" class="img-fluid mx-auto" alt="">
 
-                                            <span class="event-grid-cat1">Noida</span>
+                                            <span class="event-grid-cat1"><?php echo $gymDetail->gymCity; ?></span>
                                             <span class="event-grid-cat2">
 										<h5 class="clrfff"><?php echo $gymDetail->gymName; ?></h5></span>
 

@@ -80,7 +80,7 @@ include 'header.php';
                                 <div class="form-group">
 										<span class="c-box-checkbox">
 											<input id="rmp-3" class="checkbox-custom" name="rmp-3" type="checkbox" required="">
-                                            <label for="rmp-3" class="checkbox-custom-label"><a href="#">I Agree Term and condition</a></label>
+                                            <label for="rmp-3" class="checkbox-custom-label"><a target="_blank" href="<?php echo base_url('Gogym/termsrule'); ?>">I Agree Term and condition</a></label>
 										</span>
 
                                 </div>

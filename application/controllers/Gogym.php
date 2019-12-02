@@ -858,4 +858,7 @@ class Gogym extends CI_Controller {
     public function pgresoponse(){
          $this->load->view('pgResponse.php');
     }
+    public function termsrule(){
+	    $this->load->view('termsrule.php');
+    }
 }

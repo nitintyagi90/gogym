@@ -3,7 +3,7 @@
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
 header("Expires: 0");
-$_SESSION['onlineorderid']="Artnhub" . rand(00000,11111);
+$_SESSION['onlineorderid']="GoGyms" . rand(00000,11111);
 $_SESSION['onlineprice']=$_GET['pricereplaces'];
 $_SESSION['onlinecomname']=$_GET['comname'];
 $_SESSION['onlinegstno']=$_GET['gstno'];
