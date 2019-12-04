@@ -46,13 +46,13 @@ include 'header.php';
 
                         <!-- SignUp Panel -->
                         <div class="tab-pane fade in show active" id="candidate" role="tabpanel">
-                            <form  action="<?php echo base_url('Auth/register'); ?>" method="post" enctype="multipart/form-data" novalidate>
+                            <form  action="<?php echo base_url('Auth/register'); ?>" method="post" enctype="multipart/form-data">
 
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Mobile</label>
-                                            <input type="text" id="mobileUser" onkeypress="javascript:return isNumber(event)" maxlength="10" name="userMobile" class="form-control" placeholder="Mobile" required>
+                                            <input type="text" id="mobileUser" onkeypress="javascript:return isNumber(event)" maxlength="10" name="userMobile" class="form-control" placeholder="Mobile" required="">
                                         </div>
                                     </div>
 
@@ -60,18 +60,18 @@ include 'header.php';
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" id="mobileUser"  maxlength="10" name="userName" class="form-control" placeholder="Name" required>
+                                            <input type="text" id="mobileUser"  maxlength="10" name="userName" class="form-control" placeholder="Name" required="">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" id="passwordUser" name="userPassword" class="form-control" placeholder="Password">
+                                            <input type="password" id="passwordUser" name="userPassword" class="form-control" placeholder="Password" required="">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style="display: none;" id="owner">
+                                <!--<div class="row" style="display: none;" id="owner">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label>Partner Name</label>
@@ -98,7 +98,7 @@ include 'header.php';
                                         </div>
                                     </div>
 
-                                </div>
+                                </div>-->
                                 <div class="form-group">
 										<span class="c-box-checkbox">
 											<input id="rmp-3" class="checkbox-custom" name="rmp-3" type="checkbox" required="">
@@ -110,6 +110,7 @@ include 'header.php';
                                     <input type="submit" class="btn theme-btn full-width btn-m" value="Register" >
                                 </div>
                             </form>
+
 
                             <div class="log-option"><span>OR</span></div>
 

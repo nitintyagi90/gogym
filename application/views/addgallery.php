@@ -60,7 +60,7 @@ include 'header2.php';
                             <div class="tr-single-body">
                                 <div class="row">
                                     <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
-                                    <input type="file" name="gallery" class="form-control"/>
+                                    <input type="file" name="gallery[]" multiple class="form-control"/>
                                 </div>
                             </div>
                         </div>

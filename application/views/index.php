@@ -109,7 +109,7 @@ include 'header.php';
                                 <div class="event-grid-wrap">
                                     <a href="<?php echo site_url('Gogym/list_detail/'.$gymDetail->gym_id);?>">
                                         <div class="event-grid-header">
-                                            <img src="<?php echo $gymDetail->gymImage; ?>" class="img-fluid mx-auto" alt="">
+                                            <img src="<?php echo $gymDetail->gymImage; ?>" class="img-fluid mx-auto" alt="" style="height:225px;width:100%;">
 
                                             <span class="event-grid-cat1"><?php echo $gymDetail->gymCity; ?></span>
                                             <span class="event-grid-cat2">

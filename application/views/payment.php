@@ -68,7 +68,25 @@ include 'header.php';
                         </div>
                     </div>
                     <div class="tr-single-box">
+                        <div class="tr-single-header">
+                            <h4><i class="ti-headphone"></i> Coupon </h4>
+                        </div>
+                        <div class="tr-single-body">
+                            <h5>Have discount coupon?</h5>
+                            <div class="row">
+                                <div class="col-md-4"><p>Enter discount code</p></div>
 
+                                <div class="col-md-4">
+                                    <input type="hidden" name="gymname" id="gymname" placeholder="Enter Any Coupon" value="<?php echo $gymName; ?>" class="form-control">
+
+
+                                    <input type="text" name="coupon" id="coupon" placeholder="Enter Any Coupon" value="" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="button" id="submit2" name="apply" value="APPLY" class="btn btn-success">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <a href="<?php echo base_url('Gogym/disclaimer'); ?>" style="color: #ff7600">Disclaimer</a>
                     <!-- Payment Methode -->
@@ -148,9 +166,12 @@ include 'header.php';
                             $cal = $totalPrice*$insurance;
                             $newTotal = $cal / 100;
                             ?>
-                            <li>Booking Amount <span class="calTotal"><?php echo $totalPrice; ?></span></li>
-<!--                            <li>Coupon Discount (Go25) <span class="main-color">-<i class="fa fa-inr"></i>13.00</span></li>
--->                            <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
+                            <input type="hidden"  name="total_price" id="total_price" placeholder="Enter Any Coupon" value="<?php echo $totalPrice; ?>">
+                            <li>Booking Amount <span class="calTotal" >
+
+                            <?php echo $totalPrice; ?></span></li>
+                            <li><input type="checkbox" class="coupon_price" name="coupon_price" value="coupon_price">&nbsp;Coupon Discount <span class="main-color" id="couponprice"><i class="fa fa-inr"></i>0.00</span></li>
+                            <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
                             <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?></span></li>
                         </ul>
                     </div>
@@ -166,7 +187,7 @@ include 'footer.php';
 ?>
 <script>
 
-    var value;
+    var value = 0 ;
     var price = '<?php echo $price; ?>';
     var person = '<?php echo $person; ?>';
     var insurance = '<?php echo $insurance; ?>';
@@ -209,6 +230,50 @@ include 'footer.php';
     });
 
 
+//=============================
+
+
+
+</script>
+
+<script>
+
+
+
+    var value =0;
+    $( document ).ready(function() {
+        $("#submit2").click(function(){
+            var gymname = $("#gymname").val();
+            var coupon = $("#coupon").val();
+            var total_price  = $("#total_price").val();
+            // alert(state);
+            $.ajax({
+                method:"post",
+                url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                //datatype:"json",
+                data:{gymname:gymname,coupon:coupon, total_price:total_price},
+                success:function(data){
+                    value = data;
+                    $('#couponprice').html(data);
+                }
+            });
+        });
+
+    });
+
+    $ ('.coupon_price').click(function(){
+        if ($(this).prop('checked')) {
+
+            // if (value != isNumeric(NaN)) {
+            //     alert('hhhh');
+                var price = '<?php echo $totalPrice; ?>';
+
+                var total = price - value;
+                $(".calTotal").text('₹' + total);
+                // alert(total);
+            // }
+        }
+    });
 </script>
 
 <?php
@@ -217,7 +282,7 @@ $cal = $totalPrice*$insurance;
 $newTotal = $cal / 100;
 $totalAmountis = $totalPrice + $newTotal;
     echo "
-         <script type=\"text/javascript\">    
+         <script type=\"text/javascript\">
            $ ('.insurance').click(function(){
              if ($(this).prop('checked')){
               $(\".appendvalue\").text('₹' + $newTotal);
@@ -230,7 +295,7 @@ $totalAmountis = $totalPrice + $newTotal;
              $(\".appendvalue\").val('0.00');
              $(\".calTotal\").text('₹' + $totalPrice);
               }
-             }); 
+             });
             </script>
         ";
 

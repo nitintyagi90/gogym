@@ -192,6 +192,10 @@ class Gogym extends CI_Controller {
     {
         $this->load->view('thankyou');
     }
+    /*public function gym_search()
+    {
+        $this->load->view('gym_search');
+    }*/
     public function team()
     {
         $query = $this->db->get('team');
@@ -360,10 +364,11 @@ class Gogym extends CI_Controller {
     {
         $this->db->where('id', $id);
         $this->db->delete('gym_gallery');
-        redirect('Gogym/dashboard');
+        redirect('Gogym/listgallery');
     }
     public function searchLocation(){
         $location = $this->input->post('location');
+
         $data = $this->Gympagination->searchLocation($location);
         echo json_encode($data);
     }
@@ -495,7 +500,7 @@ class Gogym extends CI_Controller {
     }
     public function saveGallery (){
         $user_id = $this->input->post('id');
-        $path1=  base_url().'images/';
+       /* $path1=  base_url().'images/';
         $upload_image1=$_FILES["gallery"]["name"];
         if(!empty($upload_image1)){
             if(!empty($_FILES["gallery"]))
@@ -509,20 +514,79 @@ class Gogym extends CI_Controller {
                 }
             }else{
                 $img_name1 = '';
-            }
+            }*/
 
-            $data = array(
-                'user_id'=>$user_id,
-                'gym_gallery'=>$img_name1,
-            );
+
 
             $table='gym_gallery';
-            $this->Adminmodel->insert_common($table,$data);
+
+        $file_name ='gallery';
+
+        $files = $_FILES[$file_name];
+
+// print_r($files) ;
+// exit;
+
+        $file_upload = sizeof($_FILES[$file_name]['tmp_name']);
+        $image = array();
+
+        $multiple = array();
+
+        for ($i=0; $i <$file_upload ; $i++) {
+
+# code...
+
+            $_FILES[$file_name]['name'] = $files['name'][$i];
+            $_FILES[$file_name]['type'] = $files['type'][$i];
+            $_FILES[$file_name]['tmp_name'] = $files['tmp_name'][$i];
+            $_FILES[$file_name]['error'] = $files['error'][$i];
+            $_FILES[$file_name]['size'] = $files['size'][$i];
+
+
+            $upload_path = FCPATH.'./images/' ;
+            $url1 =  array('upload_path' => './images/',
+                'allowed_types' => 'jpg|jpeg|png|pdf',
+
+            );
+            $config = array(
+                'upload_path' => $url1['upload_path'],
+                'allowed_types'=> $url1['allowed_types'],
+
+            );
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload($file_name)) {
+                $error = array('error' => $this->upload->display_errors());
+            } else {
+                $data =  $this->upload->data();
+
+                $multiple[$i] =  base_url("images/".$data['file_name']);
+
+// $fileName = $this->upload->data('file_name');
+
+            }
+
+        }
+
+        $img_name1 = $multiple;
+
+
+
+        $data = array(
+            'user_id'=>$user_id,
+            'gym_gallery'=>$img_name1,
+        );
+
+
+
+//            $this->Adminmodel->insert_gallery($table,$img_name1,$user_id);
+            if($this->Adminmodel->insert_gallery($table,$img_name1,$user_id)){
             $this->session->set_flashdata('Successfully','Gallery Save successfully');
-            redirect('Gogym/dashboard');
+            redirect('Gogym/listgallery');
         }else{
             $this->session->set_flashdata('Successfully','Please fill all required fields');
-            redirect('Gogym/dashboard');
+            redirect('Gogym/addgallery');
         }
 
     }
@@ -773,8 +837,14 @@ class Gogym extends CI_Controller {
 
         $query = $this->db->get_where('gym',array('gym_id' => $id));
         $result = $query->result();
+        $categoryList = $this->db->get('category');
+        $category = $categoryList->result();
+        $query = $this->db->get('amenities');
+        $result2 = $query->result();
         $data =array(
-            'profile_user'=>$result
+            'amenities'=>$result2,
+            'profile_user'=>$result,
+            'category'=>$category,
         );
         $this->load->view('gym_edit.php',$data);
     }
@@ -810,8 +880,13 @@ class Gogym extends CI_Controller {
 
 
     public function search(){
-        $address = $_POST['address'];
+
+        $address1= $_POST['address'];
+        $address = explode(",", $address1 );
+        //print_r($address[0]);die();
         $gymCategory = $_POST['gymCategory'];
+        $data['gym'] = $this->Gympagination->searchaddress($address[0]);
+        $this->load->view('gym_search',$data);
     }
     public function trackReport(){
         $data = array(
@@ -861,4 +936,51 @@ class Gogym extends CI_Controller {
     public function termsrule(){
 	    $this->load->view('termsrule.php');
     }
+
+    //=======Coupon Detail =========
+
+    function fetch_coupon_detail(){
+      $gymname=  $this->input->post('gymname');
+      $coupon   =  $this->input->post('coupon');
+      $total_price   =  $this->input->post('total_price');
+
+      $q = $this->db->select()
+          ->where(array('coupon_gym' => $gymname , 'coupon_code'=> $coupon ))
+          ->from('coupon')
+          ->get();
+    if($q->row()){
+
+        $res = $q->row();
+//        print_r($res) ;
+
+        if($total_price >= $res->coupon_min_value){
+
+            $percent = $res->coupon_percent ;
+//            echo $percent ;
+
+            $dis = $total_price * ($res->coupon_percent/100 );
+            if($dis > $res->coupon_max_discount){
+
+               echo  $dis = $res->coupon_max_discount ;
+            }
+            else{
+
+                echo $dis ;
+            }
+        }
+        else{
+            echo "Not min value " ;
+         }
+    }
+    else{
+
+        echo "Invaild coupon";
+        }
+
+
+    }
+    //========================
+
+
+
 }

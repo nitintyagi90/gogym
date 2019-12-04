@@ -24,4 +24,11 @@ class Gympagination extends CI_Model {
         $query = $this->db->get($this->table);
         return $query->result();
     }
+    public function searchaddress($address) {
+
+        $this->db->like('gymCity', $address);
+        $query = $this->db->get($this->table);
+        return $query->result();
+        //print_r($query->result());
+    }
 }

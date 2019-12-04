@@ -17,6 +17,10 @@ include 'header2.php';
         padding-left: 8px !important;
         padding-bottom: 1px !important;
     }
+    .img272{
+        width: 250px;
+        height: 250px;
+    }
 </style>
 <section class="gray p-0">
     <div class="container-fluid" >
@@ -63,7 +67,7 @@ include 'header2.php';
                                                 <a class="delete" data-confirm="Are you sure to delete this image?" href="<?php echo site_url('Gogym/delete_gallerys/'.$gallery->id);?>">
                                                     <span aria-hidden="true" class="dlt">×</span></a>
                                                 <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery ?>">
-                                                    <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive" alt="">
+                                                    <img src="<?php echo $gallery->gym_gallery ?>" class="img-responsive img272" alt="">
                                                 </a>
                                             </li>
                                         <?php } ?>

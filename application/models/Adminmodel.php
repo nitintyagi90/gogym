@@ -118,6 +118,35 @@ class Adminmodel extends CI_Model{
 		$this->db->insert($table,$data);
 		return $this->db->insert_id();
 	}
+    public function insert_gallery($table,$img_name1,$user_id)
+    {
+
+        if($img_name1){
+            foreach ($img_name1 as $img) {
+
+                $data = array(
+                    'user_id'=>$user_id,
+                    'gym_gallery'=>$img,
+                );
+
+                $query = $this->db->insert($table,$data);
+            }
+
+            if($query==true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }else{
+            return false;
+
+        }
+    }
+//================================================
+
 	public function amenities(){
 		$this->db->select('*');
 		$this->db->from('amenities');

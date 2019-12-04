@@ -1,5 +1,6 @@
 <?php
 include 'header2.php';
+//print_r($profile_user[0]->accountType);die();
 ?>
 <style>
     .img50{
@@ -132,8 +133,8 @@ include 'header2.php';
                                                 <label>Account Type</label>
                                                 <select class="form-control" name="account_type" required>
                                                     <option>---Select Account Type---</option>
-                                                    <option value="Saving" <?php if(@$profile_user[0]->account_type=="Saving") echo 'selected="selected"'; ?> >Saving</option>
-                                                    <option value="Current" <?php if(@$profile_user[0]->account_type=="Current") echo 'selected="selected"'; ?> >Current</option>
+                                                    <option value="Saving" <?php if(@$profile_user[0]->accountType=="Saving") echo 'selected="selected"'; ?> >Saving</option>
+                                                    <option value="Current" <?php if(@$profile_user[0]->accountType=="Current") echo 'selected="selected"'; ?> >Current</option>
 
                                                 </select>
                                             </div>

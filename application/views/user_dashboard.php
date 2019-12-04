@@ -206,7 +206,8 @@ include 'footer.php';
     {
         var cm = document.getElementById('cm');
         var fit = document.getElementById('fit');
-        cm.value = fit.value*30.48;
+        var n = fit.value*30.48;
+        cm.value = cm.value .toFixed(2);
     }
 </script>
 <script>

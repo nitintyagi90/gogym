@@ -46,7 +46,7 @@ include 'header.php';
 
                         <!-- SignUp Panel -->
                         <div class="tab-pane fade in show active" id="candidate" role="tabpanel">
-                            <form  action="<?php echo base_url('Auth/partnerRegister'); ?>" method="post" enctype="multipart/form-data" novalidate>
+                            <form  action="<?php echo base_url('Auth/partnerRegister'); ?>" method="post" enctype="multipart/form-data">
 
 
                                 <div class="row">

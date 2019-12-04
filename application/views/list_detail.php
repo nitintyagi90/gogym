@@ -9,14 +9,14 @@ include 'header.php';
 
 
     <!-- ======================= Start Banner ===================== -->
-    <section class="page-title-banner" style="background-image:url(assets/img/banner-2.jpg);">
+    <section class="page-title-banner" style="background-image:url(<?php echo $gym[0]->gymImage; ?>);">
         <div class="container">
             <div class="row m-0 align-items-end detail-swap">
                 <div class="tr-list-wrap">
                     <div class="tr-list-detail">
-                        <div class="tr-list-thumb">
+                        <!--<div class="tr-list-thumb">
                             <img src="assets/img/go-gyms-60.png" class="img-responsive" alt="" />
-                        </div>
+                        </div>-->
                         <div class="tr-list-info">
                             <h4><?php echo $gym[0]->gymName; ?></h4>
                             <p><?php echo $gym[0]->gym_address ?></p>
@@ -226,6 +226,41 @@ include 'header.php';
                 <!-- Sidebar Start -->
                 <div class="col-md-4 col-sm-12">
                     <!-- Book now -->
+                    <div class="tr-single-box">
+                        <div class="tr-single-header">
+                            <h4><i class="ti-direction"></i> Gym Timing</h4>
+                        </div>
+
+                        <div class="tr-single-body">
+                            <table class="table table-striped table-2 table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Time Slot</th>
+                                        <th>Opening Time</th>
+                                        <th>Closing Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Morning</td>
+                                        <td><?php echo $gym[0]->open_mg_time; ?></td>
+                                        <td><?php echo $gym[0]->close_mg_time; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Afternoon</td>
+                                        <td><?php echo $gym[0]->after_open_time; ?></td>
+                                        <td><?php echo $gym[0]->after_close_time; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Evening</td>
+                                        <td><?php echo $gym[0]->open_evng_time; ?></td>
+                                        <td><?php echo $gym[0]->close_evng_time; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
                     <div class="tr-single-box">
                         <div class="tr-single-header">
                             <h4><i class="ti-calendar"></i> Booking</h4>
