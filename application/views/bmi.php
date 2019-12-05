@@ -15,48 +15,7 @@ include 'header.php';
     </div>
     <!-- ============================ Page Title End ================================== -->
 
-<?php
-// BMI calculator
-// Coded on 1/14/18, Updated on 1/15/18 to include Metric options/conversions
-// Used the following educational resources to determine the BMI formula:
-// http://extoxnet.orst.edu/faqs/dietcancer/web2/twohowto.html
-// http://www.medcalc.com/body.html
 
-// process data submitted in form
-if(isset($_POST['givems']) && ($_POST['givems'])== "Submit"){
-    // extract the data and assign automatically to variables
-    extract($_POST);
-
-    // now, using these variables, process the user's BMI and report it
-    //first, determine the unit of measurement the user chose -- if Standard...
-
-        // convert from lbs to kg
-        $adjusted_weight = $weight * 0.45359237;
-        // convert from inches to m
-        $adjusted_height = $height * 0.0254;
-        // square the height variable
-        $adjusted_height_final = $adjusted_height * $adjusted_height;
-        // divide the weight by the squared height to get the BMI value
-        $prep_bmi = $adjusted_weight/$adjusted_height_final;
-        $bmi = number_format($prep_bmi, 1);
-        // and finally announce the result
-        // center the result
-        echo "<center>";
-        echo "Your BMI is $bmi. ";
-    if($bmi > '18.5' && $bmi < '25') {  echo "<span style='color:#2ed02e;padding-top: 5%;'>You are considered within normal BMI range.</span><br /><br />";
-    } elseif($bmi < '18.5') { echo "<span style='color:#2ed02e;padding-top: 5%;'>You are considered underweight.</span><br /><br />";
-    } elseif($bmi >= '25' && $bmi < '30') { echo "<span style='color:#2ed02e;padding-top: 5%;'>You are considered overweight.</span><br /><br />";
-    } elseif($bmi >= '30' && $bmi < '40') { echo "You are considered obese.<br /><br />";
-    } elseif($bmi >= '40') { echo "You are considered extremely obese.<br /><br />";
-    }
-
-        // close the centering
-        echo "</center>";
-
-        // elseif unit chosen is Metric, continue accordingly
-
-} // close extract post
-?>
 
     <!-- ============================ Say Hello Start ================================== -->
     <section>
@@ -64,22 +23,32 @@ if(isset($_POST['givems']) && ($_POST['givems'])== "Submit"){
 
             <div class="row mt-5 align-items-center">
 
-                <div class="col-lg-3 col-md-3">
+                <div class="col-lg-2 col-md-2">
 
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <center><h2> BMI Calculator </h2></center>
-                    <div id="bmiform">
-                        <b>Please enter your measurements below.
-                        <form id="bmicalc" name="bmicalc" method="post">
-                            Weight (in lbs): <input type="text" name="weight" class="form-control">
-                            Height (in inches): <input type="text" name="height" class="form-control">
-                            <br>
-                            <input type="submit" name="givems" id="givems" class="btn btn-primary" value="Submit"/>
-                        </form>
+                <div class="col-lg-8 col-md-8">
+                    <h1>Body Mass Index Calculator</h1>
+                    <p>Enter your height:
+                        <input type="text" id="height" />
+                        <select type="multiple" id="heightunits">
+                            <option value="inches" selected="selected">inches</option>
+                            <option value="metres">metres</option>
 
-                    </div>
-                <div class="col-lg-3 col-md-3">
+                        </select>
+                    </p>
+                    <p>Enter your weight:
+                        <input type="text" id="weight" />
+                        <select type="multiple" id="weightunits">
+                            <option value="kg" selected="selected">kilograms</option>
+                            <option value="lb">pounds</option>
+                        </select>
+                    </p>
+                    <input type="button" value="computeBMI" onclick="computeBMI()"/>
+                    <h1>Your BMI is: <span id="output">?</span></h1>
+
+                    <h2>This means you are: value = <span id='comment'></span> </h2>
+                </div>
+                <div class="col-lg-2 col-md-2">
 
                 </div>
 
@@ -89,5 +58,29 @@ if(isset($_POST['givems']) && ($_POST['givems'])== "Submit"){
     </section>
     <div class="clearfix"></div>
     <!-- ============================ Say Hello End ================================== -->
+<script>
+    function computeBMI() {
+        //Obtain user inputs
+        var height = Number(document.getElementById("height").value);
+        var heightunits = document.getElementById("heightunits").value;
+        var weight = Number(document.getElementById("weight").value);
+        var weightunits = document.getElementById("weightunits").value;
+
+
+        //Convert all units to metric
+        if (heightunits == "inches") height /= 39.3700787;
+        if (weightunits == "lb") weight /= 2.20462;
+
+        //Perform calculation
+        var BMI = weight / Math.pow(height, 2);
+        //Display result of calculation
+        document.getElementById("output").innerHTML = Math.round(BMI * 100)/100;
+        if (BMI < 18.5) document.getElementById("comment").innerHTML = "Underweight";
+        if (BMI >= 18.5 && BMI <= 25) document.getElementById("comment").innerHTML = "Healthy range";
+        if (BMI >= 25 && BMI < 30) document.getElementById("comment").innerHTML = "Overweight";
+        /*if (BMI > 30) document.getElementById("comment").innerHTML = "Overweight";*/
+        document.getElementById("answer").value = output;
+    }
+</script>
 <?php
 include 'footer.php';

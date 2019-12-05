@@ -60,7 +60,7 @@ include 'header.php';
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" id="mobileUser"  maxlength="10" name="userName" class="form-control" placeholder="Name" required="">
+                                            <input type="text" id="mobileUser"   name="userName" class="form-control" placeholder="Name" required="">
                                         </div>
                                     </div>
 
@@ -116,7 +116,7 @@ include 'header.php';
 
                             <div class="row mrg-bot-20">
                                 <div class="col-md-6">
-                                    <a href="<?php echo base_url('Auth/FacebookLogin'); ?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
+                                    <a href="<?php echo base_url('Auth/index'); ?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
                                 </div>
                                 <div class="col-md-6">
                                     <a href="<?php echo base_url('Google/oauth2callback'); ?>" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>

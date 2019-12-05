@@ -42,6 +42,7 @@ include 'header2.php';
 								  <a class="nav-link" href="<?php echo base_url('Gogym/addgallery'); ?>"><i class="ti-medall-alt"></i>Add Gallery</a>
                                 <a class="nav-link" href="<?php echo base_url('Gogym/listgallery'); ?>"><i class="ti-bookmark-alt"></i>List Gallery</a>
                                 <a class="nav-link" href="<?php echo base_url('Gogym/bookingdetails'); ?>" ><i class="ti-credit-card"></i>Booking Details</a>
+                                <a class="nav-link" href="<?php echo base_url('Gogym/success_booking'); ?>" ><i class="ti-credit-card"></i>success Booking List</a>
                                 <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
 							</div>
 						</div>

@@ -102,7 +102,11 @@ include 'header.php';
                                         <li class="nav-item" style="width: 50%;">
                                             <a class="nav-link active" id="credit-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="credit" aria-selected="true">
                                                <!-- <button class="btn btn-payment" type="submit">Pay Now</button>-->
-                                                <a href="<?php echo base_url('Gogym/tokenmoney'); ?>" class="btn btn-payment">Pay Now</a>
+                                                <?php
+                                                $totalPrice = $price*$person;
+
+                                                ?>
+                                                <a href="<?php echo base_url('Gogym/tokenmoney/'.$totalPrice); ?>" class="btn btn-payment">Pay Now</a>
                                             </a>
                                         </li>
 
@@ -170,9 +174,12 @@ include 'header.php';
                             <li>Booking Amount <span class="calTotal" >
 
                             <?php echo $totalPrice; ?></span></li>
-                            <li><input type="checkbox" class="coupon_price" name="coupon_price" value="coupon_price">&nbsp;Coupon Discount <span class="main-color" id="couponprice"><i class="fa fa-inr"></i>0.00</span></li>
+                            <li style="display: none" id="couponamt">Coupon Discount <span class="main-color couponprice2" id="couponprice2"><i class="fa fa-inr"></i>0</span></li>
                             <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
-                            <li class="total-costs">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?></span></li>
+                            <input type="hidden" id="booking_price" name="booking_price" value="<?= $totalPrice?>">
+                            <li class="total-costs" id="totalamt"> Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?> </span></li>
+                            <li class="total-costs" id="totalamt2" style="display: none">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr" id="couponprice"></i></span></li>
+
                         </ul>
                     </div>
                 </div>
@@ -187,7 +194,7 @@ include 'footer.php';
 ?>
 <script>
 
-    var value = 0 ;
+    var value;
     var price = '<?php echo $price; ?>';
     var person = '<?php echo $person; ?>';
     var insurance = '<?php echo $insurance; ?>';
@@ -198,6 +205,9 @@ include 'footer.php';
     $(function(){
         $('input[type="radio"]').click(function(){
             value = $(this).attr("id");
+            var cuvalue = $('.couponprice2').text();
+
+            alert(cuvalue);
             if ($(this).is(':checked'))
             {
                 $(".calTotal").text('₹' + value * person);
@@ -230,50 +240,60 @@ include 'footer.php';
     });
 
 
-//=============================
-
-
-
 </script>
 
 <script>
 
 
-
-    var value =0;
     $( document ).ready(function() {
         $("#submit2").click(function(){
             var gymname = $("#gymname").val();
             var coupon = $("#coupon").val();
             var total_price  = $("#total_price").val();
-            // alert(state);
             $.ajax({
                 method:"post",
                 url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
                 //datatype:"json",
                 data:{gymname:gymname,coupon:coupon, total_price:total_price},
                 success:function(data){
-                    value = data;
+                    alert(data);
+
+                    if(data=== total_price)
+                    {
+                        value = 0;
+                        $('#couponamt').hide();
+                        alert('Invaild coupon');
+                    }
+                    else
+                    {
+                        value = data;
+                        var couponamt =(total_price - data ).toFixed(2);;
+                        $('#couponprice2').html(couponamt);
+                        $('#couponamt').show();
+                    }
+                        $('#totalamt').hide();
+
+                    $('#totalamt2').show();
                     $('#couponprice').html(data);
+
+                    $('booking_price').val(data);
+
+
+
                 }
             });
         });
 
     });
 
-    $ ('.coupon_price').click(function(){
-        if ($(this).prop('checked')) {
-
-            // if (value != isNumeric(NaN)) {
-            //     alert('hhhh');
-                var price = '<?php echo $totalPrice; ?>';
-
-                var total = price - value;
-                $(".calTotal").text('₹' + total);
-                // alert(total);
-            // }
-        }
-    });
+    //$ ('.coupon_price').click(function(){
+    //    if ($(this).prop('checked')) {
+    //            var price = '<?php //echo $totalPrice; ?>//';
+    //            var total = price - value;
+    //            $(".calTotal").text('₹' + total);
+    //
+    //    }
+    //});
 </script>
 
 <?php

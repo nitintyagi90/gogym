@@ -297,6 +297,8 @@ class Gogym extends CI_Controller {
 		$data1=$this->GogymModel->profiledetails($user_id);
         $query = $this->db->get('profession');
         $result = $query->result();
+
+
         $data2=$this->GogymModel->activitydetails();
 
         $this->db->where('user_id', $user_id); // OTHER CONDITIONS IF ANY
@@ -348,6 +350,34 @@ class Gogym extends CI_Controller {
         $categoryList = $category->result();
         $data['gym']=$categoryList;
         $this->load->view('filter',$data);
+    }
+    public function confirm_booking(){
+
+        $order_ID = $this->input->post('order_id');
+    $data = array(
+        'status' => '1',
+    );
+
+        $this->db->where('order_id', $order_ID);
+        $this->db->update('booking', $data);
+
+        redirect('Gogym/bookingdetails');
+    }
+    public function success_booking(){
+        $query = $this->db->get_where('booking',array('gymUserID' => $_SESSION['session_id'],'status'=>'1'));
+        $result = $query->result();
+
+
+        $query1 = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
+        $result1 = $query1->result();
+
+
+
+        $data =array(
+            'bookingDetail'=>$result,
+            'user'=>$result1
+        );
+        $this->load->view('success_booking.php',$data);
     }
     public function locationFilter(){
         $location = $this->input->post('location');
@@ -674,8 +704,8 @@ class Gogym extends CI_Controller {
         $gymUserID = $_POST['gymUserID'];
         $user_id = $_SESSION['session_id'];
         $plan_type = $_POST['plantype'];
+        $bookingPrice = $_POST['booking_price'] ;
         $bookingDate = $date = date('d-m-Y');
-
 
 
 
@@ -684,6 +714,12 @@ class Gogym extends CI_Controller {
         $query = $this->db->get_where('gym', array('gym_id' => $gymId));
 
         $result = $query->result();
+
+
+
+        $gym_name = $result[0]->gymName ;
+
+        $gym_add = $result[0]->gym_address ;
 
         $gymuser = $this->db->get_where('user', array('id' => $result[0]->user_id));
 
@@ -700,7 +736,9 @@ class Gogym extends CI_Controller {
 
         ownerSms($gymMobile,$verification,$ownername,$order_id);
 
-        sms91($mobile,$verification);
+//==== new=======
+        sms_user($mobile,$verification ,$name ,$order_id , $gym_name ,$gym_add);
+//===============
         $data = array(
             'name'=>$name,
             'email'=>$email,
@@ -715,12 +753,16 @@ class Gogym extends CI_Controller {
             'gym_id'=>$gymId,
             'verificationCode'=>$otp,
             'plan_type'=>$plan_type,
+            'gym_name' => $gym_name ,
+            'totalpay' => $bookingPrice,
         );
+
+
         $this->db->insert('booking', $data);
         $response = array(
-          'userName'=>$name,
-          'bookingId'=>$order_id,
-          'Verification'=>$verification,
+            'userName'=>$name,
+            'bookingId'=>$order_id,
+            'Verification'=>$verification,
         );
         $this->load->view('thankyou',$response);
     }
@@ -732,9 +774,14 @@ class Gogym extends CI_Controller {
         $table='profile_user';
         $where='id';
         $data1=$this->GogymModel->profiledetails($id);
+
+        $query = $this->db->get('profession');
+        $result = $query->result();
+
         $res = array(
             'user'=>$data,
             'profile_user'=>$data1,
+            'profession'=> $result ,
         );
         $this->load->view('user_profile.php',$res);
     }
@@ -921,8 +968,11 @@ class Gogym extends CI_Controller {
     public function register_partner(){
 	    $this->load->view('register_partner.php');
     }
-    public function tokenmoney(){
-        $this->load->view('tokenmoney/TxnTest');
+    public function tokenmoney($amount){
+
+        $data['amount']=$amount;
+        $this->load->view('tokenmoney/TxnTest',$data);
+
     }
     public function placeorderonline(){
         $this->load->view('TxnTest.php');
@@ -936,7 +986,20 @@ class Gogym extends CI_Controller {
     public function termsrule(){
 	    $this->load->view('termsrule.php');
     }
+    public function user_bookingdetails(){
 
+        $bookingCount = $this->db->count_all_results();
+        $query = $this->db->get_where('booking', array('user_id' => @$_SESSION['session_id']));
+        $result_booking = $query->result();
+
+        $response= array(
+
+            'bookingCount'=>$bookingCount,
+            'booking'=>$result_booking,
+        );
+
+        $this->load->view('user_bookingdetails',$response);
+    }
     //=======Coupon Detail =========
 
     function fetch_coupon_detail(){
@@ -952,6 +1015,14 @@ class Gogym extends CI_Controller {
 
         $res = $q->row();
 //        print_r($res) ;
+        $dis = $total_price * ($res->coupon_percent/100 );
+
+        $final = $total_price - $dis ;
+        $data = array(
+            'final' => $final ,
+            'coupon_percent' => $res->coupon_percent ,
+            'min_value' => $res->coupon_min_value ,
+        );
 
         if($total_price >= $res->coupon_min_value){
 
@@ -961,20 +1032,31 @@ class Gogym extends CI_Controller {
             $dis = $total_price * ($res->coupon_percent/100 );
             if($dis > $res->coupon_max_discount){
 
-               echo  $dis = $res->coupon_max_discount ;
+               $dis = $res->coupon_max_discount ;
+                echo $final = $total_price - $dis ;
+               $data = array(
+                   'final' => $final ,
+                   'coupon_percent' => $res->coupon_percent ,
+                   'min_value' => $res->coupon_min_value ,
+               );
+                   print_r($data) ;
+              // echo $final = $total_price - $dis ;
             }
             else{
-
-                echo $dis ;
+                print_r($data) ;
+//                echo $dis ;
+//                echo $final = $total_price - $dis ;
             }
         }
         else{
-            echo "Not min value " ;
+          echo "Not min value" ;
+//            echo $total_price ;
          }
     }
     else{
 
-        echo "Invaild coupon";
+//        echo "Invaild coupon";
+        echo $total_price ;
         }
 
 

@@ -5,9 +5,25 @@ class Auth extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+        //$this->load->library('facebook');
 		$this->load->helper('url', 'form');
 		$this->load->model('GogymModel');
 	}
+/*    public function index(){
+        $userData = array();
+        $data['authUrl'] =  $this->facebook->login_url();
+        if($this->facebook->is_authenticated()){
+            $userProfile = $this->facebook->request('get', '/me?fields=id,first_name,last_name,email,gender,locale,picture');
+            echo "<pre>";
+            print_r($userProfile);
+            die;
+        }
+        else
+        {
+            $data['authUrl'] =  $this->facebook->login_url();
+        }
+        $this->load->view('register',$data);
+    }*/
 	public function login(){
 		$user_mobile = $_POST['user_mobile'];
 		$user_password= $_POST['user_password'];
@@ -435,6 +451,8 @@ class Auth extends CI_Controller {
 
     }
     public function saveGym(){
+
+
         if($_SERVER['REQUEST_METHOD']=='POST'){
             $gymName = $this->input->post('gymName');
             $totalavailability = $this->input->post('totalavailability');
@@ -461,11 +479,35 @@ class Auth extends CI_Controller {
             $cafternoon = $this->input->post('cafternoon');
             $oevening = $this->input->post('oevening');
             $cevening = $this->input->post('cevening');
-            $path1=  base_url().'images/';
+            $path1= base_url().'images/';
             $upload_image1=$_FILES["gymImage"]["name"];
 
+
+
+
+//======================GOgym series =======
+            $sql2 = 'select gym_id from gym ORDER BY id desc limit 0,1';
+            $row2 = $this->db->query($sql2);
+
+            if($row2->row())
+            {
+                $result = $row2->row();
+                $a = substr($result->gym_id,5);
+                $c = $a+'1';
+                $randnum = "Gogym".$c;
+            }
+            else
+            {
+                $randnum = 'Gogym2000';
+            }
+
+//======================================
+
+
             if(empty($upload_image1)){
+
                 $data = array(
+                    'gym_id' => $randnum ,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -491,11 +533,15 @@ class Auth extends CI_Controller {
                     'close_evng_time'=>$cevening,
 
                 );
+
+
+
                 $this->db->select('*');
                 $this->db->where('user_id', $user_id);
                 $query = $this->db->get('gym');
                 $cnt= $query->num_rows();
                 if($cnt==0) {
+
                     $this->db->insert('gym', $data);
                     $insert_id = $this->db->insert_id();
                     foreach ($amenities as $am){
@@ -539,6 +585,7 @@ class Auth extends CI_Controller {
                     $img_name1 = '';
                 }
                 $data = array(
+                    'gym_id' => $randnum ,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -564,6 +611,8 @@ class Auth extends CI_Controller {
                     'close_evng_time'=>$cevening,
                     'gymImage'=>$img_name1,
                 );
+
+
                 $this->db->select('*');
                 $this->db->where('user_id', $user_id);
                 $query = $this->db->get('gym');
@@ -574,7 +623,9 @@ class Auth extends CI_Controller {
                     $insert_id = $this->db->insert_id();
                     foreach ($amenities as $am){
                         $dataresult = array(
-                            'gym_id' => $insert_id,
+// 'gym_id' => $insert_id,
+
+                            'gym_id' => $randnum,
                             'user_id' => $user_id,
                             'aminitiesName' => $am,
 
@@ -584,7 +635,9 @@ class Auth extends CI_Controller {
 
                     foreach ($categoryName as $cat){
                         $categoryarray = array(
-                            'gym_id' => $insert_id,
+// 'gym_id' => $insert_id,
+
+                            'gym_id' => $randnum,
                             'user_id' => $user_id,
                             'categoryName' => $cat,
 

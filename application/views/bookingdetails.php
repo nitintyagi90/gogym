@@ -43,12 +43,14 @@ include 'header2.php';
                         <a class="nav-link" href="<?php echo base_url('Gogym/addgallery'); ?>"><i class="ti-medall-alt"></i>Add Gallery</a>
                         <a class="nav-link" href="<?php echo base_url('Gogym/listgallery'); ?>"><i class="ti-bookmark-alt"></i>List Gallery</a>
                         <a class="nav-link active" href="<?php echo base_url('Gogym/bookingdetails'); ?>" ><i class="ti-credit-card"></i>Booking Details</a>
+                        <a class="nav-link" href="<?php echo base_url('Gogym/success_booking'); ?>" ><i class="ti-credit-card"></i>success Booking List</a>
                         <a class="nav-link" href="<?php echo base_url('Auth/logout');?>"><i class="ti-shift-right"></i>LogOut</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
                 <div >
+                    <img src="<?php echo base_url();?>web/assets/img/gobg.png" style="width: 100%;">
                     <!-- Notification Info -->
                     <div class="tr-single-box">
 
@@ -65,6 +67,8 @@ include 'header2.php';
                                             <th>Booking ID</th>
                                             <th>User Name</th>
                                             <th>Plan Type</th>
+                                            <th>Price</th>
+                                            <th>Action</th>
                                             <!--<th>User Email ID</th>
                                             <th>User Mobile No</th>-->
 
@@ -76,13 +80,28 @@ include 'header2.php';
                                         foreach ($bookingDetail as $book){
                                             $i++;
                                             ?>
-                                            <tr>
+
 
                                                 <td><?php echo $book->order_id; ?></td>
                                                 <td><?php echo $book->name; ?></td>
                                                 <td><?php echo $book->plan_type; ?></td>
+                                                <td><?php echo $book->totalpay; ?></td>
+                                            <?php  if($book->status == 0 ){ ?>
+                                                <td>
+                                                    <form method="post" action="<?php echo base_url('Gogym/confirm_booking');?>">
+                                                        <input type="hidden" name="order_id" value="<?php echo $book->order_id; ?>">
 
+                                                        <button class="btn btn-warning">Confirm Booking</button>
+                                                    </form>
+                                                </td>
+                                                <?php }else{ ?>
 
+                                                <td>
+
+                                                    <button class="btn btn-success" > Booking Success</button>
+
+                                                </td>
+                                                <?php } ?>
                                             </tr>
                                         <?php } ?>
 

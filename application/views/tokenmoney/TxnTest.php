@@ -4,7 +4,7 @@
 	header("Cache-Control: no-cache");
 	header("Expires: 0");
 	$_SESSION['onlineorderid']="Request" . rand(00000,11111);
-$_SESSION['onlineprice']=$_GET['tokenmoney'];
+	$_SESSION['onlineprice']=$amount ;//$_GET['tokenmoney'];
 /*$_SESSION['onlinecomname']=$_GET['comname'];
 $_SESSION['onlinegstno']=$_GET['gstno'];
 $_SESSION['onlinecomnumber']=$_GET['comnumber'];
@@ -35,7 +35,7 @@ $_SESSION['onlineaddress']=$_GET['address'];*/
 				
 					<input title="TXN_AMOUNT" tabindex="10"
 						type="hidden" name="TXN_AMOUNT"
-						value="<?php echo $_GET['tokenmoney']; ?>">
+						value="<?php echo $amount; ?>">
 
 							<input title="comname" tabindex="10"
 						type="hidden" name="comname"
