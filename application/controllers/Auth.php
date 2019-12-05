@@ -472,6 +472,7 @@ class Auth extends CI_Controller {
             $allowGym = $this->input->post('allowGym');
             $categoryName = $this->input->post('categoryName');
             $gymaddress = $this->input->post('gymaddress');
+            $gym_location = $this->input->post('gym_location');
             $user_id = $_SESSION['session_id'];
             $omorning = $this->input->post('omorning');
             $cmorning = $this->input->post('cmorning');
@@ -519,6 +520,7 @@ class Auth extends CI_Controller {
                     'ifsc' => $account_ifsc,
                     'organization' => $org_name,
                     'gym_address' => $gymaddress,
+                    'gym_location' => $gym_location,
                     'pinCode' => $gym_pin,
                     'gymCity' => $gymCity,
                     'totalavailability' => $totalavailability,
@@ -597,6 +599,7 @@ class Auth extends CI_Controller {
                     'ifsc' => $account_ifsc,
                     'organization' => $org_name,
                     'gym_address' => $gymaddress,
+                    'gym_location' => $gym_location,
                     'pinCode' => $gym_pin,
                     'gymCity' => $gymCity,
                     'totalavailability' => $totalavailability,

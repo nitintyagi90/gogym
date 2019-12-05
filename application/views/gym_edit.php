@@ -99,9 +99,13 @@ include 'header2.php';
                                             <input type="text" name="cevening" class="form-control" value="11:00">
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-12 col-sm-12">
+                                    <div class="form-group col-md-6 col-sm-12">
                                         <label>Gym Address</label>
                                         <textarea name="gymaddress" class="form-control" name="gymAddress"><?php echo @$profile_user[0]->gym_address ?></textarea>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-12">
+                                        <label>Google Map </label>
+                                        <input type="text" <?php echo @$profile_user[0]->gym_location ?> name="gym_location" class="form-control" required></input>
                                     </div>
 
                                     <div class="form-group col-md-6 col-sm-12">

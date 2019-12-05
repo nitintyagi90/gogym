@@ -334,12 +334,12 @@ include 'header.php';
                             <ul class="extra-service">
                                 <li>
                                     <div class="icon-box-icon-block">
-                                        <a href="http://maps.google.com/?q=" target="_blank">
+                                        <a href="<?php echo $gym[0]->gym_location?>" target="_blank">
                                             <div class="icon-box-round">
                                                 <i class="lni-map-marker"></i>
                                             </div>
                                             <div class="icon-box-text">
-                                                <a href="http://maps.google.com/?q=" target="_blank">
+                                                <a href="<?php echo $gym[0]->gym_location?>" target="_blank">
                                                     <?php echo $gym[0]->gym_address ?>
                                                 </a>
                                             </div>
