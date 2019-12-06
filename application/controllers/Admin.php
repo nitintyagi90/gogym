@@ -1071,9 +1071,46 @@ class Admin extends CI_Controller
 
     public function transaction(){
 
+        $q= $this->db->select()
+            ->from('gym')
+            ->get();
+
+        $result = $q->result();
+
+        $data['gym'] = $result ;
         $data['message'] = $this->Adminmodel->transaction();
         $this->load->view('Admin/transaction.php', $data);
 
     }
+    //===============date filter========
+
+    function datefilter()
+    {
+        $date1 = $this->input->post('date1');
+        $date2 = $this->input->post('date2');
+        $gymid = $this->input->post('gymid');
+
+// if($date1 == null) {
+//
+// $new_date1 = $this->input->post('date1');
+// $new_date2 = $this->input->post('date2');
+// }
+//
+// else{
+// $new1 = explode("-", $date1);
+// $new2 = explode("-", $date2);
+//
+// $new_date1 = $new1[2] . "-" . $new1[1] . "-" . $new1[0];
+// $new_date2 = $new2[2] . "-" . $new2[1] . "-" . $new2[0];
+//
+// }
+
+        $data['message'] = $this->Adminmodel->datefilter($gymid ,$date1 , $date2) ;
+        $data['gym'] = $this->Adminmodel->gym_detail() ;
+
+        $this->load->view('Admin/transaction.php', $data);
+
+    }
+//==================================
 }
 

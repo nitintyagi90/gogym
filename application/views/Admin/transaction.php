@@ -26,27 +26,32 @@ include 'header.php';
 
         <div class="row">
             <div class="col-12">
-                <div class="row">
-                    <div class="col-md-2">
-                        <label>Select Gym</label>
-                        <select class="form-control">
-                            <option>---Select Gym---</option>
-                            <option>Gold Gym</option>
-                            <option>Golden Gym</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <label>From Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col-md-2">
-                        <label>To Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col-md-2" style="padding-top: 3%">
-                        <input type="submit" class="btn btn-primary" value="Search">
-                    </div>
-                </div><br>
+                <form action="<?= base_url('Admin/datefilter')?>" method="post" >
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Select Gym</label>
+                            <select  name="gymid" class="form-control" required>
+                                <option>---Select Gym---</option>
+
+                                <?php foreach ($gym as $res) { ?>
+                                    <option value="<?= $res->gym_id ;?>"><?= $res->gymName; ?></option>
+                                <?php } ?>
+
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label>From Date</label>
+                            <input name="date1" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <label>To Date</label>
+                            <input name="date2" type="date" class="form-control">
+                        </div>
+                        <div class="col-md-2" style="padding-top: 3%">
+                            <input type="submit" class="btn btn-primary" value="Search">
+                        </div>
+                    </div><br>
+                </form>
                 <div class="card m-b-30">
                     <div class="card-body">
 
@@ -63,8 +68,9 @@ include 'header.php';
                                 </thead>
 
                                 <tbody>
-                                <?php $i=1; foreach ($message as  $value) {
-                                ?>
+                                <?php
+                                $i=1; foreach ($message as  $value) {
+                                    ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
                                         <td><?=$value['cur_date']?></td>
@@ -72,7 +78,11 @@ include 'header.php';
                                             <?=$value['gym_name']?>
                                         </td>
                                         <td><?=$value['totalpay']?></td>
-                                        <td>Online</td>
+                                        <?php if(	$value['payment_type'] == "offline"){ ?>
+                                            <td >Pay At Gym</td>
+                                        <?php }else{ ?>
+                                            <td>Pay At GoGyms</td>
+                                        <?php     } ?>
                                     </tr>
                                 <?php }?>
                                 </tbody>

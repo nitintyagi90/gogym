@@ -710,7 +710,7 @@ class Gogym extends CI_Controller {
         $plan_type = $_POST['plantype'];
         $bookingPrice = $_POST['booking_price'] ;
         $payment_type = $_POST['payment_type'] ;
-        $bookingDate = $date = date('d-m-Y');
+        $bookingDate = $date = date('Y-m-d');
 
 
 

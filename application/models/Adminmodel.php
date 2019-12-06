@@ -236,4 +236,37 @@ class Adminmodel extends CI_Model{
         $result = $query->result_array();
         return $result;
     }
+    function gym_detail(){
+
+        $q= $this->db->select()
+            ->from('gym')
+            ->get();
+
+        return $q->result();
+    }
+
+//=======date filter ===============
+    public function datefilter($gymid, $date1 ,$date2){
+
+        if($date1 && $date2) {
+
+            $query = $this->db->select()
+                ->where(array('gym_id'=> $gymid, 'status'=>'1'))
+                ->where('cur_date >=', $date1)
+                ->from('booking')
+                ->where('cur_date <=', $date2)
+                ->get();
+            $result = $query->result_array();
+        }else{
+            $query = $this->db->select()
+                ->where(array('gym_id'=> $gymid, 'status'=>'1'))
+                ->from('booking')
+                ->get();
+
+            $result = $query->result_array();
+        }
+        return $result;
+
+    }
+//====================================
 }
