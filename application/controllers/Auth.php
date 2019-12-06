@@ -658,5 +658,60 @@ class Auth extends CI_Controller {
             }
         }
     }
+    //===========Google login =================
 
+
+    public function Urllogin($insert_id){
+
+
+        $table='user';
+
+        $q= $this->db->select()
+            ->where('id', $insert_id)
+            ->from('user')
+            ->get();
+
+
+
+        $login=$q->row();
+
+        if($login){
+            $query = $this->db->get('profession');
+            $profession = $query->result();
+            $newdata = array(
+                'session_id'  => $login->id,
+                'session_name'  => $login->owner_name,
+                'user_type'  => $login->user_type,
+                'response' => 'true',
+            );
+            $table='user';
+            $where='id';
+            $data=$this->GogymModel->userdetails($login->id);
+            $profileData=$this->GogymModel->profiledetails($login->id);
+
+            $table='profile_user';
+            $where='id';
+
+            $this->db->where('user_id', $login->id); // OTHER CONDITIONS IF ANY
+            $this->db->from('booking'); //TABLE NAME
+            $bookingCount = $this->db->count_all_results();
+            $query = $this->db->get_where('booking', array('user_id' => @$_SESSION['session_id']));
+            $result_booking = $query->result();
+            $response= array(
+                'user'=>$data,
+                'profession'=>$profession,
+                'profile_user'=>$profileData,
+                'bookingCount'=>$bookingCount,
+                'booking'=>$result_booking,
+            );
+            $this->session->set_userdata($newdata);
+            $this->session->set_flashdata('Successfully','Login Successfully');
+            $this->load->view('user_dashboard.php',$response);
+        }else{
+            $this->session->set_flashdata('fail','Invalid login detail');
+            redirect('gogym/login');
+        }
+    }
+
+//========================================================
 }

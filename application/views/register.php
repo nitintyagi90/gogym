@@ -116,10 +116,10 @@ include 'header.php';
 
                             <div class="row mrg-bot-20">
                                 <div class="col-md-6">
-                                    <a href="<?php echo base_url('Auth/index'); ?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
+                                    <a href="<?=$authUrl?>" title="" class="fb-log-btn log-btn"><i class="fa fa-facebook"></i>SignUp With Facebook</a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="<?php echo base_url('Google/oauth2callback'); ?>" title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>
+                                    <a href="<?php echo base_url('login/google_login'); ?>"  title="" class="gplus-log-btn log-btn"><i class="fa fa-google-plus"></i>SignUp With Google+</a>
                                 </div>
                             </div>
 

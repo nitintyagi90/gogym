@@ -111,8 +111,10 @@ include 'header.php';
                                         </li>
 
                                         <li class="nav-item" style="width: 50%;">
+                                            <input type="hidden" name="payment_type" value="offline">
                                            <!-- <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">-->
                                                 <input type="submit" class="btn btn-success" value="Pay At Gym">
+
                                            <!-- </a>-->
                                         </li>
                                     </ul>
@@ -256,8 +258,7 @@ include 'footer.php';
                 //datatype:"json",
                 data:{gymname:gymname,coupon:coupon, total_price:total_price},
                 success:function(data){
-                    alert(data);
-
+                    var result = JSON.parse(data);
                     if(data=== total_price)
                     {
                         value = 0;
@@ -267,16 +268,15 @@ include 'footer.php';
                     else
                     {
                         value = data;
-                        var couponamt =(total_price - data ).toFixed(2);;
-                        $('#couponprice2').html(couponamt);
+                        var couponamt =(total_price - data ).toFixed(2);
+                        $('#couponprice2').html(result.coupon_percent);
                         $('#couponamt').show();
                     }
-                        $('#totalamt').hide();
-
+                    $('#totalamt').hide();
                     $('#totalamt2').show();
-                    $('#couponprice').html(data);
+                    $('#couponprice').html(result.final);
 
-                    $('booking_price').val(data);
+                    $('booking_price').val(result.final);
 
 
 

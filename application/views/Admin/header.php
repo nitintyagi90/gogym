@@ -161,6 +161,9 @@
 						<a href="<?=base_url('Admin/profession')?>"><i class="mdi mdi-animation"></i>Add Profession</a>
 					</li>
                     <li class="has-submenu ">
+                        <a href="<?=base_url('Admin/transaction')?>"><i class="mdi mdi-animation"></i>Transaction Details</a>
+                    </li>
+                    <li class="has-submenu ">
                         <a href="<?=base_url('Admin/ListGym')?>"><i class="mdi mdi-animation"></i>Gym Owner</a>
                     </li>
 

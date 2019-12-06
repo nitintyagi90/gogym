@@ -164,8 +164,12 @@ class Gogym extends CI_Controller {
     }
     public function register()
     {
-        $this->load->view('register');
+        $this->load->library('facebook');
+        $data['authUrl'] =  $this->facebook->login_url();
+
+        $this->load->view('register' , $data);
     }
+
     public function forgot()
     {
         $this->load->view('forgot');
@@ -705,6 +709,7 @@ class Gogym extends CI_Controller {
         $user_id = $_SESSION['session_id'];
         $plan_type = $_POST['plantype'];
         $bookingPrice = $_POST['booking_price'] ;
+        $payment_type = $_POST['payment_type'] ;
         $bookingDate = $date = date('d-m-Y');
 
 
@@ -755,6 +760,7 @@ class Gogym extends CI_Controller {
             'plan_type'=>$plan_type,
             'gym_name' => $gym_name ,
             'totalpay' => $bookingPrice,
+            'payment_type' => $payment_type,
         );
 
 
@@ -1030,20 +1036,24 @@ class Gogym extends CI_Controller {
 //            echo $percent ;
 
             $dis = $total_price * ($res->coupon_percent/100 );
+
             if($dis > $res->coupon_max_discount){
 
                $dis = $res->coupon_max_discount ;
+
                 echo $final = $total_price - $dis ;
                $data = array(
                    'final' => $final ,
                    'coupon_percent' => $res->coupon_percent ,
                    'min_value' => $res->coupon_min_value ,
                );
-                   print_r($data) ;
-              // echo $final = $total_price - $dis ;
+                $json = json_encode($data);
+                echo $json;
+                // echo $final = $total_price - $dis ;
             }
             else{
-                print_r($data) ;
+                $json = json_encode($data);
+                echo $json;
 //                echo $dis ;
 //                echo $final = $total_price - $dis ;
             }

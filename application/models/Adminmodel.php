@@ -196,7 +196,14 @@ class Adminmodel extends CI_Model{
         $result = $query->result_array();
         return $result;
     }
-
+    public function transaction(){
+        $this->db->select('*');
+        $this->db->from('booking');
+        $this->db->where('status=1');
+        $query = $this->db->get();
+        $result = $query->result_array();
+        return $result;
+    }
     public function category(){
         $this->db->select('*');
         $this->db->from('category');

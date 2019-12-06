@@ -1017,6 +1017,7 @@ class Admin extends CI_Controller
                 );
                 $this->db->where('event_id', $id);
                 $this->db->update('event', $data);
+
                 redirect('Admin/event_list');
             }
 
@@ -1065,6 +1066,13 @@ class Admin extends CI_Controller
                 redirect('Admin/testimonial');
             }
         }
+
+    }
+
+    public function transaction(){
+
+        $data['message'] = $this->Adminmodel->transaction();
+        $this->load->view('Admin/transaction.php', $data);
 
     }
 }
