@@ -269,7 +269,7 @@ include 'footer.php';
                     {
                         value = data;
                         var couponamt =(total_price - data ).toFixed(2);
-                        $('#couponprice2').html(result.coupon_percent);
+                        $('#couponprice2').html(result.discount);
                         $('#couponamt').show();
                     }
                     $('#totalamt').hide();

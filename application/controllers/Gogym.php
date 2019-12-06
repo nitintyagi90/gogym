@@ -1028,6 +1028,7 @@ class Gogym extends CI_Controller {
             'final' => $final ,
             'coupon_percent' => $res->coupon_percent ,
             'min_value' => $res->coupon_min_value ,
+            'discount' =>$dis,
         );
 
         if($total_price >= $res->coupon_min_value){
