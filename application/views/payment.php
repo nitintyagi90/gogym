@@ -193,6 +193,8 @@ include 'footer.php';
 ?>
 <script>
     var value;
+
+    var applycoupan=0;
     var price = '<?php echo $price; ?>';
     var person = '<?php echo $person; ?>';
     var insurance = '<?php echo $insurance; ?>';
@@ -200,14 +202,34 @@ include 'footer.php';
     var cal = totalprice * insurance;
     var newTotal = cal / 100;
     var final = totalprice + newTotal;
+
     $(function(){
         $('input[type="radio"]').click(function(){
+            $(".insurance").prop("checked", false);
+            $(".appendvalue").html('₹ 0.0');
             value = $(this).attr("id");
-            // var cuvalue = $('.couponprice2').text();
-
-            //alert(cuvalue);
             if ($(this).is(':checked'))
             {
+                if(applycoupan===1){
+                    var gymname = $("#gymname").val();
+                    var coupon = $("#coupon").val();
+                    var total_price  = value * person;
+                    $.ajax({
+                        method:"post",
+                        url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                        data:{gymname:gymname,coupon:coupon, total_price:total_price},
+                        success:function(data){
+                            var result = JSON.parse(data);
+                            afterCoupan = result.final;
+                            var discountPrice = result.discount;
+                            var newCal = afterCoupan * insurance;
+                            var insuranceAdd = newCal / 100;
+                            var totalPriceappend = insuranceAdd + afterCoupan;
+                            $(".calTotal").text('₹' + afterCoupan);
+                            $(".couponprice2").text(result.discount);
+                        }
+                    });
+                }
                 $(".calTotal").text('₹' + value * person);
             }
         });
@@ -215,6 +237,30 @@ include 'footer.php';
 
     $ ('.insurance').click(function(){
         if ($(this).prop('checked')) {
+            if(applycoupan===1){
+                var gymname = $("#gymname").val();
+                var coupon = $("#coupon").val();
+                var total_price;
+                if(value!==undefined){
+                    total_price  = value * person;
+                }else{
+                    total_price = totalprice;
+                }
+                $.ajax({
+                    method:"post",
+                    url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                    data:{gymname:gymname,coupon:coupon, total_price:total_price},
+                    success:function(data){
+                        var result = JSON.parse(data);
+                        afterCoupan = result.final;
+                        var newCal = afterCoupan * insurance;
+                        var insuranceAdd = newCal / 100;
+                        var totalPriceappend = insuranceAdd + afterCoupan;
+                        $(".calTotal").text('₹' + totalPriceappend);
+                        $(".appendvalue").text('₹' + insuranceAdd);
+                    }
+                });
+            }
             if(value==undefined){
                 $(".calTotal").text('₹' + final);
                 $(".appendvalue").text('₹' + newTotal);
@@ -227,15 +273,32 @@ include 'footer.php';
                 $(".appendvalue").text('₹' + newTotal2);
                 }
         }else{
-            $(".appendvalue").text('₹0.00');
-            $(".calTotal").text('₹' + final);
-            $(".calTotal").text('₹' + totalprice);
+            if(applycoupan===1){
+                $(".appendvalue").text('₹0.00');
+                $(".calTotal").text('₹' + afterCoupan);
+                $(".calTotal").text('₹' + afterCoupan);
+            }else{
+                $(".appendvalue").text('₹0.00');
+               if(value===undefined){
+                   $(".appendvalue").text('₹0.00');
+                   $(".calTotal").text('₹' + final);
+                   $(".calTotal").text('₹' + totalprice);
+
+               }else{
+                   $(".calTotal").text('₹' + value*person);
+
+               }
+
+            }
+
+
+
          }
  });
 </script>
 
 <script>
-    $( document ).ready(function() {
+
         $("#submit2").click(function(){
             var gymname = $("#gymname").val();
             var coupon = $("#coupon").val();
@@ -243,10 +306,10 @@ include 'footer.php';
             $.ajax({
                 method:"post",
                 url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
-                //datatype:"json",
                 data:{gymname:gymname,coupon:coupon, total_price:total_price},
                 success:function(data){
                     var result = JSON.parse(data);
+                    applycoupan=1;
                     if(data=== total_price)
                     {
                         value = 0;
@@ -268,39 +331,6 @@ include 'footer.php';
             });
         });
 
-    });
-
-    //$ ('.coupon_price').click(function(){
-    //    if ($(this).prop('checked')) {
-    //            var price = '<?php //echo $totalPrice; ?>//';
-    //            var total = price - value;
-    //            $(".calTotal").text('₹' + total);
-    //
-    //    }
-    //});
 </script>
 
-<?php
-/*$totalPrice = $price*$person;
-$cal = $totalPrice*$insurance;
-$newTotal = $cal / 100;
-$totalAmountis = $totalPrice + $newTotal;
-    echo "
-         <script type=\"text/javascript\">
-           $ ('.insurance').click(function(){
-             if ($(this).prop('checked')){
-              $(\".appendvalue\").text('₹' + $newTotal);
-              $(\".appendvalue\").val('₹' + $newTotal);
-              $(\".calTotal\").text('');
-              $(\".calTotal\").text('₹' + $totalAmountis);
-             }
-            else{
-             $(\".appendvalue\").text('₹0.00');
-             $(\".appendvalue\").val('0.00');
-             $(\".calTotal\").text('₹' + $totalPrice);
-              }
-             });
-            </script>
-        ";
 
-*/?>
