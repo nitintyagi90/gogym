@@ -1047,6 +1047,7 @@ class Gogym extends CI_Controller {
                    'final' => $final ,
                    'coupon_percent' => $res->coupon_percent ,
                    'min_value' => $res->coupon_min_value ,
+                   'discount' =>$dis,
                );
                 $json = json_encode($data);
                 echo $json;

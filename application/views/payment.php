@@ -173,15 +173,12 @@ include 'header.php';
                             $newTotal = $cal / 100;
                             ?>
                             <input type="hidden"  name="total_price" id="total_price" placeholder="Enter Any Coupon" value="<?php echo $totalPrice; ?>">
-                            <li>Booking Amount <span class="calTotal" >
-
-                            <?php echo $totalPrice; ?></span></li>
+                            <li>Booking Amount <span class="calTotal"><?php echo $totalPrice; ?></span></li>
                             <li style="display: none" id="couponamt">Coupon Discount <span class="main-color couponprice2" id="couponprice2"><i class="fa fa-inr"></i>0</span></li>
                             <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
                             <input type="hidden" id="booking_price" name="booking_price" value="<?= $totalPrice?>">
                             <li class="total-costs" id="totalamt"> Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?> </span></li>
                             <li class="total-costs" id="totalamt2" style="display: none">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr" id="couponprice"></i></span></li>
-
                         </ul>
                     </div>
                 </div>
@@ -195,7 +192,6 @@ include 'header.php';
 include 'footer.php';
 ?>
 <script>
-
     var value;
     var price = '<?php echo $price; ?>';
     var person = '<?php echo $person; ?>';
@@ -207,9 +203,9 @@ include 'footer.php';
     $(function(){
         $('input[type="radio"]').click(function(){
             value = $(this).attr("id");
-            var cuvalue = $('.couponprice2').text();
+            // var cuvalue = $('.couponprice2').text();
 
-            alert(cuvalue);
+            //alert(cuvalue);
             if ($(this).is(':checked'))
             {
                 $(".calTotal").text('₹' + value * person);
@@ -222,7 +218,6 @@ include 'footer.php';
             if(value==undefined){
                 $(".calTotal").text('₹' + final);
                 $(".appendvalue").text('₹' + newTotal);
-
             }else{
                 var totalprice2 = value * person;
                 var cal2 = totalprice2 * insurance;
@@ -230,23 +225,16 @@ include 'footer.php';
                 var final2 = totalprice2 + newTotal2;
                 $(".calTotal").text('₹' + final2);
                 $(".appendvalue").text('₹' + newTotal2);
-
-            }
+                }
         }else{
             $(".appendvalue").text('₹0.00');
             $(".calTotal").text('₹' + final);
             $(".calTotal").text('₹' + totalprice);
-
-        }
-
-    });
-
-
+         }
+ });
 </script>
 
 <script>
-
-
     $( document ).ready(function() {
         $("#submit2").click(function(){
             var gymname = $("#gymname").val();
@@ -275,11 +263,7 @@ include 'footer.php';
                     $('#totalamt').hide();
                     $('#totalamt2').show();
                     $('#couponprice').html(result.final);
-
                     $('booking_price').val(result.final);
-
-
-
                 }
             });
         });
