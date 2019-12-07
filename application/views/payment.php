@@ -77,7 +77,7 @@ include 'header.php';
                                 <div class="col-md-4"><p>Enter discount code</p></div>
 
                                 <div class="col-md-4">
-                                    <input type="hidden" name="gymname" id="gymname" placeholder="Enter Any Coupon" value="<?php echo $gymName; ?>" class="form-control">
+                                    <input type="hidden" name="gymname" id="gymname" placeholder="Enter Any Coupon" value="<?php echo $gymId; ?>" class="form-control">
 
 
                                     <input type="text" name="coupon" id="coupon" placeholder="Enter Any Coupon" value="" class="form-control">

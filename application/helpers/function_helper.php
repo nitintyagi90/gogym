@@ -239,9 +239,10 @@ Team GoGyms.";
 function sms_user($mob,$otp,$name ,$order_id ,$gym_name ,$gym_add){
 
 
-    $message_content = "Dear $name, we look forward to welcome you for confirmed Booking ID $order_id at ($gym_name & $gym_add). Awaiting you is a 100% GoGyms 
-Experience, for any other asst., call 08377-083777
+    $message_content = "Dear $name, we looking forward to welcome you for confirmed Booking ID $order_id at $gym_name $gym_add ,Awaiting you is a 100% GoGyms 
+Experience,for any other asst call 08377-083777,
 GoGyms Trainer Contact: 8376-06-8376";
+
 
 
 // $message_content = "Hi, OTP is $otp to access your GoGyms Account. For Security reasons do not share this OTP with anyone
@@ -250,8 +251,7 @@ GoGyms Trainer Contact: 8376-06-8376";
     date_default_timezone_set('Asia/Kolkata');
     $currentTime = date( 'Y-m-d h:i:sa',time ());
 
-
-    $url = "http://182.18.138.112/PushSMS.aspx?userid=amit123&password=123456&masking=Evalue&mobileno=$mob&message=".$message_content."&datetime= " ;
+  $url = "http://182.18.138.112/PushSMS.aspx?userid=amit123&password=123456&masking=Evalue&mobileno=$mob&message=".$message_content."&datetime=$currentTime " ;
 
     $url = preg_replace("/ /", "%20", $url);
 
@@ -261,8 +261,14 @@ GoGyms Trainer Contact: 8376-06-8376";
 // 	$result = curl_exec( $res );
 
     $xml = file_get_contents($url);
-
-
+    
+    return $xml ;
+    
+//   echo $xml ;
+  
+//   echo $url ;
+  
+//   exit;
 
 }
 
@@ -287,7 +293,7 @@ function ownerSms($mob,$otp,$ownername,$order_id){
     // curl_setopt( $res, CURLOPT_RETURNTRANSFER, true );
     // $result = curl_exec( $res );
 
-    $xml = file_get_contents($url);
+    // $xml = file_get_contents($url);
 
 }
 

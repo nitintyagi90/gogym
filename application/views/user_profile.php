@@ -89,14 +89,14 @@ include 'header.php';
                                         <label>Height(CM)</label>
                                         <!--<input type="text" name="user_height_cm" value="<?php /*echo $profile_user[0]->user_height_cm */?>" class="form-control" placeholder="Enter Height(In CM)" required>-->
 
-                                        <input type="text" name="user_height_cm" value="<?php echo $profile_user[0]->user_height_cm ?>" id="cm" onkeyup="cmcalculate()" class="form-control" placeholder="Enter Height(In CM)">
+                                        <input type="text" maxlength="6" onkeypress="javascript:return isNumber(event)" name="user_height_cm" value="<?php echo $profile_user[0]->user_height_cm ?>" id="cm" onkeyup="cmcalculate()" class="form-control" placeholder="Enter Height(In CM)">
 
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Height(Fit)</label>
 
                                         <!--<input type="text" name="user_height_fit" value="<?php /*echo $profile_user[0]->user_height_fit */?>" class="form-control" placeholder="Enter Height(In Fit)" required>-->
-                                        <input type="text" name="user_height_fit" value="<?php echo $profile_user[0]->user_height_fit ?>" id="fit" onkeyup="fitcalculate()" class="form-control" placeholder="Enter Height(In Fit)">
+                                        <input type="text" maxlength="6" onkeypress="javascript:return isNumber(event)" name="user_height_fit" value="<?php echo $profile_user[0]->user_height_fit ?>" id="fit" onkeyup="fitcalculate()" class="form-control" placeholder="Enter Height(In Fit)">
 
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">

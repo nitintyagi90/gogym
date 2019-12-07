@@ -31,7 +31,7 @@ include 'header.php';
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Gym Name</th>
+                                    <th>Gym ID</th>
                                     <th>Coupon Code</th>
                                     <th>Percent</th>
                                     <th>Max Discount</th>

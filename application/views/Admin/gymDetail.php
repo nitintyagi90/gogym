@@ -34,6 +34,7 @@ include 'header.php';
                                 <thead>
                                 <tr>
                                     <th>S.No</th>
+                                    <th>Gym ID</th>
                                     <th>Gym Name</th>
                                     <th>Mobile</th>
                                     <th>Gymplan</th>
@@ -52,7 +53,7 @@ include 'header.php';
                                     ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
-
+                                        <td><?=$value->gym_id;?></td>
                                         <td><?=$value->gymName;?></td>
                                         <td><?=$value->contact_no;?></td>
                                         <td><?=$value->gymplanType;?></td>

@@ -80,21 +80,38 @@ class Gogym extends CI_Controller {
         $query = $this->db->get();
         $result = $query->result();
 
+      
+$user_id = $result[0]->user_id ;
+
         $this->db->select('*');
         $this->db->from('gymPrice');
-        $this->db->where('gym_id', $id);
+        $this->db->where('user_id', $user_id);
         $query = $this->db->get();
         $gymprice = $query->result();
+
+ $this->db->select('*');
+ 
+        $this->db->from('gym_gallery');
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get();
+        $gym_gallery = $query->result();
+
 
 
         $this->db->select('*');
         $this->db->from('gym_amenities');
-        $this->db->where('gym_id', $id);
+         $this->db->where('user_id', $user_id);
         $query = $this->db->get();
         $aminities = $query->result();
+      
+        
+        
         $data['gym']=$result;
         $data['aminities']=$aminities;
         $data['gymprice']=$gymprice;
+        
+         $data['gym_gallery']=$gym_gallery;
+         
         $this->load->view('list_detail',$data);
     }
     public function payment()
@@ -113,7 +130,8 @@ class Gogym extends CI_Controller {
             $personValue = $_POST['personValue'];
             $query = $this->db->get('insurance');
             $result = $query->result();
-
+            
+            
             $userProfile = $this->db->get_where('profile_user', array('user_id' => $_SESSION['session_id']));
             $userPhone = $this->db->get_where('user', array('id' => $_SESSION['session_id']));
 
@@ -501,6 +519,17 @@ class Gogym extends CI_Controller {
         $monthlyprice = $this->input->post('monthlyprice');
         $yearlyprice = $this->input->post('yearlyprice');
         $user_id = $_SESSION['session_id'];
+        
+       
+        $q= $this->db->select()
+                ->where('user_id',$user_id)
+                ->from('gym')
+                ->get();
+                
+                $res= $q->row();
+                
+                $gym_id = $res->gym_id ;
+                
         if(empty($dailyprice)&& empty($weeklyprice)&& empty($monthlyprice) && empty($yearlyprice)){
             $this->session->set_flashdata('Successfully','All fields are required!');
             redirect('Gogym/dashboard');
@@ -511,7 +540,10 @@ class Gogym extends CI_Controller {
                 'monthlyPrice'=>$monthlyprice,
                 'yearlyPrice'=>$yearlyprice,
                 'user_id'=>$user_id,
+                'gym_id' => $gym_id ,
             );
+
+            
             $this->db->select('*');
             $this->db->where('user_id', $user_id);
             $query = $this->db->get('gymPrice');
@@ -873,6 +905,8 @@ class Gogym extends CI_Controller {
             'user'=>$result,
             'plan'=>$result1,
         );
+        
+      
         $this->load->view('plan.php',$data);
     }
     public function plan_add(){

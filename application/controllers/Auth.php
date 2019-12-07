@@ -499,6 +499,7 @@ class Auth extends CI_Controller {
             }
             else
             {
+                
                 $randnum = 'Gogym2000';
             }
 
@@ -508,7 +509,7 @@ class Auth extends CI_Controller {
             if(empty($upload_image1)){
 
                 $data = array(
-                    'gym_id' => $randnum ,
+                    // 'gym_id' => $randnum ,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -548,7 +549,8 @@ class Auth extends CI_Controller {
                     $insert_id = $this->db->insert_id();
                     foreach ($amenities as $am){
                         $dataresult = array(
-                            'gym_id' => $insert_id,
+                            
+                            'gym_id' => $randnum,
                             'user_id' => $user_id,
                             'aminitiesName' => $am,
 
@@ -557,7 +559,7 @@ class Auth extends CI_Controller {
                     }
                     foreach ($categoryName as $cat){
                         $categoryarray = array(
-                            'gym_id' => $insert_id,
+                            'gym_id' => $randnum,
                             'user_id' => $user_id,
                             'categoryName' => $cat,
 
@@ -587,7 +589,7 @@ class Auth extends CI_Controller {
                     $img_name1 = '';
                 }
                 $data = array(
-                    'gym_id' => $randnum ,
+                    // 'gym_id' => $randnum ,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -634,6 +636,8 @@ class Auth extends CI_Controller {
 
                         );
                         $this->db->insert('gym_amenities', $dataresult);
+                         redirect("Gogym/dashboard");
+                        
                     }
 
                     foreach ($categoryName as $cat){

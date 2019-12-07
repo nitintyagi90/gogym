@@ -76,8 +76,8 @@ public function __construct()
 	
 	public function google_login()
 	{
-		$clientId = '854953527288-saphdpvmqge5h7np1i0j4983op8fs5ur.apps.googleusercontent.com'; //Google client ID
-		$clientSecret = 'leP_T-wvCPOYrCVqIxSWgWLn'; //Google client secret
+		$clientId = '423096548529-l6ou4stcu69cm8t2ns95ccedh7raamv4.apps.googleusercontent.com'; //Google client ID
+		$clientSecret = 'BICw2j0PtOVVr00Rufoc4yjP'; //Google client secret
 		$redirectURL = base_url() . 'Login/google_login/';
 		
 		//Call Google API

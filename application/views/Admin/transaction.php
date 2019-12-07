@@ -62,6 +62,7 @@ include 'header.php';
                                     <th>S.No</th>
                                     <th>Date</th>
                                     <th>GymName</th>
+                                    <th>PlanType</th>
                                     <th>Price</th>
                                     <th>Payment Mode</th>
                                 </tr>
@@ -76,6 +77,9 @@ include 'header.php';
                                         <td><?=$value['cur_date']?></td>
                                         <td>
                                             <?=$value['gym_name']?>
+                                        </td>
+                                         <td>
+                                            <?=$value['plan_type']?>
                                         </td>
                                         <td><?=$value['totalpay']?></td>
                                         <?php if(	$value['payment_type'] == "offline"){ ?>

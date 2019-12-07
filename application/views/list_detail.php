@@ -4,12 +4,17 @@ include 'header.php';
 <style>
     #hearts { color: #FF0000;}
     #hearts-existing { color: #87bad7;}
+    
+    .img200{
+        width:200px;
+        height:200px;
+    }
 </style>
 
 
 
     <!-- ======================= Start Banner ===================== -->
-    <section class="page-title-banner" style="background-image:url(<?php echo $gym[0]->gymImage; ?>);">
+    <section class="page-title-banner" style="background-image:url('<?php echo $gym[0]->gymImage; ?>');">
         <div class="container">
             <div class="row m-0 align-items-end detail-swap">
                 <div class="tr-list-wrap">
@@ -194,26 +199,29 @@ include 'header.php';
                                     </div>
                                     <div class="tr-single-body">
                                         <ul class="gallery-list">
+                                            <?php foreach($gym_gallery as $gallery) { ?>
                                             <li>
-                                                <a data-fancybox="gallery" href="assets/img/event-1.jpg">
-                                                    <img src="assets/img/event-1.jpg" class="img-responsive" alt="">
+                                                <a data-fancybox="gallery" href="<?php echo $gallery->gym_gallery?>">
+                                                    <img src="<?php echo $gallery->gym_gallery?>" class="img-responsive img200" alt="">
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a data-fancybox="gallery" href="assets/img/event-1.jpg">
-                                                    <img src="assets/img/2.jpg" class="img-responsive" alt="">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a data-fancybox="gallery" href="assets/img/event-1.jpg">
-                                                    <img src="assets/img/event-1.jpg" class="img-responsive" alt="">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a data-fancybox="gallery" href="assets/img/event-1.jpg">
-                                                    <img src="assets/img/event-1.jpg" class="img-responsive" alt="">
-                                                </a>
-                                            </li>
+                                            
+                                            <?php } ?>
+                                            <!--<li>-->
+                                            <!--    <a data-fancybox="gallery" href="assets/img/event-1.jpg">-->
+                                            <!--        <img src="assets/img/2.jpg" class="img-responsive" alt="">-->
+                                            <!--    </a>-->
+                                            <!--</li>-->
+                                            <!--<li>-->
+                                            <!--    <a data-fancybox="gallery" href="assets/img/event-1.jpg">-->
+                                            <!--        <img src="assets/img/event-1.jpg" class="img-responsive" alt="">-->
+                                            <!--    </a>-->
+                                            <!--</li>-->
+                                            <!--<li>-->
+                                            <!--    <a data-fancybox="gallery" href="assets/img/event-1.jpg">-->
+                                            <!--        <img src="assets/img/event-1.jpg" class="img-responsive" alt="">-->
+                                            <!--    </a>-->
+                                            <!--</li>-->
                                         </ul>
                                     </div>
                                 </div>
@@ -258,6 +266,7 @@ include 'header.php';
                                     </tr>
                                 </tbody>
                             </table>
+                            <p><b>*Note:</b><span style="color:red">Gym booking is available only for above time slot.</span></p>
                         </div>
 
                     </div>
