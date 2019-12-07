@@ -173,7 +173,7 @@ include 'header.php';
                             $newTotal = $cal / 100;
                             ?>
                             <input type="hidden"  name="total_price" id="total_price" placeholder="Enter Any Coupon" value="<?php echo $totalPrice; ?>">
-                            <li>Booking Amount <span class="calTotal"><?php echo $totalPrice; ?></span></li>
+                            <li>Booking Amount <span class="bookingAmount"><?php echo $totalPrice; ?></span></li>
                             <li style="display: none" id="couponamt">Coupon Discount <span class="main-color couponprice2" id="couponprice2"><i class="fa fa-inr"></i>0</span></li>
                             <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
                             <input type="hidden" id="booking_price" name="booking_price" value="<?= $totalPrice?>">
@@ -193,6 +193,7 @@ include 'footer.php';
 ?>
 <script>
     var value;
+    var value2;
 
     var applycoupan=0;
     var price = '<?php echo $price; ?>';
@@ -241,7 +242,7 @@ include 'footer.php';
                 var gymname = $("#gymname").val();
                 var coupon = $("#coupon").val();
                 var total_price;
-                if(value!==undefined){
+                if(value){
                     total_price  = value * person;
                 }else{
                     total_price = totalprice;
@@ -264,7 +265,9 @@ include 'footer.php';
             if(value==undefined){
                 $(".calTotal").text('₹' + final);
                 $(".appendvalue").text('₹' + newTotal);
+                /*$(".bookingAmount").text('₹' + newTotal);*/
             }else{
+
                 var totalprice2 = value * person;
                 var cal2 = totalprice2 * insurance;
                 var newTotal2 = cal2 / 100;
@@ -312,13 +315,13 @@ include 'footer.php';
                     applycoupan=1;
                     if(data=== total_price)
                     {
-                        value = 0;
+                        value2 = 0;
                         $('#couponamt').hide();
                         alert('Invaild coupon');
                     }
                     else
                     {
-                        value = data;
+                        value2 = data;
                         var couponamt =(total_price - data ).toFixed(2);
                         $('#couponprice2').html(result.discount);
                         $('#couponamt').show();
