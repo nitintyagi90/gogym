@@ -28,7 +28,7 @@ include 'header2.php';
                 <!-- Listings Content -->
                 <div >
                     <!-- All Listing -->
-                    <form action="<?php echo base_url('Auth/saveGym');?>" class="dash-profile-form" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo base_url('Auth/editsaveGym');?>" class="dash-profile-form" method="post" enctype="multipart/form-data">
                         <!-- Basic Info -->
                         <div class="tr-single-box">
                             <div class="tr-single-header">
@@ -40,7 +40,7 @@ include 'header2.php';
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Gym Name</label>
                                         <input class="form-control" value="<?php echo @$profile_user[0]->gymName ?>" name="gymName" type="text" value="">
-                                        <input class="form-control" type="hidden" name="id" value="<?php echo $user[0]->id ?>">
+                                        <input class="form-control" type="hidden" name="id" value="<?php echo $profile_user[0]->gym_id ?>">
                                         <input class="form-control" type="hidden" name="user_profile_id" value="<?php echo @$profile_user[0]->profile_id ?>">
 
 
@@ -105,7 +105,7 @@ include 'header2.php';
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Google Map </label>
-                                        <input type="text" <?php echo @$profile_user[0]->gym_location ?> name="gym_location" class="form-control" ></input>
+                                        <input type="text" value="<?php echo @$profile_user[0]->gym_location ?>" name="gym_location" class="form-control" ></input>
                                     </div>
 
                                     <div class="form-group col-md-6 col-sm-12">
@@ -199,7 +199,12 @@ include 'header2.php';
 
                                     <div class="form-group col-md-6 col-sm-12">
                                         <label>Choose Allow</label><br>
+                                        <?php if($profile_user[0]->allowGym == 'Female') { ?>
+
+                                        <input type="checkbox" name="allowGym" value="Female" checked> Female
+                                        <?php }else{ ?>
                                         <input type="checkbox" name="allowGym" value="Female"> Female
+                                        <?php } ?>
                                     </div>
 
                                     <div class="form-group col-md-12 col-sm-12">
@@ -208,7 +213,7 @@ include 'header2.php';
                                             <?php foreach (@$amenities as $pro){ ?>
                                                 <div class="form-group col-md-3">
 
-                                                    <input type="checkbox" name="amenities[]"<?php if (@$gym[0]->aminitiesName == $pro->amentities_name) { echo "checked='checked'"; } ?>
+                                                    <input type="checkbox" name="amenities[]"<?php foreach (@$select_amenities as $select){  if ($select->aminitiesName == $pro->amentities_name) { echo "checked='checked'"; }  }?>
                                                            value="<?php echo $pro->amentities_name; ?>"><?php echo $pro->amentities_name; ?>
 
                                                 </div>
@@ -221,13 +226,16 @@ include 'header2.php';
                                         <label>Select Gym Category</label><br>
                                         <div class="row">
                                             <?php foreach (@$category as $pro){ ?>
+
+
+
                                                 <div class="form-group col-md-3">
 
-                                                    <input type="checkbox" name="categoryName[]"<?php if (@$gym[0]->categoryName == $pro->categoryName) { echo "checked='checked'"; } ?>
+                                                    <input type="checkbox" name="categoryName[]"<?php foreach (@$select_cat as $select){ if (@$select->categoryName == $pro->categoryName) { echo "checked='checked'"; } }?>
                                                            value="<?php echo $pro->categoryName; ?>"><?php echo $pro->categoryName; ?>
 
                                                 </div>
-                                            <?php } ?>
+                                            <?php  }?>
 
                                         </div>
                                     </div>
