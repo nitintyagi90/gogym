@@ -228,6 +228,28 @@ class Adminmodel extends CI_Model{
         $result = $query->result_array();
         return $result;
     }
+    public function totalgym(){
+
+        $this->db->select('*');
+        $this->db->from('gym');
+        $this->db->order_by("id", "desc");
+        $query = $this->db->get();
+
+        $result = $query->result_array();
+        return $result;
+    }
+    public function totaluser(){
+
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->order_by("id", "desc");
+        $this->db->where('user_type=1');
+        $query = $this->db->get();
+
+        $result = $query->result_array();
+        return $result;
+    }
+
     public function cupconlist(){
         $this->db->select('*');
         $this->db->from('coupon');

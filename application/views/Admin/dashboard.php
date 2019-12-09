@@ -23,7 +23,8 @@ include 'header.php';
 		<!-- end page title end breadcrumb -->
 		<div class="row">
 			<!-- Column -->
-			<div class="col-sm-12 col-md-6 col-xl-3">
+			<div class="col-sm-12 col-md-6 col-xl-4">
+                <a href="<?=base_url('Admin/gymDetail')?>">
 				<div class="card bg-danger m-b-30">
 					<div class="card-body">
 						<div class="d-flex row">
@@ -34,17 +35,19 @@ include 'header.php';
 							</div>
 							<div class="col-8 ml-auto align-self-center text-center">
 								<div class="m-l-10 text-white float-right">
-									<h5 class="mt-0 round-inner">105</h5>
-									<p class="mb-0 ">Gym Owner</p>
+									<h5 class="mt-0 round-inner"><?php pr($message);?></h5>
+									<p class="mb-0 ">Total Gym Owner</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+                </a>
 			</div>
 			<!-- Column -->
 			<!-- Column -->
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <a href="<?=base_url('Admin/userlist')?>">
 				<div class="card bg-info m-b-30">
 					<div class="card-body">
 						<div class="d-flex row">
@@ -55,17 +58,19 @@ include 'header.php';
 							</div>
 							<div class="col-8 text-center ml-auto align-self-center">
 								<div class="m-l-10 text-white float-right">
-									<h5 class="mt-0 round-inner"></h5>
-									<p class="mb-0 ">New Users</p>
+									<h5 class="mt-0 round-inner"><?php pr($message1);?></h5>
+									<p class="mb-0 ">Total Users</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+                </a>
 			</div>
 			<!-- Column -->
 			<!-- Column -->
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <a href="<?=base_url('Admin/transaction')?>">
 				<div class="card bg-success m-b-30">
 					<div class="card-body">
 						<div class="d-flex row">
@@ -76,35 +81,18 @@ include 'header.php';
 							</div>
 							<div class="col-8 ml-auto align-self-center text-center">
 								<div class="m-l-10 text-white float-right">
-									<h5 class="mt-0 round-inner"></h5>
-									<p class="mb-0 ">New Orders</p>
+									<h5 class="mt-0 round-inner"><?php pr($message2);?></h5>
+									<p class="mb-0 ">Total Orders</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+                </a>
 			</div>
 			<!-- Column -->
 			<!-- Column -->
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
-				<div class="card bg-primary m-b-30">
-					<div class="card-body">
-						<div class="d-flex row">
-							<div class="col-3 align-self-center">
-								<div class="round">
-									<i class="mdi mdi-calculator"></i>
-								</div>
-							</div>
-							<div class="col-8 ml-auto align-self-center text-center">
-								<div class="m-l-10 text-white float-right">
-									<h5 class="mt-0 round-inner"></h5>
-									<p class="mb-0">Total Sales</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
 			<!-- Column --><br><br>
 		</div>
 

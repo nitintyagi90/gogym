@@ -39,24 +39,7 @@ include 'header.php';
                                     <th>Gym Name :</th>
                                     <td><?php echo $gym[0]->gymName; ?></td>
                                 </tr>
-                                <tr>
-                                    <th>Daily Plan Price :</th>
-                                    <td>49</td>
-                                </tr>
-                                <tr>
-                                    <th>Weekly Plan Price :</th>
-                                    <td>Gold</td>
-                                </tr>
-                                <tr>
-                                    <th>Monthly Plan Price :</th>
-                                    <td>Gold</td>
-                                </tr>
-                                <tr>
-                                    <th>Yearly Plan Price :</th>
-                                    <td>Gold</td>
-                                </tr>
-
-                                <tr>
+                              <tr>
                                     <th>Contact Person :</th>
                                     <td><?php echo $gym[0]->contact_name ?></td>
                                 </tr>
@@ -66,27 +49,27 @@ include 'header.php';
                                 </tr>
                                 <tr>
                                     <th>Open Morning Time :</th>
-                                    <td>06:00</td>
+                                    <td><?php echo $gym[0]->open_mg_time ?></td>
                                 </tr>
                                 <tr>
                                     <th>Close Morning Time :</th>
-                                    <td>11:00</td>
+                                    <td><?php echo $gym[0]->close_mg_time ?></td>
                                 </tr>
                                 <tr>
                                     <th>Open Afternoon Time :</th>
-                                    <td>01:00</td>
+                                    <td><?php echo $gym[0]->after_open_time ?></td>
                                 </tr>
                                 <tr>
                                     <th>Close Afternoon Time :</th>
-                                    <td>04:00</td>
+                                    <td><?php echo $gym[0]->after_close_time ?></td>
                                 </tr>
                                 <tr>
                                     <th>Open Evening Time :</th>
-                                    <td>06:00</td>
+                                    <td><?php echo $gym[0]->open_evng_time ?></td>
                                 </tr>
                                 <tr>
                                     <th>Close Evening Time :</th>
-                                    <td>11:00</td>
+                                    <td><?php echo $gym[0]->close_evng_time ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -127,10 +110,7 @@ include 'header.php';
                                     <th>PAN No</th>
                                     <td><?php echo $gym[0]->panCard ?></td>
                                 </tr>
-                                <tr>
-                                    <th>Gym Category</th>
-                                    <td>A , B</td>
-                                </tr>
+
                                 <tr>
                                     <th>Gym Addrerss</th>
                                     <td><?php echo $gym[0]->gym_address ?></td>

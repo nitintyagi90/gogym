@@ -6,10 +6,46 @@ class Login extends CI_Controller {
 public function __construct()
 {
 	parent::__construct();
+    $this->load->model('Adminmodel');
+
 	require_once APPPATH.'third_party/src/Google_Client.php';
 	require_once APPPATH.'third_party/src/contrib/Google_Oauth2Service.php';
 }
 
+
+function admin()
+{
+    if (!empty($this->session->userdata('session_admin'))) {
+        redirect('Admin/dashboard');
+    }
+    $this->load->view('Admin/index');
+}
+
+//===========================admin====================================
+    public function admin_login()
+    {
+        $data = array(
+            'name' => $this->input->post('username'),
+            'pass' => md5($this->input->post('password'))
+        );
+        $table = 'admin';
+        $login = $this->Adminmodel->admin_log($data, $table);
+
+        if ($login) {
+
+            $newdata = array('session_id' => $login->id,
+                'session_admin' => $login->email
+            );
+            $this->session->set_userdata($newdata);
+            redirect('Admin/dashboard');
+        } else {
+            $this->session->set_flashdata('message_name1', 'Invalid UserID or Password');
+            redirect("Admin/index");
+
+        }
+    }
+
+    //=======================================admin=========================
     //=========================Facebook signin==================
 
     public function index(){

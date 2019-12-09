@@ -7,11 +7,14 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Adminmodel');
+        if(!$this->session->userdata('session_id')){
+            redirect('login/admin');
+        }
     }
 
     public function index()
     {
-        if (!empty($this->session->userdata('session_id'))) {
+        if (!empty($this->session->userdata('session_admin'))) {
             redirect('Admin/dashboard');
         }
         $this->load->view('Admin/index');
@@ -29,7 +32,7 @@ class Admin extends CI_Controller
         if ($login) {
 
             $newdata = array('session_id' => $login->id,
-                'session_name' => $login->email
+                'session_admin' => $login->email
             );
             $this->session->set_userdata($newdata);
             redirect('Admin/dashboard');
@@ -64,14 +67,21 @@ class Admin extends CI_Controller
         $this->db->join('profile_user', 'profile_user.user_id = user.id');
         $this->db->where('user.id', $id);
         $query = $this->db->get();
+        //echo $this->db->last_query();die();
         $result = $query->result();
         $data['user']=$result;
-        $this->load->view('Admin/Userlist_details.php');
+        $this->load->view('Admin/Userlist_details.php',$data);
     }
 
     public function dashboard()
     {
-        $this->load->view('Admin/dashboard.php');
+        $data = $this->Adminmodel->totalgym();
+        $data1=$this->Adminmodel->totaluser();
+        $data2=$this->Adminmodel->transaction();
+        $result['message'] =count($data);
+        $result['message1'] =count($data1);
+        $result['message2'] =count($data2);
+        $this->load->view('Admin/dashboard.php',$result);
     }
 
     public function cupcon()

@@ -40,7 +40,7 @@
 									</a>
 								</div>
 								<div class="px-3 pb-3">
-									<form class="form-horizontal m-t-20 mb-0" action="<?php echo base_url('Admin/admin_login');?>" autocomplete="on" method="post">
+									<form class="form-horizontal m-t-20 mb-0" action="<?php echo base_url('Login/admin_login');?>" autocomplete="on" method="post">
 
 										<div class="form-group row">
 											<div class="col-12">

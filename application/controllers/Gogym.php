@@ -120,7 +120,7 @@ $user_id = $result[0]->user_id ;
     }
     public function payment()
     {
-        if ($_SESSION['session_id'])
+        if ($_SESSION['user_type']==1)
         {
             $gender = $_POST['gender'];
             $checkIn = $_POST['checkIn'];

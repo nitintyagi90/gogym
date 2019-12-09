@@ -110,7 +110,7 @@ include 'header.php';
                             <a href="#myModal" data-toggle="modal" class="btn add-review-btn">Add Your Review</a>
 
                             <!-- Review & Rating -->
-                            <div class="row">
+                           <!-- <div class="row">
                                 <div class="comment-module-wrap">
 
                                     <div class="comment-module-header">
@@ -124,7 +124,7 @@ include 'header.php';
                                         <div class="comment-module-rating">
                                             <div class="f-rate">
                                                 4.5<sup>5</sup>
-                                                <!--<span class="rating-status good-rate">Very Good</span>-->
+
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +147,7 @@ include 'header.php';
                                             <ul>
                                                 <li>
                                                     <div class="reply-module-avater">
-                                                        <img src="<?php echo base_url();?>web/assets/img/team-2.png" class="img-responsive img-circle" alt="">
+                                                        <img src="<?php /*echo base_url();*/?>web/assets/img/team-2.png" class="img-responsive img-circle" alt="">
                                                     </div>
                                                     <div class="reply-module-detail">
                                                         <h5 class="reply-module-title">Daisy Lilla</h5>
@@ -157,7 +157,7 @@ include 'header.php';
                                                 </li>
                                                 <li>
                                                     <div class="reply-module-avater">
-                                                        <img src="<?php echo base_url();?>web/assets/img/team-3.png" class="img-responsive img-circle" alt="">
+                                                        <img src="<?php /*echo base_url();*/?>web/assets/img/team-3.png" class="img-responsive img-circle" alt="">
                                                     </div>
                                                     <div class="reply-module-detail">
                                                         <h5 class="reply-module-title">Zahir Khan</h5>
@@ -169,7 +169,7 @@ include 'header.php';
                                         </div>
                                         <div class="comment-form-module">
                                             <div class="comment-form-avater">
-                                                <img src="<?php echo base_url();?>web/assets/img/team-4.png" class="img-responsive img-circle" alt="">
+                                                <img src="<?php /*echo base_url();*/?>web/assets/img/team-4.png" class="img-responsive img-circle" alt="">
                                             </div>
                                             <div class="comment-form-box">
                                                 <div class="input-group">
@@ -183,7 +183,7 @@ include 'header.php';
                                     </div>
 
                                 </div>
-                            </div>
+                            </div>-->
 
                         </div>
 

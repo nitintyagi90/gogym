@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+
 ?>
 <style>
     .img50{
@@ -37,15 +38,15 @@ include 'header.php';
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <tr>
                                     <th>User Name :</th>
-                                    <td>Sanjeev</td>
+                                    <td><?php echo $user[0]->owner_name; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Email ID :</th>
-                                    <td>sanjeev@gmail.com</td>
+                                    <td><?php echo $user[0]->user_email; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Gender :</th>
-                                    <td>Male</td>
+                                    <td><?php echo $user[0]->user_gender; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Mobile No :</th>
@@ -53,28 +54,28 @@ include 'header.php';
                                 </tr>
                                 <tr>
                                     <th>Date Of Birth :</th>
-                                    <td>16/10/1990</td>
+                                    <td><?php echo $user[0]->user_dob; ?></td>
                                 </tr>
 
                                 <tr>
                                     <th>Location :</th>
-                                    <td>Noida</td>
+                                    <td><?php echo $user[0]->user_location; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Profession :</th>
-                                    <td>Teacher</td>
+                                    <td><?php echo $user[0]->user_profession; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Blood Group :</th>
-                                    <td>O+</td>
+                                    <td><?php echo $user[0]->user_bloodgroup; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Height(CM) :</th>
-                                    <td>164</td>
+                                    <td><?php echo $user[0]->user_height_cm; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Height(Fit) :</th>
-                                    <td>5.7</td>
+                                    <td><?php echo $user[0]->user_height_fit; ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -89,40 +90,40 @@ include 'header.php';
 
                                 <tr>
                                     <th>Heart Rate :</th>
-                                    <td>90</td>
+                                    <td><?php echo $user[0]->user_heart_rate; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Blood Pressure(Low) :</th>
-                                    <td>80</td>
+                                    <td><?php echo $user[0]->user_bp_low; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Blood Pressure(High)</th>
-                                    <td>120</td>
+                                    <td><?php echo $user[0]->user_bp_high; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Smoking</th>
-                                    <td>No</td>
+                                    <td><?php echo $user[0]->user_smoking; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Drinking</th>
-                                    <td>No</td>
+                                    <td><?php echo $user[0]->user_drinking; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Disease </th>
-                                    <td>No</td>
+                                    <td><?php echo $user[0]->user_disease; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Disease ( If Yes )</th>
-                                    <td>Disease Details</td>
+                                    <td><?php echo $user[0]->disease_details; ?></td>
                                 </tr>
                                 <tr>
                                     <th>Address</th>
-                                    <td>sec- 63 Noida</td>
+                                    <td><?php echo $user[0]->user_address; ?></td>
                                 </tr>
 
                                 <tr>
                                     <th>Profile Image</th>
-                                    <td><img src="" class="img50"></td>
+                                    <td><img src="<?php echo $user[0]->user_images; ?>" class="img50"></td>
                                 </tr>
                             </table>
                         </div>
