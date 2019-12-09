@@ -308,9 +308,8 @@ include 'footer.php';
 
 <script>
 
+
     $("#submit2").click(function(){
-
-
         if(value===undefined){
             var gymname = $("#gymname").val();
             var coupon = $("#coupon").val();
@@ -420,7 +419,6 @@ include 'footer.php';
         }
 
     });
-
 </script>
 
 
