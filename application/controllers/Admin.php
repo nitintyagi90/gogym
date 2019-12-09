@@ -29,7 +29,7 @@ class Admin extends CI_Controller
         if ($login) {
 
             $newdata = array('session_id' => $login->id,
-                'session_name' => $login->email
+                'session_admin' => $login->email
             );
             $this->session->set_userdata($newdata);
             redirect('Admin/dashboard');

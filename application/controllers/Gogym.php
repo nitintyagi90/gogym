@@ -1140,7 +1140,10 @@ else{
     }
     public function tokenmoney($amount){
 
-        $data['amount']=$amount;
+
+        $new_amt =  substr($amount,9);
+
+        $data['amount']=$new_amt;
         $this->load->view('tokenmoney/TxnTest',$data);
 
     }
@@ -1211,7 +1214,7 @@ else{
 
                $dis = $res->coupon_max_discount ;
 
-                echo $final = $total_price - $dis ;
+                $final = $total_price - $dis ;
                $data = array(
                    'final' => $final ,
                    'coupon_percent' => $res->coupon_percent ,
