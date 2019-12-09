@@ -106,7 +106,7 @@ include 'header.php';
                                                 $totalPrice = $price*$person;
 
                                                 ?>
-                                                <a href="<?php echo base_url('Gogym/tokenmoney/'.$totalPrice); ?>" class="btn btn-payment">Pay Now</a>
+                                                <a href="<?php echo base_url('Gogym/tokenmoney'); ?>" class="btn btn-payment paytm">Pay Now</a>
                                             </a>
                                         </li>
 
@@ -177,6 +177,9 @@ include 'header.php';
                             <li style="display: none" id="couponamt">Coupon Discount <span class="main-color couponprice2" id="couponprice2"><i class="fa fa-inr"></i>0</span></li>
                             <li><input type="checkbox" class="insurance" name="Insurance" value="Insurance">&nbsp;Insurance(<?php echo $insurance; ?>%) <span class="main-color appendvalue"><i class="fa fa-inr"></i>0.00</span></li>
                             <input type="hidden" id="booking_price" name="booking_price" value="<?= $totalPrice?>">
+
+                            <textarea name="booking_price" class="calTotal" id="booking_amt" hidden><?php echo "₹";echo  $totalPrice; ?></textarea>
+
                             <li class="total-costs" id="totalamt"> Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr"></i><?php echo $totalPrice; ?> </span></li>
                             <li class="total-costs" id="totalamt2" style="display: none">Total Cost<br><p style="font-size: 10px;">(inclusive of all taxes)</p> <span class="main-color calTotal" style="margin-top: -20%;"><i class="fa fa-inr" id="couponprice"></i></span></li>
                         </ul>
@@ -191,6 +194,18 @@ include 'header.php';
 <?php
 include 'footer.php';
 ?>
+
+<script>
+
+
+    $(function() {
+        $('.paytm').click( function() {
+            window.location = $(this).attr('href') + '/' + $('#booking_amt').val();
+            return false;
+        });
+    });
+
+</script>
 <script>
     var value;
     var value2;
