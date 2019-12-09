@@ -1,12 +1,12 @@
 <!-- Footer -->
 <footer class="footer">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-12">
-				© 2019 GoGyms
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                © 2019 GoGyms
+            </div>
+        </div>
+    </div>
 </footer>
 <!-- End Footer -->
 
@@ -58,19 +58,7 @@
 <!-- App js -->
 <script src="<?php echo base_url();?>admin/assets/js/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/popper.min.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/bootstrap-material-design.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/modernizr.min.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/detect.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/fastclick.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/jquery.slimscroll.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/jquery.blockUI.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/waves.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/jquery.nicescroll.js"></script>
-<script src="<?php echo base_url();?>admin/assets/js/jquery.scrollTo.min.js"></script>
 
-<!-- Plugins js -->
 <script src="<?php echo base_url();?>admin/assets/plugins/timepicker/moment.js"></script>
 <script src="<?php echo base_url();?>admin/assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
 <script src="<?php echo base_url();?>admin/assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
@@ -82,11 +70,9 @@
 
 <script src="<?php echo base_url();?>admin/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
 <script src="<?php echo base_url();?>admin/assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
-<!-- Plugins Init js -->
+
 <script src="<?php echo base_url();?>admin/assets/pages/form-advanced.js"></script>
 
-<!-- App js -->
-<script src="<?php echo base_url();?>admin/assets/js/app.js"></script>
 </body>
 
 </html>

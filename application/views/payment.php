@@ -7,21 +7,21 @@ include 'header.php';
         height: 250px;
     }
 </style>
-    <!-- ============================ Page Title  Start================================== -->
-    <div class="page-title image-title" style="background-image:url(assets/img/banner-2.jpg);">
-        <div class="finding-overlay op-70"></div>
-        <div class="container">
-            <div class="page-title-wrap">
-                <h1>Booking Summary</h1>
-                <p><a href="#" class="theme-cl">Home</a> <span class="current-page active">Booking</span></p>
-            </div>
+<!-- ============================ Page Title  Start================================== -->
+<div class="page-title image-title" style="background-image:url(assets/img/banner-2.jpg);">
+    <div class="finding-overlay op-70"></div>
+    <div class="container">
+        <div class="page-title-wrap">
+            <h1>Booking Summary</h1>
+            <p><a href="#" class="theme-cl">Home</a> <span class="current-page active">Booking</span></p>
         </div>
     </div>
-    <!-- ============================ Page Title End ================================== -->
+</div>
+<!-- ============================ Page Title End ================================== -->
 
-    <!-- =========================== Category Start ============================================ -->
-    <section>
-        <div class="container">
+<!-- =========================== Category Start ============================================ -->
+<section>
+    <div class="container">
         <form action="<?php echo base_url('Gogym/booking'); ?>" method="post" enctype="multipart/form-data">
             <div class="row">
 
@@ -101,7 +101,7 @@ include 'header.php';
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                                         <li class="nav-item" style="width: 50%;">
                                             <a class="nav-link active" id="credit-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="credit" aria-selected="true">
-                                               <!-- <button class="btn btn-payment" type="submit">Pay Now</button>-->
+                                                <!-- <button class="btn btn-payment" type="submit">Pay Now</button>-->
                                                 <?php
                                                 $totalPrice = $price*$person;
 
@@ -112,10 +112,10 @@ include 'header.php';
 
                                         <li class="nav-item" style="width: 50%;">
                                             <input type="hidden" name="payment_type" value="offline">
-                                           <!-- <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">-->
-                                                <input type="submit" class="btn btn-success" value="Pay At Gym">
+                                            <!-- <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">-->
+                                            <input type="submit" class="btn btn-success" value="Pay At Gym">
 
-                                           <!-- </a>-->
+                                            <!-- </a>-->
                                         </li>
                                     </ul>
                                 </div>
@@ -151,7 +151,7 @@ include 'header.php';
                         <div class="booking-summary" style="    bottom: 20px;
     left: 25px;
     top: 20px;position: relative;">
-                           <!-- <h4 class="booking-item-title" name="gymname"><?php /*echo $gymName */?></h4>
+                            <!-- <h4 class="booking-item-title" name="gymname"><?php /*echo $gymName */?></h4>
                             <p class="booking-item-location" name="address"><?php /*echo $address */?></p>-->
                             <p>Please select your Plan:</p>
                             <input style="position: relative;left: 0px;" type="radio" id="<?php echo $allprice[0]->dailyPrice ?>" name="plantype" value="Daily" checked> Daily<br>
@@ -185,9 +185,9 @@ include 'header.php';
 
             </div>
         </form>
-        </div>
-    </section>
-    <!-- =========================== Category End ============================================ -->
+    </div>
+</section>
+<!-- =========================== Category End ============================================ -->
 <?php
 include 'footer.php';
 ?>
@@ -203,7 +203,7 @@ include 'footer.php';
     var cal = totalprice * insurance;
     var newTotal = cal / 100;
     var final = totalprice + newTotal;
-
+    var finalValue;
     $(function(){
         $('input[type="radio"]').click(function(){
             $(".insurance").prop("checked", false);
@@ -216,6 +216,7 @@ include 'footer.php';
                     var coupon = $("#coupon").val();
                     var total_price  = value * person;
                     $.ajax({
+
                         method:"post",
                         url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
                         data:{gymname:gymname,coupon:coupon, total_price:total_price},
@@ -232,6 +233,7 @@ include 'footer.php';
                     });
                 }
                 $(".calTotal").text('₹' + value * person);
+                $(".bookingAmount").text('₹' + value * person);
             }
         });
     });
@@ -247,6 +249,7 @@ include 'footer.php';
                 }else{
                     total_price = totalprice;
                 }
+
                 $.ajax({
                     method:"post",
                     url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
@@ -262,19 +265,22 @@ include 'footer.php';
                     }
                 });
             }
+
             if(value==undefined){
                 $(".calTotal").text('₹' + final);
                 $(".appendvalue").text('₹' + newTotal);
                 /*$(".bookingAmount").text('₹' + newTotal);*/
             }else{
-
                 var totalprice2 = value * person;
                 var cal2 = totalprice2 * insurance;
                 var newTotal2 = cal2 / 100;
+
+                finalValue=totalprice2;
                 var final2 = totalprice2 + newTotal2;
+
                 $(".calTotal").text('₹' + final2);
                 $(".appendvalue").text('₹' + newTotal2);
-                }
+            }
         }else{
             if(applycoupan===1){
                 $(".appendvalue").text('₹0.00');
@@ -282,27 +288,30 @@ include 'footer.php';
                 $(".calTotal").text('₹' + afterCoupan);
             }else{
                 $(".appendvalue").text('₹0.00');
-               if(value===undefined){
-                   $(".appendvalue").text('₹0.00');
-                   $(".calTotal").text('₹' + final);
-                   $(".calTotal").text('₹' + totalprice);
+                if(value===undefined){
+                    $(".appendvalue").text('₹0.00');
+                    $(".calTotal").text('₹' + final);
+                    $(".calTotal").text('₹' + totalprice);
 
-               }else{
-                   $(".calTotal").text('₹' + value*person);
+                }else{
+                    $(".calTotal").text('₹' + value*person);
 
-               }
+                }
 
             }
 
 
 
-         }
- });
+        }
+    });
 </script>
 
 <script>
 
-        $("#submit2").click(function(){
+    $("#submit2").click(function(){
+
+
+        if(value===undefined){
             var gymname = $("#gymname").val();
             var coupon = $("#coupon").val();
             var total_price  = $("#total_price").val();
@@ -312,6 +321,7 @@ include 'footer.php';
                 data:{gymname:gymname,coupon:coupon, total_price:total_price},
                 success:function(data){
                     var result = JSON.parse(data);
+
                     applycoupan=1;
                     if(data=== total_price)
                     {
@@ -325,14 +335,91 @@ include 'footer.php';
                         var couponamt =(total_price - data ).toFixed(2);
                         $('#couponprice2').html(result.discount);
                         $('#couponamt').show();
+                        $('.calTotal').html('₹' + result.final);
+                        $(".appendvalue").html('₹' + '0.00');
+                        $(".insurance").prop("checked", 0);
                     }
                     $('#totalamt').hide();
                     $('#totalamt2').show();
                     $('#couponprice').html(result.final);
                     $('booking_price').val(result.final);
+
                 }
             });
-        });
+        }else {
+
+            if(finalValue){
+
+                var gymname1 = $("#gymname").val();
+                var coupon1 = $("#coupon").val();
+                $.ajax({
+                    method:"post",
+                    url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                    data:{gymname:gymname1,coupon:coupon1, total_price:finalValue},
+                    success:function(data){
+                        var result = JSON.parse(data);
+
+                        applycoupan=1;
+                        if(data=== total_price)
+                        {
+
+                            value2 = 0;
+                            $('#couponamt').hide();
+                            alert('Invaild coupon');
+                        }
+                        else
+                        {
+                            value2 = data;
+                            var couponamt =(total_price - data ).toFixed(2);
+                            $('#couponprice2').html(result.discount);
+                            $(".calTotal").text('₹' + result.final);
+                            $(".appendvalue").html('₹' + '0.00');
+                            $(".insurance").prop("checked", 0);
+
+                            $('#couponamt').show();
+                        }
+                        $('#totalamt').hide();
+                        $('#totalamt2').show();
+                        $('#couponprice').html(result.final);
+                    }
+                });
+            }else{
+
+                var gymname1 = $("#gymname").val();
+                var coupon1 = $("#coupon").val();
+                $.ajax({
+                    method:"post",
+                    url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                    data:{gymname:gymname1,coupon:coupon1, total_price:value},
+                    success:function(data){
+                        var result = JSON.parse(data);
+                        applycoupan=1;
+                        if(data=== total_price)
+                        {
+                            value2 = 0;
+                            $('#couponamt').hide();
+                            alert('Invaild coupon');
+                        }
+                        else
+                        {
+                            value2 = data;
+                            var couponamt =(total_price - data ).toFixed(2);
+                            $('#couponprice2').html(result.discount);
+                            $(".calTotal").text('₹' + result.final);
+
+                            $('#couponamt').show();
+                        }
+                        $('#totalamt').hide();
+                        $('#totalamt2').show();
+                        $('#couponprice').html(result.final);
+
+                    }
+                });
+            }
+
+        }
+
+    });
 
 </script>
 

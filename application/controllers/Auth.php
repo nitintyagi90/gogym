@@ -224,7 +224,13 @@ class Auth extends CI_Controller {
 			$this->db->where('id', $id);
 			$this->db->update('user', $data);
             $this->session->set_flashdata('fail','Verification Done please login');
+            if($userType==1){
             redirect('gogym/login');
+            }
+            else{
+                redirect('gogym/login_partner');
+            }
+
 		}
 		else{
 
@@ -492,7 +498,7 @@ class Auth extends CI_Controller {
             if($row2->row())
             {
                 $result = $row2->row();
-                $a = substr($result->gym_id,5);
+                $a = substr($result->gym_id,6);
                 $c = $a+'1';
                 $randnum = "GoGyms".$c;
             }
@@ -733,6 +739,7 @@ class Auth extends CI_Controller {
 
         if(!empty($upload_image1)){
             $upload1 = move_uploaded_file($_FILES["gymImage"]["tmp_name"], "./images/".$upload_image1);
+
             if($upload1){
                 $img_name1 = $path1.$upload_image1;
 

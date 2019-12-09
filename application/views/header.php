@@ -14,7 +14,8 @@
 
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="shortcut icon" href="<?php echo base_url();?>web/assets/img/go-gyms-fab.png" type="image/x-icon" /> 
+        <link rel="shortcut icon" href="<?php echo base_url();?>web/assets/img/go-gyms-fab.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     </head>
 	<body>
 		<!-- ============================================================== -->
@@ -28,11 +29,11 @@
                 <div class="header light">
                     <div class="container po-relative">
                         <nav class="navbar navbar-expand-lg header-nav-bar">
-                            <a href="<?php echo base_url('Gogym');?>" class="navbar-brand"><img src="<?php echo base_url();?>web/assets/img/go-gyms-new .png" alt="GoGyms"></a>
+                            <a href="<?php echo base_url();?>" class="navbar-brand"><img src="<?php echo base_url();?>web/assets/img/go-gyms-new .png" alt="GoGyms"></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="ti-align-right"></span></button>
                             <div class="collapse navbar-collapse hover-dropdown font-14 ml-auto" id="navigation">
                                 <ul class="navbar-nav ml-auto">
-									<li class="nav-item"><a class="nav-link" href="<?php echo base_url('Gogym');?>">Home</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?php echo base_url();?>">Home</a></li>
 									<li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Why GoGyms <i class="fa fa-angle-down m-l-5"></i></a>
 										<ul class="b-none dropdown-menu font-14 animated fadeInUp">
 											<li><a class="dropdown-item" href="<?php echo base_url('Gogym/about'); ?>">About US</a></li>
@@ -56,7 +57,7 @@
 									<a href="javascript:void(0)" class="login btn theme-btn font-14 " data-toggle="modal" data-target="#signin" style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>
 								</div>-->
 								<div class="act-buttons">
-									<?php if(empty($_SESSION['session_id'])){ ?>
+									<?php if(empty($_SESSION['user_type']==1)){ ?>
 									<!--<a href="javascript:void(0)" class="login btn theme-btn font-14 " data-toggle="modal" data-target="#signin" style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>-->
                                         <a href="<?php echo base_url('Gogym/login'); ?>" class="login btn theme-btn font-14 "  style="color: #fff;"><i class="fa fa-sign-in pr-2"></i>Login</a>
 									<?php } else{ ?>

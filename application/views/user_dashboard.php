@@ -163,7 +163,7 @@ include 'header.php';
 				</div>
 			</div>
 
-		</div>
+		</div><br><br><br>
 	</section>
 	<!-- =========================== Dashboard End ============================================ -->
 

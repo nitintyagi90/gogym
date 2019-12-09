@@ -124,7 +124,7 @@ include 'header.php';
                             <div class="tr-single-body">
                                 <div class="card">
                                     <div class="table-responsive" style="overflow-x: auto;">
-                                        <table class="table table-striped table-2 table-hover">
+                                        <table id="example" class="table table-striped table-2 table-hover">
                                             <thead>
                                             <tr>
                                                 <th>Date</th>

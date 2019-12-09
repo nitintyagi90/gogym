@@ -12,6 +12,10 @@ class Gogym extends CI_Controller {
     }
 	public function index()
 	{
+	    
+	     if($_SESSION['user_type']==2){
+	         session_destroy();
+	     }
 
         $this->db->select('*');
         $this->db->from('gym');
@@ -268,48 +272,54 @@ $user_id = $result[0]->user_id ;
     }
 	public function dashboard()
 	{
-		$user_id=$_SESSION['session_id'];
-		$table='user';
-		$where='id';
-		$data=$this->GogymModel->userdetails($user_id);
-		$table='gym';
-		$where='user_id';
-		$data1=$this->GogymModel->profileownerdetails($user_id);
+        if($_SESSION['user_type']==2) {
+            $user_id = $_SESSION['session_id'];
+            $table = 'user';
+            $where = 'id';
+            $data = $this->GogymModel->userdetails($user_id);
+            $table = 'gym';
+            $where = 'user_id';
+            $data1 = $this->GogymModel->profileownerdetails($user_id);
 
-        $query = $this->db->get('amenities');
-        $result = $query->result();
+            $query = $this->db->get('amenities');
+            $result = $query->result();
 
-        $this->db->select('*');
-        $this->db->from('gym');
-        $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
-        $query2 = $this->db->get();
-        $result2 = $query2->result();
+            $this->db->select('*');
+            $this->db->from('gym');
+            $this->db->join('gym_amenities', 'gym_amenities.gym_id = gym.gym_id');
+            $query2 = $this->db->get();
+            $result2 = $query2->result();
 
-        $categoryList = $this->db->get('category');
-        $category = $categoryList->result();
+            $categoryList = $this->db->get('category');
+            $category = $categoryList->result();
 
-        $gymPrice = $this->db->get_where('gymPrice', array('user_id' => $user_id));
-        $gym_gallery = $this->db->get_where('gym_gallery', array('user_id' => $user_id));
-        $listgymPrice = $gymPrice->result();
-        $listGallery = $gym_gallery->result();
+            $gymPrice = $this->db->get_where('gymPrice', array('user_id' => $user_id));
+            $gym_gallery = $this->db->get_where('gym_gallery', array('user_id' => $user_id));
+            $listgymPrice = $gymPrice->result();
+            $listGallery = $gym_gallery->result();
 
-        $bookingQuery = $this->db->get_where('booking', array('gymUserID' => $user_id));
-        $booking = $bookingQuery->result();
+            $bookingQuery = $this->db->get_where('booking', array('gymUserID' => $user_id));
+            $booking = $bookingQuery->result();
 
-        $response= array(
-			'user'=>$data,
-			'profile_user'=>$data1,
-			'amenities'=>$result,
-			'gym'=>$result2,
-			'category'=>$category,
-			'gymPrice'=>$listgymPrice,
-			'galleryList'=>$listGallery,
-            'booking'=>$booking,
-		);
-		$this->load->view('dashboard.php',$response);
+            $response = array(
+                'user' => $data,
+                'profile_user' => $data1,
+                'amenities' => $result,
+                'gym' => $result2,
+                'category' => $category,
+                'gymPrice' => $listgymPrice,
+                'galleryList' => $listGallery,
+                'booking' => $booking,
+            );
+            $this->load->view('dashboard.php', $response);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
 	}
 	public function user_dashboard()
 	{
+        if($_SESSION['user_type']==1) {
 		$user_id=$_SESSION['session_id'];
 		$table='user';
 		$where='id';
@@ -340,10 +350,15 @@ $user_id = $result[0]->user_id ;
 		);
         $this->session->set_flashdata('message_name', 'Profile has been Deactive successfully!');
         $this->load->view('user_dashboard.php',$response);
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
 	}
 
     public function gym($id)
     {
+        if($_SESSION['user_type']==1) {
         $user_id=$_GET['user_id'];
         $table='user';
         $where='id';
@@ -359,6 +374,10 @@ $user_id = $result[0]->user_id ;
             'profession'=>$result
         );
         $this->load->view('user_dashboard.php',$response);
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
     }
 
     public function filter(){
@@ -374,7 +393,7 @@ $user_id = $result[0]->user_id ;
         $this->load->view('filter',$data);
     }
     public function confirm_booking(){
-
+        if($_SESSION['user_type']==2) {
         $order_ID = $this->input->post('order_id');
     $data = array(
         'status' => '1',
@@ -384,8 +403,13 @@ $user_id = $result[0]->user_id ;
         $this->db->update('booking', $data);
 
         redirect('Gogym/bookingdetails');
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function success_booking(){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('booking',array('gymUserID' => $_SESSION['session_id'],'status'=>'1'));
         $result = $query->result();
 
@@ -400,6 +424,10 @@ $user_id = $result[0]->user_id ;
             'user'=>$result1
         );
         $this->load->view('success_booking.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function locationFilter(){
         $location = $this->input->post('location');
@@ -414,9 +442,14 @@ $user_id = $result[0]->user_id ;
     }
     public function delete_gallerys($id)
     {
+        if($_SESSION['user_type']==2) {
         $this->db->where('id', $id);
         $this->db->delete('gym_gallery');
         redirect('Gogym/listgallery');
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function searchLocation(){
         $location = $this->input->post('location');
@@ -514,6 +547,7 @@ $user_id = $result[0]->user_id ;
     }
 
     public function saveGymplan (){
+        if($_SESSION['user_type']==2) {
         $dailyprice = $this->input->post('dailyprice');
         $weeklyprice = $this->input->post('weeklyprice');
         $monthlyprice = $this->input->post('monthlyprice');
@@ -557,14 +591,18 @@ $user_id = $result[0]->user_id ;
                 $this->db->where('user_id', $user_id);
                 $this->db->update('gymPrice', $data);
                 $this->session->set_flashdata('Successfully','Price update successfully');
-                redirect('Gogym/plan_add');
+                redirect('Gogym/plan');
             }
 
 
         }
-
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function saveGallery (){
+
         $user_id = $this->input->post('id');
        /* $path1=  base_url().'images/';
         $upload_image1=$_FILES["gallery"]["name"];
@@ -600,7 +638,6 @@ $user_id = $result[0]->user_id ;
 
         for ($i=0; $i <$file_upload ; $i++) {
 
-# code...
 
             $_FILES[$file_name]['name'] = $files['name'][$i];
             $_FILES[$file_name]['type'] = $files['type'][$i];
@@ -636,8 +673,6 @@ $user_id = $result[0]->user_id ;
         }
 
         $img_name1 = $multiple;
-
-
 
         $data = array(
             'user_id'=>$user_id,
@@ -730,6 +765,7 @@ $user_id = $result[0]->user_id ;
     }
 
     public function booking(){
+        if($_SESSION['user_type']==1) {
         $name = $_POST['name'];
         $checkIn = $_POST['checkIn'];
         $checkout = $_POST['checkout'];
@@ -803,9 +839,14 @@ $user_id = $result[0]->user_id ;
             'Verification'=>$verification,
         );
         $this->load->view('thankyou',$response);
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
     }
 
     public function user_profile($id){
+        if($_SESSION['user_type']==1) {
         $table='user';
         $where='id';
         $data=$this->GogymModel->userdetails($id);
@@ -822,8 +863,13 @@ $user_id = $result[0]->user_id ;
             'profession'=> $result ,
         );
         $this->load->view('user_profile.php',$res);
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
     }
     public function dailytrackreport(){
+        if($_SESSION['user_type']==1) {
         $data2=$this->GogymModel->activitydetails();
         $query = $this->db->get_where('booking', array('user_id' => $_SESSION['session_id']));
         $result = $query->result();
@@ -832,32 +878,52 @@ $user_id = $result[0]->user_id ;
             'activity'=>$data2
         );
         $this->load->view('dailytrackreport.php',$data);
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
     }
     public function dailytrackreportlist(){
+        if($_SESSION['user_type']==1) {
         $query = $this->db->get_where('trackReport',array('user_id' => $_SESSION['session_id']));
         $result = $query->result();
         $data =array(
             'report'=>$result
         );
 	    $this->load->view('dailytrackreportlist.php',$data);
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
     }
     public function partner_profile(){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
         $result = $query->result();
         $data =array(
             'user'=>$result
         );
         $this->load->view('partner_profile.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function addgallery(){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
         $result = $query->result();
         $data =array(
             'user'=>$result
         );
         $this->load->view('addgallery.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function listgallery(){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
         $query1 = $this->db->get_where('gym_gallery',array('user_id' => $_SESSION['session_id']));
         $result = $query->result();
@@ -866,25 +932,35 @@ $user_id = $result[0]->user_id ;
             'user'=>$result,
             'galleryList'=>$result1,
         );
+
         $this->load->view('listgallery.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function bookingdetails(){
-        $query = $this->db->get_where('booking',array('gymUserID' => $_SESSION['session_id']));
-        $result = $query->result();
+        if($_SESSION['user_type']==2) {
+            $query = $this->db->get_where('booking', array('gymUserID' => $_SESSION['session_id']));
+            $result = $query->result();
 
 
-        $query1 = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
-        $result1 = $query1->result();
+            $query1 = $this->db->get_where('user', array('id' => $_SESSION['session_id']));
+            $result1 = $query1->result();
 
 
-
-        $data =array(
-            'bookingDetail'=>$result,
-            'user'=>$result1
-        );
-        $this->load->view('bookingdetails.php',$data);
+            $data = array(
+                'bookingDetail' => $result,
+                'user' => $result1
+            );
+            $this->load->view('bookingdetails.php', $data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function gym_details(){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
         $query1 = $this->db->get_where('gym',array('user_id' => $_SESSION['session_id']));
 
@@ -895,8 +971,13 @@ $user_id = $result[0]->user_id ;
             'gym'=>$result1,
         );
         $this->load->view('gym_details.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function plan(){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('user',array('id' => $_SESSION['session_id']));
         $query1 = $this->db->get_where('gymPrice',array('user_id' => $_SESSION['session_id']));
         $result = $query->result();
@@ -908,20 +989,34 @@ $user_id = $result[0]->user_id ;
         
       
         $this->load->view('plan.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function plan_add(){
-        $this->load->view('plan_add.php');
+        if($_SESSION['user_type']==2) {
+            $this->load->view('plan_add.php');
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+            }
     }
     public function plan_edit(){
+        if($_SESSION['user_type']==2) {
         $query1 = $this->db->get_where('gymPrice',array('user_id' => $_SESSION['session_id']));
         $result1 = $query1->result();
         $data =array(
             'gymPrice'=>$result1,
         );
 	    $this->load->view('plan_edit.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function gym_edit($id){
-
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('gym',array('gym_id' => $id));
         $result = $query->result();
 
@@ -951,9 +1046,13 @@ $user_id = $result[0]->user_id ;
             'select_amenities'=>$select_amenities
         );
         $this->load->view('gym_edit.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function gym_add(){
-
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get('amenities');
         $result = $query->result();
 
@@ -972,14 +1071,23 @@ $user_id = $result[0]->user_id ;
         );
 
         $this->load->view('gym_add.php',$data);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     public function gym_view($id){
+        if($_SESSION['user_type']==2) {
         $query = $this->db->get_where('gym',array('gym_id' => $id));
         $result = $query->result();
         $data =array(
             'profile_user'=>$result
         );
         $this->load->view('gym_view.php',$data);
+    }
+else{
+    redirect('Gogym/user_dashboard');
+}
     }
 
 
@@ -993,31 +1101,36 @@ $user_id = $result[0]->user_id ;
         $this->load->view('gym_search',$data);
     }
     public function trackReport(){
-        $data = array(
-            'weight'=>$_POST['weight'],
-            'user_id'=>$_SESSION['session_id'],
-            'checkinDate'=>$_POST['checkinDate'],
-            'checkIntime'=>$_POST['checkIntime'],
-            'pressurehigh'=>$_POST['pressurehigh'],
-            'pressurelow'=>$_POST['pressurelow'],
-            'heartrate'=>$_POST['heartrate'],
-            'activity1'=>$_POST['activity1'],
-            'activity2'=>$_POST['activity2'],
-            'activity3'=>$_POST['activity3'],
-            'activity4'=>$_POST['activity4'],
-            'activity5'=>$_POST['activity5'],
-            'activity6'=>$_POST['activity6'],
-            'activity7'=>$_POST['activity7'],
-            'activity8'=>$_POST['activity8'],
-            'activity9'=>$_POST['activity9'],
-            'activity10'=>$_POST['activity10'],
-            'remark'=>$_POST['remark'],
-            'outtime'=>$_POST['outtime'],
+        if($_SESSION['user_type']==1) {
+            $data = array(
+                'weight' => $_POST['weight'],
+                'user_id' => $_SESSION['session_id'],
+                'checkinDate' => $_POST['checkinDate'],
+                'checkIntime' => $_POST['checkIntime'],
+                'pressurehigh' => $_POST['pressurehigh'],
+                'pressurelow' => $_POST['pressurelow'],
+                'heartrate' => $_POST['heartrate'],
+                'activity1' => $_POST['activity1'],
+                'activity2' => $_POST['activity2'],
+                'activity3' => $_POST['activity3'],
+                'activity4' => $_POST['activity4'],
+                'activity5' => $_POST['activity5'],
+                'activity6' => $_POST['activity6'],
+                'activity7' => $_POST['activity7'],
+                'activity8' => $_POST['activity8'],
+                'activity9' => $_POST['activity9'],
+                'activity10' => $_POST['activity10'],
+                'remark' => $_POST['remark'],
+                'outtime' => $_POST['outtime'],
 
-    );
-        $this->db->insert('trackReport', $data);
-        $this->session->set_flashdata('Successfully','Report save successfully');
-        redirect('Gogym/user_dashboard');
+            );
+            $this->db->insert('trackReport', $data);
+            $this->session->set_flashdata('Successfully', 'Report save successfully');
+            redirect('Gogym/user_dashboard');
+        }
+        else{
+            redirect('Gogym/dashboard');
+        }
     }
     public function login_partner(){
 	    $this->load->view('login_partner.php');
@@ -1044,7 +1157,7 @@ $user_id = $result[0]->user_id ;
 	    $this->load->view('termsrule.php');
     }
     public function user_bookingdetails(){
-
+        if($_SESSION['user_type']==2){
         $bookingCount = $this->db->count_all_results();
         $query = $this->db->get_where('booking', array('user_id' => @$_SESSION['session_id']));
         $result_booking = $query->result();
@@ -1056,6 +1169,10 @@ $user_id = $result[0]->user_id ;
         );
 
         $this->load->view('user_bookingdetails',$response);
+        }
+        else{
+            redirect('Gogym/user_dashboard');
+        }
     }
     //=======Coupon Detail =========
 
