@@ -924,14 +924,31 @@ $user_id = $result[0]->user_id ;
 
         $query = $this->db->get_where('gym',array('gym_id' => $id));
         $result = $query->result();
+
         $categoryList = $this->db->get('category');
         $category = $categoryList->result();
+      //=========selected category =====
+        $qu = $this->db->get_where('gym_category',array('gym_id' => $id));
+        $select_cat = $qu->result();
+
+        //==========================
+
         $query = $this->db->get('amenities');
         $result2 = $query->result();
+
+        //=========selected amenities =====
+        $qu = $this->db->get_where('gym_amenities',array('gym_id' => $id));
+        $select_amenities= $qu->result();
+
+        //==========================
+
+
         $data =array(
             'amenities'=>$result2,
             'profile_user'=>$result,
             'category'=>$category,
+            'select_cat' =>$select_cat,
+            'select_amenities'=>$select_amenities
         );
         $this->load->view('gym_edit.php',$data);
     }
@@ -1044,6 +1061,7 @@ $user_id = $result[0]->user_id ;
 
     function fetch_coupon_detail(){
       $gymname=  $this->input->post('gymname');
+
       $coupon   =  $this->input->post('coupon');
       $total_price   =  $this->input->post('total_price');
 
@@ -1054,7 +1072,7 @@ $user_id = $result[0]->user_id ;
     if($q->row()){
 
         $res = $q->row();
-//        print_r($res) ;
+//  print_r($res) ;
         $dis = $total_price * ($res->coupon_percent/100 );
 
         $final = $total_price - $dis ;
@@ -1101,8 +1119,8 @@ $user_id = $result[0]->user_id ;
     }
     else{
 
-//        echo "Invaild coupon";
-        echo $total_price ;
+       echo "Invaild coupon";
+      //  echo $total_price ;
         }
 
 

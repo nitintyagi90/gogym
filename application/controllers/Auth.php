@@ -146,8 +146,9 @@ class Auth extends CI_Controller {
         $result = $query->result_array();
         @$existsmobile = $result[0]['mobile'];
         if ($existsmobile == $_POST['mobile']) {
-            echo "false";
-            exit();
+
+            $this->session->set_flashdata('fail','Mobile Number already exists!');
+           redirect('Gogym/register_partner');
         } else {
             $otp = rand(1000, 9999);
             sms91($mobile, $otp);
@@ -484,8 +485,6 @@ class Auth extends CI_Controller {
             $upload_image1=$_FILES["gymImage"]["name"];
 
 
-
-
 //======================GOgym series =======
             $sql2 = 'select gym_id from gym ORDER BY id desc limit 0,1';
             $row2 = $this->db->query($sql2);
@@ -495,12 +494,12 @@ class Auth extends CI_Controller {
                 $result = $row2->row();
                 $a = substr($result->gym_id,5);
                 $c = $a+'1';
-                $randnum = "Gogym".$c;
+                $randnum = "GoGyms".$c;
             }
             else
             {
                 
-                $randnum = 'Gogym2000';
+                $randnum = 'GoGyms2000';
             }
 
 //======================================
@@ -509,7 +508,7 @@ class Auth extends CI_Controller {
             if(empty($upload_image1)){
 
                 $data = array(
-                    // 'gym_id' => $randnum ,
+                     'gym_id' => $randnum ,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -555,6 +554,8 @@ class Auth extends CI_Controller {
                             'aminitiesName' => $am,
 
                         );
+
+
                         $this->db->insert('gym_amenities', $dataresult);
                     }
                     foreach ($categoryName as $cat){
@@ -589,7 +590,7 @@ class Auth extends CI_Controller {
                     $img_name1 = '';
                 }
                 $data = array(
-                    // 'gym_id' => $randnum ,
+                     'gym_id' => $randnum ,
                     'contact_name' => $contact_name,
                     'contact_no' => $contact_no,
                     'gstNumber' => $gym_gstno,
@@ -635,8 +636,11 @@ class Auth extends CI_Controller {
                             'aminitiesName' => $am,
 
                         );
+
+
+
                         $this->db->insert('gym_amenities', $dataresult);
-                         redirect("Gogym/dashboard");
+//                         redirect("Gogym/dashboard");
                         
                     }
 
@@ -662,6 +666,135 @@ class Auth extends CI_Controller {
             }
         }
     }
+
+  //==============edit Gym =============
+
+    function editsaveGym(){
+
+        $gymid = $this->input->post('id');
+
+        $gymName = $this->input->post('gymName');
+        $totalavailability = $this->input->post('totalavailability');
+        $contact_name = $this->input->post('contact_name');
+        $contact_no = $this->input->post('contact_no');
+        $gym_pin = $this->input->post('gym_pin');
+        $gymCity = $this->input->post('gymCity');
+        $gymdescription = $this->input->post('gymdescription');
+        $account_name = $this->input->post('account_name');
+        $account_type = $this->input->post('account_type');
+        $account_no = $this->input->post('account_no');
+        $account_ifsc = $this->input->post('account_ifsc');
+        $org_name = $this->input->post('org_name');
+        $gym_gstno = $this->input->post('gym_gstno');
+        $gym_panno = $this->input->post('gym_panno');
+        $amenities = $this->input->post('amenities');
+        $allowGym = $this->input->post('allowGym');
+        $categoryName = $this->input->post('categoryName');
+        $gymaddress = $this->input->post('gymaddress');
+        $gym_location = $this->input->post('gym_location');
+        $user_id = $_SESSION['session_id'];
+        $omorning = $this->input->post('omorning');
+        $cmorning = $this->input->post('cmorning');
+        $oafternoon = $this->input->post('oafternoon');
+        $cafternoon = $this->input->post('cafternoon');
+        $oevening = $this->input->post('oevening');
+        $cevening = $this->input->post('cevening');
+        $path1= base_url().'images/';
+        $upload_image1=$_FILES["gymImage"]["name"];
+
+        $data = array(
+
+            'contact_name' => $contact_name,
+            'contact_no' => $contact_no,
+            'gstNumber' => $gym_gstno,
+            'gymName' => $gymName,
+            'allowGym' => $allowGym,
+            'accountHolderName' => $account_name,
+            'accountType' => $account_type,
+            'accountNumber' => $account_no,
+            'ifsc' => $account_ifsc,
+            'organization' => $org_name,
+            'gym_address' => $gymaddress,
+            'gym_location' => $gym_location,
+            'pinCode' => $gym_pin,
+            'gymCity' => $gymCity,
+            'totalavailability' => $totalavailability,
+            'gymdescription' => $gymdescription,
+            'panCard' => $gym_panno,
+//            'user_id'=>$user_id,
+            'open_mg_time'=>$omorning,
+            'close_mg_time'=>$cmorning,
+            'after_open_time'=>$oafternoon,
+            'after_close_time'=>$cafternoon,
+            'open_evng_time'=>$oevening,
+            'close_evng_time'=>$cevening,
+
+        );
+
+        if(!empty($upload_image1)){
+            $upload1 = move_uploaded_file($_FILES["gymImage"]["tmp_name"], "./images/".$upload_image1);
+            if($upload1){
+                $img_name1 = $path1.$upload_image1;
+
+                $data['gymImage']=$img_name1;
+            }
+
+        }
+
+    //========update======================
+        $this->db->where('user_id', $user_id);
+        $this->db->update('gym', $data);
+
+
+        //==============gym_amenities =============
+
+        $this->db->where('gym_id',$gymid);
+        $this->db->delete('gym_amenities');
+
+        foreach ($amenities as $am){
+            $dataresult = array(
+// 'gym_id' => $insert_id,
+                'gym_id' => $gymid,
+                'user_id' => $user_id,
+                'aminitiesName' => $am,
+
+            );
+
+            $this->db->insert('gym_amenities', $dataresult);
+
+
+        }
+//===============category============
+
+        $this->db->where('gym_id',$gymid);
+        $this->db->delete('gym_category');
+
+        foreach ($categoryName as $cat){
+            $categoryarray = array(
+// 'gym_id' => $insert_id,
+                'gym_id' => $gymid,
+                'user_id' => $user_id,
+                'categoryName' => $cat,
+
+            );
+
+
+                $this->db->insert('gym_category', $categoryarray);
+
+        }
+
+
+
+        redirect("Gogym/dashboard");
+
+
+
+
+
+
+    }
+    //==================================
+
     //===========Google login =================
 
 

@@ -37,7 +37,7 @@ include 'header.php';
                                     <th>Gym ID</th>
                                     <th>Gym Name</th>
                                     <th>Mobile</th>
-                                    <th>Gymplan</th>
+
                                     <th>GymPrice</th>
                                     <th>Totalavailability</th>
                                     <th>Location</th>
@@ -56,7 +56,7 @@ include 'header.php';
                                         <td><?=$value->gym_id;?></td>
                                         <td><?=$value->gymName;?></td>
                                         <td><?=$value->contact_no;?></td>
-                                        <td><?=$value->gymplanType;?></td>
+
                                         <td><?=$value->gymPrice;?></td>
                                         <td><?=$value->totalavailability;?></td>
                                         <td><?=$value->gymCity;?></td>
