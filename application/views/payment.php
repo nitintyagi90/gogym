@@ -203,7 +203,7 @@ include 'footer.php';
     var cal = totalprice * insurance;
     var newTotal = cal / 100;
     var final = totalprice + newTotal;
-
+    var finalValue;
     $(function(){
         $('input[type="radio"]').click(function(){
             $(".insurance").prop("checked", false);
@@ -216,6 +216,7 @@ include 'footer.php';
                     var coupon = $("#coupon").val();
                     var total_price  = value * person;
                     $.ajax({
+
                         method:"post",
                         url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
                         data:{gymname:gymname,coupon:coupon, total_price:total_price},
@@ -232,6 +233,7 @@ include 'footer.php';
                     });
                 }
                 $(".calTotal").text('₹' + value * person);
+                $(".bookingAmount").text('₹' + value * person);
             }
         });
     });
@@ -247,6 +249,7 @@ include 'footer.php';
                 }else{
                     total_price = totalprice;
                 }
+
                 $.ajax({
                     method:"post",
                     url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
@@ -262,16 +265,19 @@ include 'footer.php';
                     }
                 });
             }
+
             if(value==undefined){
                 $(".calTotal").text('₹' + final);
                 $(".appendvalue").text('₹' + newTotal);
                 /*$(".bookingAmount").text('₹' + newTotal);*/
             }else{
-
                 var totalprice2 = value * person;
                 var cal2 = totalprice2 * insurance;
                 var newTotal2 = cal2 / 100;
+
+                finalValue=totalprice2;
                 var final2 = totalprice2 + newTotal2;
+
                 $(".calTotal").text('₹' + final2);
                 $(".appendvalue").text('₹' + newTotal2);
                 }
@@ -303,35 +309,116 @@ include 'footer.php';
 <script>
 
         $("#submit2").click(function(){
-            var gymname = $("#gymname").val();
-            var coupon = $("#coupon").val();
-            var total_price  = $("#total_price").val();
-            $.ajax({
-                method:"post",
-                url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
-                data:{gymname:gymname,coupon:coupon, total_price:total_price},
-                success:function(data){
-                    var result = JSON.parse(data);
-                    applycoupan=1;
-                    if(data=== total_price)
-                    {
-                        value2 = 0;
-                        $('#couponamt').hide();
-                        alert('Invaild coupon');
+
+
+            if(value===undefined){
+                var gymname = $("#gymname").val();
+                var coupon = $("#coupon").val();
+                var total_price  = $("#total_price").val();
+                $.ajax({
+                    method:"post",
+                    url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                    data:{gymname:gymname,coupon:coupon, total_price:total_price},
+                    success:function(data){
+                        var result = JSON.parse(data);
+
+                        applycoupan=1;
+                        if(data=== total_price)
+                        {
+                            value2 = 0;
+                            $('#couponamt').hide();
+                            alert('Invaild coupon');
+                        }
+                        else
+                        {
+                            value2 = data;
+                            var couponamt =(total_price - data ).toFixed(2);
+                            $('#couponprice2').html(result.discount);
+                            $('#couponamt').show();
+                            $('.calTotal').html('₹' + result.final);
+                            $(".appendvalue").html('₹' + '0.00');
+                            $(".insurance").prop("checked", 0);
+                        }
+                        $('#totalamt').hide();
+                        $('#totalamt2').show();
+                        $('#couponprice').html(result.final);
+                        $('booking_price').val(result.final);
+
                     }
-                    else
-                    {
-                        value2 = data;
-                        var couponamt =(total_price - data ).toFixed(2);
-                        $('#couponprice2').html(result.discount);
-                        $('#couponamt').show();
-                    }
-                    $('#totalamt').hide();
-                    $('#totalamt2').show();
-                    $('#couponprice').html(result.final);
-                    $('booking_price').val(result.final);
-                }
-            });
+                });
+            }else {
+
+               if(finalValue){
+
+                   var gymname1 = $("#gymname").val();
+                   var coupon1 = $("#coupon").val();
+                   $.ajax({
+                       method:"post",
+                       url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                       data:{gymname:gymname1,coupon:coupon1, total_price:finalValue},
+                       success:function(data){
+                           var result = JSON.parse(data);
+
+                           applycoupan=1;
+                           if(data=== total_price)
+                           {
+
+                               value2 = 0;
+                               $('#couponamt').hide();
+                               alert('Invaild coupon');
+                           }
+                           else
+                           {
+                               value2 = data;
+                               var couponamt =(total_price - data ).toFixed(2);
+                               $('#couponprice2').html(result.discount);
+                               $(".calTotal").text('₹' + result.final);
+                               $(".appendvalue").html('₹' + '0.00');
+                               $(".insurance").prop("checked", 0);
+
+                               $('#couponamt').show();
+                           }
+                           $('#totalamt').hide();
+                           $('#totalamt2').show();
+                           $('#couponprice').html(result.final);
+                       }
+                   });
+               }else{
+
+                   var gymname1 = $("#gymname").val();
+                   var coupon1 = $("#coupon").val();
+                   $.ajax({
+                       method:"post",
+                       url:"<?php echo base_url();?>"+"index.php/Gogym/fetch_coupon_detail",
+                       data:{gymname:gymname1,coupon:coupon1, total_price:value},
+                       success:function(data){
+                           var result = JSON.parse(data);
+                           applycoupan=1;
+                           if(data=== total_price)
+                           {
+                               value2 = 0;
+                               $('#couponamt').hide();
+                               alert('Invaild coupon');
+                           }
+                           else
+                           {
+                               value2 = data;
+                               var couponamt =(total_price - data ).toFixed(2);
+                               $('#couponprice2').html(result.discount);
+                               $(".calTotal").text('₹' + result.final);
+
+                               $('#couponamt').show();
+                           }
+                           $('#totalamt').hide();
+                           $('#totalamt2').show();
+                           $('#couponprice').html(result.final);
+
+                       }
+                   });
+               }
+
+            }
+
         });
 
 </script>
