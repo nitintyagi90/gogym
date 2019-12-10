@@ -1159,6 +1159,9 @@ else{
     public function termsrule(){
 	    $this->load->view('termsrule.php');
     }
+    public function onlineorder(){
+
+    }
     public function user_bookingdetails(){
         if($_SESSION['user_type']==2){
         $bookingCount = $this->db->count_all_results();

@@ -23,7 +23,7 @@ if($isValidChecksum == "TRUE") {
 	echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>";
 	if ($_POST["STATUS"] == "TXN_SUCCESS") {
 		echo "<b>Transaction status is success</b>" . "<br/>";
-		redirect('Gogym/index');
+		redirect('Gogym/onlineorder');
 		//Process your transaction here as success transaction.
 		//Verify amount & order id received from Payment gateway with your application's order id and amount.
 	}

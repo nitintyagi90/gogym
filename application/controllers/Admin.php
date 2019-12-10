@@ -881,8 +881,9 @@ class Admin extends CI_Controller
                     'coupon_min_value' => $coupconvalue,
                 );
                 $this->db->insert('coupon', $data);
-                redirect('Admin/cupconlist');
+
             }
+            redirect('Admin/cupconlist');
         }
     }
     public function saveLaunch_offer()
